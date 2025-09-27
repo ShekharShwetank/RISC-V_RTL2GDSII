@@ -90,8 +90,8 @@ show
 
 ### Looping Constructs:
 
-1. for loop -> used inside always block -> used for evaluating expressions, and not for instantiating hardware.
-2. generate for loop -> used outside always, and can't be used inside always -> used to instantiate Hardware, multiple times, example: instantiate an 'and' gate 100 times
+1. for loop => used inside always block => used for evaluating expressions, and not for instantiating hardware.
+2. generate for loop => used outside always, and can't be used inside always => used to instantiate Hardware, multiple times, example: instantiate an 'and' gate 100 times
 
 #### Commands:
 files: mux_generate, demux_case, demux_generate, fa, rca
@@ -107,8 +107,34 @@ synth -top <top_module_name>
 abc -liberty <lib_path>
 write_verilog -noattr <*_noattr_generated_netlist.v>
 show
-# GLS:
 iverilog /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v <*.v> <tb_*.v>
 ./a.out
 gtkwave <tb_*.vcd>
 ```
+
+1. Mux Generate
+![1](assets/waveform_mux_generate_2.png)
+![2](assets/waveform_mux_generated.png)
+![3](assets/mux_generate.png)
+
+2. Demux Case
+![1](assets/waveform_demux_case.png)
+![2](assets/demux_case.png)
+
+3. Demux Generate
+![2](assets/waveform_demux_generate.png)
+![3](assets/demux_generate.png)
+
+3. Ripple Carry Adder using Full Adder
+![2](assets/waveform_rca.png)
+![2](assets/waveform_rca_2.png)
+![2](assets/waveform_rca_3_mid.png)
+![2](assets/waveform_rca_4.png)
+![2](assets/waveform_rca_5_end.png)
+![3](assets/fa.png)
+![1](assets/rca.png)
+
+
+### [Verify Outputs](assets/)
+### [Generated_Netlists](assets/FILES)
+### [Lecture_Notes](assets/Lecture_Notes/)
