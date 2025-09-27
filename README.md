@@ -24,5 +24,5 @@ The RTL to GDSII flow is the process of converting a high-level hardware descrip
 
 ## Table of Contents
 
-*   [Week 0: Tool Installation and Setup](./WEEK%200/README.md)
-*   [Week 1: Introduction to Verilog RTL Design and Synthesis](./WEEK%201/README.md)
+*   [Week 0: Tool Installation and Setup](WEEK_0)
+*   [Week 1: Introduction to Verilog RTL Design and Synthesis](WEEK_1)
