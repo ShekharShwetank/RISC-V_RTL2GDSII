@@ -77,6 +77,10 @@ gtkwave <tb_*_mux.vcd>
 ![gls3](assets/gls_waveform_good_mux.png)
 ![gls4](assets/gls_waveform_blocking_caveat.png)
 
+### Synthesis Simulation Mismatch:
+![non_gls](assets/waveform_bad_mux.png)
+![gls2](assets/gls_waveform_bad_mux.png)
+
 
 ### [Verify Outputs](assets/)
 ### [Generated_Netlists](assets/FILES)
