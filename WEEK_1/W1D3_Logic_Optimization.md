@@ -1,19 +1,19 @@
 # Day 3 - Logic Optimization
-	1. Combinational Logic Optimization
-	2. Sequential Logic Optimization
+1. Combinational Logic Optimization
+2. Sequential Logic Optimization
 
 ### Combinational Logic Optimization:
 It means squeezing the logic to get the most optimized design in terms of area and power. the most commonly used techniques are:
 1. Constant Propagation
-	>Direct Optimization
+	- Direct Optimization
 2. Boolean Logic Optimization
-	>K-Map
-	>Quine McKluskey
+	- K-Map
+	- Quine McKluskey
 
 ### Sequential Logic Optimizations:
-> Basic:
+- Basic:
 	1. Sequential Contant Propagation
-> Advanced:
+- Advanced:
 	1. State optimization: Optimization of unused state.
 	2. Retiming: splitting logic equally for possible combinations and improving the overall timing. use of 'useful slack' to reduce the delay somewhere else
 	3. Sequential Logic Cloning (Floor Plan Aware Synthesis): Aviod the slack, ensure meeting timing requirements.
@@ -39,6 +39,8 @@ abc -liberty <lib_path>
 write_verilog <*_opt_generated_netlist.v>
 show
 ```
+![opt_check](assets/opt_check.png)
+![multiple_modules_opt](assets/multiple_modules_opt.png)
 
 > Sequential:
 
@@ -48,6 +50,14 @@ ls *dff_const*
 iverilog <dff_const*.v> <tb_dff_const*.v>
 ./a.out
 gtkwave <tb_dff_const*.vcd>
+```
+![dff_const1](assets/waveform_dff_const1.png)
+![dff_const1](assets/waveform_dff_const2.png)
+![dff_const1](assets/waveform_dff_const3.png)
+![dff_const1](assets/waveform_dff_const4.png)
+![dff_const5](assets/waveform_dff_const5.png)
+
+```
 yosys
 read_liberty -lib <lib_path>
 read_verilog <dff_const*.v>
@@ -57,10 +67,15 @@ abc -liberty <lib_path>
 write_verilog <dff_const*_generated_netlist.v>
 show
 ```
+![dff_const1](assets/dff_const1.png)
+![dff_const1](assets/dff_const2.png)
+![dff_const1](assets/dff_const3.png)
+![dff_const1](assets/dff_const4.png)
+![dff_const5](assets/dff_const5.png)
 
 > Unused output optimization:
 
-files: counter_opt, 
+files: counter_opt
 ```
 yosys
 read_liberty -lib <lib_path>
@@ -71,6 +86,14 @@ abc -liberty <lib_path>
 write_verilog <*_opt_generated_netlist.v>
 show
 ```
+![counter_opt](assets/counter_opt.png)
+![counter_opt](assets/waveform_counter_opt.png)
 
 counter_opt2:
 >> assign q = (count[2:0] == 3'b100);
+
+![counter_opt](assets/counter_opt2.png)
+
+### [Verify Outputs](assets/)
+### [Generated_Netlists](assets/FILES)
+### [Lecture_Notes](assets/Lecture_Notes/)
