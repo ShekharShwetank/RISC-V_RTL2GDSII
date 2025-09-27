@@ -1,336 +1,634 @@
 # Week 1: RTL Design and Synthesis
-# Check ![WEEK_1/assets](../WEEK_1/assets) for proof of work
 
 This week focuses on the fundamentals of RTL design using Verilog, simulation, and logic synthesis.
 
 ## Design and Synthesis Flow
 
-![Design Flow](assets/flow.png)
+The overall flow involves designing in RTL, simulating to verify functionality, synthesizing the RTL into a gate-level netlist using a standard cell library, and finally performing a Gate Level Simulation (GLS) to ensure the synthesized netlist is functionally correct.
 
 ---
 
 ## Day 1: Introduction to Verilog RTL Design and Synthesis
 
-### # 1. The Building Blocks of Verilog
+Commands to run iverilog and gtkwave, the comparison between top modules, module structures, and the contents:
 
-Before we build a circuit, let's understand the language. Verilog allows us to describe hardware at different levels of abstraction.
+- **Top level module file**:
+  Data types, assignments, verilog constructs, hierarchal design principle, instantiations, sequential and combinational, procedural blocks, synthesizeable and non-synthesizable verilog code.
 
-#### Module Structure and Hierarchy
+- **Test Bench**:
+  Stimulus generators and stimulus observers.
 
-A **module** is the basic building block in Verilog, like a function in software or a schematic block in a circuit diagram. We practice **hierarchical design** by instantiating (creating a copy of) one module inside another, which allows us to build complex systems from simpler, reusable parts.
+- **Key knowledge**:
+  - Difference between reg, wire, and others.
+  - typedef, parameter.
+  - case statements, if-else, loops etc.
 
-#### Key Data Types
+- **Intro to yosys**:
+  - Synthesizer: converts RTL to netlist.
+  - ip: design_file and *.lib file.
+  - yosys: synthesizer.
+  - op: netlist file.
 
-In synthesizable Verilog, two primary data types are used to connect these modules:
-
-  * **`wire`**: Represents a physical wire. It's a connection point that cannot store a value on its own. It must be continuously driven by something, like the output of a gate. It's used for combinational logic with the `assign` keyword.
-  * **`reg`**: Represents a storage element, like a flip-flop or a latch. Despite its name, it doesn't always mean a hardware register. It's used inside procedural blocks (like `always`) and holds its value until the next assignment.
-  * **`parameter`**: A constant value defined within a module, making the design configurable and reusable (e.g., setting the width of a bus with `parameter WIDTH = 8`).
-
-#### Verilog Constructs
-
-We describe logic using two main types of blocks:
-
-  * **Combinational Logic (`assign`)**: These describe circuits whose outputs depend only on the current inputs (e.g., logic gates). They are defined with continuous assignments.
-    ```verilog
-    assign y = a & b; // y is the AND of a and b
-    ```
-  * **Sequential Logic (`always`)**: These describe circuits with memory elements that depend on a clock signal. The `always @(posedge clk)` block is the standard way to create flip-flops and registers.
-    ```verilog
-    always @(posedge clk) begin
-      if (reset)
-        q <= 1'b0;
-      else
-        q <= d; // q gets the value of d on the rising clock edge
-    end
-    ```
-  * **Control Statements**: Inside `always` blocks, we can use familiar statements like `if-else` and `case` to describe complex logic.
-
----
-
-### # 2. Simulation: Does My Design Work?
-
-Writing code is one thing; proving it's correct is another. We use a **testbench** to verify our design's functionality before moving on.
-
-A testbench is a **non-synthesizable** Verilog module that wraps around our design (often called the DUT - Design Under Test). It has two jobs:
-
-1.  **Stimulus Generation**: It creates and applies inputs to the DUT, such as clock signals, reset signals, and data. This is done inside `initial` and `always` blocks.
-2.  **Response Observation**: It watches the outputs of the DUT to see if they are correct. This is often done by writing the signal values to a file (`$dumpfile`, `$dumpvars`) for viewing in a waveform analyzer.
-
-#### Simulation Workflow with iverilog & GTKWave
-
-This is a two-step process to compile and run the simulation. Let's use a concrete example of a 2-to-1 multiplexer.
-
-**Example Design: `good_mux.v`**
-```verilog
-module good_mux (input i0 , input i1 , input sel , output reg y);
-always @ (*)
-begin
-	if(sel)
-		y <= i1;
-	else 
-		y <= i0;
-end
-endmodule
+> commands:
+```
+read_verilog: to read design file
+read_liberty: to read library
+write_verilog: to generate the output file
 ```
 
-**Example Testbench: `tb_good_mux.v`**
-```verilog
-`timescale 1ns / 1ps
-module tb_good_mux;
-	// Inputs
-	reg i0,i1,sel;
-	// Outputs
-	wire y;
+### Verify if synthesis is correct?
 
-        // Instantiate the Unit Under Test (UUT)
-	good_mux uut (
-		.sel(sel),
-		.i0(i0),
-		.i1(i1),
-		.y(y)
-	);
+1. ip: gen_netlist & tb
+   - tool: iverilog
+   - op: vcd file
+2. ip: vcd file
+   - tool: gtkwave
+   - op: waveform
 
-	initial begin
-	$dumpfile("tb_good_mux.vcd");
-	$dumpvars(0,tb_good_mux);
-	// Initialize Inputs
-	sel = 0;
-	i0 = 0;
-	i1 = 0;
-	#300 $finish;
-	end
+![GTKWave Waveform Example](assets/GTKWAVE_WAVEFORM.png)
 
-always #75 sel = ~sel;
-always #10 i0 = ~i0;
-always #55 i1 = ~i1;
-endmodule
+4. BOTH WAVEFORMS SHOULD BE SAME: RTL AND NETLIST
+
+![Synthesis Flow](assets/Lecture_Notes/flow.png)
+
+### Logic Synthesis
+
+- **RTL Design**: behavioural representation of the required specification, written in verilog/HDL following all the synthesizable constructs.
+- **Synthesis**: RTL to Gate-level translation
+  - Converted into gates & connections b/w gates
+  - Generates a file called netlist
+
+  - ip: RTL & Frontend lib
+  - tool: synthesizer -> yosys
+  - op: gatelvl netlist
+
+![Synthesis Illustration](assets/Lecture_Notes/synthesis_illustration.png)
+
+### .lib?
+
+- Collection of logical modules
+- Includes basic logic gates
+- Different flavours of same gate: slow, medium and fast
+
+### Why different flavours?
+
+- Combinational delay in logic path determines the maximum speed of operation of digital logic circuit.
+  - T_clk > T_CQ_A + T_COMBI + T_SETUP_DFF_B
+  - f_clk(max) = 1/T_clk(min)
+  - T_hold_DFF_B < T_CQ_A + T_COMBI
+- Fast cells for meeting performance & slow cells for meeting HOLD
+
+### FAST VS SLOW CELLS:
+
+- **Capacitance**: Load in a Digital Logic Circuit
+- Faster the charging/discharging of capacitance -> lesser the cell delay
+- To charge/discharge the capacitance fast, we need transistors capable of sourcing more current -> wider transistors.
+- Wider transistors -> Low Delay -> More area and Power as well!!
+- Narrow transistors -> More Delay -> Less area and Power.
+- Faster cells do not come free, penalty of area and Power.
+
+### Constraints: optimum guidance offered to the synthesizer:
+
+- More use of faster cells:
+  - Bad ckt in terms of Power and area.
+  - Hold time violations
+
+- More use of slower cells:
+  - Sluggish ckt, may not meet performance standards
+
+### yosys:
+
 ```
-
-1.  **Compile and Run**: Use `iverilog` to compile your design and its testbench. The output of the iverilog is a `.vcd` file and `a.out` file is created. By executing `a.out` iverilog dump the vcd file.
-    ```bash
-    iverilog good_mux.v tb_good_mux.v
-    ```
-2.  **View**: Use `gtkwave` to open the Value Change Dump (`.vcd`) file and visually inspect the waveforms to verify the circuit's behavior.
-    ```bash
-    gtkwave tb_good_mux.vcd
-    ```
-
----
-
-### # 3. Logic Synthesis: Turning Code into Gates
-
-**Logic synthesis** is the process of automatically converting abstract RTL code into a **gate-level netlist**. This netlist is a detailed blueprint of the circuit, describing which specific logic gates (AND, OR, Flip-Flops) to use and how to connect them with wires. Yosys is the synthesizer used to convert RTL to netlist. Netlist should be the same as the Design but represented in the form of standard cells. The same testbench can be used to verify RTL and Synthesized Netlist.
-
-![Synthesis Illustration](assets/synthesis_illustration.png)
-
-  * **Inputs**:
-    1.  **RTL Design (`.v`)**: Your synthesizable Verilog code.
-    2.  **Standard Cell Library (`.lib`)**: A technology-specific library defining the available logic gates and their characteristics (timing, power, area).
-  * **Tool**: We use **Yosys**, a powerful open-source synthesis tool.
-  * **Output**:
-    1.  **Gate-Level Netlist (`.v`)**: A structural Verilog file describing the synthesized circuit.
-
-A lab on logic synthesis will be done using Yosys and SKY130 PDKs.
-
-### # 4. The Standard Cell Library (`.lib`)
-
-The `.lib` file is the "parts catalog" for the synthesis tool. It contains different "flavors" (e.g., slow, typical, fast) of each logic gate.
-
-#### Why Different Flavors?
-
-Digital circuit speed is determined by timing constraints. The two most important are:
-
-1.  **Setup Time**: Data must arrive at a flip-flop *before* the clock edge. The total delay of the data path must be less than the clock period.
-      * $T\_{clk} \> T\_{CQ} + T\_{combi} + T\_{setup}$
-      * To meet this, we sometimes need **fast cells** to reduce the combinational delay ($T\_{combi}$).
-2.  **Hold Time**: Data must remain stable at a flip-flop for a short time *after* the clock edge. The data path must be slow enough to not change too quickly.
-      * $T\_{hold} \< T\_{CQ} + T\_{combi}$
-      * To meet this, we sometimes need **slow cells** to increase the combinational delay.
-
-#### The Performance vs. Area/Power Trade-off
-
-  * **Fast Cells**: Use wider transistors that can source more current, charging/discharging capacitance faster. This leads to **low delay** but comes at the cost of **more area and power**.
-  * **Slow Cells**: Use narrower transistors, resulting in **higher delay** but **less area and power**.
-
-The synthesizer's job is to intelligently pick a combination of these cells to meet performance goals while minimizing area and power.
-
----
-
-### # 5. Practical Synthesis Workflow with Yosys
-
-Here's how to synthesize your design and, crucially, verify that the resulting netlist is functionally identical to your original RTL.
-
-#### Step 1: Synthesize with Yosys
-
-You can run Yosys interactively or with a script. Here are the essential commands:
-
-```tcl
-# Start the yosys tool
 yosys
-
-# Read the standard cell library. This tells yosys what gates are available.
-# The path will depend on where your PDK is installed.
-read_liberty -lib /path/to/your/sky130_fd_sc_hd__tt_025C_1v80.lib
-
-# Read your synthesizable Verilog design file
-read_verilog my_design.v
-
-# The main synthesis command. It performs high-level optimizations.
-# -top specifies the top-level module to be synthesized.
-synth -top my_design
-
-# Map the design to the specific gates in your library.
-# This is a crucial technology mapping step.
-abc -liberty /path/to/your/sky130_fd_sc_hd__tt_025C_1v80.lib
-
-# Clean up the design for a simpler netlist
-clean
-
-# Write the final gate-level netlist.
-# The -noattr flag removes extra attributes to make it cleaner for simulation.
-write_verilog -noattr my_design_netlist.v
-
-# (Optional) Display a graphical view of the synthesized circuit
+read_liberty -lib ../path/to/your/sky130_*.lib
+read_verilog <filename.v>
+synth -top <module_name_to_be_synthesized>
+abc -liberty <../path/to/lib>
+write_verilog <gen_netlist_filename.v>
+write_verilog -noattr <gen_netlist_filename.v>
 show
 ```
 
-#### Step 2: Verify the Netlist
-
-How do you know the synthesis was correct? **You simulate the netlist with the same testbench\!**
-
-1.  **Simulate the RTL** (as done in section 2) and generate `rtl_waves.vcd`.
-2.  **Simulate the Netlist**: Compile the *netlist*, the *standard cell library's Verilog model*, and the *original testbench* together.
-    ```bash
-    # Note: We now include the netlist and the PDK's primitive cell models.
-    iverilog -o netlist_sim.vvp tb_my_design.v my_design_netlist.v /path/to/sky130_fd_sc_hd.v
-    vvp netlist_sim.vvp
-    ```
-    This generates `netlist_waves.vcd`.
-3.  **Compare**: Open both `rtl_waves.vcd` and `netlist_waves.vcd` in GTKWave. **The waveforms for all inputs and outputs must be identical.** If they are, then the synthesis was functionally correct.
+[Verify Outputs](assets)
 
 ---
 
-## Day 2: Timing Libraries, Synthesis Strategies, and Flop Coding
+## Day 2: Understanding "sky130_fd_sc_hd_tt_025C_1v80"
 
-### Understanding Timing Libraries (.lib)
+### Introduction to timing .libs
 
-Timing libraries, with the `.lib` extension, are crucial for synthesis. They characterize the behavior of standard cells for different operating conditions.
+- `.lib` files are the standard format for representing cell libraries.
+- Typical lib, can be slow, typical, fast
+- 1v80: voltage
+- 025C: temperature
+- **P V T**: TOGETHER DETERMINES HOW THE SILICON IS GOING TO WORK, ACROSS ALL CORNERS
+  - **P: PROCESS** => VARIATIONS DUE TO FABRICATION, DUE TO THE MACHINE IN USE
+  - **V: VOLTAGE**
+  - **T: TEMPERATURE**
+- Technology: cmos
+- Delay model: table_lookup
+- Time: 1ns
 
-#### PVT Corners
+> cell defines the beginning of the cell. Other information of cells mentioned are:
+- Leakage power based on the combination of inputs
+- Area
+- Power ports
+- Input capacitance
+- Power associated with the pin
+- Transition
 
-The behavior of silicon chips is heavily influenced by **PVT (Process, Voltage, Temperature)** conditions. Libraries are provided for different corners to ensure the design works reliably across all of them.
+### Find the Library:
 
-*   **Process**: Variations in the manufacturing process.
-*   **Voltage**: Variations in the supply voltage.
-*   **Temperature**: Variations in the operating temperature.
+```
+find ~/.ciel -name "sky130_fd_sc_hd__tt_025C_1v80.lib"
+```
 
-A typical library name like `sky130_fd_sc_hd__tt_025C_1v80.lib` can be decoded as:
+- Path: /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/
+- Liberty has the definition and information on power, delay, area, timing associated with the pins of cells.
 
-*   `tt`: **T**ypical-**T**ypical process corner.
-*   `025C`: **25 degrees Celsius** temperature.
-*   `1v80`: **1.80V** supply voltage.
+![Library Path](assets/lib_path.png)
+![Library Content](assets/lib_content.png)
 
-#### Library Content
+### Difference between: and2_0 & and2_2:
 
-A `.lib` file contains detailed information for each standard cell, including:
+- Area: increases
+- Thus as the *_no. increases: area increases => larger cells employ wider transistors => faster, but consume more power => delay reduces
 
-*   **Timing**: Delay models (often using look-up tables).
-*   **Power**: Leakage and dynamic power consumption.
-*   **Area**: The physical area of the cell.
-*   **Pin Information**: Capacitance, direction, and function of each pin.
+### Hierarchical vs Flat Synthesis
 
-#### Cell Variations
+- File used: multiple_modules.v
 
-Libraries provide different versions of the same logic gate (e.g., `and2_0`, `and2_2`). As the number increases:
+##### STEPS:
 
-*   **Area increases**: Larger cells use wider transistors.
-*   **Delay decreases**: Wider transistors lead to faster switching times.
-*   **Power increases**: Larger transistors consume more power.
-
-### Synthesis Strategies: Hierarchical vs. Flat
-
-#### Hierarchical Synthesis
-
-In hierarchical synthesis, the module hierarchy of the design is preserved in the synthesized netlist. This is the default behavior.
-
-**Steps:**
-```tcl
+```
 yosys
-read_liberty -lib <path_to_lib>
+read_liberty -lib /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 read_verilog multiple_modules.v
 synth -top multiple_modules
-abc -liberty <path_to_lib>
-show
-write_verilog -noattr hierarchical_netlist.v
+abc -liberty /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+-> 'flatten' 
+show <specify the module name> (will show instantiation: hierarchal: the hierarchy is preserved)
+write_verilog <your_generated_netlist_filename_hier.v>
+#if don't want attr:
+write_verilog -noattr <your_generated_netlist_filename_hier.v>
 ```
 
-#### Flat Synthesis
+![Multiple Modules Hierarchical](assets/multiple_modules.png)
 
-In flat synthesis, the entire design hierarchy is flattened into a single module containing only standard cells.
-
-**Steps:**
-```tcl
-# ... (read library and verilog) ...
-synth -top multiple_modules
+```
 flatten
-abc -liberty <path_to_lib>
-show
-write_verilog -noattr flat_netlist.v
+write_verilog <-noattr> <your_generated_netlist_filename_flat.v>
+show <specify modulename>
 ```
 
-#### Sub-module Level Synthesis
+![Multiple Modules Flat](assets/multiple_modules_flatten.png)
 
-This approach involves synthesizing each sub-module independently. This is useful for:
+### Why does the tool choose an input inverted NAND implementation for OR?
 
-*   **Reusability**: Synthesize a module once and use it multiple times.
-*   **Divide and Conquer**: Break down a large design into smaller, manageable parts.
+- CMOS always realise inverted functions.
+- NOR + INV 
+  - OR: will have a stacked PMOS: BAD, avoid.
+  - Stacked NMOS: preferred.
+  - Cause Stacked PMOS has poor mobility.
+  - Also for good logical effort.
 
-**Steps:**
-```tcl
+### Synthesize at submodule level in a multiple module file:
+
+#### Why is the sub-module level synthesis necessary?
+
+- Synthesize once, replicate multiple time and stitch together
+- Have multiple instances of same module
+- Massive design => DIVIDE AND CONQUER APPROACH
+- **Optimization and Area Reduction**: By synthesizing sub-modules separately, the synthesis tool can optimize each one individually. It performs logic optimization, technology mapping, and area minimization for each sub-module. This leads to more efficient use of resources and reduced overall chip area.
+- **Reusability**: Each submodule can be designed, verified, and optimized independently. They can be reused in a large design multiple times saving time and enhancing efficiency. 
+- **Parallel Processing**: Different sub-modules can be synthesized concurrently, improving efficiency. For large designs, parallel synthesis significantly reduces turnaround time.
+
+```
 yosys
-read_liberty -lib <path_to_lib>
+read_liberty -lib /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 read_verilog multiple_modules.v
 synth -top <sub_module_name>
-abc -liberty <path_to_lib>
+abc -liberty /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 ```
 
-### Flip-Flop Coding Styles and Synthesis
+![Multiple Modules Sub-module](assets/multiple_modules_sub_module1.png)
 
-#### Why Use Flip-Flops?
+### How to design a FLOP & different flop coding styles:
 
-Flip-flops are essential for sequential logic and play a crucial role in preventing glitches. Combinational logic can produce transient incorrect outputs (glitches) as signals propagate through different paths with different delays. Flip-flops sample their inputs only on a clock edge, ensuring that the output is stable and glitch-free.
+#### Why Flops?
 
-#### Simulating and Synthesizing Flip-Flops
+- Output glitches due to prop delay.
+- More combinational ckt means more glitches.
+- Thus we use Flops (DFF) between combinational ckts.
+- Flop output is stable
 
-Different types of flip-flops (with synchronous/asynchronous set/reset) can be designed and verified.
+Glitches can occur in digital circuits due to various reasons such as signal delays, noise, or timing issues. Flops prevent glitches during the operation in the following ways:
+- **Synchronization**: Flops are edge-triggered devices, meaning they respond only to transitions of the input signal (e.g., rising edge, falling edge). This synchronization ensures that the output changes only at specific points, reducing the likelihood of glitches caused by transient signal variations.
+- **Timing Control**: Flops are typically controlled by a clock signal, ensuring that all circuit operations occur synchronously. This eliminates timing issues that could lead to glitches due to data arriving at different times.
 
-**Simulation:**
-```bash
+Reset and Set: both can be Async or Sync.
+
+### Design of sync and async reset and set, code and their pictorial representation.
+
+> Simulated: 
+> dff async set & reset
+> dff sync set & reset
+> dff_asyncreset_syncreset
+
+```
 iverilog <filename.v> <tb_filename.v>
 ./a.out
 gtkwave <tb_filename.vcd>
+gtkwave ./<tb_filename.vcd>
 ```
 
-**Synthesis:**
-```tcl
+![DFF Async Res Sync Res Waveform](assets/waveform_dff_asyncres_syncres.png)
+
+> Synthesis:
+
+```
 yosys
-read_liberty -lib <path_to_lib>
+read_liberty -lib /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 read_verilog <filename.v>
-synth -top <module_name>
-dfflibmap -liberty <path_to_lib>
-abc -liberty <path_to_lib>
+synth -top <sub_module_name>
+dfflibmap -liberty /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog <-noattr> <your_generated_netlist_filename_flat.v>
 show
-write_verilog -noattr netlist.v
 ```
 
-### Synthesis Optimizations
+![DFF Async Res Sync Res](assets/dff_asyncres_syncres.png)
 
-Synthesis tools perform various optimizations, including:
+#### Some Optimizations made by tool:
 
-*   **Logic Implementation**: The tool might choose an implementation that is more efficient in CMOS technology. For example, an `OR` gate might be implemented as an inverted-input `NAND` gate to avoid stacked PMOS transistors, which have poor mobility.
-*   **Set/Reset Logic**: If the RTL code uses an active-high reset but the library only contains active-low reset flip-flops, the tool will automatically insert an inverter.
-*   **Arithmetic Optimizations**:
-    *   **Multiplication by 2^n**: This is implemented as a simple left shift, which corresponds to wiring (appending `n` zeros) and requires no logic gates.
-    *   **Multiplication by a constant**: For example, `y = a * 9` can be implemented as `y = a * 8 + a`, which translates to a left shift and an addition.
+- Defined active high set/reset macro in the liberty, tool uses inverter to provide and align with low set/reset input in RTL code.
+- Multiply by 2^n => shift left by n (append 'n' number of zeros).
+- Multiply by 9 => 2x[2:0] mapped to [5:0].
+
+### [Verify Outputs](assets/)
+
+---
+
+## Day 3: Logic Optimization
+
+### Combinational Logic Optimization
+
+It means squeezing the logic to get the most optimized design in terms of area and power. The most commonly used techniques are:
+
+1. **Constant Propagation**
+   - Direct Optimization
+2. **Boolean Logic Optimization**
+   - K-Map
+   - Quine McKluskey
+
+### Sequential Logic Optimizations
+
+- **Basic**:
+  1. Sequential Constant Propagation
+- **Advanced**:
+  1. State optimization: Optimization of unused state.
+  2. Retiming: Splitting logic equally for possible combinations and improving the overall timing. Use of 'useful slack' to reduce the delay somewhere else.
+  3. Sequential Logic Cloning (Floor Plan Aware Synthesis): Avoid the slack, ensure meeting timing requirements.
+
+### Sequential Constant Propagation
+
+For a flop to become sequential constant, the Q (in a DFF) pin should always have a constant value.
+
+### Optimization Lab
+
+#### Combinational
+
+For files: opt_check, opt_check2, opt_check3, opt_check4, multiple_module_opt
+
+```bash
+ls *opt*
+ls *opt_check*
+yosys
+read_liberty -lib <lib_path>
+read_verilog <*opt_check.v>
+synth -top <top_module_name>
+flatten <for multiple_modules_opt>
+opt_clean -purge  # command to do constant propagation and other optimization
+abc -liberty <lib_path>
+write_verilog <*_opt_generated_netlist.v>
+show
+```
+
+![opt_check](assets/opt_check.png)
+![multiple_modules_opt](assets/multiple_modules_opt.png)
+
+#### Sequential
+
+Files: dff_const1, dff_const2, dff_const3, dff_const4, dff_const5
+
+```bash
+ls *dff_const*
+iverilog <dff_const*.v> <tb_dff_const*.v>
+./a.out
+gtkwave <tb_dff_const*.vcd>
+```
+
+![dff_const1](assets/waveform_dff_const1.png)
+![dff_const2](assets/waveform_dff_const2.png)
+![dff_const3](assets/waveform_dff_const3.png)
+![dff_const4](assets/waveform_dff_const4.png)
+![dff_const5](assets/waveform_dff_const5.png)
+
+```bash
+yosys
+read_liberty -lib <lib_path>
+read_verilog <dff_const*.v>
+synth -top <top_module_name>
+dfflibmap -liberty <lib_path>
+abc -liberty <lib_path>
+write_verilog <dff_const*_generated_netlist.v>
+show
+```
+
+![dff_const1](assets/dff_const1.png)
+![dff_const2](assets/dff_const2.png)
+![dff_const3](assets/dff_const3.png)
+![dff_const4](assets/dff_const4.png)
+![dff_const5](assets/dff_const5.png)
+
+#### Unused Output Optimization
+
+Files: counter_opt
+
+```bash
+yosys
+read_liberty -lib <lib_path>
+read_verilog <*_opt.v>
+synth -top <top_module_name>
+dfflibmap -liberty <lib_path>
+abc -liberty <lib_path>
+write_verilog <*_opt_generated_netlist.v>
+show
+```
+
+![counter_opt](assets/counter_opt.png)
+![counter_opt_waveform](assets/waveform_counter_opt.png)
+
+counter_opt2:
+> assign q = (count[2:0] == 3'b100);
+
+![counter_opt2](assets/counter_opt2.png)
+
+### [Verify Outputs](assets/)
+### [Generated Netlists](assets/FILES)
+### [Lecture Notes](assets/Lecture_Notes/)
+
+---
+
+## Day 4: GLS, Blocking vs Non-blocking and Synthesis-Simulation Mismatch
+
+1. Running the test bench with Netlist as Design Under Test.
+2. Netlist == RTL Code <logically same>
+3. Same Testbench
+
+### Why GLS?
+
+1. Verify the logical correctness of design after synthesis.
+2. Ensure the timing of the design is met.
+   > For this GLS needs to be run with delay annotation.
+
+### Synthesis Simulation Mismatch
+
+It happens because of the following reasons:
+
+1. Missing Sensitivity List
+2. Blocking vs Non-Blocking assignment
+3. Non Standard Verilog Coding
+
+### Missing Sensitivity List
+
+> How does a Simulator work? -> looks for activity
+
+### Blocking and Non-Blocking Statements
+
+> Inside always block
+- '='  -> Blocking
+  - Executes the statements in the order it is written.
+  - So the first statement is evaluated before the second statement.
+
+- '<=' -> Non-Blocking
+  - Executes all the RHS when the always block is entered and assigns to LHS.
+  - Parallel evaluation.
+
+> Sequential circuit: use non-blocking statements.
+
+> Ternary operator: `<condn>?<True>:<False>`
+
+### Commands
+
+- File types: generated_netlist, verilog_models_file and the test_bench
+- Files: ternary_operator_mux.v, bad_mux.v, good_mux.v, blocking_caveat.v
+
+#### RTL Simulation
+
+```bash
+iverilog <*_mux.v> <tb_*_mux.v>
+./a.out
+gtkwave <tb_*_mux.vcd>
+```
+
+![ternary_operator_mux_waveform](assets/waveform_ternary_operator_mux.png)
+![bad_mux_waveform](assets/waveform_bad_mux.png)
+![good_mux_waveform](assets/waveform_good_mux.png)
+![blocking_caveat_waveform](assets/waveform_blocking_caveat.png)
+
+#### Synthesis
+
+```bash
+yosys
+read_liberty -lib <lib_path>
+read_verilog <*_mux.v>
+synth -top <top_module_name>
+abc -liberty <lib_path>
+write_verilog -noattr <*_mux_noattr_generated_netlist.v>
+show
+```
+
+![ternary_operator_mux](assets/ternary_operator_mux.png)
+![bad_mux](assets/bad_mux.png)
+![good_mux](assets/good_mux.png)
+![blocking_caveat](assets/blocking_caveat.png)
+
+#### GLS
+
+```bash
+iverilog /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v <*_mux.v> <tb_*_mux.v>
+./a.out
+gtkwave <tb_*_mux.vcd>
+```
+
+![gls_ternary](assets/gls_waveform_ternary_operator_mux.png)
+![gls_bad](assets/gls_waveform_bad_mux.png)
+![gls_good](assets/gls_waveform_good_mux.png)
+![gls_caveat](assets/gls_waveform_blocking_caveat.png)
+
+### Synthesis Simulation Mismatch
+
+![rtl_bad](assets/waveform_bad_mux.png)
+![gls_bad](assets/gls_waveform_bad_mux.png)
+
+### [Verify Outputs](assets/)
+### [Generated Netlists](assets/FILES)
+### [Lecture Notes](assets/Lecture_Notes/)
+
+---
+
+## Day 5: Optimization
+
+### IF-ELSE & CASE
+
+**Note:** `if-else` and `case` statements are procedural constructs used inside `always` blocks. The variables assigned within these blocks must be of type `reg`.
+
+#### `if-else` Statements
+
+The `if-else` construct creates a priority-encoded logic structure. Conditions are evaluated sequentially.
+
+**Syntax:**
+
+```verilog
+if (condition1) begin
+    // Statements for condition1
+end
+else if (condition2) begin
+    // Statements for condition2
+end
+else begin
+    // Default statements
+end
+```
+
+**Caveat: Inferred Latches**
+
+A common pitfall in combinational logic (`always @(*)`) is inferring a latch. This happens if an output is not assigned a value in every possible branch of the `if-else` structure. The synthesis tool must then "latch" (hold) the previous value, which is usually unintended and can cause timing issues.
+
+* **Bad Practice (Infers a latch for `y`):**
+
+  ```verilog
+  always @(*) begin
+      if (enable)
+          y = data_in;
+      // No 'else' part! 'y' holds its value if 'enable' is false.
+  end
+  ```
+
+* **Good Practice (Combinational):**
+
+  To avoid latches, ensure a value is assigned in all conditions or set a default value at the start of the block.
+
+  ```verilog
+  always @(*) begin
+      y = default_value; // Assign a default
+      if (enable)
+          y = data_in;
+  end
+  ```
+
+#### `case` Statements
+
+The `case` statement compares an expression to a list of cases and executes the corresponding statements. It is ideal for implementing multiplexers as it implies parallel logic (no priority).
+
+**Syntax:**
+
+```verilog
+case (control_signal)
+    case_value1: begin
+        // Statements for case_value1
+    end
+    case_value2: begin
+        // Statements for case_value2
+    end
+    default: begin
+        // Default statements (crucial!)
+    end
+endcase
+```
+
+**Caveats with `case`:**
+
+1. **Incomplete `case`**: If not all possible values of `control_signal` are covered and no `default` case is provided, a latch will be inferred. **Solution: Always include a `default` case.**
+2. **Partial Assignment**: If a variable is not assigned a value in every single `case` branch (including `default`), a latch will be inferred for that variable. **Solution: Assign a default value to all outputs before the `case` statement.**
+
+#### Priority: `if-else` vs. `case`
+
+* **`if-else`**: Synthesizes to **priority logic**. The first `if` condition has the highest priority. This can create a longer critical path if the chain is long.
+* **`case`**: Synthesizes to a balanced multiplexer structure (parallel logic). It's generally faster and preferred for selecting between multiple data sources based on a single control signal. Avoid overlapping case items, as this is not synthesizable in standard Verilog.
+
+#### Commands for `if-else` and `case` Labs
+
+Files: all incomp_*.v files & corresponding tb_incomp_*.v *_case.v & tb_*_case.v
+
+```bash
+ls *incomp* or ls *case*
+iverilog <incomp_*.v> <tb_incomp_*.v>
+./a.out
+gtkwave <tb_incomp_*.vcd>
+yosys
+read_liberty -lib <lib_path>
+read_verilog <incomp_*.v>
+synth -top <top_module_name>
+abc -liberty <lib_path>
+write_verilog -noattr <incomp_*_noattr_generated_netlist.v>
+show
+```
+
+### Looping Constructs
+
+1. for loop => used inside always block => used for evaluating expressions, and not for instantiating hardware.
+2. generate for loop => used outside always, and can't be used inside always => used to instantiate Hardware, multiple times, example: instantiate an 'and' gate 100 times
+
+#### Commands
+
+Files: mux_generate, demux_case, demux_generate, fa, rca
+
+```bash
+iverilog <*.v> <tb_*.v>
+./a.out
+gtkwave <tb_*.vcd>
+yosys
+read_liberty -lib <lib_path>
+read_verilog <*.v>
+synth -top <top_module_name>
+abc -liberty <lib_path>
+write_verilog -noattr <*_noattr_generated_netlist.v>
+show
+iverilog /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v /home/ank/.ciel/ciel/sky130/versions/a80ed405766c5d4f21c8bfca84552a7478fe75b2/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v <*.v> <tb_*.v>
+./a.out
+gtkwave <tb_*.vcd>
+```
+
+1. **Mux Generate**
+
+   ![mux_generate_waveform_2](assets/waveform_mux_generate_2.png)
+   ![mux_generated_waveform](assets/waveform_mux_generated.png)
+   ![mux_generate](assets/mux_generate.png)
+
+2. **Demux Case**
+
+   ![demux_case_waveform](assets/waveform_demux_case.png)
+   ![demux_case](assets/demux_case.png)
+
+3. **Demux Generate**
+
+   ![demux_generate_waveform](assets/waveform_demux_generate.png)
+   ![demux_generate](assets/demux_generate.png)
+
+4. **Ripple Carry Adder using Full Adder**
+
+   ![rca_waveform](assets/waveform_rca.png)
+   ![rca_waveform_2](assets/waveform_rca_2.png)
+   ![rca_waveform_3](assets/waveform_rca_3_mid.png)
+   ![rca_waveform_4](assets/waveform_rca_4.png)
+   ![rca_waveform_5](assets/waveform_rca_5_end.png)
+   ![fa](assets/fa.png)
+   ![rca](assets/rca.png)
+
+### [Verify Outputs](assets/)
+### [Generated Netlists](assets/FILES)
+### [Lecture Notes](assets/Lecture_Notes/)
+### [Lecture Notes](assets/Lecture_Notes/)
