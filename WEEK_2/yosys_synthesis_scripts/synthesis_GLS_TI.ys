@@ -1,0 +1,7 @@
+read_verilog src/wb_interconnect.v
+read_verilog src/picorv32.v
+read_verilog src/soc.v
+read_verilog src/sram_stub.v
+synth -top soc
+write_verilog netlist/soc_generic.v
+show soc
