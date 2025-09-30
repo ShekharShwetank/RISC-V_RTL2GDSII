@@ -64,17 +64,16 @@ The hands-on tasks involve installing simulation tools, compiling Verilog module
 - **GTKWave**: Used for viewing simulation waveforms.
 
 #### Steps Performed
-1. **Clone the BabySoC project repo**: Repository cloned to access Verilog modules.
-2. **Compile the BabySoC Verilog modules using iverilog**:
+1. **Compile the BabySoC Verilog modules using iverilog**:
    - Command: `iverilog -o simulation/soc_rtl.sim testbench/soc_tb.v src/soc.v src/wb_interconnect.v src/picorv32.v src/sram.v`
-3. **Simulate and generate .vcd waveform files**:
+2. **Simulate and generate .vcd waveform files**:
    - Command: `./simulation/baby_soc_sim.sim`
-4. **Open .vcd files in GTKWave and analyze**:
+3. **Open .vcd files in GTKWave and analyze**:
    - Command: `gtkwave waveforms/soc_tb.vcd`
    - Analysis of: Reset operation, Clocking, Dataflow between modules.
 
 #### Simulation Logs
-Simulation logs are available in `logs/synthesis.log` and other log files in the `logs/` directory.
+Simulation logs are available in `logs/synthesis.log` and other log files in the [/logs](/logs) directory.
 
 #### GTKWave Screenshots and Explanations
 
@@ -88,6 +87,8 @@ Simulation logs are available in `logs/synthesis.log` and other log files in the
 *Figure: Side-by-side comparison of RTL and GLS waveforms. The waveforms are functionally identical, confirming the synthesis preserved the design's logic.*
 
 Additional screenshots: `assets/Firmware_data_loading.png`, `assets/Firmware_data_Post.png`, `assets/waveform_sram_1.png` provide further insights into firmware loading and SRAM interactions.
+Check [/assets](assets/)
+![Firmware_Data_Loading](assets/Firmware_data_loading.png)
 
 These labs demonstrate correct BabySoC behavior through simulation and waveform analysis.
 
