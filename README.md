@@ -120,13 +120,13 @@ Additional screenshots: `assets/Firmware_data_loading.png`, `assets/Firmware_dat
 Check [WEEK_2/assets](WEEK_2/assets/)
 ![Firmware_Data_Loading](WEEK_2/assets/Firmware_data_loading.png)
 
-These labs demonstrate correct BabySoC behavior through simulation and waveform analysis.
+These demonstrate correct BabySoC behavior through simulation and waveform analysis.
 
 ---
 
 ## 2. RTL Functional Simulation
 
-The first major goal was to verify the logical correctness of the RTL design.
+The first major goal is to verify the logical correctness of the RTL design.
 
 ### 2.1. Firmware Development
 To perform a meaningful test, a simple firmware was written in RISC-V assembly. This program writes a known value (`0xDEADBEEF`) to a specific memory address (`0x100`) and then halts.
@@ -147,7 +147,7 @@ This was compiled using the `riscv64-unknown-elf` toolchain finally into the fol
 
 #### RISC-V Firmware Compilation Flow
 
-This document outlines the step-by-step process to compile a RISC-V assembly source file (`.s`) into a Verilog-compatible hexadecimal file (`.hex`) suitable for loading into a simulation model with `$readmemh`.
+This section outlines the step-by-step process to compile a RISC-V assembly source file (`.s`) into a Verilog-compatible hexadecimal file (`.hex`) suitable for loading into a simulation model with `$readmemh`.
 
 ##### Prerequisites
 
