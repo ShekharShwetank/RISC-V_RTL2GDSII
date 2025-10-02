@@ -7,7 +7,7 @@ The primary goal is to convert the high-level RTL design into a gate-level netli
 ## Table of Contents
 
 0.  [Pre-Synthesis Verification (RTL)](#0-pre-synthesis-verification-rtl)
-1.  [Synthesis Flow Overview](#1-synthesis-flow-overviewSynthesis-Flow-Overview)
+1.  [Synthesis Flow Overview](#1-synthesis-flow-overview)
 2.  [Key Concept: Black-Boxing Analog IPs](#2-key-concept-black-boxing-analog-ips)
 3.  [The Synthesis Script](#3-the-synthesis-script)
 4.  [The Debugging Journey: Errors & Resolutions](#4-the-debugging-journey-errors--resolutions)
