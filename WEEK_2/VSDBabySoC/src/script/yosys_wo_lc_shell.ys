@@ -1,0 +1,19 @@
+read_liberty -lib src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -lib src/lib/avsddac.lib
+read_liberty -lib src/lib/avsdpll.lib
+read_verilog src/module/vsdbabysoc.v
+read_verilog -I src/include src/module/rvmyth.v
+read_verilog -I src/include src/module/clk_gate.v
+read_verilog src/module/avsddac_stub.v
+read_verilog src/module/avsdpll_stub.v
+synth -top vsdbabysoc
+dfflibmap -liberty src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+opt
+abc -liberty src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+flatten
+setundef -zero
+clean -purge
+rename -enumerate
+write_verilog -noattr reports/vsdbabysoc_netlist.v
+stat -liberty src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show vsdbabysoc

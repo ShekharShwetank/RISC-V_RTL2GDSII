@@ -34,6 +34,34 @@ This week documents the complete pre-synthesis and post-synthesis verification f
 
 ![BabySoC Architecture](WEEK_2/assets/soc.yosys_show.png)
 
+## Table of Contents
+- [Part 1: SoC Fundamentals (Theory)](#part-1-soc-fundamentals-theory)
+  - [Understanding System on a Chip (SoC)](#understanding-system-on-a-chip-soc)
+  - [Key Parts of an SoC](#key-parts-of-an-soc)
+  - [Why SoCs Are Awesome](#why-socs-are-awesome)
+  - [Where You’ll Find SoCs](#where-youll-find-socs)
+  - [Some Popular SoCs](#some-popular-socs)
+  - [Challenges with SoCs](#challenges-with-socs)
+  - [Types of SoCs](#types-of-socs)
+- [Part 2: Functional Modelling and Verification](#part-2-functional-modelling-and-verification)
+  - [Project Objective & SoC Architecture](#1-project-objective-soc-architecture)
+  - [Hands-on Functional Modelling Labs](#11-hands-on-functional-modelling-labs)
+    - [Tools Installation](#tools-installation)
+    - [Steps Performed](#steps-performed)
+  - [RTL Functional Simulation](#2-rtl-functional-simulation)
+    - [Firmware Development](#21-firmware-development)
+    - [RTL Debugging](#22-rtl-debugging)
+    - [Final RTL Simulation](#23-final-rtl-simulation)
+  - [Logic Synthesis](#3-logic-synthesis)
+    - [Synthesis Strategy](#31-synthesis-strategy)
+    - [Synthesis Script (`synthesis.ys`)](#32-synthesis-script-synthesisys)
+    - [Synthesis Results](#33-synthesis-results)
+  - [Post-Synthesis Verification (Gate-Level Simulation)](#4-post-synthesis-verification-gate-level-simulation)
+    - [Analysis of the Post-Synthesis Simulation Waveform](#41-analysis-of-the-post-synthesis-simulation-waveform)
+    - [GLS Flow](#42-gls-flow)
+    - [Final Verification Result](#43-final-verification-result)
+  - [Conclusion](#5-conclusion)
+
 ## Part 1: SoC Fundamentals (Theory)
 
 ### Understanding System on a Chip (SoC)
@@ -84,6 +112,8 @@ The goal of this phase was to perform a comprehensive functional verification of
 * **CPU Core:** `PicoRV32`, a 32-bit RISC-V processor.
 * **Memory:** A 4KB behavioral model of a single-port SRAM.
 * **Interconnect:** A Wishbone bus to connect the master (CPU) and slave (SRAM).
+
+* **Also Check Out:** [VSDBabySoC](WEEK_2/VSDBabySoC/README.md) for a simpler implementation to get started with.
 
 ### 1.1. Hands-on Functional Modelling Labs
 
