@@ -85,6 +85,8 @@ The goal of this phase was to perform a comprehensive functional verification of
 * **Memory:** A 4KB behavioral model of a single-port SRAM.
 * **Interconnect:** A Wishbone bus to connect the master (CPU) and slave (SRAM).
 
+* **Also Check Out:** [VSDBabySoC](WEEK_2/VSDBabySoC/README.md) for a simpler implementation to started with.
+
 ### 1.1. Hands-on Functional Modelling Labs
 
 The hands-on tasks involve installing simulation tools, compiling Verilog modules, simulating, and analyzing waveforms.
