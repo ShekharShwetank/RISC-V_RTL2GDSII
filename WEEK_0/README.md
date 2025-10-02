@@ -2,6 +2,11 @@
 
 This week was focused on setting up the environment and installing all the necessary tools for the RTL to GDSII flow.
 
+[Check out the detailed environment setup guide here.](Environment_setup.md)
+[Automated Installation Script here.](Shell_Scripts/INSTALL_OPEN_SOURCE_TOOLS.sh)
+[Automated Verification Script here.](Shell_Scripts/VERIFY_INSTALLATION.sh)
+[Installation Verification Logs here.](Installation_Verification_Logs.md)
+
 ## Tools Installed
 
 ### Icarus Verilog
