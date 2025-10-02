@@ -1,4 +1,4 @@
-|# VSD BabySoC: RTL to Post-Synthesis Verification
+# VSD BabySoC: RTL to Post-Synthesis Verification
 
 This document provides a comprehensive walkthrough of the synthesis and post-synthesis verification flow for the `vsdbabysoc` System-on-Chip. The project integrates the `rvmyth` RISC-V core with two analog IPs, `avsddac` (a DAC) and `avsdpll` (a PLL), using an open-source toolchain featuring Yosys for synthesis and Icarus Verilog for simulation.
 
