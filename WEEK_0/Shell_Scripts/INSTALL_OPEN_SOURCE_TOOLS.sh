@@ -22,7 +22,7 @@ sudo apt-get install -y make
 
 # Clone and build Yosys
 echo "Cloning and building Yosys..."
-git clone https://github.com/YosysHQ/yosys.git
+git clone --recursive https://github.com/YosysHQ/yosys.git
 cd yosys
 make config-gcc
 make
@@ -42,11 +42,11 @@ echo "Installing dependencies for ngspice..."
 sudo apt-get install -y libx11-dev tcl-dev tk-dev libcairo2-dev \
     mesa-common-dev libglu1-mesa-dev libncurses-dev
 
-# Download and build ngspice (assuming ngspice-37.tar.gz is downloaded)
-# Note: User needs to download ngspice-37.tar.gz from https://sourceforge.net/projects/ngspice/files/
+# Download and build ngspice (assuming ngspice-latest.tar.gz is downloaded)
+# Note: User needs to download ngspice-latest.tar.gz from https://sourceforge.net/projects/ngspice/files/
 # For automation, we'll assume it's in the current directory
-echo "Please download ngspice-37.tar.gz from https://sourceforge.net/projects/ngspice/files/ and place it in the current directory."
-echo "Then run: tar -zxvf ngspice-37.tar.gz && cd ngspice-37 && mkdir release && cd release && ../configure --with-x --with-readline=yes --disable-debug && make && sudo make install"
+echo "Please download ngspice-latest.tar.gz from https://sourceforge.net/projects/ngspice/files/ and place it in the current directory."
+echo "Then run: tar -zxvf ngspice-latest.tar.gz && cd ngspice-latest && mkdir release && cd release && ../configure --with-x --with-readline=yes --disable-debug && make && sudo make install"
 
 # Install dependencies for magic
 echo "Installing dependencies for magic..."
