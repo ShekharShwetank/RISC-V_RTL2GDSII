@@ -1,0 +1,6 @@
+Startpoint: core/_9085_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: core/_8462_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+

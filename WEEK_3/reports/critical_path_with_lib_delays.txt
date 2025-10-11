@@ -1,0 +1,7 @@
+Detected time unit in liberty: ns
+
+Index	Pin	Cell	Observed_delay(ns)	Time(ns)	Lib_intrinsic(ns)	Note
+0	core/_9085_/CLK	sky130_fd_sc_hd__dfxtp_1	0.0	0.0	0.2692208	ok
+1	core/_9085_/Q	sky130_fd_sc_hd__dfxtp_1	8.43	8.43	0.2692208	ok
+2	core/_6479_/Y	sky130_fd_sc_hd__a21oi_1	-0.25	8.19	0.0699607	ok
+3	core/_8462_/D	sky130_fd_sc_hd__dfxtp_1	0.0	8.19	0.2692208	ok

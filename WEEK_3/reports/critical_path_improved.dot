@@ -1,0 +1,13 @@
+digraph critical_path {
+  rankdir=LR;
+  node [shape=box, fontname="Helvetica", style="filled", fontsize=10];
+  n0 [label="core/_9085_/CLK\\nsky130_fd_sc_hd__dfxtp_1\\nTime: 0.0 ns", fillcolor="lightgreen"];
+  n1 [label="core/_9085_/Q\\nsky130_fd_sc_hd__dfxtp_1\\nTime: 8.43 ns", fillcolor="lightgreen"];
+  n2 [label="core/_6479_/Y\\nsky130_fd_sc_hd__a21oi_1\\nTime: 8.19 ns", fillcolor="lightblue"];
+  n3 [label="core/_8462_/D\\nsky130_fd_sc_hd__dfxtp_1\\nTime: 8.19 ns", fillcolor="lightgreen"];
+  n0 -> n1 [label="8.43 ns", fontsize=10];
+  n1 -> n2 [label="-0.25 ns", fontsize=10];
+  n2 -> n3 [label="0.00 ns", fontsize=10];
+  labelloc="t";
+  label="Critical path — arrival=8.19 ns, required=10.45 ns, slack=2.26 ns";
+}
