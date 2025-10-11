@@ -136,17 +136,7 @@ This document provides a comprehensive walkthrough of the post-synthesis verific
     │           ├── wns_hold.rpt
     │           └── wns_setup.rpt
     ├── scripts
-    │   ├── annotate_image.py
-    │   ├── annotate_with_lib_delays.py
-    │   ├── generate_improved_graph.py
-    │   ├── generate_timing_graph.py
-    │   ├── parse_and_plot_sta.py
-    │   ├── parse_full_critical_path.py
-    │   ├── parse_pvt_and_plot.py
-    │   ├── plot_pvt_sta_old.py
     │   ├── plot_pvt_sta.py
-    │   ├── print_file_content.sh
-    │   ├── run_sta_per_corner_old.sh
     │   └── run_sta_per_corner.sh
     ├── STA
     │   ├── final.sdc
@@ -206,7 +196,7 @@ This document provides a comprehensive walkthrough of the post-synthesis verific
 
 Post-Synthesis Verification (GLS) was performed as detailed in [WEEK_2/VSDBabySoC/README.md](../WEEK_2/VSDBabySoC/README.md), confirming functional equivalence between the RTL and gate-level netlist.
 
-![GLS Waveform Comparison](WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
+![GLS Waveform Comparison](../WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
 
 ## 1\. STA Flow Overview
 
@@ -226,47 +216,46 @@ Timing constraints define the operating environment for STA, including clocks, d
 #### `STA/final.sdc`
 
 ```tcl
-# final.sdc for VSDBabySoC (clean version)
-
+# 1. Define the main clock
 set clk_targets [get_pins pll/CLK]
 if {[llength $clk_targets] == 0} {
-  # Fallback: try a top-level port named core_clk, else any pin named */CLK
-  set clk_targets [get_ports core_clk]
-  if {[llength $clk_targets] == 0} {
-    set clk_targets [get_pins */CLK]
-  }
+    set clk_targets [get_ports core_clk]
+    if {[llength $clk_targets] == 0} {
+        set clk_targets [get_pins */CLK]
+    }
 }
 create_clock -name core_clk -period 11.0 $clk_targets
-
-# 1. Define the core clock (on PLL output or port)
-# create_clock -name core_clk -period 11.0 [get_ports {core_clk}]
-# Alternative (if PLL pin is visible):
-# create_clock -name core_clk -period 11.0 [get_pins pll/CLK]
 
 # 2. Collect ports
 set all_in  [all_inputs]
 set all_out [all_outputs]
 set non_data_ports [get_ports {REF VCO_IN ENb_CP ENb_VCO reset}]
 
-# 3. Exclude asynchronous controls
+# 3. Exclude asynchronous control signals (e.g. reset)
 set_false_path -from [get_ports reset]
 
-# 4. Apply input/output delays
+# 4. Define data input ports (exclude non-data ones)
+# OpenSTA doesn't support remove_from_collection, so use filter logic
+set data_in {}
+foreach port $all_in {
+    if {[lsearch $non_data_ports $port] == -1} {
+        lappend data_in $port
+    }
+}
+
+# 5. Apply input/output delays
 set input_delay_val  [expr {0.3 * 11.0}]
 set output_delay_val [expr {0.3 * 11.0}]
-set data_in  [remove_from_collection $all_in $non_data_ports]
-
 set_input_delay  $input_delay_val -clock [get_clocks core_clk] $data_in
 set_output_delay $output_delay_val -clock [get_clocks core_clk] $all_out
 
-# 5. Clock uncertainties and transition
+# 6. Clock uncertainties and transition
 set_clock_uncertainty -setup 0.10 [get_clocks core_clk]
 set_clock_uncertainty -hold  0.05 [get_clocks core_clk]
 set_clock_transition 0.05 [get_clocks core_clk]
 
-# 6. Output loads
+# 7. Output loads
 set_load 0.02 [all_outputs]
-
 ```
 
 - Clock period = 11 ns
@@ -275,7 +264,7 @@ set_load 0.02 [all_outputs]
 
 ## 3\. STA Fundamentals
 
-Refer to [STA_fundamentals_summary.md](STA_fundamentals_summary.md) for a comprehensive summary of STA concepts.
+Refer to [STA_fundamentals_summary.md](WEEK_3/STA_fundamentals_summary.md) for a comprehensive summary of STA concepts.
 
 ## 4\. The STA Script
 
@@ -297,7 +286,7 @@ report_wns > reports/6_worst_negative_slack.rpt
 report_checks -path_delay max -fields {slew capacitance input_pins nets fanout} -digits 4 > reports/6_critical_path.rpt
 ```
 
-### 4\. Executing STA
+## 5\. Executing STA
 
 With the script ready, STA is run with:
 
@@ -307,7 +296,7 @@ sta -no_splash STA/run_sta.tcl | tee STA/sta_run.log
 
 The full execution log can be found in `STA/sta_run.log`.
 
-## 5\. STA Results
+## 6\. STA Results
 
 The STA completed successfully, generating timing reports in `reports/`. Key statistics from the reports:
 
@@ -327,15 +316,13 @@ Detailed reports:
 - `6_critical_path.rpt` and `6_critical_path_full.rpt`: Critical path details.
 
 Additional files:
-- `sta_summary.txt`: STA extraction summary.
-- `parsed_*.txt`: Parsed timing data.
+- `run_sta_per_corner.sh` : Script for running STA per corner.
+- `plot_pvt_sta.py` : Python script for plotting pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wns.png, pvt_tns.png.
 - `generate_timing_graph.py`: Python script for generating timing graphs.
 - Graphviz .dot and .png files: Visualizations of critical paths (e.g., critical_path.png, critical_path_improved.png).
-- `pvt/` and `pvt_old/`: Folders for PVT variation analysis (if performed).
+- `pvt/`: Folder for PVT variation analysis outputs.
 
-![STA Summary Report](assets/sta_summary_report.png)
-
-## 6\. PVT Corner Analysis
+## 7\. PVT Corner Analysis
 
 PVT (Process, Voltage, Temperature) corner analysis is essential for ensuring timing closure across all possible operating conditions in the fabricated chip. Semiconductor manufacturing introduces variations in process parameters (e.g., transistor threshold voltage and mobility), supply voltage fluctuations, and temperature changes, which significantly impact gate delays, slew rates, and overall circuit performance. Without PVT analysis, a design might pass STA at nominal conditions (e.g., typical-typical "tt" corner) but fail in extreme corners, leading to functional or timing failures in real-world deployment.
 
@@ -398,13 +385,13 @@ Wrote pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wn
 
 Reports stored in `reports/pvt/<corner>/` (e.g., `wns_setup.rpt`, `tns_hold.rpt`). Full summary in `pvt_summary.csv`.
 
-![PVT Worst Setup Slack Across Corners](pvt_worst_setup.png)
-![PVT Worst Hold Slack Across Corners](pvt_worst_hold.png)
-![PVT Worst Negative Slack (WNS)](pvt_wns.png)
-![PVT Total Negative Slack (TNS)](pvt_tns.png)
-![PVT Summary Overview](PVT_Summary.png)
+![PVT Worst Setup Slack Across Corners](WEEK_3/pvt_worst_setup.png)
+![PVT Worst Hold Slack Across Corners](WEEK_3/pvt_worst_hold.png)
+![PVT Worst Negative Slack (WNS)](WEEK_3/pvt_wns.png)
+![PVT Total Negative Slack (TNS)](WEEK_3/pvt_tns.png)
+![PVT Summary Overview](WEEK_3pvt_summary.png)
 
-## 7\. Timing Analysis and Critical Path Evaluation
+## 8\. Timing Analysis and Critical Path Evaluation
 
 ### Setup Path Analysis
 
@@ -441,13 +428,9 @@ Path Type: max
 
 **Setup Slack Formula:**
 
-\[
-Slack_{setup} = Required\ Time - Arrival\ Time = 10.45 - 8.19 = +2.26\ ns
-\]
+Slack_setup = Required Time - Arrival Time = 10.45 - 8.19 = +2.26 ns
 
 ✅ Setup timing met.
-
-![Setup Path Visualization](assets/setup_path_visual.png)
 
 ### Hold Path Analysis
 
@@ -483,13 +466,9 @@ Path Type: min
 
 **Hold Slack Formula:**
 
-\[
-Slack_{hold} = Arrival\ Time - Required\ Time = 0.00 - (-0.03) = +0.03\ ns
-\]
+Slack_hold = Arrival Time - Required Time = 0.00 - (-0.03) = +0.03 ns
 
 ✅ Hold timing met.
-
-![Hold Path Visualization](assets/hold_path_visual.png)
 
 ### Critical Path Evaluation
 
@@ -530,9 +509,9 @@ Path Type: max
 - Graphviz .dot files: critical_path.dot, critical_path_improved.dot, etc.
 - Parsed data in reports/parsed_critical_path_full.txt.
 
-![Critical Path Graph](critical_path_with_lib_delays.png)
-![Critical_Path_2](critical_path_improved.png)
+![Critical Path Graph](WEEK_3/ritical_path_with_lib_delays.png)
+![Critical_Path_2](WEEK_3/critical_path_improved.png)
 
-## 8\. Conclusion
+## 9\. Conclusion
 
 This process successfully verified the `vsdbabysoc` gate-level netlist through GLS and STA. Timing closure was achieved with positive slacks for setup and hold checks. The critical path was identified, confirming the design's performance limits.
