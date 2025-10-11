@@ -1,0 +1,52 @@
+Startpoint: core/_9050_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: core/_8095_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ core/_9050_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   1.22    1.22 ^ core/_9050_/Q (sky130_fd_sc_hd__dfxtp_1)
+   0.52    1.73 ^ core/_4035_/Y (sky130_fd_sc_hd__xnor2_1)
+   0.55    2.28 v core/_4193_/Y (sky130_fd_sc_hd__o21ai_0)
+   0.83    3.12 ^ core/_4242_/Y (sky130_fd_sc_hd__a211oi_1)
+   0.48    3.60 v core/_4266_/Y (sky130_fd_sc_hd__o31ai_1)
+   0.55    4.14 v core/_4312_/X (sky130_fd_sc_hd__a21o_1)
+   0.83    4.97 ^ core/_4374_/Y (sky130_fd_sc_hd__a221oi_1)
+   0.73    5.70 v core/_4422_/Y (sky130_fd_sc_hd__o311ai_0)
+   0.92    6.62 ^ core/_4490_/Y (sky130_fd_sc_hd__a311oi_1)
+   0.37    6.99 v core/_4492_/Y (sky130_fd_sc_hd__nor3_1)
+   0.78    7.77 ^ core/_4607_/Y (sky130_fd_sc_hd__a31oi_1)
+   0.51    8.29 v core/_4691_/Y (sky130_fd_sc_hd__o41ai_1)
+   1.30    9.58 v core/_4729_/X (sky130_fd_sc_hd__maj3_1)
+   0.67   10.26 ^ core/_4831_/Y (sky130_fd_sc_hd__a41oi_1)
+   0.48   10.74 v core/_4859_/Y (sky130_fd_sc_hd__o21ai_0)
+   1.33   12.07 v core/_4876_/X (sky130_fd_sc_hd__maj3_1)
+   1.30   13.37 v core/_4916_/X (sky130_fd_sc_hd__maj3_1)
+   1.30   14.67 v core/_4935_/X (sky130_fd_sc_hd__maj3_1)
+   1.29   15.96 v core/_4968_/X (sky130_fd_sc_hd__maj3_1)
+   1.30   17.26 v core/_4984_/X (sky130_fd_sc_hd__maj3_1)
+   1.32   18.58 v core/_5018_/X (sky130_fd_sc_hd__maj3_1)
+   0.62   19.20 ^ core/_5039_/Y (sky130_fd_sc_hd__a211oi_1)
+   0.26   19.46 v core/_5040_/Y (sky130_fd_sc_hd__a311oi_1)
+   1.28   20.75 ^ core/_5756_/Y (sky130_fd_sc_hd__o211ai_1)
+   0.72   21.47 v core/_5759_/Y (sky130_fd_sc_hd__a311oi_1)
+   0.00   21.47 v core/_8095_/D (sky130_fd_sc_hd__dfxtp_1)
+          21.47   data arrival time
+
+  11.00   11.00   clock core_clk (rise edge)
+   0.00   11.00   clock network delay (ideal)
+  -0.10   10.90   clock uncertainty
+   0.00   10.90   clock reconvergence pessimism
+          10.90 ^ core/_8095_/CLK (sky130_fd_sc_hd__dfxtp_1)
+  -1.45    9.45   library setup time
+           9.45   data required time
+---------------------------------------------------------
+           9.45   data required time
+         -21.47   data arrival time
+---------------------------------------------------------
+         -12.01   slack (VIOLATED)
+
+

@@ -42,8 +42,9 @@ This document provides a comprehensive walkthrough of the post-synthesis verific
 4.  [The STA Script](#4-the-sta-script)
 5.  [Executing STA](#5-executing-sta)
 6.  [STA Results](#6-sta-results)
-7.  [Timing Analysis and Critical Path Evaluation](#7-timing-analysis-and-critical-path-evaluation)
-8.  [Conclusion](#8-conclusion)
+7.  [PVT Corner Analysis](#7-pvt-corner-analysis)
+8.  [Timing Analysis and Critical Path Evaluation](#8-timing-analysis-and-critical-path-evaluation)
+9.  [Conclusion](#9-conclusion)
 
 ## Pre-requisites
 
@@ -64,81 +65,148 @@ This document provides a comprehensive walkthrough of the post-synthesis verific
     path/to/VSDBabySoC$ tree -a
     .
     ├── assets
-    │   ├── opensta_main_view.png
-    │   ├── opensta_installation.png
-    │   ├── sta_execution.png
-    │   ├── setup_path_visual.png
-    │   ├── hold_path_visual.png
-    │   ├── critical_path_graph.png
-    │   ├── sta_summary_report.png
-    │   ├── timing_closure.png
-    │   └── comp_pre_vs_post_synth_sim.png
+    │   ├── STA Theory 
+    │   └── STA_1.jpg
+    ├── critical_path_improved.png
+    ├── critical_path.png
+    ├── critical_path_with_lib_delays.png
+    ├── logs
+    │   ├── LOG_1_PRE_SYNTHESIS_VSDBabySoC.md
+    │   ├── LOG_2_POST_SYNTHESIS_VSDBabySoC.md
+    │   ├── LOG_3_A_Opensta_Installation_logs.md
+    │   ├── LOG_3_STA.md
+    │   └── LOG_4_PVT_Corner.md
+    ├── pvt_summary.csv
+    ├── PVT_Summary.png
+    ├── pvt_tns.png
+    ├── pvt_wns.png
+    ├── pvt_worst_hold.png
+    ├── pvt_worst_setup.png
+    ├── README.md
     ├── reports
     │   ├── 1_clocks.rpt
+    │   ├── 2_unconstrained.rpt
     │   ├── 3_setup_report.rpt
     │   ├── 4_hold_report.rpt
-    │   ├── 5_total_negative_slack.rpt
-    │   ├── 6_worst_negative_slack.rpt
-    │   └── 6_critical_path.rpt
+    │   ├── 5_worst_slack.rpt
+    │   ├── 6_critical_path_full.rpt
+    │   ├── 6_critical_path_full_short.rpt
+    │   ├── 6_critical_path.rpt
+    │   ├── critical_path.dot
+    │   ├── critical_path_improved.dot
+    │   ├── critical_path_improved.png
+    │   ├── critical_path.png
+    │   ├── critical_path_with_lib_delays.dot
+    │   ├── critical_path_with_lib_delays_graphviz.png
+    │   ├── critical_path_with_lib_delays.png
+    │   ├── critical_path_with_lib_delays.txt
+    │   └── pvt
+    │       ├── ff_100C_1v65
+    │       │   ├── 3_setup_summary.rpt
+    │       │   ├── 4_hold_summary.rpt
+    │       │   ├── 6_critical_path_full_max.rpt
+    │       │   ├── 6_critical_path_full_min.rpt
+    │       │   ├── tns_hold.rpt
+    │       │   ├── tns_setup.rpt
+    │       │   ├── units.rpt
+    │       │   ├── wns_hold.rpt
+    │       │   └── wns_setup.rpt
+    │       ├── ff_100C_1v95
+    │       ├── ff_n40C_1v56
+    │       ├── ff_n40C_1v6
+    │       ├── ff_n40C_1v76
+    │       ├── ff_n40C_1v95
+    │       ├── ss_100C_1v40
+    │       ├── ss_100C_1v60
+    │       ├── ss_n40C_1v28
+    │       ├── ss_n40C_1v35
+    │       ├── ss_n40C_1v40
+    │       ├── ss_n40C_1v44
+    │       ├── ss_n40C_1v60
+    │       ├── ss_n40C_1v76
+    │       ├── tt_025C_1v80
+    │       └── tt_100C_1v80
+    │           ├── 3_setup_summary.rpt
+    │           ├── 4_hold_summary.rpt
+    │           ├── 6_critical_path_full_max.rpt
+    │           ├── 6_critical_path_full_min.rpt
+    │           ├── tns_hold.rpt
+    │           ├── tns_setup.rpt
+    │           ├── units.rpt
+    │           ├── wns_hold.rpt
+    │           └── wns_setup.rpt
+    ├── scripts
+    │   ├── annotate_image.py
+    │   ├── annotate_with_lib_delays.py
+    │   ├── generate_improved_graph.py
+    │   ├── generate_timing_graph.py
+    │   ├── parse_and_plot_sta.py
+    │   ├── parse_full_critical_path.py
+    │   ├── parse_pvt_and_plot.py
+    │   ├── plot_pvt_sta_old.py
+    │   ├── plot_pvt_sta.py
+    │   ├── print_file_content.sh
+    │   ├── run_sta_per_corner_old.sh
+    │   └── run_sta_per_corner.sh
     ├── STA
     │   ├── final.sdc
     │   ├── run_sta.tcl
+    │   ├── sta_per_corner.tcl
     │   └── sta_run.log
-    └── src
-        ├── gds
-        │   ├── avsddac.gds
-        │   └── avsdpll.gds
-        ├── gls_model
-        │   ├── primitives.v
-        │   └── sky130_fd_sc_hd.v
-        ├── include
-        │   ├── sandpiper_gen.vh
-        │   ├── sandpiper.vh
-        │   ├── sp_default.vh
-        │   └── sp_verilog.vh
-        ├── layout_conf
-        │   ├── rvmyth
-        │   │   ├── config.tcl
-        │   │   └── pin_order.cfg
-        │   └── vsdbabysoc
-        │       ├── config.tcl
-        │       ├── macro.cfg
-        │       └── pin_order.cfg
-        ├── lef
-        │   ├── avsddac.lef
-        │   └── avsdpll.lef
-        ├── lib
-        │   ├── avsddac.lib
-        │   ├── avsdpll.lib
-        │   └── sky130_fd_sc_hd__tt_025C_1v80.lib
-        ├── module
-        │   ├── avsddac_stub.v
-        │   ├── avsddac.v
-        │   ├── avsdpll_stub.v
-        │   ├── avsdpll.v
-        │   ├── clk_gate.v
-        │   ├── pseudo_rand_gen.sv
-        │   ├── pseudo_rand.sv
-        │   ├── rvmyth_gen.v
-        │   ├── rvmyth.tlv
-        │   ├── rvmyth.v
-        │   ├── testbench.rvmyth.post-routing.v
-        │   ├── testbench.v
-        │   └── vsdbabysoc.v
-        ├── script
-        │   ├── sta.conf
-        │   ├── verilog_to_lib.pl
-        │   └── yosys.ys
-        └── sdc
-            ├── vsdbabysoc_layout.sdc
-            └── vsdbabysoc_synthesis.sdc
+    ├── STA_fundamentals_summary.md
+    └── VSDBabySoC
+        ├── assets
+        │   ├── chip_stats.png
+        │   ├── comp_pre_vs_post_synth_sim_2.png
+        │   ├── comp_pre_vs_post_synth_sim.png
+        │   ├── Screenshot from 2025-10-02 00-57-45.png
+        │   ├── vsdbabysoc.yosys_show.png
+        │   ├── waveform_post_synth_sim.png
+        │   ├── waveform_pre_synth_sim_2.png
+        │   └── waveform_pre_synth_sim.png
+        ├── README.md
+        ├── reports
+        │   ├── logs
+        │   │   └── synthesis_yosis.log
+        │   └── vsdbabysoc_netlist.v
+        ├── simulation
+        │   ├── dump.vcd
+        │   ├── post_synth_sim.out
+        │   ├── pre_synth_sim.out
+        │   └── pre_synth_sim.vcd
+        └── src
+            ├── gds
+            ├── gls_model
+            │   ├── primitives.v
+            │   └── sky130_fd_sc_hd.v
+            ├── include
+            ├── layout_conf
+            │   ├── rvmyth
+            │   └── vsdbabysoc
+            ├── lef
+            ├── lib
+            │   ├── avsddac.lib
+            │   ├── avsdpll.lib
+            │   └── sky130_fd_sc_hd__tt_025C_1v80.lib
+            ├── module
+            │   ├── avsddac.v
+            │   ├── avsdpll.v
+            │   ├── clk_gate.v
+            │   ├── rvmyth.v
+            │   ├── testbench.v
+            │   └── vsdbabysoc.v
+            ├── script
+            └── sdc
+                └── vsdbabysoc_synthesis.sdc
+
+    40 directories, 336 files
     ```
 
 ## 0\. Post-Synthesis Verification (GLS)
 
 Post-Synthesis Verification (GLS) was performed as detailed in [WEEK_2/VSDBabySoC/README.md](../WEEK_2/VSDBabySoC/README.md), confirming functional equivalence between the RTL and gate-level netlist.
 
-![GLS Waveform Comparison](assets/comp_pre_vs_post_synth_sim.png)
+![GLS Waveform Comparison](WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
 
 ## 1\. STA Flow Overview
 
@@ -158,19 +226,56 @@ Timing constraints define the operating environment for STA, including clocks, d
 #### `STA/final.sdc`
 
 ```tcl
-create_clock -name core_clk -period 10 [get_ports clk]
-set_input_delay 2 -clock core_clk [get_ports reset]
-set_output_delay 2 -clock core_clk [all_outputs]
-set_clock_uncertainty 0.1 [get_clocks core_clk]
+# final.sdc for VSDBabySoC (clean version)
+
+set clk_targets [get_pins pll/CLK]
+if {[llength $clk_targets] == 0} {
+  # Fallback: try a top-level port named core_clk, else any pin named */CLK
+  set clk_targets [get_ports core_clk]
+  if {[llength $clk_targets] == 0} {
+    set clk_targets [get_pins */CLK]
+  }
+}
+create_clock -name core_clk -period 11.0 $clk_targets
+
+# 1. Define the core clock (on PLL output or port)
+# create_clock -name core_clk -period 11.0 [get_ports {core_clk}]
+# Alternative (if PLL pin is visible):
+# create_clock -name core_clk -period 11.0 [get_pins pll/CLK]
+
+# 2. Collect ports
+set all_in  [all_inputs]
+set all_out [all_outputs]
+set non_data_ports [get_ports {REF VCO_IN ENb_CP ENb_VCO reset}]
+
+# 3. Exclude asynchronous controls
+set_false_path -from [get_ports reset]
+
+# 4. Apply input/output delays
+set input_delay_val  [expr {0.3 * 11.0}]
+set output_delay_val [expr {0.3 * 11.0}]
+set data_in  [remove_from_collection $all_in $non_data_ports]
+
+set_input_delay  $input_delay_val -clock [get_clocks core_clk] $data_in
+set_output_delay $output_delay_val -clock [get_clocks core_clk] $all_out
+
+# 5. Clock uncertainties and transition
+set_clock_uncertainty -setup 0.10 [get_clocks core_clk]
+set_clock_uncertainty -hold  0.05 [get_clocks core_clk]
+set_clock_transition 0.05 [get_clocks core_clk]
+
+# 6. Output loads
+set_load 0.02 [all_outputs]
+
 ```
 
-- Clock period = 10 ns ⇒ Maximum frequency = 100 MHz.
+- Clock period = 11 ns
 - Input/Output delays account for external interfacing.
 - Clock uncertainty models jitter.
 
 ## 3\. STA Fundamentals
 
-Refer to [STA_fundamentals_summary.md](STA_fundamentals_summary.md) for a comprehensive summary of STA concepts from the Udemy course.
+Refer to [STA_fundamentals_summary.md](STA_fundamentals_summary.md) for a comprehensive summary of STA concepts.
 
 ## 4\. The STA Script
 
@@ -230,7 +335,76 @@ Additional files:
 
 ![STA Summary Report](assets/sta_summary_report.png)
 
-## 6\. Timing Analysis and Critical Path Evaluation
+## 6\. PVT Corner Analysis
+
+PVT (Process, Voltage, Temperature) corner analysis is essential for ensuring timing closure across all possible operating conditions in the fabricated chip. Semiconductor manufacturing introduces variations in process parameters (e.g., transistor threshold voltage and mobility), supply voltage fluctuations, and temperature changes, which significantly impact gate delays, slew rates, and overall circuit performance. Without PVT analysis, a design might pass STA at nominal conditions (e.g., typical-typical "tt" corner) but fail in extreme corners, leading to functional or timing failures in real-world deployment.
+
+### Why PVT Analysis is Necessary
+
+- **Process Variations**: Chips from the same design can vary due to fabrication inconsistencies (fast-fast "ff" for optimistic, slow-slow "ss" for pessimistic).
+- **Voltage Variations**: Supply voltage (Vdd) affects transistor drive strength; lower voltage slows gates, higher speeds them up.
+- **Temperature Effects**: High temperatures increase resistance and reduce mobility (slower gates); low temperatures do the opposite.
+- **Multi-Corner Multi-Mode (MCMM) STA**: Analyzes combinations to find the worst-case slack, ensuring robustness across the operating range (e.g., automotive: -40°C to 125°C, 0.8V to 1.2V).
+
+### Commands Used and Explanation
+
+PVT analysis was automated using scripts in `scripts/`. First, clear previous PVT reports:
+
+```bash
+rm -rf reports/pvt/*
+```
+
+Then, run STA for each PVT corner using `run_sta_per_corner.sh`. This shell script loops over a list of corners, loads the specific liberty file (e.g., `sky130_fd_sc_hd__ss_n40C_1v28.lib` for slow process at -40°C and 1.28V), executes `sta_per_corner.tcl` (which generates setup/hold summaries, WNS/TNS reports, and critical paths), and stores outputs in `reports/pvt/<corner>/`.
+
+```bash
+cd WEEK_3 && ./scripts/run_sta_per_corner.sh
+```
+
+Example log output (from `LOGS/LOG_7_PVT_Corner.md`):
+```
+=== Running corner: ff_100C_1v95
+    Lib: .../sky130_fd_sc_hd__ff_100C_1v95.lib
+INFO: Loaded liberty .../ff_100C_1v95.lib
+INFO: Corner ff_100C_1v95 finished. Reports in reports/pvt/ff_100C_1v95
+...
+All corners processed. Reports are under reports/pvt/
+```
+
+Supported corners include ff/ss/tt at various temperatures (-40°C to 100°C) and voltages (1.28V to 1.95V).
+
+Finally, parse results and generate visualizations with `plot_pvt_sta.py`. This Python script reads WNS/TNS from each corner's reports, computes summaries, writes `pvt_summary.csv`, and plots slacks using Matplotlib.
+
+```bash
+python3 scripts/plot_pvt_sta.py
+```
+
+Example output:
+```
+=== PVT SUMMARY ===
+  PVT_CORNER  Worst Setup Slack  Worst Hold Slack    WNS       TNS
+ff_100C_1v65               4.08              0.21   0.00      0.00
+...
+ss_n40C_1v28             -56.02              1.79 -56.02 -48146.38
+...
+Wrote pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wns.png, pvt_tns.png
+```
+
+### PVT Results and Observations
+
+- **Fast Corners (ff)**: Positive slacks (e.g., ff_n40C_1v95: setup +5.36 ns), no violations.
+- **Typical Corners (tt)**: Nominal performance (tt_025C_1v80: setup +2.19 ns).
+- **Slow Corners (ss)**: Violations in extreme conditions (ss_n40C_1v28: WNS -56.02 ns, TNS -48146.38 ns), indicating need for optimizations like cell sizing or VT swapping.
+- All hold slacks positive, suggesting hold fixes (e.g., via buffers) may suffice if focusing on setup.
+
+Reports stored in `reports/pvt/<corner>/` (e.g., `wns_setup.rpt`, `tns_hold.rpt`). Full summary in `pvt_summary.csv`.
+
+![PVT Worst Setup Slack Across Corners](pvt_worst_setup.png)
+![PVT Worst Hold Slack Across Corners](pvt_worst_hold.png)
+![PVT Worst Negative Slack (WNS)](pvt_wns.png)
+![PVT Total Negative Slack (TNS)](pvt_tns.png)
+![PVT Summary Overview](PVT_Summary.png)
+
+## 7\. Timing Analysis and Critical Path Evaluation
 
 ### Setup Path Analysis
 
@@ -356,8 +530,9 @@ Path Type: max
 - Graphviz .dot files: critical_path.dot, critical_path_improved.dot, etc.
 - Parsed data in reports/parsed_critical_path_full.txt.
 
-![Critical Path Graph](assets/critical_path_graph.png)
+![Critical Path Graph](critical_path_with_lib_delays.png)
+![Critical_Path_2](critical_path_improved.png)
 
-## 7\. Conclusion
+## 8\. Conclusion
 
-This process successfully verified the `vsdbabysoc` gate-level netlist through GLS and STA. Timing closure was achieved with positive slacks for setup and hold checks. The critical path was identified, confirming the design's performance limits. The design is now ready for physical design stages.
+This process successfully verified the `vsdbabysoc` gate-level netlist through GLS and STA. Timing closure was achieved with positive slacks for setup and hold checks. The critical path was identified, confirming the design's performance limits.
