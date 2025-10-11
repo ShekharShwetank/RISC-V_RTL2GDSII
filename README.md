@@ -31,7 +31,7 @@ The RTL to GDSII flow is the process of converting a high-level hardware descrip
 
 # VSDBabySoC: Post-Synthesis Verification and Static Timing Analysis using OpenSTA
 
-This document provides a comprehensive walkthrough of the post-synthesis verification and static timing analysis (STA) flow for the `vsdbabysoc` System-on-Chip. The project verifies the gate-level netlist (synthesized as per [WEEK_2/VSDBabySoC/README.md](../WEEK_2/VSDBabySoC/README.md)) using Gate-Level Simulation (GLS) and performs STA with OpenSTA to ensure timing closure, validate setup and hold constraints, and identify the critical path limiting performance.
+This document provides a comprehensive walkthrough of the post-synthesis verification and static timing analysis (STA) flow for the `vsdbabysoc` System-on-Chip. The project verifies the gate-level netlist (synthesized as per [WEEK_2/VSDBabySoC/README.md](WEEK_2/VSDBabySoC/README.md)) using Gate-Level Simulation (GLS) and performs STA with OpenSTA to ensure timing closure, validate setup and hold constraints, and identify the critical path limiting performance.
 
 ## Table of Contents
 
@@ -194,9 +194,9 @@ This document provides a comprehensive walkthrough of the post-synthesis verific
 
 ## 0\. Post-Synthesis Verification (GLS)
 
-Post-Synthesis Verification (GLS) was performed as detailed in [WEEK_2/VSDBabySoC/README.md](../WEEK_2/VSDBabySoC/README.md), confirming functional equivalence between the RTL and gate-level netlist.
+Post-Synthesis Verification (GLS) was performed as detailed in [WEEK_2/VSDBabySoC/README.md](WEEK_2/VSDBabySoC/README.md), confirming functional equivalence between the RTL and gate-level netlist.
 
-![GLS Waveform Comparison](../WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
+![GLS Waveform Comparison](WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
 
 ## 1\. STA Flow Overview
 
@@ -389,7 +389,7 @@ Reports stored in `reports/pvt/<corner>/` (e.g., `wns_setup.rpt`, `tns_hold.rpt`
 ![PVT Worst Hold Slack Across Corners](WEEK_3/pvt_worst_hold.png)
 ![PVT Worst Negative Slack (WNS)](WEEK_3/pvt_wns.png)
 ![PVT Total Negative Slack (TNS)](WEEK_3/pvt_tns.png)
-![PVT Summary Overview](WEEK_3pvt_summary.png)
+![PVT Summary Overview](WEEK_3/pvt_summary.png)
 
 ## 8\. Timing Analysis and Critical Path Evaluation
 
@@ -509,7 +509,7 @@ Path Type: max
 - Graphviz .dot files: critical_path.dot, critical_path_improved.dot, etc.
 - Parsed data in reports/parsed_critical_path_full.txt.
 
-![Critical Path Graph](WEEK_3/ritical_path_with_lib_delays.png)
+![Critical Path Graph](WEEK_3/critical_path_with_lib_delays.png)
 ![Critical_Path_2](WEEK_3/critical_path_improved.png)
 
 ## 9\. Conclusion
