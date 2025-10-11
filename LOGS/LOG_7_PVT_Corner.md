@@ -1,3 +1,4 @@
+```bash
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc$ rm -rf reports/pvt/*
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc$ ./run_sta_per_corner.sh
 === Running corner: ff_100C_1v95
@@ -165,6 +166,7 @@ ss_n40C_1v60             -10.42              0.63 -10.42  -7745.99
 ss_n40C_1v76              -5.30              0.46  -5.30  -3422.34
 tt_025C_1v80               2.19              0.27   0.00      0.00
 tt_100C_1v80               2.61              0.28   0.00      0.00
+```
 
 Wrote pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wns.png, pvt_tns.png
 
