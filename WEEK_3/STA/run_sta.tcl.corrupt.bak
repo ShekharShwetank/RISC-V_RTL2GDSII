@@ -1,0 +1,61 @@
+# OpenSTA Tcl Script for VSDBabySoC Analysis (fixed for OpenSTA)
+# -----------------------------------------------------------------------------
+# 0. Ensure output directory exists
+# -----------------------------------------------------------------------------
+if {![file exists "reports"]} {
+    file mkdir reports
+}
+
+# -----------------------------------------------------------------------------
+# 1. LOAD LIBRARIES
+# -----------------------------------------------------------------------------
+puts "INFO: Loading libraries..."
+read_liberty VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty VSDBabySoC/src/lib/avsddac.lib
+read_liberty VSDBabySoC/src/lib/avsdpll.lib
+
+# -----------------------------------------------------------------------------
+# 2. READ THE DESIGN
+# -----------------------------------------------------------------------------
+puts "INFO: Reading synthesized netlist..."
+read_verilog VSDBabySoC/reports/vsdbabysoc_netlist.v
+
+# -----------------------------------------------------------------------------
+# 3. LINK THE DESIGN
+# -----------------------------------------------------------------------------
+puts "INFO: Linking design..."
+link_design vsdbabysoc
+
+# -----------------------------------------------------------------------------
+# 4. READ TIMING CONSTRAINTS (SDC)
+# -----------------------------------------------------------------------------
+puts "INFO: Reading SDC constraints..."
+read_sdc STA/final.sdc
+
+# -----------------------------------------------------------------------------
+# 5. GENERATE REPORTS (using OpenSTA-supported commands)
+# -----------------------------------------------------------------------------
+puts "INFO: Generating timing reports..."
+
+# A. List clock properties available to the tool
+report_clock_properties > reports/1_clocks.rpt
+
+# B. Unconstrained endpoint report (same intent as original)
+report_checks -unconstrained > reports/2_unconstrained.rpt
+
+# C. Full setup timing (max paths)
+report_checks -path_delay max -format full_clock_expanded > reports/3_setup_report.rpt
+
+# D. Full hold timing (min paths)
+report_checks -path_delay min -format full_clock_expanded > reports/4_hold_report.rpt
+
+# E. Worst slack summary
+report_worst_slack -max > reports/5_worst_slack.rpt
+
+# F. Find the single worst path (group_path_count 1) and save it
+#    find_timing_paths is supported by OpenSTA and prints the path(s).
+find_timing_paths -path_delay max -group_path_count 1 > reports/6_critical_path.rpt
+
+puts "INFO: Reports written to ./reports/"
+puts "INFO: STA script finished."
+exit

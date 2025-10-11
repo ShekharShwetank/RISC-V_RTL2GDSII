@@ -1,0 +1,27 @@
+Startpoint: reset (input port clocked by core_clk)
+Endpoint: core/_9088_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ reset (in)
+   0.00    0.00 ^ core/_9088_/D (sky130_fd_sc_hd__dfxtp_1)
+           0.00   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ core/_9088_/CLK (sky130_fd_sc_hd__dfxtp_1)
+  -0.02   -0.02   library hold time
+          -0.02   data required time
+---------------------------------------------------------
+          -0.02   data required time
+          -0.00   data arrival time
+---------------------------------------------------------
+           0.02   slack (MET)
+
+

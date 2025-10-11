@@ -1,0 +1,28 @@
+Startpoint: core/_9085_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: core/_8462_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ core/_9085_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   7.94    7.94 ^ core/_9085_/Q (sky130_fd_sc_hd__dfxtp_1)
+  -0.16    7.78 v core/_6479_/Y (sky130_fd_sc_hd__a21oi_1)
+   0.00    7.78 v core/_8462_/D (sky130_fd_sc_hd__dfxtp_1)
+           7.78   data arrival time
+
+  11.00   11.00   clock core_clk (rise edge)
+   0.00   11.00   clock network delay (ideal)
+   0.00   11.00   clock reconvergence pessimism
+          11.00 ^ core/_8462_/CLK (sky130_fd_sc_hd__dfxtp_1)
+  -0.48   10.52   library setup time
+          10.52   data required time
+---------------------------------------------------------
+          10.52   data required time
+          -7.78   data arrival time
+---------------------------------------------------------
+           2.74   slack (MET)
+
+

@@ -1,0 +1,9 @@
+STA extraction run at 2025-10-11T21:20:58.925582 by ank
+
+Clocks (parsed):
+ - Clock                   Period          Waveform
+
+Top worst slack endpoints (parsed):
+ - worst slack max 2.26 slack=2.26 ns  | raw: worst slack max 2.26
+
+Critical path steps (parsed):

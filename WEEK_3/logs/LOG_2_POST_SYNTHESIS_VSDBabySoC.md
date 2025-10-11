@@ -1,0 +1,3303 @@
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC$ yosys src/script/yosys_wo_lc_shell.ys | tee reports/logs/synthesis_yosis.log
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.57+148 (git sha1 259bd6fb3, g++ 13.3.0-6ubuntu2~24.04 -fPIC -O3)
+
+-- Executing script file `src/script/yosys_wo_lc_shell.ys' --
+
+1. Executing Liberty frontend: src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Liberty frontend: src/lib/avsddac.lib
+Imported 1 cell types from liberty file.
+
+3. Executing Liberty frontend: src/lib/avsdpll.lib
+Imported 1 cell types from liberty file.
+
+4. Executing Verilog-2005 frontend: src/module/vsdbabysoc.v
+Parsing Verilog input from `src/module/vsdbabysoc.v' to AST representation.
+Generating RTLIL representation for module `\vsdbabysoc'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: src/module/rvmyth.v
+Parsing Verilog input from `src/module/rvmyth.v' to AST representation.
+Generating RTLIL representation for module `\rvmyth'.
+Warning: Replacing memory \CPU_Xreg_value_a5 with list of registers. See src/module/rvmyth_gen.v:696
+Warning: Replacing memory \CPU_Xreg_value_a4 with list of registers. See src/module/rvmyth_gen.v:695
+Warning: Replacing memory \CPU_Dmem_value_a5 with list of registers. See src/module/rvmyth_gen.v:686
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: src/module/clk_gate.v
+Parsing Verilog input from `src/module/clk_gate.v' to AST representation.
+Generating RTLIL representation for module `\clk_gate'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: src/module/avsddac_stub.v
+Parsing Verilog input from `src/module/avsddac_stub.v' to AST representation.
+Replacing existing blackbox module `\avsddac' at src/module/avsddac_stub.v:4.1-13.10.
+Generating RTLIL representation for module `\avsddac'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: src/module/avsdpll_stub.v
+Parsing Verilog input from `src/module/avsdpll_stub.v' to AST representation.
+Replacing existing blackbox module `\avsdpll' at src/module/avsdpll_stub.v:4.1-14.10.
+Generating RTLIL representation for module `\avsdpll'.
+Successfully finished Verilog frontend.
+
+9. Executing SYNTH pass.
+
+9.1. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1.1. Analyzing design hierarchy..
+Top module:  \vsdbabysoc
+Used module:     \rvmyth
+Used module:         \clk_gate
+
+9.1.2. Analyzing design hierarchy..
+Top module:  \vsdbabysoc
+Used module:     \rvmyth
+Used module:         \clk_gate
+Removed 0 unused modules.
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rs2_valid_a2 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rs1_valid_a2 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rd_valid_a5 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rd_valid_a4 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rd_valid_a3 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_rd_valid_a2 (clk_gate).
+Mapping positional arguments of cell rvmyth.gen_clkP_CPU_dmem_rd_en_a5 (clk_gate).
+
+9.2. Executing PROC pass (convert processes to netlists).
+
+9.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$src/module/rvmyth.v:314$577 in module rvmyth.
+Marked 1 switch rules as full_case in process $proc$src/module/rvmyth.v:314$577 in module rvmyth.
+Removed 1 dead cases from process $proc$src/module/rvmyth.v:296$574 in module rvmyth.
+Marked 1 switch rules as full_case in process $proc$src/module/rvmyth.v:296$574 in module rvmyth.
+Removed 1 dead cases from process $proc$src/module/rvmyth.v:294$571 in module rvmyth.
+Marked 1 switch rules as full_case in process $proc$src/module/rvmyth.v:294$571 in module rvmyth.
+Marked 1 switch rules as full_case in process $proc$src/module/rvmyth.v:276$568 in module rvmyth.
+Removed a total of 3 dead cases.
+
+9.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 286 assignments to connections.
+
+9.2.4. Executing PROC_INIT pass (extract init attributes).
+
+9.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+9.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+9.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$734'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$731'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$728'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$725'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$722'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$719'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$716'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$713'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$710'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$707'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$704'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$701'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$698'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$695'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$692'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:308$689'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$686'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$683'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$680'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$677'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$674'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$671'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$668'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$665'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$662'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$659'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$656'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$653'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$650'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$647'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$644'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$641'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$638'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$635'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$632'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$629'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$626'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$623'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$620'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$617'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$614'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$611'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$608'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$605'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$602'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$599'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$596'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:288$593'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$592'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$591'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$590'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$589'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$588'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$587'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$586'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$585'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$584'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$583'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$582'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$581'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:273$580'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:314$577'.
+     1/1: $1$mem2reg_rd$\CPU_Dmem_value_a5$src/module/rvmyth.v:314$4_DATA[31:0]$579
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:296$574'.
+     1/1: $1$mem2reg_rd$\CPU_Xreg_value_a4$src/module/rvmyth.v:296$3_DATA[31:0]$576
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:294$571'.
+     1/1: $1$mem2reg_rd$\CPU_Xreg_value_a4$src/module/rvmyth.v:294$2_DATA[31:0]$573
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:276$568'.
+     1/1: $1$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$570
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:270$567'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:269$566'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:268$565'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:267$564'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:266$563'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:265$562'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:264$561'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:263$560'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:262$559'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:261$558'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:260$557'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:259$556'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:258$555'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$394'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$393'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$392'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$391'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$390'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$389'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$388'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$387'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$386'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$385'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$384'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$383'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$382'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$381'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$380'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$379'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$378'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$377'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$376'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$375'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$374'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$373'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$372'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$371'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$370'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$369'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$368'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$367'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$366'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$365'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$364'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$363'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$362'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$361'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$360'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$359'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$358'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$357'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$356'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$355'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$354'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$353'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$352'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$351'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$350'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$349'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$348'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$347'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$346'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$345'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$344'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$343'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$342'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$341'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$340'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$339'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$338'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$337'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$336'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$335'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$334'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$333'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$332'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$331'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$330'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$329'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$328'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$327'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$326'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$325'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$324'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$323'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$322'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$321'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$320'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$319'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$318'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$317'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$316'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$315'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth.v:242$312'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:678$131'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:677$130'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:674$129'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:673$128'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:670$127'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:669$126'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:666$125'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:663$124'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:662$123'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:659$122'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:656$121'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:653$120'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:650$119'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:647$118'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:644$117'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:641$116'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:640$115'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:639$114'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:638$113'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:635$112'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:634$111'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:633$110'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:630$109'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:629$108'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:628$107'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:627$106'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:624$105'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:623$104'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:622$103'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:619$102'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:616$101'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:615$100'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:612$99'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:611$98'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:608$97'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:607$96'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:606$95'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:605$94'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:602$93'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:601$92'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:598$91'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:597$90'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:594$89'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:593$88'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:590$87'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:589$86'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:586$85'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:585$84'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:582$83'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:581$82'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:578$81'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:577$80'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:574$79'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:573$78'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:570$77'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:569$76'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:566$75'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:565$74'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:562$73'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:561$72'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:558$71'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:557$70'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:556$69'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:555$68'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:552$67'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:551$66'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:550$65'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:549$64'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:546$63'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:545$62'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:544$61'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:541$60'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:540$59'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:537$58'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:536$57'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:533$56'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:532$55'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:529$54'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:528$53'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:525$52'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:524$51'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:521$50'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:520$49'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:517$48'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:516$47'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:513$46'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:512$45'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:511$44'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:510$43'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:507$42'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:506$41'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:505$40'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:504$39'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:501$38'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:500$37'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:499$36'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:498$35'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:495$34'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:494$33'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:493$32'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:492$31'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:489$30'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:488$29'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:487$28'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:486$27'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:483$26'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:482$25'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:481$24'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:480$23'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:477$22'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:476$21'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:473$20'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:472$19'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:469$18'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:468$17'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:465$16'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:464$15'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:461$14'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:460$13'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:457$12'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:456$11'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:453$10'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:452$9'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:449$8'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:446$7'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:443$6'.
+Creating decoders for process `\rvmyth.$proc$src/module/rvmyth_gen.v:440$5'.
+
+9.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[15]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$734'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[14]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$731'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[13]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$728'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[12]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$725'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[11]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$722'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[10]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$719'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[9]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$716'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[8]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$713'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[7]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$710'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[6]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$707'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[5]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$704'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[4]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$701'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[3]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$698'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[2]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$695'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[1]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$692'.
+No latch inferred for signal `\rvmyth.\CPU_Dmem_value_a4[0]' from process `\rvmyth.$proc$src/module/rvmyth.v:308$689'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[31]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$686'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[30]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$683'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[29]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$680'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[28]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$677'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[27]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$674'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[26]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$671'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[25]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$668'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[24]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$665'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[23]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$662'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[22]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$659'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[21]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$656'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[20]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$653'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[19]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$650'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[18]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$647'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[17]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$644'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[16]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$641'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[15]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$638'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[14]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$635'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[13]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$632'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[12]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$629'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[11]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$626'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[10]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$623'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[9]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$620'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[8]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$617'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[7]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$614'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[6]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$611'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[5]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$608'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[4]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$605'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[3]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$602'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[2]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$599'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[1]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$596'.
+No latch inferred for signal `\rvmyth.\CPU_Xreg_value_a3[0]' from process `\rvmyth.$proc$src/module/rvmyth.v:288$593'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[12]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$592'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[11]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$591'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[10]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$590'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[9]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$589'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[8]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$588'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[7]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$587'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[6]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$586'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[5]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$585'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[4]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$584'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[3]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$583'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[2]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$582'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[1]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$581'.
+No latch inferred for signal `\rvmyth.\CPU_Imem_instr_a1[0]' from process `\rvmyth.$proc$src/module/rvmyth.v:273$580'.
+No latch inferred for signal `\rvmyth.$mem2reg_rd$\CPU_Dmem_value_a5$src/module/rvmyth.v:314$4_DATA' from process `\rvmyth.$proc$src/module/rvmyth.v:314$577'.
+No latch inferred for signal `\rvmyth.$mem2reg_rd$\CPU_Xreg_value_a4$src/module/rvmyth.v:296$3_DATA' from process `\rvmyth.$proc$src/module/rvmyth.v:296$574'.
+No latch inferred for signal `\rvmyth.$mem2reg_rd$\CPU_Xreg_value_a4$src/module/rvmyth.v:294$2_DATA' from process `\rvmyth.$proc$src/module/rvmyth.v:294$571'.
+No latch inferred for signal `\rvmyth.$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA' from process `\rvmyth.$proc$src/module/rvmyth.v:276$568'.
+No latch inferred for signal `\rvmyth.\instrs[12]' from process `\rvmyth.$proc$src/module/rvmyth.v:270$567'.
+No latch inferred for signal `\rvmyth.\instrs[11]' from process `\rvmyth.$proc$src/module/rvmyth.v:269$566'.
+No latch inferred for signal `\rvmyth.\instrs[10]' from process `\rvmyth.$proc$src/module/rvmyth.v:268$565'.
+No latch inferred for signal `\rvmyth.\instrs[9]' from process `\rvmyth.$proc$src/module/rvmyth.v:267$564'.
+No latch inferred for signal `\rvmyth.\instrs[8]' from process `\rvmyth.$proc$src/module/rvmyth.v:266$563'.
+No latch inferred for signal `\rvmyth.\instrs[7]' from process `\rvmyth.$proc$src/module/rvmyth.v:265$562'.
+No latch inferred for signal `\rvmyth.\instrs[6]' from process `\rvmyth.$proc$src/module/rvmyth.v:264$561'.
+No latch inferred for signal `\rvmyth.\instrs[5]' from process `\rvmyth.$proc$src/module/rvmyth.v:263$560'.
+No latch inferred for signal `\rvmyth.\instrs[4]' from process `\rvmyth.$proc$src/module/rvmyth.v:262$559'.
+No latch inferred for signal `\rvmyth.\instrs[3]' from process `\rvmyth.$proc$src/module/rvmyth.v:261$558'.
+No latch inferred for signal `\rvmyth.\instrs[2]' from process `\rvmyth.$proc$src/module/rvmyth.v:260$557'.
+No latch inferred for signal `\rvmyth.\instrs[1]' from process `\rvmyth.$proc$src/module/rvmyth.v:259$556'.
+No latch inferred for signal `\rvmyth.\instrs[0]' from process `\rvmyth.$proc$src/module/rvmyth.v:258$555'.
+
+9.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[31]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$394'.
+  created $dff cell `$procdff$835' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[31]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$393'.
+  created $dff cell `$procdff$836' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[30]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$392'.
+  created $dff cell `$procdff$837' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[30]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$391'.
+  created $dff cell `$procdff$838' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[29]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$390'.
+  created $dff cell `$procdff$839' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[29]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$389'.
+  created $dff cell `$procdff$840' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[28]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$388'.
+  created $dff cell `$procdff$841' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[28]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$387'.
+  created $dff cell `$procdff$842' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[27]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$386'.
+  created $dff cell `$procdff$843' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[27]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$385'.
+  created $dff cell `$procdff$844' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[26]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$384'.
+  created $dff cell `$procdff$845' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[26]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$383'.
+  created $dff cell `$procdff$846' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[25]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$382'.
+  created $dff cell `$procdff$847' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[25]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$381'.
+  created $dff cell `$procdff$848' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[24]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$380'.
+  created $dff cell `$procdff$849' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[24]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$379'.
+  created $dff cell `$procdff$850' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[23]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$378'.
+  created $dff cell `$procdff$851' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[23]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$377'.
+  created $dff cell `$procdff$852' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[22]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$376'.
+  created $dff cell `$procdff$853' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[22]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$375'.
+  created $dff cell `$procdff$854' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[21]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$374'.
+  created $dff cell `$procdff$855' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[21]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$373'.
+  created $dff cell `$procdff$856' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[20]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$372'.
+  created $dff cell `$procdff$857' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[20]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$371'.
+  created $dff cell `$procdff$858' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[19]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$370'.
+  created $dff cell `$procdff$859' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[19]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$369'.
+  created $dff cell `$procdff$860' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[18]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$368'.
+  created $dff cell `$procdff$861' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[18]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$367'.
+  created $dff cell `$procdff$862' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[17]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$366'.
+  created $dff cell `$procdff$863' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[17]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$365'.
+  created $dff cell `$procdff$864' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[16]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$364'.
+  created $dff cell `$procdff$865' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[16]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$363'.
+  created $dff cell `$procdff$866' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[15]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$362'.
+  created $dff cell `$procdff$867' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[15]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$361'.
+  created $dff cell `$procdff$868' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[14]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$360'.
+  created $dff cell `$procdff$869' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[14]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$359'.
+  created $dff cell `$procdff$870' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[13]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$358'.
+  created $dff cell `$procdff$871' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[13]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$357'.
+  created $dff cell `$procdff$872' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[12]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$356'.
+  created $dff cell `$procdff$873' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[12]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$355'.
+  created $dff cell `$procdff$874' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[11]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$354'.
+  created $dff cell `$procdff$875' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[11]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$353'.
+  created $dff cell `$procdff$876' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[10]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$352'.
+  created $dff cell `$procdff$877' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[10]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$351'.
+  created $dff cell `$procdff$878' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[9]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$350'.
+  created $dff cell `$procdff$879' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[9]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$349'.
+  created $dff cell `$procdff$880' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[8]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$348'.
+  created $dff cell `$procdff$881' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[8]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$347'.
+  created $dff cell `$procdff$882' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[7]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$346'.
+  created $dff cell `$procdff$883' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[7]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$345'.
+  created $dff cell `$procdff$884' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[6]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$344'.
+  created $dff cell `$procdff$885' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[6]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$343'.
+  created $dff cell `$procdff$886' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[5]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$342'.
+  created $dff cell `$procdff$887' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[5]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$341'.
+  created $dff cell `$procdff$888' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[4]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$340'.
+  created $dff cell `$procdff$889' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[4]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$339'.
+  created $dff cell `$procdff$890' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[3]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$338'.
+  created $dff cell `$procdff$891' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[3]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$337'.
+  created $dff cell `$procdff$892' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[2]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$336'.
+  created $dff cell `$procdff$893' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[2]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$335'.
+  created $dff cell `$procdff$894' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[1]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$334'.
+  created $dff cell `$procdff$895' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[1]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$333'.
+  created $dff cell `$procdff$896' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a5[0]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:696$332'.
+  created $dff cell `$procdff$897' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Xreg_value_a4[0]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:695$331'.
+  created $dff cell `$procdff$898' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[15]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$330'.
+  created $dff cell `$procdff$899' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[14]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$329'.
+  created $dff cell `$procdff$900' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[13]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$328'.
+  created $dff cell `$procdff$901' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[12]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$327'.
+  created $dff cell `$procdff$902' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[11]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$326'.
+  created $dff cell `$procdff$903' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[10]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$325'.
+  created $dff cell `$procdff$904' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[9]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$324'.
+  created $dff cell `$procdff$905' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[8]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$323'.
+  created $dff cell `$procdff$906' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[7]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$322'.
+  created $dff cell `$procdff$907' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[6]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$321'.
+  created $dff cell `$procdff$908' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[5]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$320'.
+  created $dff cell `$procdff$909' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[4]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$319'.
+  created $dff cell `$procdff$910' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[3]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$318'.
+  created $dff cell `$procdff$911' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[2]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$317'.
+  created $dff cell `$procdff$912' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[1]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$316'.
+  created $dff cell `$procdff$913' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_Dmem_value_a5[0]' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:686$315'.
+  created $dff cell `$procdff$914' with positive edge clock.
+Creating register for signal `\rvmyth.\OUT' using process `\rvmyth.$proc$src/module/rvmyth.v:242$312'.
+  created $dff cell `$procdff$915' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_taken_br_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:678$131'.
+  created $dff cell `$procdff$916' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_taken_br_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:677$130'.
+  created $dff cell `$procdff$917' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_load_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:674$129'.
+  created $dff cell `$procdff$918' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_load_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:673$128'.
+  created $dff cell `$procdff$919' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_jump_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:670$127'.
+  created $dff cell `$procdff$920' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_jump_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:669$126'.
+  created $dff cell `$procdff$921' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_valid_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:666$125'.
+  created $dff cell `$procdff$922' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_src2_value_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:663$124'.
+  created $dff cell `$procdff$923' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_src2_value_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:662$123'.
+  created $dff cell `$procdff$924' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_src1_value_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:659$122'.
+  created $dff cell `$procdff$925' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rs2_valid_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:656$121'.
+  created $dff cell `$procdff$926' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rs2_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:653$120'.
+  created $dff cell `$procdff$927' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rs1_valid_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:650$119'.
+  created $dff cell `$procdff$928' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rs1_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:647$118'.
+  created $dff cell `$procdff$929' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_result_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:644$117'.
+  created $dff cell `$procdff$930' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_reset_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:641$116'.
+  created $dff cell `$procdff$931' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_reset_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:640$115'.
+  created $dff cell `$procdff$932' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_reset_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:639$114'.
+  created $dff cell `$procdff$933' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_reset_a1' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:638$113'.
+  created $dff cell `$procdff$934' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_valid_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:635$112'.
+  created $dff cell `$procdff$935' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_valid_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:634$111'.
+  created $dff cell `$procdff$936' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_valid_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:633$110'.
+  created $dff cell `$procdff$937' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:630$109'.
+  created $dff cell `$procdff$938' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:629$108'.
+  created $dff cell `$procdff$939' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:628$107'.
+  created $dff cell `$procdff$940' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_rd_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:627$106'.
+  created $dff cell `$procdff$941' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_pc_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:624$105'.
+  created $dff cell `$procdff$942' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_pc_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:623$104'.
+  created $dff cell `$procdff$943' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_pc_a1' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:622$103'.
+  created $dff cell `$procdff$944' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_jalr_tgt_pc_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:619$102'.
+  created $dff cell `$procdff$945' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_xori_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:616$101'.
+  created $dff cell `$procdff$946' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_xori_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:615$100'.
+  created $dff cell `$procdff$947' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_xor_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:612$99'.
+  created $dff cell `$procdff$948' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_xor_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:611$98'.
+  created $dff cell `$procdff$949' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sw_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:608$97'.
+  created $dff cell `$procdff$950' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sw_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:607$96'.
+  created $dff cell `$procdff$951' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sw_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:606$95'.
+  created $dff cell `$procdff$952' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sw_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:605$94'.
+  created $dff cell `$procdff$953' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sub_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:602$93'.
+  created $dff cell `$procdff$954' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sub_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:601$92'.
+  created $dff cell `$procdff$955' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srli_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:598$91'.
+  created $dff cell `$procdff$956' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srli_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:597$90'.
+  created $dff cell `$procdff$957' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srl_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:594$89'.
+  created $dff cell `$procdff$958' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srl_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:593$88'.
+  created $dff cell `$procdff$959' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srai_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:590$87'.
+  created $dff cell `$procdff$960' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_srai_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:589$86'.
+  created $dff cell `$procdff$961' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sra_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:586$85'.
+  created $dff cell `$procdff$962' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sra_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:585$84'.
+  created $dff cell `$procdff$963' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sltu_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:582$83'.
+  created $dff cell `$procdff$964' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sltu_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:581$82'.
+  created $dff cell `$procdff$965' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sltiu_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:578$81'.
+  created $dff cell `$procdff$966' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sltiu_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:577$80'.
+  created $dff cell `$procdff$967' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slti_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:574$79'.
+  created $dff cell `$procdff$968' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slti_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:573$78'.
+  created $dff cell `$procdff$969' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slt_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:570$77'.
+  created $dff cell `$procdff$970' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slt_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:569$76'.
+  created $dff cell `$procdff$971' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slli_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:566$75'.
+  created $dff cell `$procdff$972' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_slli_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:565$74'.
+  created $dff cell `$procdff$973' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sll_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:562$73'.
+  created $dff cell `$procdff$974' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sll_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:561$72'.
+  created $dff cell `$procdff$975' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sh_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:558$71'.
+  created $dff cell `$procdff$976' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sh_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:557$70'.
+  created $dff cell `$procdff$977' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sh_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:556$69'.
+  created $dff cell `$procdff$978' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sh_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:555$68'.
+  created $dff cell `$procdff$979' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sb_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:552$67'.
+  created $dff cell `$procdff$980' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sb_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:551$66'.
+  created $dff cell `$procdff$981' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sb_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:550$65'.
+  created $dff cell `$procdff$982' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_sb_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:549$64'.
+  created $dff cell `$procdff$983' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_s_instr_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:546$63'.
+  created $dff cell `$procdff$984' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_s_instr_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:545$62'.
+  created $dff cell `$procdff$985' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_s_instr_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:544$61'.
+  created $dff cell `$procdff$986' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_ori_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:541$60'.
+  created $dff cell `$procdff$987' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_ori_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:540$59'.
+  created $dff cell `$procdff$988' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_or_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:537$58'.
+  created $dff cell `$procdff$989' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_or_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:536$57'.
+  created $dff cell `$procdff$990' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_lui_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:533$56'.
+  created $dff cell `$procdff$991' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_lui_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:532$55'.
+  created $dff cell `$procdff$992' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_load_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:529$54'.
+  created $dff cell `$procdff$993' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_load_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:528$53'.
+  created $dff cell `$procdff$994' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jump_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:525$52'.
+  created $dff cell `$procdff$995' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jump_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:524$51'.
+  created $dff cell `$procdff$996' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jalr_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:521$50'.
+  created $dff cell `$procdff$997' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jalr_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:520$49'.
+  created $dff cell `$procdff$998' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jal_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:517$48'.
+  created $dff cell `$procdff$999' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_jal_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:516$47'.
+  created $dff cell `$procdff$1000' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bne_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:513$46'.
+  created $dff cell `$procdff$1001' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bne_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:512$45'.
+  created $dff cell `$procdff$1002' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bne_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:511$44'.
+  created $dff cell `$procdff$1003' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bne_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:510$43'.
+  created $dff cell `$procdff$1004' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bltu_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:507$42'.
+  created $dff cell `$procdff$1005' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bltu_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:506$41'.
+  created $dff cell `$procdff$1006' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bltu_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:505$40'.
+  created $dff cell `$procdff$1007' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bltu_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:504$39'.
+  created $dff cell `$procdff$1008' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_blt_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:501$38'.
+  created $dff cell `$procdff$1009' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_blt_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:500$37'.
+  created $dff cell `$procdff$1010' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_blt_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:499$36'.
+  created $dff cell `$procdff$1011' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_blt_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:498$35'.
+  created $dff cell `$procdff$1012' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bgeu_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:495$34'.
+  created $dff cell `$procdff$1013' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bgeu_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:494$33'.
+  created $dff cell `$procdff$1014' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bgeu_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:493$32'.
+  created $dff cell `$procdff$1015' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bgeu_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:492$31'.
+  created $dff cell `$procdff$1016' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bge_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:489$30'.
+  created $dff cell `$procdff$1017' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bge_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:488$29'.
+  created $dff cell `$procdff$1018' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bge_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:487$28'.
+  created $dff cell `$procdff$1019' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_bge_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:486$27'.
+  created $dff cell `$procdff$1020' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_beq_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:483$26'.
+  created $dff cell `$procdff$1021' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_beq_a4' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:482$25'.
+  created $dff cell `$procdff$1022' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_beq_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:481$24'.
+  created $dff cell `$procdff$1023' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_beq_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:480$23'.
+  created $dff cell `$procdff$1024' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_auipc_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:477$22'.
+  created $dff cell `$procdff$1025' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_auipc_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:476$21'.
+  created $dff cell `$procdff$1026' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_andi_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:473$20'.
+  created $dff cell `$procdff$1027' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_andi_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:472$19'.
+  created $dff cell `$procdff$1028' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_and_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:469$18'.
+  created $dff cell `$procdff$1029' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_and_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:468$17'.
+  created $dff cell `$procdff$1030' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_addi_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:465$16'.
+  created $dff cell `$procdff$1031' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_addi_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:464$15'.
+  created $dff cell `$procdff$1032' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_add_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:461$14'.
+  created $dff cell `$procdff$1033' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_is_add_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:460$13'.
+  created $dff cell `$procdff$1034' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_inc_pc_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:457$12'.
+  created $dff cell `$procdff$1035' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_inc_pc_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:456$11'.
+  created $dff cell `$procdff$1036' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_imm_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:453$10'.
+  created $dff cell `$procdff$1037' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_imm_a2' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:452$9'.
+  created $dff cell `$procdff$1038' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_imem_rd_en_a1' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:449$8'.
+  created $dff cell `$procdff$1039' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_imem_rd_addr_a1' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:446$7'.
+  created $dff cell `$procdff$1040' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_dmem_rd_data_a5' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:443$6'.
+  created $dff cell `$procdff$1041' with positive edge clock.
+Creating register for signal `\rvmyth.\CPU_br_tgt_pc_a3' using process `\rvmyth.$proc$src/module/rvmyth_gen.v:440$5'.
+  created $dff cell `$procdff$1042' with positive edge clock.
+
+9.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+9.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$734'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$731'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$728'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$725'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$722'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$719'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$716'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$713'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$710'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$707'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$704'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$701'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$698'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$695'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$692'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:308$689'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$686'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$683'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$680'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$677'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$674'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$671'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$668'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$665'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$662'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$659'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$656'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$653'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$650'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$647'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$644'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$641'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$638'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$635'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$632'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$629'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$626'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$623'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$620'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$617'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$614'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$611'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$608'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$605'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$602'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$599'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$596'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:288$593'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$592'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$591'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$590'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$589'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$588'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$587'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$586'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$585'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$584'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$583'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$582'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$581'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:273$580'.
+Found and cleaned up 1 empty switch in `\rvmyth.$proc$src/module/rvmyth.v:314$577'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:314$577'.
+Found and cleaned up 1 empty switch in `\rvmyth.$proc$src/module/rvmyth.v:296$574'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:296$574'.
+Found and cleaned up 1 empty switch in `\rvmyth.$proc$src/module/rvmyth.v:294$571'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:294$571'.
+Found and cleaned up 1 empty switch in `\rvmyth.$proc$src/module/rvmyth.v:276$568'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:276$568'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:270$567'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:269$566'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:268$565'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:267$564'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:266$563'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:265$562'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:264$561'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:263$560'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:262$559'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:261$558'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:260$557'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:259$556'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:258$555'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$394'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$393'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$392'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$391'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$390'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$389'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$388'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$387'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$386'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$385'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$384'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$383'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$382'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$381'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$380'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$379'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$378'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$377'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$376'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$375'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$374'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$373'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$372'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$371'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$370'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$369'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$368'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$367'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$366'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$365'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$364'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$363'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$362'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$361'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$360'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$359'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$358'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$357'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$356'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$355'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$354'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$353'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$352'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$351'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$350'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$349'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$348'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$347'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$346'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$345'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$344'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$343'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$342'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$341'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$340'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$339'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$338'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$337'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$336'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$335'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$334'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$333'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:696$332'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:695$331'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$330'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$329'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$328'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$327'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$326'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$325'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$324'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$323'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$322'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$321'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$320'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$319'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$318'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$317'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$316'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:686$315'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth.v:242$312'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:678$131'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:677$130'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:674$129'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:673$128'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:670$127'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:669$126'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:666$125'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:663$124'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:662$123'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:659$122'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:656$121'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:653$120'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:650$119'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:647$118'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:644$117'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:641$116'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:640$115'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:639$114'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:638$113'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:635$112'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:634$111'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:633$110'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:630$109'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:629$108'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:628$107'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:627$106'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:624$105'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:623$104'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:622$103'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:619$102'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:616$101'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:615$100'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:612$99'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:611$98'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:608$97'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:607$96'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:606$95'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:605$94'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:602$93'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:601$92'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:598$91'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:597$90'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:594$89'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:593$88'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:590$87'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:589$86'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:586$85'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:585$84'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:582$83'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:581$82'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:578$81'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:577$80'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:574$79'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:573$78'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:570$77'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:569$76'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:566$75'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:565$74'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:562$73'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:561$72'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:558$71'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:557$70'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:556$69'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:555$68'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:552$67'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:551$66'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:550$65'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:549$64'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:546$63'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:545$62'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:544$61'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:541$60'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:540$59'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:537$58'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:536$57'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:533$56'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:532$55'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:529$54'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:528$53'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:525$52'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:524$51'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:521$50'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:520$49'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:517$48'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:516$47'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:513$46'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:512$45'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:511$44'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:510$43'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:507$42'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:506$41'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:505$40'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:504$39'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:501$38'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:500$37'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:499$36'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:498$35'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:495$34'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:494$33'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:493$32'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:492$31'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:489$30'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:488$29'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:487$28'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:486$27'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:483$26'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:482$25'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:481$24'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:480$23'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:477$22'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:476$21'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:473$20'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:472$19'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:469$18'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:468$17'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:465$16'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:464$15'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:461$14'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:460$13'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:457$12'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:456$11'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:453$10'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:452$9'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:449$8'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:446$7'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:443$6'.
+Removing empty process `rvmyth.$proc$src/module/rvmyth_gen.v:440$5'.
+Cleaned up 4 empty switches.
+
+9.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rvmyth.
+<suppressed ~43 debug messages>
+Optimizing module vsdbabysoc.
+Optimizing module clk_gate.
+
+9.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+Optimizing module clk_gate.
+
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Finding unused cells or wires in module \clk_gate..
+Removed 65 unused cells and 531 unused wires.
+<suppressed ~131 debug messages>
+
+9.5. Executing CHECK pass (checking for obvious problems).
+Checking module clk_gate...
+Checking module rvmyth...
+Checking module vsdbabysoc...
+Found and reported 0 problems.
+
+9.6. Executing OPT pass (performing simple optimizations).
+
+9.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~261 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 87 cells.
+
+9.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~237 debug messages>
+
+9.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+    New ctrl vector for $pmux cell $procmux$821: { $procmux$834_CMP $procmux$833_CMP $procmux$832_CMP $procmux$831_CMP $procmux$829_CMP $procmux$828_CMP $auto$opt_reduce.cc:137:opt_pmux$1046 $procmux$825_CMP $procmux$824_CMP $auto$opt_reduce.cc:137:opt_pmux$1044 $procmux$822_CMP }
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 1 changes.
+
+9.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 4 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 5 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 6 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 7 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 8 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 9 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 10 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 11 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 12 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 13 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 14 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 15 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 16 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 17 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 18 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 19 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 20 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 21 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 22 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 23 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 24 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 25 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 26 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 27 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 28 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 29 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 30 on $procdff$1040 ($dff) from module rvmyth.
+Setting constant 0-bit at position 31 on $procdff$1040 ($dff) from module rvmyth.
+
+9.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 91 unused wires.
+<suppressed ~5 debug messages>
+
+9.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~237 debug messages>
+
+9.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+9.7. Executing FSM pass (extract and optimize FSM).
+
+9.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking rvmyth.CPU_imm_a2 as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking rvmyth.CPU_rd_a2 as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking rvmyth.CPU_rs1_a2 as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking rvmyth.CPU_rs2_a2 as FSM state register:
+    Users of register don't seem to benefit from recoding.
+
+9.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+9.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+9.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+9.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+9.8. Executing OPT pass (performing simple optimizations).
+
+9.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~237 debug messages>
+
+9.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$944 ($dff) from module rvmyth (D = { $ternary$src/module/rvmyth.v:50$137_Y [31:6] $ternary$src/module/rvmyth.v:50$137_Y [1:0] }, Q = { \CPU_pc_a1 [31:6] \CPU_pc_a1 [1:0] }, rval = 28'0000000000000000000000000000).
+Adding SRST signal on $procdff$914 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$690_Y, Q = \CPU_Dmem_value_a5[0], rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1050 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[0]).
+Adding SRST signal on $procdff$913 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$693_Y, Q = \CPU_Dmem_value_a5[1], rval = 1).
+Adding EN signal on $auto$ff.cc:266:slice$1052 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[1]).
+Adding SRST signal on $procdff$912 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$696_Y, Q = \CPU_Dmem_value_a5[2], rval = 2).
+Adding EN signal on $auto$ff.cc:266:slice$1054 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[2]).
+Adding SRST signal on $procdff$911 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$699_Y, Q = \CPU_Dmem_value_a5[3], rval = 3).
+Adding EN signal on $auto$ff.cc:266:slice$1056 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[3]).
+Adding SRST signal on $procdff$910 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$702_Y, Q = \CPU_Dmem_value_a5[4], rval = 4).
+Adding EN signal on $auto$ff.cc:266:slice$1058 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[4]).
+Adding SRST signal on $procdff$909 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$705_Y, Q = \CPU_Dmem_value_a5[5], rval = 5).
+Adding EN signal on $auto$ff.cc:266:slice$1060 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[5]).
+Adding SRST signal on $procdff$908 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$708_Y, Q = \CPU_Dmem_value_a5[6], rval = 6).
+Adding EN signal on $auto$ff.cc:266:slice$1062 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[6]).
+Adding SRST signal on $procdff$907 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$711_Y, Q = \CPU_Dmem_value_a5[7], rval = 7).
+Adding EN signal on $auto$ff.cc:266:slice$1064 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[7]).
+Adding SRST signal on $procdff$906 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$714_Y, Q = \CPU_Dmem_value_a5[8], rval = 8).
+Adding EN signal on $auto$ff.cc:266:slice$1066 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[8]).
+Adding SRST signal on $procdff$905 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$717_Y, Q = \CPU_Dmem_value_a5[9], rval = 9).
+Adding EN signal on $auto$ff.cc:266:slice$1068 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[9]).
+Adding SRST signal on $procdff$904 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$720_Y, Q = \CPU_Dmem_value_a5[10], rval = 10).
+Adding EN signal on $auto$ff.cc:266:slice$1070 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[10]).
+Adding SRST signal on $procdff$903 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$723_Y, Q = \CPU_Dmem_value_a5[11], rval = 11).
+Adding EN signal on $auto$ff.cc:266:slice$1072 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[11]).
+Adding SRST signal on $procdff$902 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$726_Y, Q = \CPU_Dmem_value_a5[12], rval = 12).
+Adding EN signal on $auto$ff.cc:266:slice$1074 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[12]).
+Adding SRST signal on $procdff$901 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$729_Y, Q = \CPU_Dmem_value_a5[13], rval = 13).
+Adding EN signal on $auto$ff.cc:266:slice$1076 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[13]).
+Adding SRST signal on $procdff$900 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$732_Y, Q = \CPU_Dmem_value_a5[14], rval = 14).
+Adding EN signal on $auto$ff.cc:266:slice$1078 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[14]).
+Adding SRST signal on $procdff$899 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:309$735_Y, Q = \CPU_Dmem_value_a5[15], rval = 15).
+Adding EN signal on $auto$ff.cc:266:slice$1080 ($sdff) from module rvmyth (D = \CPU_src2_value_a4, Q = \CPU_Dmem_value_a5[15]).
+Adding SRST signal on $procdff$898 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$594_Y, Q = \CPU_Xreg_value_a4[0], rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1082 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[0]).
+Adding SRST signal on $procdff$896 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$597_Y, Q = \CPU_Xreg_value_a4[1], rval = 1).
+Adding EN signal on $auto$ff.cc:266:slice$1084 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[1]).
+Adding SRST signal on $procdff$894 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$600_Y, Q = \CPU_Xreg_value_a4[2], rval = 2).
+Adding EN signal on $auto$ff.cc:266:slice$1086 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[2]).
+Adding SRST signal on $procdff$892 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$603_Y, Q = \CPU_Xreg_value_a4[3], rval = 3).
+Adding EN signal on $auto$ff.cc:266:slice$1088 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[3]).
+Adding SRST signal on $procdff$890 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$606_Y, Q = \CPU_Xreg_value_a4[4], rval = 4).
+Adding EN signal on $auto$ff.cc:266:slice$1090 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[4]).
+Adding SRST signal on $procdff$888 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$609_Y, Q = \CPU_Xreg_value_a4[5], rval = 5).
+Adding EN signal on $auto$ff.cc:266:slice$1092 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[5]).
+Adding SRST signal on $procdff$886 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$612_Y, Q = \CPU_Xreg_value_a4[6], rval = 6).
+Adding EN signal on $auto$ff.cc:266:slice$1094 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[6]).
+Adding SRST signal on $procdff$884 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$615_Y, Q = \CPU_Xreg_value_a4[7], rval = 7).
+Adding EN signal on $auto$ff.cc:266:slice$1096 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[7]).
+Adding SRST signal on $procdff$882 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$618_Y, Q = \CPU_Xreg_value_a4[8], rval = 8).
+Adding EN signal on $auto$ff.cc:266:slice$1098 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[8]).
+Adding SRST signal on $procdff$880 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$621_Y, Q = \CPU_Xreg_value_a4[9], rval = 9).
+Adding EN signal on $auto$ff.cc:266:slice$1100 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[9]).
+Adding SRST signal on $procdff$878 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$624_Y, Q = \CPU_Xreg_value_a4[10], rval = 10).
+Adding EN signal on $auto$ff.cc:266:slice$1102 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[10]).
+Adding SRST signal on $procdff$876 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$627_Y, Q = \CPU_Xreg_value_a4[11], rval = 11).
+Adding EN signal on $auto$ff.cc:266:slice$1104 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[11]).
+Adding SRST signal on $procdff$874 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$630_Y, Q = \CPU_Xreg_value_a4[12], rval = 12).
+Adding EN signal on $auto$ff.cc:266:slice$1106 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[12]).
+Adding SRST signal on $procdff$872 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$633_Y, Q = \CPU_Xreg_value_a4[13], rval = 13).
+Adding EN signal on $auto$ff.cc:266:slice$1108 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[13]).
+Adding SRST signal on $procdff$870 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$636_Y, Q = \CPU_Xreg_value_a4[14], rval = 14).
+Adding EN signal on $auto$ff.cc:266:slice$1110 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[14]).
+Adding SRST signal on $procdff$868 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$639_Y, Q = \CPU_Xreg_value_a4[15], rval = 15).
+Adding EN signal on $auto$ff.cc:266:slice$1112 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[15]).
+Adding SRST signal on $procdff$866 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$642_Y, Q = \CPU_Xreg_value_a4[16], rval = 16).
+Adding EN signal on $auto$ff.cc:266:slice$1114 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[16]).
+Adding SRST signal on $procdff$864 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$645_Y, Q = \CPU_Xreg_value_a4[17], rval = 17).
+Adding EN signal on $auto$ff.cc:266:slice$1116 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[17]).
+Adding SRST signal on $procdff$862 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$648_Y, Q = \CPU_Xreg_value_a4[18], rval = 18).
+Adding EN signal on $auto$ff.cc:266:slice$1118 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[18]).
+Adding SRST signal on $procdff$860 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$651_Y, Q = \CPU_Xreg_value_a4[19], rval = 19).
+Adding EN signal on $auto$ff.cc:266:slice$1120 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[19]).
+Adding SRST signal on $procdff$858 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$654_Y, Q = \CPU_Xreg_value_a4[20], rval = 20).
+Adding EN signal on $auto$ff.cc:266:slice$1122 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[20]).
+Adding SRST signal on $procdff$856 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$657_Y, Q = \CPU_Xreg_value_a4[21], rval = 21).
+Adding EN signal on $auto$ff.cc:266:slice$1124 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[21]).
+Adding SRST signal on $procdff$854 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$660_Y, Q = \CPU_Xreg_value_a4[22], rval = 22).
+Adding EN signal on $auto$ff.cc:266:slice$1126 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[22]).
+Adding SRST signal on $procdff$852 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$663_Y, Q = \CPU_Xreg_value_a4[23], rval = 23).
+Adding EN signal on $auto$ff.cc:266:slice$1128 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[23]).
+Adding SRST signal on $procdff$850 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$666_Y, Q = \CPU_Xreg_value_a4[24], rval = 24).
+Adding EN signal on $auto$ff.cc:266:slice$1130 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[24]).
+Adding SRST signal on $procdff$848 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$669_Y, Q = \CPU_Xreg_value_a4[25], rval = 25).
+Adding EN signal on $auto$ff.cc:266:slice$1132 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[25]).
+Adding SRST signal on $procdff$846 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$672_Y, Q = \CPU_Xreg_value_a4[26], rval = 26).
+Adding EN signal on $auto$ff.cc:266:slice$1134 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[26]).
+Adding SRST signal on $procdff$844 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$675_Y, Q = \CPU_Xreg_value_a4[27], rval = 27).
+Adding EN signal on $auto$ff.cc:266:slice$1136 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[27]).
+Adding SRST signal on $procdff$842 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$678_Y, Q = \CPU_Xreg_value_a4[28], rval = 28).
+Adding EN signal on $auto$ff.cc:266:slice$1138 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[28]).
+Adding SRST signal on $procdff$840 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$681_Y, Q = \CPU_Xreg_value_a4[29], rval = 29).
+Adding EN signal on $auto$ff.cc:266:slice$1140 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[29]).
+Adding SRST signal on $procdff$838 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$684_Y, Q = \CPU_Xreg_value_a4[30], rval = 30).
+Adding EN signal on $auto$ff.cc:266:slice$1142 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[30]).
+Adding SRST signal on $procdff$836 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:289$687_Y, Q = \CPU_Xreg_value_a4[31], rval = 31).
+Adding EN signal on $auto$ff.cc:266:slice$1144 ($sdff) from module rvmyth (D = \CPU_rf_wr_data_a3, Q = \CPU_Xreg_value_a4[31]).
+
+9.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 96 unused cells and 96 unused wires.
+<suppressed ~145 debug messages>
+
+9.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~62 debug messages>
+
+9.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 1 cells.
+
+9.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:266:slice$1047 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:50$137_Y [5:2], Q = \CPU_imem_rd_addr_a1 [3:0], rval = 4'0000).
+
+9.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 1 unused cells and 0 unused wires.
+<suppressed ~1 debug messages>
+
+9.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~60 debug messages>
+
+9.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+9.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 29 bits (of 32) from port B of cell rvmyth.$add$src/module/rvmyth.v:60$140 ($add).
+Removed top 4 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:63$142 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:64$144 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:65$146 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:67$150 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:69$153 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:70$155 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:72$158 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:74$161 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:75$162 ($eq).
+Removed top 3 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:106$181 ($eq).
+Removed top 2 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:107$182 ($eq).
+Removed top 5 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:114$187 ($eq).
+Removed top 5 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:115$188 ($eq).
+Removed top 1 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:116$189 ($eq).
+Removed top 1 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:118$191 ($eq).
+Removed top 1 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:120$193 ($eq).
+Removed top 1 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:123$196 ($eq).
+Removed top 1 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:124$197 ($eq).
+Removed top 3 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:125$198 ($eq).
+Removed top 1 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:126$199 ($eq).
+Removed top 3 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:128$201 ($eq).
+Removed top 2 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:129$202 ($eq).
+Removed top 2 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:130$203 ($eq).
+Removed top 1 bits (of 11) from port B of cell rvmyth.$eq$src/module/rvmyth.v:131$204 ($eq).
+Removed top 5 bits (of 7) from port B of cell rvmyth.$eq$src/module/rvmyth.v:135$206 ($eq).
+Removed top 1 bits (of 7) from port B of cell rvmyth.$eq$src/module/rvmyth.v:143$210 ($eq).
+Removed top 2 bits (of 7) from port B of cell rvmyth.$eq$src/module/rvmyth.v:144$211 ($eq).
+Removed top 3 bits (of 10) from port B of cell rvmyth.$eq$src/module/rvmyth.v:146$213 ($eq).
+Removed top 31 bits (of 64) from port Y of cell rvmyth.$add$src/module/rvmyth.v:176$225 ($add).
+Removed top 31 bits (of 64) from port Y of cell rvmyth.$add$src/module/rvmyth.v:177$226 ($add).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$or$src/module/rvmyth.v:178$227 ($or).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$or$src/module/rvmyth.v:179$228 ($or).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$xor$src/module/rvmyth.v:180$229 ($xor).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$xor$src/module/rvmyth.v:181$230 ($xor).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$and$src/module/rvmyth.v:182$231 ($and).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$and$src/module/rvmyth.v:183$232 ($and).
+Removed top 31 bits (of 64) from port Y of cell rvmyth.$sub$src/module/rvmyth.v:184$233 ($sub).
+Removed top 63 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:185$236 ($mux).
+Removed top 63 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:191$243 ($mux).
+Removed top 31 bits (of 64) from port Y of cell rvmyth.$add$src/module/rvmyth.v:196$246 ($add).
+Removed top 29 bits (of 32) from port B of cell rvmyth.$add$src/module/rvmyth.v:197$247 ($add).
+Removed top 31 bits (of 64) from port Y of cell rvmyth.$add$src/module/rvmyth.v:197$247 ($add).
+Removed top 31 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:199$252 ($mux).
+Removed top 31 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:198$253 ($mux).
+Removed top 31 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:197$254 ($mux).
+Removed top 31 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:196$255 ($mux).
+Removed top 31 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:195$256 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:176$277 ($mux).
+Removed top 28 bits (of 32) from port A of cell rvmyth.$lt$src/module/rvmyth.v:276$313 ($lt).
+Removed top 28 bits (of 32) from port B of cell rvmyth.$lt$src/module/rvmyth.v:276$313 ($lt).
+Removed top 4 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$401 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$405 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$409 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$413 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$417 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$421 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$425 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$429 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$433 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$437 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$441 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$445 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$449 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$453 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$eq$src/module/rvmyth.v:287$457 ($eq).
+Removed top 3 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$525 ($eq).
+Removed top 2 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$527 ($eq).
+Removed top 2 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$529 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$531 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$533 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$535 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$eq$src/module/rvmyth.v:307$537 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$771_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$772_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$773_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$774_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$775_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$776_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$777_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$778_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$779_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$780_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$781_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$782_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$procmux$783_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$procmux$784_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell rvmyth.$procmux$785_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$804_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$805_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$806_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$807_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$808_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$809_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$810_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell rvmyth.$procmux$811_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$812_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$813_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$814_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell rvmyth.$procmux$815_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$procmux$816_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell rvmyth.$procmux$817_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell rvmyth.$procmux$818_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$procmux$827_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$procmux$828_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$procmux$829_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell rvmyth.$procmux$830_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell rvmyth.$procmux$831_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell rvmyth.$procmux$832_CMP0 ($eq).
+Removed top 3 bits (of 4) from port B of cell rvmyth.$procmux$833_CMP0 ($eq).
+Removed top 22 bits (of 32) from FF cell rvmyth.$procdff$863 ($dff).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:177$276 ($mux).
+Removed top 1 bits (of 33) from port Y of cell rvmyth.$add$src/module/rvmyth.v:177$226 ($add).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:178$275 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:179$274 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:180$273 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:181$272 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:182$271 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:183$270 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:184$269 ($mux).
+Removed top 1 bits (of 33) from port Y of cell rvmyth.$sub$src/module/rvmyth.v:184$233 ($sub).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:185$268 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:186$267 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:187$265 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shl$src/module/rvmyth.v:187$237 ($shl).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:188$264 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shr$src/module/rvmyth.v:188$238 ($shr).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:189$263 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shr$src/module/rvmyth.v:189$239 ($shr).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:190$262 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shl$src/module/rvmyth.v:190$240 ($shl).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:191$261 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:192$260 ($mux).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:193$258 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shr$src/module/rvmyth.v:193$244 ($shr).
+Removed top 32 bits (of 64) from mux cell rvmyth.$ternary$src/module/rvmyth.v:194$257 ($mux).
+Removed top 32 bits (of 64) from port Y of cell rvmyth.$shr$src/module/rvmyth.v:194$245 ($shr).
+Removed top 1 bits (of 33) from mux cell rvmyth.$ternary$src/module/rvmyth.v:195$256 ($mux).
+Removed top 1 bits (of 33) from mux cell rvmyth.$ternary$src/module/rvmyth.v:196$255 ($mux).
+Removed top 1 bits (of 33) from port Y of cell rvmyth.$add$src/module/rvmyth.v:196$246 ($add).
+Removed top 1 bits (of 33) from mux cell rvmyth.$ternary$src/module/rvmyth.v:197$254 ($mux).
+Removed top 1 bits (of 33) from mux cell rvmyth.$ternary$src/module/rvmyth.v:198$253 ($mux).
+Removed top 1 bits (of 33) from port Y of cell rvmyth.$add$src/module/rvmyth.v:197$247 ($add).
+Removed top 1 bits (of 33) from mux cell rvmyth.$ternary$src/module/rvmyth.v:199$252 ($mux).
+Removed top 1 bits (of 33) from port Y of cell rvmyth.$add$src/module/rvmyth.v:176$225 ($add).
+Removed top 32 bits (of 64) from wire rvmyth.$add$src/module/rvmyth.v:176$225_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$add$src/module/rvmyth.v:177$226_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$add$src/module/rvmyth.v:196$246_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$add$src/module/rvmyth.v:197$247_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$and$src/module/rvmyth.v:182$231_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$and$src/module/rvmyth.v:183$232_Y.
+Removed top 32 bits (of 64) from wire rvmyth.$or$src/module/rvmyth.v:178$227_Y.
+Removed top 20 bits (of 32) from wire rvmyth.$ternary$src/module/rvmyth.v:80$167_Y.
+Removed top 22 bits (of 32) from wire rvmyth.CPU_Xreg_value_a5[17].
+Removed top 28 bits (of 32) from wire rvmyth.CPU_imem_rd_addr_a1.
+
+9.10. Executing PEEPOPT pass (run peephole optimizers).
+
+9.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 11 unused wires.
+<suppressed ~1 debug messages>
+
+9.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module clk_gate:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module rvmyth:
+  creating $macc model for $add$src/module/rvmyth.v:161$215 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:164$216 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:176$225 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:177$226 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:196$246 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:197$247 ($add).
+  creating $macc model for $add$src/module/rvmyth.v:60$140 ($add).
+  creating $macc model for $sub$src/module/rvmyth.v:184$233 ($sub).
+  creating $alu model for $macc $sub$src/module/rvmyth.v:184$233.
+  creating $alu model for $macc $add$src/module/rvmyth.v:60$140.
+  creating $alu model for $macc $add$src/module/rvmyth.v:197$247.
+  creating $alu model for $macc $add$src/module/rvmyth.v:196$246.
+  creating $alu model for $macc $add$src/module/rvmyth.v:177$226.
+  creating $alu model for $macc $add$src/module/rvmyth.v:176$225.
+  creating $alu model for $macc $add$src/module/rvmyth.v:164$216.
+  creating $alu model for $macc $add$src/module/rvmyth.v:161$215.
+  creating $alu model for $ge$src/module/rvmyth.v:212$291 ($ge): merged with $sub$src/module/rvmyth.v:184$233.
+  creating $alu model for $lt$src/module/rvmyth.v:173$223 ($lt): merged with $sub$src/module/rvmyth.v:184$233.
+  creating $alu model for $lt$src/module/rvmyth.v:174$224 ($lt): new $alu
+  creating $alu model for $lt$src/module/rvmyth.v:276$313 ($lt): new $alu
+  creating $alu model for $eq$src/module/rvmyth.v:209$286 ($eq): merged with $sub$src/module/rvmyth.v:184$233.
+  creating $alu model for $ne$src/module/rvmyth.v:210$287 ($ne): merged with $sub$src/module/rvmyth.v:184$233.
+  creating $alu cell for $lt$src/module/rvmyth.v:276$313: $auto$alumacc.cc:495:replace_alu$1159
+  creating $alu cell for $add$src/module/rvmyth.v:161$215: $auto$alumacc.cc:495:replace_alu$1164
+  creating $alu cell for $add$src/module/rvmyth.v:164$216: $auto$alumacc.cc:495:replace_alu$1167
+  creating $alu cell for $lt$src/module/rvmyth.v:174$224: $auto$alumacc.cc:495:replace_alu$1170
+  creating $alu cell for $add$src/module/rvmyth.v:176$225: $auto$alumacc.cc:495:replace_alu$1175
+  creating $alu cell for $add$src/module/rvmyth.v:177$226: $auto$alumacc.cc:495:replace_alu$1178
+  creating $alu cell for $add$src/module/rvmyth.v:196$246: $auto$alumacc.cc:495:replace_alu$1181
+  creating $alu cell for $add$src/module/rvmyth.v:197$247: $auto$alumacc.cc:495:replace_alu$1184
+  creating $alu cell for $add$src/module/rvmyth.v:60$140: $auto$alumacc.cc:495:replace_alu$1187
+  creating $alu cell for $sub$src/module/rvmyth.v:184$233, $ge$src/module/rvmyth.v:212$291, $lt$src/module/rvmyth.v:173$223, $eq$src/module/rvmyth.v:209$286, $ne$src/module/rvmyth.v:210$287: $auto$alumacc.cc:495:replace_alu$1190
+  created 10 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module vsdbabysoc:
+  created 0 $alu and 0 $macc cells.
+
+9.13. Executing SHARE pass (SAT-based resource sharing).
+Found 6 cells in module rvmyth that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$src/module/rvmyth.v:194$245 ($shr):
+    Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    Found 3 candidates: $shr$src/module/rvmyth.v:193$244 $shr$src/module/rvmyth.v:189$239 $shr$src/module/rvmyth.v:188$238
+    Analyzing resource sharing with $shr$src/module/rvmyth.v:193$244 ($shr):
+      Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+      Activation pattern for cell $shr$src/module/rvmyth.v:194$245: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 19'0000001000000000000
+      Activation pattern for cell $shr$src/module/rvmyth.v:193$244: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 18'000010000000000000
+      According to the SAT solver this pair of cells can be shared. (Pattern only case)
+      Simplified activation pattern for cell $shr$src/module/rvmyth.v:194$245: \CPU_is_srl_a3 = 1'0
+      Simplified activation pattern for cell $shr$src/module/rvmyth.v:193$244: \CPU_is_srl_a3 = 1'1
+      Activation signal for $shr$src/module/rvmyth.v:194$245: $auto$share.cc:1068:make_cell_activation_logic$1205
+      New cell: $auto$share.cc:669:make_supercell$1212 ($shr)
+  Analyzing resource sharing options for $auto$share.cc:669:make_supercell$1212 ($shr):
+    Found 2 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    Found 2 candidates: $shr$src/module/rvmyth.v:189$239 $shr$src/module/rvmyth.v:188$238
+    Analyzing resource sharing with $shr$src/module/rvmyth.v:189$239 ($shr):
+      Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+      Activation pattern for cell $auto$share.cc:669:make_supercell$1212: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 19'0000001000000000000
+      Activation pattern for cell $auto$share.cc:669:make_supercell$1212: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 18'000010000000000000
+      Activation pattern for cell $shr$src/module/rvmyth.v:189$239: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 14'00001000000000
+      According to the SAT solver this pair of cells can be shared. (Pattern only case)
+      Simplified activation pattern for cell $auto$share.cc:669:make_supercell$1212: \CPU_is_srai_a3 = 1'0
+      Simplified activation pattern for cell $shr$src/module/rvmyth.v:189$239: \CPU_is_srai_a3 = 1'1
+      Activation signal for $auto$share.cc:669:make_supercell$1212: $auto$share.cc:1068:make_cell_activation_logic$1215
+      New cell: $auto$share.cc:669:make_supercell$1222 ($shr)
+  Analyzing resource sharing options for $auto$share.cc:669:make_supercell$1222 ($shr):
+    Found 3 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    Found 1 candidates: $shr$src/module/rvmyth.v:188$238
+    Analyzing resource sharing with $shr$src/module/rvmyth.v:188$238 ($shr):
+      Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+      Activation pattern for cell $auto$share.cc:669:make_supercell$1222: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 19'0000001000000000000
+      Activation pattern for cell $auto$share.cc:669:make_supercell$1222: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 18'000010000000000000
+      Activation pattern for cell $auto$share.cc:669:make_supercell$1222: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 14'00001000000000
+      Activation pattern for cell $shr$src/module/rvmyth.v:188$238: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 13'0001000000000
+      According to the SAT solver this pair of cells can be shared. (Pattern only case)
+      Simplified activation pattern for cell $auto$share.cc:669:make_supercell$1222: \CPU_is_srli_a3 = 1'0
+      Simplified activation pattern for cell $shr$src/module/rvmyth.v:188$238: \CPU_is_srli_a3 = 1'1
+      Activation signal for $auto$share.cc:669:make_supercell$1222: $auto$share.cc:1068:make_cell_activation_logic$1225
+      New cell: $auto$share.cc:669:make_supercell$1232 ($shr)
+  Analyzing resource sharing options for $auto$share.cc:669:make_supercell$1232 ($shr):
+    Found 4 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srl_a3 \CPU_is_srai_a3 \CPU_is_sra_a3 \CPU_is_sltu_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slt_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$src/module/rvmyth.v:190$240 ($shl):
+    Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    Found 1 candidates: $shl$src/module/rvmyth.v:187$237
+    Analyzing resource sharing with $shl$src/module/rvmyth.v:187$237 ($shl):
+      Found 1 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+      Activation pattern for cell $shl$src/module/rvmyth.v:190$240: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 15'000000001000000
+      Activation pattern for cell $shl$src/module/rvmyth.v:187$237: { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 } = 12'000001000000
+      According to the SAT solver this pair of cells can be shared. (Pattern only case)
+      Simplified activation pattern for cell $shl$src/module/rvmyth.v:190$240: \CPU_is_slli_a3 = 1'0
+      Simplified activation pattern for cell $shl$src/module/rvmyth.v:187$237: \CPU_is_slli_a3 = 1'1
+      Activation signal for $shl$src/module/rvmyth.v:190$240: $auto$share.cc:1068:make_cell_activation_logic$1235
+      New cell: $auto$share.cc:669:make_supercell$1242 ($shl)
+  Analyzing resource sharing options for $auto$share.cc:669:make_supercell$1242 ($shl):
+    Found 2 activation_patterns using ctrl signal { \CPU_is_xori_a3 \CPU_is_xor_a3 \CPU_is_sub_a3 \CPU_is_srli_a3 \CPU_is_srai_a3 \CPU_is_sltiu_a3 \CPU_is_slti_a3 \CPU_is_slli_a3 \CPU_is_sll_a3 \CPU_is_ori_a3 \CPU_is_or_a3 \CPU_is_andi_a3 \CPU_is_and_a3 \CPU_is_addi_a3 \CPU_is_add_a3 }.
+    No candidates found.
+Removing 8 cells in module rvmyth:
+  Removing cell $shl$src/module/rvmyth.v:187$237 ($shl).
+  Removing cell $shl$src/module/rvmyth.v:190$240 ($shl).
+  Removing cell $shr$src/module/rvmyth.v:188$238 ($shr).
+  Removing cell $auto$share.cc:669:make_supercell$1222 ($shr).
+  Removing cell $shr$src/module/rvmyth.v:189$239 ($shr).
+  Removing cell $auto$share.cc:669:make_supercell$1212 ($shr).
+  Removing cell $shr$src/module/rvmyth.v:193$244 ($shr).
+  Removing cell $shr$src/module/rvmyth.v:194$245 ($shr).
+
+9.14. Executing OPT pass (performing simple optimizations).
+
+9.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~13 debug messages>
+Optimizing module vsdbabysoc.
+
+9.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 4 cells.
+
+9.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+9.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 5 unused cells and 20 unused wires.
+<suppressed ~10 debug messages>
+
+9.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+9.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+9.15. Executing MEMORY pass.
+
+9.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+9.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+9.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+9.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+9.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+9.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+9.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+9.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+9.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.17. Executing OPT pass (performing simple optimizations).
+
+9.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~30 debug messages>
+Optimizing module vsdbabysoc.
+
+9.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $auto$ff.cc:266:slice$1048 ($sdff) from module rvmyth (D = $ternary$src/module/rvmyth.v:50$137_Y [1:0], Q = \CPU_pc_a1 [1:0]).
+
+9.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 4 unused cells and 5 unused wires.
+<suppressed ~5 debug messages>
+
+9.17.5. Rerunning OPT passes. (Removed registers in this run.)
+
+9.17.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~1 debug messages>
+Optimizing module vsdbabysoc.
+
+9.17.7. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.17.8. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.17.10. Finished fast OPT passes.
+
+9.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+9.19. Executing OPT pass (performing simple optimizations).
+
+9.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~68 debug messages>
+
+9.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $auto$share.cc:662:make_supercell$1209:
+      Old ports: A={ \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 }, B={ 32'00000000000000000000000000000000 \CPU_src1_value_a3 }, Y=$auto$share.cc:659:make_supercell$1207
+      New ports: A=\CPU_src1_value_a3 [31], B=1'0, Y=$auto$share.cc:659:make_supercell$1207 [32]
+      New connections: { $auto$share.cc:659:make_supercell$1207 [63:33] $auto$share.cc:659:make_supercell$1207 [31:0] } = { $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] $auto$share.cc:659:make_supercell$1207 [32] \CPU_src1_value_a3 }
+    Consolidated identical input bits for $mux cell $auto$share.cc:663:make_supercell$1210:
+      Old ports: A={ 1'0 \CPU_src2_value_a3 [4:0] }, B=\CPU_src2_value_a3 [5:0], Y=$auto$share.cc:660:make_supercell$1208
+      New ports: A=1'0, B=\CPU_src2_value_a3 [5], Y=$auto$share.cc:660:make_supercell$1208 [5]
+      New connections: $auto$share.cc:660:make_supercell$1208 [4:0] = \CPU_src2_value_a3 [4:0]
+    Consolidated identical input bits for $pmux cell $procmux$821:
+      Old ports: A=1049747, B=320'00000010101100000000010100010011000000000000000000000101100100110000000000000000000010001001001100000000000101011000010110010011111111101010010110011100111000110000000010111000100010001011001101000000100101011000010110110011111111101001010110011100111000110100000010111000100010001011001111111110000000000000000011100011, Y=$0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569
+      New ports: A=16'0000100000101001, B=160'0111100000110001000000000011100100000000010010010000101100111001111100111110111000111101010010111010101100111011111010111110111010111101010010111100000000001110, Y={ $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [30] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [25] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [23] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [21:19] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [16:15] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [12:10] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [8:4] }
+      New connections: { $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [31] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [29:26] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [24] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [22] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [18:17] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [14:13] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [9] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [3:0] } = { $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [6] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [6] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [6] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [6] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [6] 2'00 $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [16] 8'00000011 }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:82$165:
+      Old ports: A=0, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [19:12] \CPU_instr_a1 [20] \CPU_instr_a1 [30:21] 1'0 }, Y=$ternary$src/module/rvmyth.v:82$165_Y
+      New ports: A=20'00000000000000000000, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [19:12] \CPU_instr_a1 [20] \CPU_instr_a1 [30:21] }, Y=$ternary$src/module/rvmyth.v:82$165_Y [20:1]
+      New connections: { $ternary$src/module/rvmyth.v:82$165_Y [31:21] $ternary$src/module/rvmyth.v:82$165_Y [0] } = { $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] 1'0 }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $auto$share.cc:662:make_supercell$1219:
+      Old ports: A=$auto$share.cc:659:make_supercell$1207, B={ \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 [31] \CPU_src1_value_a3 }, Y=$auto$share.cc:659:make_supercell$1217
+      New ports: A=$auto$share.cc:659:make_supercell$1207 [32], B=\CPU_src1_value_a3 [31], Y=$auto$share.cc:659:make_supercell$1217 [32]
+      New connections: { $auto$share.cc:659:make_supercell$1217 [63:33] $auto$share.cc:659:make_supercell$1217 [31:0] } = { $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] $auto$share.cc:659:make_supercell$1217 [32] \CPU_src1_value_a3 }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:276$314:
+      Old ports: A=$0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569, B=0, Y={ \CPU_instr_a1 [31:2] \CPU_imem_rd_data_a1 [1:0] }
+      New ports: A={ $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [30] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [25] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [23] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [21:19] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [16:15] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [12:10] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [8:4] 1'1 }, B=17'00000000000000000, Y={ \CPU_instr_a1 [30] \CPU_instr_a1 [25] \CPU_instr_a1 [23] \CPU_instr_a1 [21:19] \CPU_instr_a1 [16:15] \CPU_instr_a1 [12:10] \CPU_instr_a1 [8:4] \CPU_imem_rd_data_a1 [0] }
+      New connections: { \CPU_instr_a1 [31] \CPU_instr_a1 [29:26] \CPU_instr_a1 [24] \CPU_instr_a1 [22] \CPU_instr_a1 [18:17] \CPU_instr_a1 [14:13] \CPU_instr_a1 [9] \CPU_instr_a1 [3:2] \CPU_imem_rd_data_a1 [1] } = { \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] 2'00 \CPU_instr_a1 [16] 6'000000 \CPU_imem_rd_data_a1 [0] }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:81$166:
+      Old ports: A=$ternary$src/module/rvmyth.v:82$165_Y, B={ \CPU_instr_a1 [31:12] 12'000000000000 }, Y=$ternary$src/module/rvmyth.v:81$166_Y
+      New ports: A={ $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20:1] }, B={ \CPU_instr_a1 [31:12] 11'00000000000 }, Y=$ternary$src/module/rvmyth.v:81$166_Y [31:1]
+      New connections: $ternary$src/module/rvmyth.v:81$166_Y [0] = 1'0
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $auto$share.cc:662:make_supercell$1229:
+      Old ports: A=$auto$share.cc:659:make_supercell$1217, B={ 32'00000000000000000000000000000000 \CPU_src1_value_a3 }, Y=$auto$share.cc:659:make_supercell$1227
+      New ports: A=$auto$share.cc:659:make_supercell$1217 [32], B=1'0, Y=$auto$share.cc:659:make_supercell$1227 [32]
+      New connections: { $auto$share.cc:659:make_supercell$1227 [63:33] $auto$share.cc:659:make_supercell$1227 [31:0] } = { $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] $auto$share.cc:659:make_supercell$1227 [32] \CPU_src1_value_a3 }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:80$167:
+      Old ports: A=$ternary$src/module/rvmyth.v:81$166_Y, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [7] \CPU_instr_a1 [30:25] \CPU_instr_a1 [11:8] 1'0 }, Y=$auto$wreduce.cc:514:run$1154
+      New ports: A=$ternary$src/module/rvmyth.v:81$166_Y [31:1], B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8] }, Y=$auto$wreduce.cc:514:run$1154 [31:1]
+      New connections: $auto$wreduce.cc:514:run$1154 [0] = 1'0
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:81$166:
+      Old ports: A={ $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20:1] }, B={ \CPU_instr_a1 [31:12] 11'00000000000 }, Y=$ternary$src/module/rvmyth.v:81$166_Y [31:1]
+      New ports: A={ $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20:1] }, B={ \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [23] 1'0 \CPU_instr_a1 [21:19] \CPU_instr_a1 [16] 1'0 \CPU_instr_a1 [16:15] 2'00 \CPU_instr_a1 [12] 11'00000000000 }, Y={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23:1] }
+      New connections: { $ternary$src/module/rvmyth.v:81$166_Y [31] $ternary$src/module/rvmyth.v:81$166_Y [29:27] $ternary$src/module/rvmyth.v:81$166_Y [24] } = { $ternary$src/module/rvmyth.v:81$166_Y [26] $ternary$src/module/rvmyth.v:81$166_Y [26] $ternary$src/module/rvmyth.v:81$166_Y [26] $ternary$src/module/rvmyth.v:81$166_Y [26] $ternary$src/module/rvmyth.v:81$166_Y [22] }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:82$165:
+      Old ports: A=20'00000000000000000000, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [19:12] \CPU_instr_a1 [20] \CPU_instr_a1 [30:21] }, Y=$ternary$src/module/rvmyth.v:82$165_Y [20:1]
+      New ports: A=10'0000000000, B={ \CPU_instr_a1 [19] \CPU_instr_a1 [16:15] \CPU_instr_a1 [12] \CPU_instr_a1 [20] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [23] \CPU_instr_a1 [21] }, Y={ $ternary$src/module/rvmyth.v:82$165_Y [19] $ternary$src/module/rvmyth.v:82$165_Y [16:15] $ternary$src/module/rvmyth.v:82$165_Y [12:10] $ternary$src/module/rvmyth.v:82$165_Y [6:5] $ternary$src/module/rvmyth.v:82$165_Y [3] $ternary$src/module/rvmyth.v:82$165_Y [1] }
+      New connections: { $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [18:17] $ternary$src/module/rvmyth.v:82$165_Y [14:13] $ternary$src/module/rvmyth.v:82$165_Y [9:7] $ternary$src/module/rvmyth.v:82$165_Y [4] $ternary$src/module/rvmyth.v:82$165_Y [2] } = { $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [16] 3'000 $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] 2'00 }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:80$167:
+      Old ports: A=$ternary$src/module/rvmyth.v:81$166_Y [31:1], B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8] }, Y=$auto$wreduce.cc:514:run$1154 [31:1]
+      New ports: A={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23:1] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8] }, Y={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23:1] }
+      New connections: { $auto$wreduce.cc:514:run$1154 [31] $auto$wreduce.cc:514:run$1154 [29:27] $auto$wreduce.cc:514:run$1154 [24] } = { $auto$wreduce.cc:514:run$1154 [26] $auto$wreduce.cc:514:run$1154 [26] $auto$wreduce.cc:514:run$1154 [26] $auto$wreduce.cc:514:run$1154 [26] $auto$wreduce.cc:514:run$1154 [22] }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:81$166:
+      Old ports: A={ $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20] $ternary$src/module/rvmyth.v:82$165_Y [20:1] }, B={ \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [23] 1'0 \CPU_instr_a1 [21:19] \CPU_instr_a1 [16] 1'0 \CPU_instr_a1 [16:15] 2'00 \CPU_instr_a1 [12] 11'00000000000 }, Y={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23:1] }
+      New ports: A={ $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [6] $ternary$src/module/rvmyth.v:82$165_Y [19] $ternary$src/module/rvmyth.v:82$165_Y [16:15] $ternary$src/module/rvmyth.v:82$165_Y [12:10] $ternary$src/module/rvmyth.v:82$165_Y [6:5] $ternary$src/module/rvmyth.v:82$165_Y [3] $ternary$src/module/rvmyth.v:82$165_Y [1] }, B={ \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [23] \CPU_instr_a1 [21:19] \CPU_instr_a1 [16:15] \CPU_instr_a1 [12] 6'000000 }, Y={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23] $ternary$src/module/rvmyth.v:81$166_Y [21:19] $ternary$src/module/rvmyth.v:81$166_Y [16:15] $ternary$src/module/rvmyth.v:81$166_Y [12:10] $ternary$src/module/rvmyth.v:81$166_Y [6:5] $ternary$src/module/rvmyth.v:81$166_Y [3] $ternary$src/module/rvmyth.v:81$166_Y [1] }
+      New connections: { $ternary$src/module/rvmyth.v:81$166_Y [22] $ternary$src/module/rvmyth.v:81$166_Y [18:17] $ternary$src/module/rvmyth.v:81$166_Y [14:13] $ternary$src/module/rvmyth.v:81$166_Y [9:7] $ternary$src/module/rvmyth.v:81$166_Y [4] $ternary$src/module/rvmyth.v:81$166_Y [2] } = { $ternary$src/module/rvmyth.v:81$166_Y [6] $ternary$src/module/rvmyth.v:81$166_Y [16] 3'000 $ternary$src/module/rvmyth.v:81$166_Y [6] $ternary$src/module/rvmyth.v:81$166_Y [6] $ternary$src/module/rvmyth.v:81$166_Y [6] 2'00 }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:79$168:
+      Old ports: A=$auto$wreduce.cc:514:run$1154, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31:25] \CPU_instr_a1 [11:7] }, Y=$ternary$src/module/rvmyth.v:79$168_Y
+      New ports: A={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23:1] 1'0 }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8:7] }, Y={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23:0] }
+      New connections: { $ternary$src/module/rvmyth.v:79$168_Y [31] $ternary$src/module/rvmyth.v:79$168_Y [29:27] $ternary$src/module/rvmyth.v:79$168_Y [24] } = { $ternary$src/module/rvmyth.v:79$168_Y [26] $ternary$src/module/rvmyth.v:79$168_Y [26] $ternary$src/module/rvmyth.v:79$168_Y [26] $ternary$src/module/rvmyth.v:79$168_Y [26] $ternary$src/module/rvmyth.v:79$168_Y [22] }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:80$167:
+      Old ports: A={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23:1] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8] }, Y={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23:1] }
+      New ports: A={ $ternary$src/module/rvmyth.v:81$166_Y [30] $ternary$src/module/rvmyth.v:81$166_Y [26:25] $ternary$src/module/rvmyth.v:81$166_Y [23] $ternary$src/module/rvmyth.v:81$166_Y [21:19] $ternary$src/module/rvmyth.v:81$166_Y [16:15] 1'0 $ternary$src/module/rvmyth.v:81$166_Y [12:10] $ternary$src/module/rvmyth.v:81$166_Y [6:5] 1'0 $ternary$src/module/rvmyth.v:81$166_Y [3] $ternary$src/module/rvmyth.v:81$166_Y [1] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8] }, Y={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23] $auto$wreduce.cc:514:run$1154 [21:19] $auto$wreduce.cc:514:run$1154 [16:15] $auto$wreduce.cc:514:run$1154 [13:10] $auto$wreduce.cc:514:run$1154 [6:3] $auto$wreduce.cc:514:run$1154 [1] }
+      New connections: { $auto$wreduce.cc:514:run$1154 [22] $auto$wreduce.cc:514:run$1154 [18:17] $auto$wreduce.cc:514:run$1154 [14] $auto$wreduce.cc:514:run$1154 [9:7] $auto$wreduce.cc:514:run$1154 [2] } = { $auto$wreduce.cc:514:run$1154 [6] $auto$wreduce.cc:514:run$1154 [16] $auto$wreduce.cc:514:run$1154 [13] $auto$wreduce.cc:514:run$1154 [13] $auto$wreduce.cc:514:run$1154 [6] $auto$wreduce.cc:514:run$1154 [6] $auto$wreduce.cc:514:run$1154 [6] 1'0 }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:78$169:
+      Old ports: A=$ternary$src/module/rvmyth.v:79$168_Y, B={ \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31] \CPU_instr_a1 [31:20] }, Y=\CPU_imm_a1
+      New ports: A={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23:0] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] 1'0 \CPU_instr_a1 [23] 1'0 \CPU_instr_a1 [21:20] }, Y={ \CPU_imm_a1 [30] \CPU_imm_a1 [26:25] \CPU_imm_a1 [23:0] }
+      New connections: { \CPU_imm_a1 [31] \CPU_imm_a1 [29:27] \CPU_imm_a1 [24] } = { \CPU_imm_a1 [26] \CPU_imm_a1 [26] \CPU_imm_a1 [26] \CPU_imm_a1 [26] \CPU_imm_a1 [22] }
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:79$168:
+      Old ports: A={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23:1] 1'0 }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] 1'0 \CPU_instr_a1 [8:7] }, Y={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23:0] }
+      New ports: A={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [26:25] $auto$wreduce.cc:514:run$1154 [23] $auto$wreduce.cc:514:run$1154 [21:19] $auto$wreduce.cc:514:run$1154 [16:15] $auto$wreduce.cc:514:run$1154 [13:10] $auto$wreduce.cc:514:run$1154 [6:3] $auto$wreduce.cc:514:run$1154 [1] 1'0 }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8:7] }, Y={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23] $ternary$src/module/rvmyth.v:79$168_Y [21:19] $ternary$src/module/rvmyth.v:79$168_Y [16:15] $ternary$src/module/rvmyth.v:79$168_Y [13:10] $ternary$src/module/rvmyth.v:79$168_Y [6:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }
+      New connections: { $ternary$src/module/rvmyth.v:79$168_Y [22] $ternary$src/module/rvmyth.v:79$168_Y [18:17] $ternary$src/module/rvmyth.v:79$168_Y [14] $ternary$src/module/rvmyth.v:79$168_Y [9:7] $ternary$src/module/rvmyth.v:79$168_Y [2] } = { $ternary$src/module/rvmyth.v:79$168_Y [6] $ternary$src/module/rvmyth.v:79$168_Y [16] $ternary$src/module/rvmyth.v:79$168_Y [13] $ternary$src/module/rvmyth.v:79$168_Y [13] $ternary$src/module/rvmyth.v:79$168_Y [6] $ternary$src/module/rvmyth.v:79$168_Y [6] $ternary$src/module/rvmyth.v:79$168_Y [6] 1'0 }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:78$169:
+      Old ports: A={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23:0] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [25] 1'0 \CPU_instr_a1 [23] 1'0 \CPU_instr_a1 [21:20] }, Y={ \CPU_imm_a1 [30] \CPU_imm_a1 [26:25] \CPU_imm_a1 [23:0] }
+      New ports: A={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [26:25] $ternary$src/module/rvmyth.v:79$168_Y [23] $ternary$src/module/rvmyth.v:79$168_Y [21:19] $ternary$src/module/rvmyth.v:79$168_Y [16:15] $ternary$src/module/rvmyth.v:79$168_Y [13:10] $ternary$src/module/rvmyth.v:79$168_Y [6:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] 1'0 \CPU_instr_a1 [23] \CPU_instr_a1 [21:20] }, Y={ \CPU_imm_a1 [30] \CPU_imm_a1 [26:25] \CPU_imm_a1 [23] \CPU_imm_a1 [21:19] \CPU_imm_a1 [16:15] \CPU_imm_a1 [13:10] \CPU_imm_a1 [6:3] \CPU_imm_a1 [1:0] }
+      New connections: { \CPU_imm_a1 [22] \CPU_imm_a1 [18:17] \CPU_imm_a1 [14] \CPU_imm_a1 [9:7] \CPU_imm_a1 [2] } = { \CPU_imm_a1 [6] \CPU_imm_a1 [16] \CPU_imm_a1 [13] \CPU_imm_a1 [13] \CPU_imm_a1 [6] \CPU_imm_a1 [6] \CPU_imm_a1 [6] 1'0 }
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 18 changes.
+
+9.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.6. Executing OPT_SHARE pass.
+
+9.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$1038 ($dff) from module rvmyth (D = $ternary$src/module/rvmyth.v:79$168_Y [4], Q = \CPU_imm_a2 [4], rval = 1'0).
+
+9.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~52 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~66 debug messages>
+
+9.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:80$167:
+      Old ports: A=18'000000000000000000, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8] }, Y={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [31] $auto$wreduce.cc:514:run$1154 [25] $auto$wreduce.cc:514:run$1154 [23] $auto$wreduce.cc:514:run$1154 [21:18] $auto$wreduce.cc:514:run$1154 [15] $auto$wreduce.cc:514:run$1154 [17] $auto$wreduce.cc:514:run$1154 [12:10] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [5:3] $auto$wreduce.cc:514:run$1154 [1] }
+      New ports: A=7'0000000, B={ \CPU_instr_a1 [7] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8] }, Y={ $auto$wreduce.cc:514:run$1154 [11:10] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [5:3] $auto$wreduce.cc:514:run$1154 [1] }
+      New connections: { $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [31] $auto$wreduce.cc:514:run$1154 [25] $auto$wreduce.cc:514:run$1154 [23] $auto$wreduce.cc:514:run$1154 [21:18] $auto$wreduce.cc:514:run$1154 [15] $auto$wreduce.cc:514:run$1154 [17] $auto$wreduce.cc:514:run$1154 [12] } = { $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [24] }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:79$168:
+      Old ports: A={ $auto$wreduce.cc:514:run$1154 [30] $auto$wreduce.cc:514:run$1154 [31] $auto$wreduce.cc:514:run$1154 [25] $auto$wreduce.cc:514:run$1154 [23] $auto$wreduce.cc:514:run$1154 [21:18] $auto$wreduce.cc:514:run$1154 [15] $auto$wreduce.cc:514:run$1154 [17] $auto$wreduce.cc:514:run$1154 [12:10] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [5:3] $auto$wreduce.cc:514:run$1154 [1] 1'0 }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8:7] }, Y={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [31] $ternary$src/module/rvmyth.v:79$168_Y [25] $ternary$src/module/rvmyth.v:79$168_Y [23] $ternary$src/module/rvmyth.v:79$168_Y [21:18] $ternary$src/module/rvmyth.v:79$168_Y [15] $ternary$src/module/rvmyth.v:79$168_Y [17] $ternary$src/module/rvmyth.v:79$168_Y [12:10] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [5:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }
+      New ports: A={ $auto$wreduce.cc:514:run$1154 [11:10] $auto$wreduce.cc:514:run$1154 [24] $auto$wreduce.cc:514:run$1154 [5:3] $auto$wreduce.cc:514:run$1154 [1] 1'0 }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] \CPU_instr_a1 [11:10] \CPU_instr_a1 [8:7] }, Y={ $ternary$src/module/rvmyth.v:79$168_Y [11:10] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [5:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }
+      New connections: { $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [31] $ternary$src/module/rvmyth.v:79$168_Y [25] $ternary$src/module/rvmyth.v:79$168_Y [23] $ternary$src/module/rvmyth.v:79$168_Y [21:18] $ternary$src/module/rvmyth.v:79$168_Y [15] $ternary$src/module/rvmyth.v:79$168_Y [17] $ternary$src/module/rvmyth.v:79$168_Y [12] } = { $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [24] }
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:78$169:
+      Old ports: A={ $ternary$src/module/rvmyth.v:79$168_Y [30] $ternary$src/module/rvmyth.v:79$168_Y [31] $ternary$src/module/rvmyth.v:79$168_Y [25] $ternary$src/module/rvmyth.v:79$168_Y [23] $ternary$src/module/rvmyth.v:79$168_Y [21:18] $ternary$src/module/rvmyth.v:79$168_Y [15] $ternary$src/module/rvmyth.v:79$168_Y [17] $ternary$src/module/rvmyth.v:79$168_Y [12:10] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [5:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] 1'0 \CPU_instr_a1 [23] \CPU_instr_a1 [21:20] }, Y={ \CPU_imm_a1 [30] \CPU_imm_a1 [31] \CPU_imm_a1 [25] \CPU_imm_a1 [23] \CPU_imm_a1 [21:18] \CPU_imm_a1 [15] \CPU_imm_a1 [17] \CPU_imm_a1 [12:10] \CPU_imm_a1 [24] \CPU_imm_a1 [5:3] \CPU_imm_a1 [1:0] }
+      New ports: A={ $ternary$src/module/rvmyth.v:79$168_Y [11:10] $ternary$src/module/rvmyth.v:79$168_Y [24] $ternary$src/module/rvmyth.v:79$168_Y [5:3] $ternary$src/module/rvmyth.v:79$168_Y [1:0] }, B={ \CPU_instr_a1 [6] \CPU_instr_a1 [30] \CPU_instr_a1 [6] \CPU_instr_a1 [25] 1'0 \CPU_instr_a1 [23] \CPU_instr_a1 [21:20] }, Y={ \CPU_imm_a1 [11:10] \CPU_imm_a1 [24] \CPU_imm_a1 [5:3] \CPU_imm_a1 [1:0] }
+      New connections: { \CPU_imm_a1 [30] \CPU_imm_a1 [31] \CPU_imm_a1 [25] \CPU_imm_a1 [23] \CPU_imm_a1 [21:18] \CPU_imm_a1 [15] \CPU_imm_a1 [17] \CPU_imm_a1 [12] } = { \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] \CPU_imm_a1 [24] }
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 3 changes.
+
+9.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~135 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 45 cells.
+
+9.19.14. Executing OPT_SHARE pass.
+
+9.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$929 ($dff) from module rvmyth (D = { $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [19] $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [15] }, Q = { \CPU_rs1_a2 [4] \CPU_rs1_a2 [0] }, rval = 2'00).
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$1252 ($dff) from module rvmyth.
+Setting constant 0-bit at position 0 on $procdff$1000 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$927 ($dff) from module rvmyth.
+Setting constant 0-bit at position 4 on $procdff$927 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$941 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$1250 ($dff) from module rvmyth.
+
+9.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 18 unused wires.
+<suppressed ~1 debug messages>
+
+9.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~40 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $auto$share.cc:662:make_supercell$1209.
+    dead port 1/2 on $mux $auto$share.cc:662:make_supercell$1219.
+    dead port 1/2 on $mux $auto$share.cc:663:make_supercell$1220.
+    dead port 1/32 on $pmux $procmux$754.
+    dead port 2/32 on $pmux $procmux$754.
+    dead port 3/32 on $pmux $procmux$754.
+    dead port 4/32 on $pmux $procmux$754.
+    dead port 5/32 on $pmux $procmux$754.
+    dead port 6/32 on $pmux $procmux$754.
+    dead port 7/32 on $pmux $procmux$754.
+    dead port 8/32 on $pmux $procmux$754.
+    dead port 9/32 on $pmux $procmux$754.
+    dead port 10/32 on $pmux $procmux$754.
+    dead port 11/32 on $pmux $procmux$754.
+    dead port 12/32 on $pmux $procmux$754.
+    dead port 13/32 on $pmux $procmux$754.
+    dead port 14/32 on $pmux $procmux$754.
+    dead port 15/32 on $pmux $procmux$754.
+    dead port 16/32 on $pmux $procmux$754.
+    dead port 17/32 on $pmux $procmux$754.
+    dead port 18/32 on $pmux $procmux$754.
+    dead port 19/32 on $pmux $procmux$754.
+    dead port 20/32 on $pmux $procmux$754.
+    dead port 25/32 on $pmux $procmux$754.
+    dead port 26/32 on $pmux $procmux$754.
+    dead port 27/32 on $pmux $procmux$754.
+    dead port 28/32 on $pmux $procmux$754.
+    dead port 1/32 on $pmux $procmux$787.
+    dead port 2/32 on $pmux $procmux$787.
+    dead port 3/32 on $pmux $procmux$787.
+    dead port 4/32 on $pmux $procmux$787.
+    dead port 9/32 on $pmux $procmux$787.
+    dead port 10/32 on $pmux $procmux$787.
+    dead port 11/32 on $pmux $procmux$787.
+    dead port 12/32 on $pmux $procmux$787.
+    dead port 17/32 on $pmux $procmux$787.
+    dead port 18/32 on $pmux $procmux$787.
+    dead port 19/32 on $pmux $procmux$787.
+    dead port 20/32 on $pmux $procmux$787.
+    dead port 25/32 on $pmux $procmux$787.
+    dead port 26/32 on $pmux $procmux$787.
+    dead port 27/32 on $pmux $procmux$787.
+    dead port 28/32 on $pmux $procmux$787.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:179$274.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:180$273.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:181$272.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:182$271.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:183$270.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:185$236.
+    dead port 2/2 on $mux $ternary$src/module/rvmyth.v:185$236.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:185$268.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:186$267.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:188$264.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:189$263.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:191$243.
+    dead port 2/2 on $mux $ternary$src/module/rvmyth.v:191$243.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:191$261.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:192$260.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:193$258.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:194$257.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:195$256.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:196$255.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:197$254.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:198$253.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:212$298.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:213$297.
+    dead port 1/2 on $mux $ternary$src/module/rvmyth.v:53$134.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 67 multiplexer ports.
+<suppressed ~65 debug messages>
+
+9.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.22. Executing OPT_SHARE pass.
+
+9.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $procdff$1007 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$1037 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$940 ($dff) from module rvmyth.
+
+9.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 67 unused cells and 140 unused wires.
+<suppressed ~104 debug messages>
+
+9.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~8 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.26. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+9.19.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.19.29. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.30. Executing OPT_SHARE pass.
+
+9.19.31. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $procdff$921 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$939 ($dff) from module rvmyth.
+
+9.19.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 7 unused cells and 12 unused wires.
+<suppressed ~9 debug messages>
+
+9.19.33. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~2 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.34. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.35. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+9.19.36. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.19.37. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.38. Executing OPT_SHARE pass.
+
+9.19.39. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $procdff$920 ($dff) from module rvmyth.
+Setting constant 0-bit at position 2 on $procdff$938 ($dff) from module rvmyth.
+
+9.19.40. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+9.19.41. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~1 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.42. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.43. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+9.19.44. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+    Consolidated identical input bits for $mux cell $ternary$src/module/rvmyth.v:204$283:
+      Old ports: A={ \CPU_rd_a3 [4:3] 1'0 \CPU_rd_a3 [1:0] }, B={ \CPU_rd_a5 [4:3] 1'0 \CPU_rd_a5 [1:0] }, Y=\CPU_rf_wr_index_a3
+      New ports: A={ \CPU_rd_a3 [4:3] \CPU_rd_a3 [1:0] }, B={ \CPU_rd_a5 [4:3] \CPU_rd_a5 [1:0] }, Y={ \CPU_rf_wr_index_a3 [4:3] \CPU_rf_wr_index_a3 [1:0] }
+      New connections: \CPU_rf_wr_index_a3 [2] = 1'0
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 1 changes.
+
+9.19.45. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.46. Executing OPT_SHARE pass.
+
+9.19.47. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.19.48. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+9.19.49. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~2 debug messages>
+Optimizing module vsdbabysoc.
+
+9.19.50. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.19.51. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+9.19.52. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+9.19.53. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.19.54. Executing OPT_SHARE pass.
+
+9.19.55. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.19.56. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+9.19.57. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.19.58. Finished fast OPT passes. (There is nothing left to do.)
+
+9.20. Executing TECHMAP pass (map to technology primitives).
+
+9.20.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `\$connect'.
+Generating RTLIL representation for module `\$input_port'.
+Successfully finished Verilog frontend.
+
+9.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$constmap:092011f7d4aee5efbb37c41f16125a055a79abd7$paramod$65b247ea06a847990f5821813abbc3df9880ca64\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$7f1d45a92d0221fa6c256845bf4513df30042923\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $dff.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$44a13d10af618e7fbe7b9aad2f6151ffcee1e2fa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$740b056ede97228d3eae64ea2fdc81f0a33e0fe7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$49f1dc3dcd6d2c748486fe94c6744a34a19bbafe\_90_pmux for cells of type $pmux.
+Using template $paramod$f116bcd7d8e5f4f095de98430b881202cc70d5e2\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011110 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~2057 debug messages>
+
+9.21. Executing OPT pass (performing simple optimizations).
+
+9.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~917 debug messages>
+Optimizing module vsdbabysoc.
+
+9.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~1140 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 380 cells.
+
+9.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:266:slice$4800 ($_DFF_P_) from module rvmyth (D = $0$mem2reg_rd$\CPU_Imem_instr_a1$src/module/rvmyth.v:276$1_DATA[31:0]$569 [18], Q = \CPU_rs1_a2 [1], rval = 1'0).
+
+9.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 612 unused cells and 1263 unused wires.
+<suppressed ~613 debug messages>
+
+9.21.5. Rerunning OPT passes. (Removed registers in this run.)
+
+9.21.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.21.7. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+9.21.8. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:266:slice$1849 ($_SDFF_PP0_) from module rvmyth (D = $procmux$821.Y_B [10], Q = \CPU_rs1_a2 [4], rval = 1'0).
+Adding SRST signal on $auto$ff.cc:266:slice$1848 ($_SDFF_PP0_) from module rvmyth (D = $procmux$821.Y_B [8], Q = \CPU_rs1_a2 [0], rval = 1'0).
+Adding SRST signal on $auto$ff.cc:266:slice$10389 ($_SDFF_PP0_) from module rvmyth (D = $procmux$821.Y_B [9], Q = \CPU_rs1_a2 [1], rval = 1'0).
+
+9.21.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 3 unused cells and 3 unused wires.
+<suppressed ~4 debug messages>
+
+9.21.10. Rerunning OPT passes. (Removed registers in this run.)
+
+9.21.11. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+9.21.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 4 cells.
+
+9.21.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.21.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+9.21.15. Finished fast OPT passes.
+
+9.22. Executing ABC pass (technology mapping using ABC).
+
+9.22.1. Extracting gate netlist of module `\clk_gate' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+9.22.1.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+
+9.22.2. Extracting gate netlist of module `\rvmyth' to `<abc-temp-dir>/input.blif'..
+Replacing 2 occurrences of constant undef bits with constant zero bits
+
+9.22.2.1. Executed ABC.
+Extracted 3999 gates and 5190 wires to a netlist network with 1188 inputs and 216 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Sep 19 2025 17:16:22)
+ABC: abc 01> set abcout /dev/stdout
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-9tEfZr/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: abc 04> echo "ABC_DONE"
+
+9.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      174
+ABC RESULTS:            ANDNOT cells:     1413
+ABC RESULTS:               MUX cells:      513
+ABC RESULTS:              NAND cells:       43
+ABC RESULTS:               NOR cells:       98
+ABC RESULTS:               NOT cells:       52
+ABC RESULTS:                OR cells:     1322
+ABC RESULTS:             ORNOT cells:       73
+ABC RESULTS:              XNOR cells:       77
+ABC RESULTS:               XOR cells:      130
+ABC RESULTS:        internal signals:     3786
+ABC RESULTS:           input signals:     1188
+ABC RESULTS:          output signals:      216
+Removing temp directory.
+
+9.22.3. Extracting gate netlist of module `\vsdbabysoc' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+9.22.3.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+Removing global temp directory.
+
+9.23. Executing OPT pass (performing simple optimizations).
+
+9.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+<suppressed ~127 debug messages>
+Optimizing module vsdbabysoc.
+
+9.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 10 cells.
+
+9.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+Removed 3 unused cells and 2215 unused wires.
+<suppressed ~12 debug messages>
+
+9.23.5. Finished fast OPT passes.
+
+9.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `vsdbabysoc'. Setting top module to vsdbabysoc.
+
+9.24.1. Analyzing design hierarchy..
+Top module:  \vsdbabysoc
+Used module:     \rvmyth
+Used module:         \clk_gate
+
+9.24.2. Analyzing design hierarchy..
+Top module:  \vsdbabysoc
+Used module:     \rvmyth
+Used module:         \clk_gate
+Removed 0 unused modules.
+
+9.25. Printing statistics.
+
+=== clk_gate ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+        5 wire bits
+        5 public wires
+        5 public wire bits
+        5 ports
+        5 port bits
+
+=== rvmyth ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     3945 wires
+     6632 wire bits
+      269 public wires
+     2941 public wire bits
+        3 ports
+       12 port bits
+     5155 cells
+     1411   $_ANDNOT_
+      174   $_AND_
+      239   $_DFF_P_
+      513   $_MUX_
+       42   $_NAND_
+       98   $_NOR_
+       49   $_NOT_
+       73   $_ORNOT_
+     1322   $_OR_
+      962   $_SDFFE_PP0P_
+       64   $_SDFFE_PP1P_
+        8   $_SDFF_PP0_
+       71   $_XNOR_
+      129   $_XOR_
+        7 submodules
+        7   clk_gate
+
+=== vsdbabysoc ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        9 wires
+       18 wire bits
+        9 public wires
+       18 public wire bits
+        7 ports
+        7 port bits
+        2 cells
+        1   avsddac
+        1   avsdpll
+        1 submodules
+        1   rvmyth
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     5157 vsdbabysoc
+     5155 rvmyth
+
+        +----------Count including submodules.
+        | 
+     3989 wires
+     6685 wire bits
+      313 public wires
+     2994 public wire bits
+       45 ports
+       54 port bits
+        - memories
+        - memory bits
+        - processes
+     5157 cells
+     1411   $_ANDNOT_
+      174   $_AND_
+      239   $_DFF_P_
+      513   $_MUX_
+       42   $_NAND_
+       98   $_NOR_
+       49   $_NOT_
+       73   $_ORNOT_
+     1322   $_OR_
+      962   $_SDFFE_PP0P_
+       64   $_SDFFE_PP1P_
+        8   $_SDFF_PP0_
+       71   $_XNOR_
+      129   $_XOR_
+        1   avsddac
+        1   avsdpll
+        1 submodules
+        1   rvmyth
+
+9.26. Executing CHECK pass (checking for obvious problems).
+Checking module clk_gate...
+Checking module rvmyth...
+Checking module vsdbabysoc...
+Found and reported 0 problems.
+
+10. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_1 (noninv, pins=3, area=20.02) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtn_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_NN0_.
+  cell sky130_fd_sc_hd__dfrtp_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__edfxtp_1 (noninv, pins=4, area=30.03) is a direct match for cell type $_DFFE_PP_.
+  cell sky130_fd_sc_hd__dfbbn_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_NNN_.
+  cell sky130_fd_sc_hd__dfbbp_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    \sky130_fd_sc_hd__dfrtn_1 _DFF_NN0_ (.CLK_N( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    \sky130_fd_sc_hd__edfxtp_1 _DFFE_PP_ (.CLK( C), .D( D), .DE( E), .Q( Q));
+    \sky130_fd_sc_hd__dfbbn_1 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \sky130_fd_sc_hd__dfbbp_1 _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+10.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~24 debug messages>
+Mapping DFF cells in module `\clk_gate':
+Mapping DFF cells in module `\rvmyth':
+  mapped 1273 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_1 cells.
+Mapping DFF cells in module `\vsdbabysoc':
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clk_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \rvmyth..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vsdbabysoc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clk_gate.
+  Optimizing cells in module \rvmyth.
+  Optimizing cells in module \vsdbabysoc.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clk_gate'.
+Finding identical cells in module `\rvmyth'.
+Finding identical cells in module `\vsdbabysoc'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clk_gate..
+Finding unused cells or wires in module \rvmyth..
+Finding unused cells or wires in module \vsdbabysoc..
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clk_gate.
+Optimizing module rvmyth.
+Optimizing module vsdbabysoc.
+
+11.9. Finished fast OPT passes. (There is nothing left to do.)
+
+12. Executing ABC pass (technology mapping using ABC).
+
+12.1. Extracting gate netlist of module `\clk_gate' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+12.1.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+
+12.2. Extracting gate netlist of module `\rvmyth' to `<abc-temp-dir>/input.blif'..
+
+12.2.1. Executed ABC.
+Extracted 5942 gates and 7169 wires to a netlist network with 1225 inputs and 1173 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Sep 19 2025 17:16:22)
+ABC: abc 01> set abcout /dev/stdout
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/ank/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.07 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-stat+ strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: e cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/ank/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.10 sec
+ABC: Memory =   19.84 MB. Time =     0.10 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: abc 07> echo "ABC_DONE"
+
+12.2.2. Re-integrating ABC results.
+ABC RESULTS:          _const0_ cells:        4
+ABC RESULTS:          _const1_ cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a2111oi_0 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a211o_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_1 cells:      439
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_0 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:      738
+ABC RESULTS:   sky130_fd_sc_hd__a221o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a221oi_1 cells:       42
+ABC RESULTS:   sky130_fd_sc_hd__a222oi_1 cells:      227
+ABC RESULTS:   sky130_fd_sc_hd__a22o_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_1 cells:      112
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_1 cells:       33
+ABC RESULTS:   sky130_fd_sc_hd__a31o_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:       17
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a41oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__and2_0 cells:       39
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:       33
+ABC RESULTS:   sky130_fd_sc_hd__and3b_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__and4_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__and4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:       41
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso1p_1 cells:       16
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:       62
+ABC RESULTS:   sky130_fd_sc_hd__maj3_1 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__mux2i_1 cells:       64
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:     1255
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:       28
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:       67
+ABC RESULTS:   sky130_fd_sc_hd__nand4_1 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:      636
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:       19
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__o21a_1 cells:       16
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:      156
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o22a_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_1 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o311ai_0 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o32a_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o41a_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o41ai_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__or4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_1 cells:       77
+ABC RESULTS:   sky130_fd_sc_hd__xor2_1 cells:       46
+ABC RESULTS:        internal signals:     4771
+ABC RESULTS:           input signals:     1225
+ABC RESULTS:          output signals:     1173
+Removing temp directory.
+
+12.3. Extracting gate netlist of module `\vsdbabysoc' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+12.3.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+Removing global temp directory.
+
+13. Executing FLATTEN pass (flatten design).
+Deleting now unused module clk_gate.
+Deleting now unused module rvmyth.
+<suppressed ~8 debug messages>
+
+14. Executing SETUNDEF pass (replace undef values with defined constants).
+Removed 393 unused cells and 7573 unused wires.
+
+15. Executing Verilog backend.
+
+15.1. Executing BMUXMAP pass.
+
+15.2. Executing DEMUXMAP pass.
+Dumping module `\vsdbabysoc'.
+
+16. Printing statistics.
+
+=== vsdbabysoc ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     4054        - wires
+     5528        - wire bits
+     4054        - public wires
+     5528        - public wire bits
+        7        - ports
+        7        - port bits
+     5238 4.52E+04 cells
+        8        -   $scopeinfo
+        1        -   avsddac
+        1        -   avsdpll
+        1    8.758   sky130_fd_sc_hd__a2111oi_0
+        8   70.067   sky130_fd_sc_hd__a211o_1
+      329 2.47E+03   sky130_fd_sc_hd__a211oi_1
+        8   60.058   sky130_fd_sc_hd__a21boi_0
+        9   67.565   sky130_fd_sc_hd__a21o_1
+      728 3.64E+03   sky130_fd_sc_hd__a21oi_1
+        1    10.01   sky130_fd_sc_hd__a221o_1
+       42  367.853   sky130_fd_sc_hd__a221oi_1
+      227 2.27E+03   sky130_fd_sc_hd__a222oi_1
+        2   17.517   sky130_fd_sc_hd__a22o_1
+      112  840.806   sky130_fd_sc_hd__a22oi_1
+        1    8.758   sky130_fd_sc_hd__a2bb2oi_1
+       27  236.477   sky130_fd_sc_hd__a311oi_1
+        3   26.275   sky130_fd_sc_hd__a31o_1
+       15    93.84   sky130_fd_sc_hd__a31oi_1
+        1    8.758   sky130_fd_sc_hd__a32oi_1
+        1    8.758   sky130_fd_sc_hd__a41oi_1
+       39  243.984   sky130_fd_sc_hd__and2_0
+       33  206.448   sky130_fd_sc_hd__and3_1
+        4   35.034   sky130_fd_sc_hd__and3b_1
+        9   78.826   sky130_fd_sc_hd__and4_1
+        1    10.01   sky130_fd_sc_hd__and4b_1
+       41  153.898   sky130_fd_sc_hd__clkinv_1
+     1144 2.29E+04   sky130_fd_sc_hd__dfxtp_1
+       16  100.096   sky130_fd_sc_hd__lpflow_inputiso1p_1
+       62  387.872   sky130_fd_sc_hd__lpflow_isobufsrc_1
+       18  180.173   sky130_fd_sc_hd__maj3_1
+        5   56.304   sky130_fd_sc_hd__mux2_1
+       64  640.614   sky130_fd_sc_hd__mux2i_1
+        1   22.522   sky130_fd_sc_hd__mux4_2
+     1251  4.7E+03   sky130_fd_sc_hd__nand2_1
+       28  175.168   sky130_fd_sc_hd__nand2b_1
+       67  335.322   sky130_fd_sc_hd__nand3_1
+       32  200.192   sky130_fd_sc_hd__nand4_1
+      516 1.94E+03   sky130_fd_sc_hd__nor2_1
+        3   18.768   sky130_fd_sc_hd__nor2b_1
+       19   95.091   sky130_fd_sc_hd__nor3_1
+        7    52.55   sky130_fd_sc_hd__nor3b_1
+        6   37.536   sky130_fd_sc_hd__nor4_1
+        1    8.758   sky130_fd_sc_hd__o2111ai_1
+       10   75.072   sky130_fd_sc_hd__o211ai_1
+       16  120.115   sky130_fd_sc_hd__o21a_1
+      146  730.701   sky130_fd_sc_hd__o21ai_0
+        2   17.517   sky130_fd_sc_hd__o221ai_1
+        2   17.517   sky130_fd_sc_hd__o22a_1
+       13   81.328   sky130_fd_sc_hd__o22ai_1
+        1    8.758   sky130_fd_sc_hd__o2bb2ai_1
+        2   17.517   sky130_fd_sc_hd__o311ai_0
+        7    52.55   sky130_fd_sc_hd__o31ai_1
+        1    10.01   sky130_fd_sc_hd__o32a_1
+        4   35.034   sky130_fd_sc_hd__o32ai_1
+        2   22.522   sky130_fd_sc_hd__o41a_1
+        4   35.034   sky130_fd_sc_hd__o41ai_1
+        9   56.304   sky130_fd_sc_hd__or3_1
+        3   22.522   sky130_fd_sc_hd__or4_1
+        1    10.01   sky130_fd_sc_hd__or4b_1
+       77  674.397   sky130_fd_sc_hd__xnor2_1
+       46  402.886   sky130_fd_sc_hd__xor2_1
+
+   Area for cell type $scopeinfo is unknown!
+   Area for cell type \avsddac is unknown!
+   Area for cell type \avsdpll is unknown!
+
+   Chip area for module '\vsdbabysoc': 45174.576000
+     of which used for sequential elements: 22901.964800 (50.70%)
+
+Warnings: 3 unique messages, 3 total
+End of script. Logfile hash: 373072b1bf, CPU: user 2.01s system 0.04s, MEM: 62.88 MB peak
+Yosys 0.57+148 (git sha1 259bd6fb3, g++ 13.3.0-6ubuntu2~24.04 -fPIC -O3)
+Time spent: 31% 2x abc (0 sec), 12% 30x opt_clean (0 sec), ...
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC$ iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 -o simulation/post_synth_sim.out src/gls_model/primitives.v src/gls_model/sky130_fd_sc_hd.v reports/vsdbabysoc_netlist.v src/module/avsdpll.v src/module/avsddac.v src/module/testbench.v
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC$ cd simulation
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC/simulation$ ./post_synth_sim.out
+VCD info: dumpfile dump.vcd opened for output.
+src/module/testbench.v:63: $finish called at 84999000 (1ps)
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC/simulation$ gtkwave dump.vcd
+
+GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+
+[0] start time.
+(soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_2/babysoc/VSDBabySoC/simulation$ iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 -o simulation/post_synth_sim.out src/gls_model/primitives.v src/gls_model/sky130_fd_sc_hd.v reports/vsdbabysoc_netlist.v src/module/avsdpll.v src/module/avsddac.v src/module/testbench.v
+
+
