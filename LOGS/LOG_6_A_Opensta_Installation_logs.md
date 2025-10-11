@@ -1,3 +1,4 @@
+```bash
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc/STA$ sudo apt install opensta
 Reading package lists... Done
 Building dependency tree... Done
@@ -1541,3 +1542,4 @@ Install the project...
 -- Installing: /usr/local/include/sta/StaConfig.hh
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/OpenSTA/build$ cd ~/Desktop/SoC_Shwetank/WEEK_3/babysoc/
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc$ sta -no_splash STA/run_sta.tcl | tee STA/sta_run.log
+```
