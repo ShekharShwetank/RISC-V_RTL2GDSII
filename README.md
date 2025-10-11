@@ -297,7 +297,7 @@ report_wns > reports/6_worst_negative_slack.rpt
 report_checks -path_delay max -fields {slew capacitance input_pins nets fanout} -digits 4 > reports/6_critical_path.rpt
 ```
 
-## 4\. Executing STA
+### 4\. Executing STA
 
 With the script ready, STA is run with:
 
