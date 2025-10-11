@@ -1,3 +1,4 @@
+```bash
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc$ cat STA/run_sta.tcl
 # OpenSTA Tcl Script for VSDBabySoC Analysis (restored, safe)
 # -----------------------------------------------------------------------------
@@ -62,4 +63,4 @@ total 24
 -rw-rw-r-- 1 ank ank   21 Oct  9 02:41 5_worst_slack.rpt
 -rw-rw-r-- 1 ank ank  192 Oct  9 02:41 6_critical_path.rpt
 (soc_env) ank@ank-Victus-by-HP-Gaming-Laptop-15-fb0xxx:~/Desktop/SoC_Shwetank/WEEK_3/babysoc$ 
-
+```
