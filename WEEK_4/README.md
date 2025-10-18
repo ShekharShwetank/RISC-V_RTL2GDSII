@@ -577,7 +577,7 @@ All SPICE netlists used in the simulations are included in the `sky130CircuitDes
 | Switching Threshold (Vm) | Vm | ~0.98 to ~1.2 | V |
 | Propagation Delays | Rise Delay | ~0.333 | ns |
 | | Fall Delay | ~0.285 | ns |
-| Noise Margins (Wp=1, Wn=0.36) | NML | ~0.675678 | V |
+| Noise Margins | NML | ~0.675678 | V |
 | | NMH | ~0.702931 | V |
 
 ## Observations / Analysis
