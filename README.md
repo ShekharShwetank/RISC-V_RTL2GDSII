@@ -28,528 +28,601 @@ The RTL to GDSII flow is the process of converting a high-level hardware descrip
 *   [Week 1: Introduction to Verilog RTL Design and Synthesis](WEEK_1)
 *   [Week 2: SoC Fundamentals and Functional Modelling](WEEK_2)
 *   [Week 3: Static Timing Analysis and PVT Corners](WEEK_3)
+*   [Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations](WEEK_4)
 
-# VSDBabySoC: Post-Synthesis Verification and Static Timing Analysis using OpenSTA
-
-This document provides a comprehensive walkthrough of the post-synthesis verification and static timing analysis (STA) flow for the `vsdbabysoc` System-on-Chip. The project verifies the gate-level netlist (synthesized as per [WEEK_2/VSDBabySoC/README.md](WEEK_2/VSDBabySoC/README.md)) using Gate-Level Simulation (GLS) and performs STA with OpenSTA to ensure timing closure, validate setup and hold constraints, and identify the critical path limiting performance.
+# Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations
 
 ## Table of Contents
+- [Overview](#overview)
+- [Introduction to Circuit Design and SPICE Simulations](#introduction-to-circuit-design-and-spice-simulations)
+  - [Theory: Why SPICE Simulations?](#theory-why-spice-simulations)
+  - [SPICE Simulation Overview](#spice-simulation-overview)
+  - [Introduction to Basic Element: NMOS Transistor](#introduction-to-basic-element-nmos-transistor)
+  - [NMOS Resistive and Saturation Regions](#nmos-resistive-and-saturation-regions)
+  - [SPICE Netlist Example](#spice-netlist-example)
+  - [Labs: Introduction to SPICE](#labs-introduction-to-spice)
+    - [Outputs](#outputs)
+- [SPICE Simulation for Lower Nodes and Velocity Saturation Effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
+  - [Theory: SPICE for Lower Nodes](#theory-spice-for-lower-nodes)
+  - [CMOS Voltage Transfer Characteristics (VTC)](#cmos-voltage-transfer-characteristics-vtc)
+  - [Labs: SPICE for Lower Nodes and Velocity Saturation](#labs-spice-for-lower-nodes-and-velocity-saturation)
+    - [Example 1 Outputs](#example-1-outputs)
+    - [Example 2 Output](#example-2-output)
+- [Voltage Transfer Characteristics: SPICE Simulations](#voltage-transfer-characteristics-spice-simulations)
+  - [Theory: CMOS Inverter SPICE Netlist](#theory-cmos-inverter-spice-netlist)
+  - [SPICE simulation for CMOS inverter](#spice-simulation-for-cmos-inverter)
+  - [Static Behavior Evaluation: CMOS Inverter Robustness and Switching Threshold (Vm)](#static-behavior-evaluation-cmos-inverter-robustness-and-switching-threshold-vm)
+  - [Velocity Saturation and Switching Threshold (Vm) Analysis](#velocity-saturation-and-switching-threshold-vm-analysis)
+  - [Labs: VTC SPICE Simulations](#labs-vtc-spice-simulations)
+    - [VTC Plot](#vtc-plot)
+    - [Transient Plot](#transient-plot)
+    - [Fall Delay](#fall-delay)
+    - [Rise Delay](#rise-delay)
+- [Static Behavior Evaluation: CMOS Inverter Robustness and Noise Margin](#static-behavior-evaluation-cmos-inverter-robustness-and-noise-margin)
+  - [Theory: Noise Margin](#theory-noise-margin)
+  - [Labs: Noise Margin - Sky130 Inverter (Wp/Lp=1u/0.15u, Wn/Ln=0.36u/0.15u)](#labs-noise-margin---sky130-inverter-wplp1u015u-wnln036u015u)
+    - [Noise Margin High](#noise-margin-high)
+    - [Noise Margin Low](#noise-margin-low)
+- [Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation](#static-behavior-evaluation-cmos-inverter-robustness---power-supply-variation)
+  - [Theory: Power Supply Variation](#theory-power-supply-variation)
+  - [Oxide Thickness Variations](#oxide-thickness-variations)
+  - [CMOS Inverter Robustness to Extreme Device Width Variation](#cmos-inverter-robustness-to-extreme-device-width-variation)
+  - [Labs: Power Supply Variation](#labs-power-supply-variation)
+    - [Smart SPICE for Power Supply Variations](#smart-spice-for-power-supply-variations)
+    - [Extreme Device Width Variation](#extreme-device-width-variation)
+    - [Gain Plots](#gain-plots)
+- [SPICE Netlists and Code](#spice-netlists-and-code)
+- [Tabulated Results](#tabulated-results)
+- [Observations / Analysis](#observations--analysis)
+- [Conclusions](#conclusions)
+- [References / Citations](#references--citations)
 
-0.  [Post-Synthesis Verification (GLS)](#0-post-synthesis-verification-gls)
-1.  [STA Flow Overview](#1-sta-flow-overview)
-2.  [Key Concept: Timing Constraints and SDC](#2-key-concept-timing-constraints-and-sdc)
-3.  [STA Fundamentals](#3-sta-fundamentals)
-4.  [The STA Script](#4-the-sta-script)
-5.  [Executing STA](#5-executing-sta)
-6.  [STA Results](#6-sta-results)
-7.  [PVT Corner Analysis](#7-pvt-corner-analysis)
-8.  [Timing Analysis and Critical Path Evaluation](#8-timing-analysis-and-critical-path-evaluation)
-9.  [Conclusion](#9-conclusion)
+## Overview
+Week 4 explores the fundamentals of circuit design, SPICE simulations, and the static characteristics of CMOS inverters. Topics include transistor operation, voltage transfer characteristics (VTC), noise margins, switching thresholds, and robustness to process and supply variations. Labs demonstrate practical SPICE simulations using Sky130 models, with outputs visualized through plots and waveforms.
 
-## Pre-requisites
+Key themes:
+- Introduction to SPICE and NMOS transistor basics.
+- Velocity saturation effects in lower technology nodes.
+- CMOS inverter VTC and transient analysis.
+- Noise margin calculations and robustness.
+- Impact of power supply and device variations on inverter performance.
 
-- Install OpenSTA, Yosys, Icarus Verilog, and GTKWave. Refer to their respective documentation for installation instructions in WEEK_0 and LOGS.
-- Install Sandpiper for Verilog generation from TL-Verilog: rvmyth is in TL-Verilog.
+## Introduction to Circuit Design and SPICE Simulations
 
-  - **Command**:
+### Theory: Why SPICE Simulations?
+SPICE (Simulation Program with Integrated Circuit Emphasis) verifies circuit behavior and performance before implementation. In circuit design, logic gates like NAND, NOR, and NOT are built using NMOS and PMOS transistors. For an inverter:
+- PMOS (pull-up) and NMOS (pull-down) drains connect to the output with a capacitive load.
+- Both gates connect to the input, PMOS source to VDD, NMOS source to GND.
 
-    ```bash
-    pip3 install pyyaml click sandpiper-saas
-    sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
-    ```
+SPICE ensures circuits meet functionality, timing, and power requirements.
 
-  - **Note**: The `rvmyth.v` file is generated from `rvmyth.tlv` using Sandpiper. This file is included in the synthesis and simulation processes.
+### SPICE Simulation Overview
+SPICE allows virtual testing of circuits. Input waveforms generate output waveforms, enabling measurement of parameters like **delay**. Design parameters such as transistor **width (W)** and **length (L)** control current flow and delay for optimization.
 
-  - **Files**:
-    ```bash
-    path/to/VSDBabySoC$ tree -a
-    .
-    ├── assets
-    │   ├── STA Theory 
-    │   └── STA_1.jpg
-    ├── critical_path_improved.png
-    ├── critical_path.png
-    ├── critical_path_with_lib_delays.png
-    ├── logs
-    │   ├── LOG_1_PRE_SYNTHESIS_VSDBabySoC.md
-    │   ├── LOG_2_POST_SYNTHESIS_VSDBabySoC.md
-    │   ├── LOG_3_A_Opensta_Installation_logs.md
-    │   ├── LOG_3_STA.md
-    │   └── LOG_4_PVT_Corner.md
-    ├── pvt_summary.csv
-    ├── PVT_Summary.png
-    ├── pvt_tns.png
-    ├── pvt_wns.png
-    ├── pvt_worst_hold.png
-    ├── pvt_worst_setup.png
-    ├── README.md
-    ├── reports
-    │   ├── 1_clocks.rpt
-    │   ├── 2_unconstrained.rpt
-    │   ├── 3_setup_report.rpt
-    │   ├── 4_hold_report.rpt
-    │   ├── 5_worst_slack.rpt
-    │   ├── 6_critical_path_full.rpt
-    │   ├── 6_critical_path_full_short.rpt
-    │   ├── 6_critical_path.rpt
-    │   ├── critical_path.dot
-    │   ├── critical_path_improved.dot
-    │   ├── critical_path_improved.png
-    │   ├── critical_path.png
-    │   ├── critical_path_with_lib_delays.dot
-    │   ├── critical_path_with_lib_delays_graphviz.png
-    │   ├── critical_path_with_lib_delays.png
-    │   ├── critical_path_with_lib_delays.txt
-    │   └── pvt
-    │       ├── ff_100C_1v65
-    │       │   ├── 3_setup_summary.rpt
-    │       │   ├── 4_hold_summary.rpt
-    │       │   ├── 6_critical_path_full_max.rpt
-    │       │   ├── 6_critical_path_full_min.rpt
-    │       │   ├── tns_hold.rpt
-    │       │   ├── tns_setup.rpt
-    │       │   ├── units.rpt
-    │       │   ├── wns_hold.rpt
-    │       │   └── wns_setup.rpt
-    │       ├── ff_100C_1v95
-    │       ├── ff_n40C_1v56
-    │       ├── ff_n40C_1v6
-    │       ├── ff_n40C_1v76
-    │       ├── ff_n40C_1v95
-    │       ├── ss_100C_1v40
-    │       ├── ss_100C_1v60
-    │       ├── ss_n40C_1v28
-    │       ├── ss_n40C_1v35
-    │       ├── ss_n40C_1v40
-    │       ├── ss_n40C_1v44
-    │       ├── ss_n40C_1v60
-    │       ├── ss_n40C_1v76
-    │       ├── tt_025C_1v80
-    │       └── tt_100C_1v80
-    │           ├── 3_setup_summary.rpt
-    │           ├── 4_hold_summary.rpt
-    │           ├── 6_critical_path_full_max.rpt
-    │           ├── 6_critical_path_full_min.rpt
-    │           ├── tns_hold.rpt
-    │           ├── tns_setup.rpt
-    │           ├── units.rpt
-    │           ├── wns_hold.rpt
-    │           └── wns_setup.rpt
-    ├── scripts
-    │   ├── plot_pvt_sta.py
-    │   └── run_sta_per_corner.sh
-    ├── STA
-    │   ├── final.sdc
-    │   ├── run_sta.tcl
-    │   ├── sta_per_corner.tcl
-    │   └── sta_run.log
-    ├── STA_fundamentals_summary.md
-    └── VSDBabySoC
-        ├── assets
-        │   ├── chip_stats.png
-        │   ├── comp_pre_vs_post_synth_sim_2.png
-        │   ├── comp_pre_vs_post_synth_sim.png
-        │   ├── Screenshot from 2025-10-02 00-57-45.png
-        │   ├── vsdbabysoc.yosys_show.png
-        │   ├── waveform_post_synth_sim.png
-        │   ├── waveform_pre_synth_sim_2.png
-        │   └── waveform_pre_synth_sim.png
-        ├── README.md
-        ├── reports
-        │   ├── logs
-        │   │   └── synthesis_yosis.log
-        │   └── vsdbabysoc_netlist.v
-        ├── simulation
-        │   ├── dump.vcd
-        │   ├── post_synth_sim.out
-        │   ├── pre_synth_sim.out
-        │   └── pre_synth_sim.vcd
-        └── src
-            ├── gds
-            ├── gls_model
-            │   ├── primitives.v
-            │   └── sky130_fd_sc_hd.v
-            ├── include
-            ├── layout_conf
-            │   ├── rvmyth
-            │   └── vsdbabysoc
-            ├── lef
-            ├── lib
-            │   ├── avsddac.lib
-            │   ├── avsdpll.lib
-            │   └── sky130_fd_sc_hd__tt_025C_1v80.lib
-            ├── module
-            │   ├── avsddac.v
-            │   ├── avsdpll.v
-            │   ├── clk_gate.v
-            │   ├── rvmyth.v
-            │   ├── testbench.v
-            │   └── vsdbabysoc.v
-            ├── script
-            └── sdc
-                └── vsdbabysoc_synthesis.sdc
+![Figure: SPICE Simulation Example](WEEK_4/assets/1.png)
 
-    40 directories, 336 files
-    ```
+For buffers (e.g., CBUF1 vs. CBUF2), differences arise from drive strengths or W/L ratios. Delay tables are derived from SPICE simulations.
 
-## 0\. Post-Synthesis Verification (GLS)
+![cbuf](WEEK_4/assets/2.png)
 
-Post-Synthesis Verification (GLS) was performed as detailed in [WEEK_2/VSDBabySoC/README.md](WEEK_2/VSDBabySoC/README.md), confirming functional equivalence between the RTL and gate-level netlist.
+### Introduction to Basic Element: NMOS Transistor
+An NMOS transistor conducts when a positive voltage is applied to the gate, enabling current flow from drain to source.
 
-![GLS Waveform Comparison](WEEK_2/VSDBabySoC/assets/comp_pre_vs_post_synth_sim.png)
+![Figure: NMOS Transistor Diagram](WEEK_4/assets/3.png)
 
-## 1\. STA Flow Overview
+**Threshold Voltage (Vt)**: Voltage at which the transistor switches from off to on, key for SPICE simulations.
 
-The STA process analyzes the timing of the synthesized netlist to ensure it meets timing constraints without setup or hold violations.
+**Strong Inversion**: Full channel formation for significant current flow.
 
-  - **Inputs**:
-      - Gate-level netlist (`vsdbabysoc_netlist.v`)
-      - Technology timing libraries (`.lib` files)
-      - SDC constraints file
-  - **Tool**: `OpenSTA` Static Timing Analyzer
-  - **Output**: Timing reports (setup, hold, critical path)
+**Threshold Voltage with Substrate Potential**: Vt varies with substrate potential due to the body effect.
 
-## 2\. Key Concept: Timing Constraints and SDC
+![Figure: Threshold Voltage vs. Substrate Potential](WEEK_4/assets/4.png)
+![Figure:](WEEK_4/assets/5.png)
+![Figure:](WEEK_4/assets/6.png)
+![Figure:](WEEK_4/assets/7.png)
+![Figure:](WEEK_4/assets/8.png)
 
-Timing constraints define the operating environment for STA, including clocks, delays, and uncertainties.
 
-#### `STA/final.sdc`
+At Vsb = 0, Vt is the baseline. Body effect coefficient and Fermi potential are foundry-provided constants for SPICE models.
 
-```tcl
-# 1. Define the main clock
-set clk_targets [get_pins pll/CLK]
-if {[llength $clk_targets] == 0} {
-    set clk_targets [get_ports core_clk]
-    if {[llength $clk_targets] == 0} {
-        set clk_targets [get_pins */CLK]
-    }
-}
-create_clock -name core_clk -period 11.0 $clk_targets
+### NMOS Resistive and Saturation Regions
+- **Resistive Region**: Small Vds, current increases linearly with Vds.
+- **Saturation Region**: Vds ≥ Vgs - Vt, Id independent of Vds.
+![Figure:](WEEK_4/assets/9.png)
+![Figure:](WEEK_4/assets/10.png)
+![Figure:](WEEK_4/assets/11.png)
+![Figure:](WEEK_4/assets/12.png)
 
-# 2. Collect ports
-set all_in  [all_inputs]
-set all_out [all_outputs]
-set non_data_ports [get_ports {REF VCO_IN ENb_CP ENb_VCO reset}]
+Drain current models:
+- Linear: Id = μn Cox (W/L) [(Vgs - Vt)Vds - (Vds²/2)]
+- Saturation: Id = (μn Cox / 2) (W/L) (Vgs - Vt)²
 
-# 3. Exclude asynchronous control signals (e.g. reset)
-set_false_path -from [get_ports reset]
+![Figure:](WEEK_4/assets/13.png)
+![Figure:](WEEK_4/assets/14.png)
 
-# 4. Define data input ports (exclude non-data ones)
-# OpenSTA doesn't support remove_from_collection, so use filter logic
-set data_in {}
-foreach port $all_in {
-    if {[lsearch $non_data_ports $port] == -1} {
-        lappend data_in $port
-    }
-}
+SPICE sweeps Vds for fixed Vgs to generate Id-Vds curves.
 
-# 5. Apply input/output delays
-set input_delay_val  [expr {0.3 * 11.0}]
-set output_delay_val [expr {0.3 * 11.0}]
-set_input_delay  $input_delay_val -clock [get_clocks core_clk] $data_in
-set_output_delay $output_delay_val -clock [get_clocks core_clk] $all_out
+![Figure: Id-Vds Curves](WEEK_4/assets/15.png)
+![Figure:](WEEK_4/assets/17.png)
+![Figure:](WEEK_4/assets/18.png)
+![Figure:](WEEK_4/assets/19.png)
+![Figure:](WEEK_4/assets/20.png)
+![Figure:](WEEK_4/assets/21.png)
+![Figure:](WEEK_4/assets/22.png)
+![Figure:](WEEK_4/assets/23.png)
+![Figure:](WEEK_4/assets/24.png)
+![Figure:](WEEK_4/assets/25.png)
+![Figure:](WEEK_4/assets/26.png)
+![Figure:](WEEK_4/assets/27.png)
+![Figure:](WEEK_4/assets/28.png)
+![Figure:](WEEK_4/assets/29.png)
+![Figure:](WEEK_4/assets/30.png)
+![Figure:](WEEK_4/assets/31.png)
 
-# 6. Clock uncertainties and transition
-set_clock_uncertainty -setup 0.10 [get_clocks core_clk]
-set_clock_uncertainty -hold  0.05 [get_clocks core_clk]
-set_clock_transition 0.05 [get_clocks core_clk]
+### SPICE Netlist Example
+```
+*Model Description
+.param temp=27
 
-# 7. Output loads
-set_load 0.02 [all_outputs]
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
+
+*Netlist Description
+XM1 Vdd n1 0 0 sky130_fd_pr__nfet_01v8 w=1.8u l=1.2u
+R1 in n1 55
+Vdd vdd 0 2.5V
+Vin in 0 2.5V
+
+*simulation commands
+.op
+.dc Vdd 0 1.8 0.1 Vin 0 1.8 0.2
+
+.control
+ run
+ display
+ setplot dc1
+.endc
+.end
 ```
 
-- Clock period = 11 ns
-- Input/Output delays account for external interfacing.
-- Clock uncertainty models jitter.
+### Labs: Introduction to SPICE
+SPICE simulates electronic circuits for analysis of voltage, current, and power.
 
-## 3\. STA Fundamentals
+**SPICE Lab with Sky130 Models**:
+- Clone repo: `git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git`
+- Key files:
+  1. `/sky130CircuitDesignWorkshop/design/sky130_fd_pr/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.pm3.spice` (NFET model at tt conditions).
+  2. `/sky130CircuitDesignWorkshop/design/sky130_fd_pr/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.corner.spice` (Corner model for variations).
+  3. `/sky130CircuitDesignWorkshop/design/sky130_fd_pr/models/sky130.lib.pm3.spice` (Full library).
 
-Refer to [STA_fundamentals_summary.md](WEEK_3/STA_fundamentals_summary.md) for a comprehensive summary of STA concepts.
+Download ngspice from [SourceForge](http://ngspice.sourceforge.net/download.html).
 
-## 4\. The STA Script
+**Example Netlist**:
+```
+*Model Description
+.param temp=27
 
-We use a TCL script (`STA/run_sta.tcl`) to automate OpenSTA analysis.
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
 
-#### `STA/run_sta.tcl`
+*Netlist Description
+XM1 Vdd n1 0 0 sky130_fd_pr__nfet_01v8 w=5 l=2
+R1 n1 in 55
+Vdd vdd 0 1.8V
+Vin in 0 1.8V
 
-```tcl
-# OpenSTA Tcl Script for VSDBabySoC Analysis (final, OpenSTA 2.7.0 compatible)
+*simulation commands
+.op
+.dc Vdd 0 1.8 0.1 Vin 0 1.8 0.2
 
-puts "INFO: Loading libraries..."
-read_liberty VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-read_liberty VSDBabySoC/src/lib/avsddac.lib
-read_liberty VSDBabySoC/src/lib/avsdpll.lib
-
-puts "INFO: Reading synthesized netlist..."
-read_verilog VSDBabySoC/reports/vsdbabysoc_netlist.v
-
-puts "INFO: Linking design..."
-link_design vsdbabysoc
-
-puts "INFO: Reading SDC constraints..."
-read_sdc STA/final.sdc
-
-puts "INFO: Generating timing reports..."
-
-# A. Clock listing
-report_clock_properties > reports/1_clocks.rpt
-puts "A done"
-
-# B. Unconstrained endpoints
-report_checks -unconstrained > reports/2_unconstrained.rpt
-puts "B done"
-
-# C. Full setup timing (max paths)
-report_checks -path_delay max -format full_clock_expanded > reports/3_setup_report.rpt
-puts "C done"
-
-# D. Full hold timing (min paths)
-report_checks -path_delay min -format full_clock_expanded > reports/4_hold_report.rpt
-puts "D done"
-
-# E. Worst slack summary
-report_worst_slack -max > reports/5_worst_slack.rpt
-puts "E done"
-
-# F. Single worst (critical) path report
-report_checks -path_delay max -format short -group_path_count 1 > reports/6_critical_path.rpt
-puts "F done"
-
-report_checks -path_delay max -format full_clock_expanded -group_path_count 1 > reports/6_critical_path_full.rpt
-report_checks -path_delay max -format full -group_path_count 1 > reports/6_critical_path_full_short.rpt
-
-puts "INFO: Reports written to ./reports/"
-puts "INFO: STA script finished successfully."
-
-exit
+.control
+ run
+ display
+ setplot dc1
+.endc
+.end
 ```
 
-## 5\. Executing STA
+Plot command: `ngspice day1_nfet_idvds_L2_W5.spice; plot -vdd#branch`
 
-With the script ready, STA is run with:
+#### Outputs
+![Figure:](WEEK_4/assets/day_1_1.png)
+![Figure: Ids vs Vds Plot](WEEK_4/assets/day_1_Ids_vs_Vds.png)
+![Figure:](WEEK_4/assets/day_1_2.png)
 
-```bash
-sta -no_splash STA/run_sta.tcl | tee STA/sta_run.log
+## SPICE Simulation for Lower Nodes and Velocity Saturation Effect
+
+### Theory: SPICE for Lower Nodes
+In lower technology nodes, long-channel devices show quadratic Id-Vgs dependence. Short-channel devices are quadratic at low Vgs but linear at higher Vgs due to velocity saturation.
+
+![Figure: Ids vs Vds Plot](WEEK_4/assets/32.png)
+
+Velocity saturation: At higher electric fields, carrier velocity saturates, becoming constant.
+![Figure: Velocity Saturation](WEEK_4/assets/38.png)
+![Figure: Velocity Saturation](WEEK_4/assets/33.png)
+![Figure: Velocity Saturation](WEEK_4/assets/36.png)
+![Figure: Velocity Saturation](WEEK_4/assets/37.png)
+
+
+Observations:
+- Short-channel: Id constant with Vds increase due to saturation.
+- Id linear with Vgs in saturation.
+
+![Figure: Velocity Saturation](WEEK_4/assets/42.png)
+![Figure: Velocity Saturation](WEEK_4/assets/43.png)
+![Figure: Velocity Saturation](WEEK_4/assets/44.png)
+![Figure: Velocity Saturation](WEEK_4/assets/45.png)
+![Figure: Velocity Saturation](WEEK_4/assets/46.png)
+![Figure: Velocity Saturation](WEEK_4/assets/47.png)
+![Figure: Velocity Saturation](WEEK_4/assets/48.png)
+![Figure: Velocity Saturation](WEEK_4/assets/49.png)
+![Figure: Velocity Saturation](WEEK_4/assets/50.png)
+
+### CMOS Voltage Transfer Characteristics (VTC)
+Vout high when Vin low, low when Vin high. Transition region shows steep drop where both NMOS and PMOS conduct, defining switching threshold.
+
+MOSFET as Switch: Rp (PMOS) and Rn (NMOS) as non-linear resistors controlled by Vgs and Vds.
+
+![Figure: Velocity Saturation](WEEK_4/assets/51.png)
+![Figure: Velocity Saturation](WEEK_4/assets/52.png)
+![Figure: Velocity Saturation](WEEK_4/assets/53.png)
+![Figure: Velocity Saturation](WEEK_4/assets/54.png)
+![Figure: Velocity Saturation](WEEK_4/assets/55.png)
+
+
+Regions:
+- Linear: Id increases linearly with Vds.
+- Saturation: Id constant.
+
+PMOS/NMOS Drain Current vs. Drain Voltage:
+
+   1. Linear Region (Vds < Vdsat):
+      - Drain current (Ids) increases linearly with Vds.
+      - Device behaves like a resistor controlled by Vgs.
+
+   2. Saturation Region (Vds ≥ Vdsat):
+      - Drain current (Ids) becomes constant and independent of Vds.
+      - For NMOS, Ids depends on Vgs - Vth.
+      - For PMOS, Ids depends on Vth - Vgs.
+
+![Figure: Velocity Saturation](WEEK_4/assets/56.png)
+![Figure: Velocity Saturation](WEEK_4/assets/57.png)
+![Figure: Velocity Saturation](WEEK_4/assets/58.png)
+![Figure: Velocity Saturation](WEEK_4/assets/59.png)
+
+VTC derivation: Merge PMOS and NMOS load curves.
+
+![Figure: Velocity Saturation](WEEK_4/assets/60.png)
+![Figure: Velocity Saturation](WEEK_4/assets/62.png)
+
+### Labs: SPICE for Lower Nodes and Velocity Saturation
+**Sky130 Id-Vgs**
+
+**Example 1**:
+```
+*Model Description
+.param temp=27
+
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
+
+*Netlist Description
+XM1 Vdd n1 0 0 sky130_fd_pr__nfet_01v8 w=0.39 l=0.15
+R1 n1 in 55
+Vdd vdd 0 1.8V
+Vin in 0 1.8V
+
+*simulation commands
+.op
+.dc Vdd 0 1.8 0.1 Vin 0 1.8 0.2
+
+.control
+ run
+ display
+ setplot dc1
+.endc
+.end
+```
+#### Example 1 Outputs
+![Figure: Ids vs Vds](WEEK_4/assets/day_2_1.png)
+![Figure: Ids vs Vds](WEEK_4/assets/day_2_2.png)
+
+**Example 2**:
+```
+*Model Description
+.param temp=27
+
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
+
+*Netlist Description
+XM1 Vdd n1 0 0 sky130_fd_pr__nfet_01v8 w=0.39 l=0.15
+R1 n1 in 55
+Vdd vdd 0 1.8V
+Vin in 0 1.8V
+
+*simulation commands
+.op
+.dc Vin 0 1.8 0.1
+
+.control
+ run
+ display
+ setplot dc1
+.endc
+.end
+```
+#### Example 2 Output
+![Figure: Ids vs Vgs](WEEK_4/assets/day_2_3.png)
+![Figure: Ids vs Vds](WEEK_4/assets/day_2_4.png)
+![Figure: Ids vs Vds](WEEK_4/assets/day_2_Threshold_voltage.png)
+
+## Voltage Transfer Characteristics: SPICE Simulations
+
+### Theory: CMOS Inverter SPICE Netlist
+Includes transistor models, power connections, input source, transistor specs, and commands (e.g., `.tran`).
+
+Components: PMOS, NMOS, Vdd, Vss, Vin/Vout.
+
+![Figure: Velocity Saturation](WEEK_4/assets/63.png)
+
+For a **CMOS inverter**, the **SPICE deck** includes:
+
+- **Component Connectivity:** Define connections between components like **PMOS**, **NMOS**, **Vdd**, **Vss**, and **Vin/Vout**.
+- **Component Values:** Specify values for components such as **threshold voltages (Vth)**, **transistor sizes**, and **supply voltages**.
+- **Identify Nodes:** Identify all electrical nodes like **Vin**, **Vout**, **source**, **drain**, and **bulk** for both transistors.
+- **Name Nodes:** Assign names to each node, ensuring clear identification during simulations (e.g., **Vout** for the output node).
+
+### SPICE simulation for CMOS inverter
+SPICE Netlist for CMOS Inverter
+A **SPICE netlist** for a CMOS inverter includes transistor models, power supply connections, input voltage source, transistor specifications (PMOS and NMOS), and simulation commands (e.g., `.tran` for transient analysis).
+
+![Figure: Velocity Saturation](WEEK_4/assets/64.png)
+
+Same Wn/Ln = Wp/Lp = 1.5. Plot out vs in:
+![Figure: Velocity Saturation](WEEK_4/assets/65.png)
+
+Now, Wn/Ln = 1.5 and Wp/Lp = 3.75. Plot out vs in:
+![Figure: Velocity Saturation](WEEK_4/assets/66.png)
+
+## **Static Behavior Evaluation: CMOS Inverter Robustness and Switching Threshold (Vm)**  
+The **switching threshold (Vm)** is the point where **Vin = Vout**, and both transistors are in saturation (since **Vds = Vgs**). At **Vm**, maximum power is drawn due to large current, and it can be graphically found at the intersection of the **VTC** with the **Vin = Vout** line. The analytical expression for **Vm** is obtained by equating the drain currents of PMOS and NMOS (**IDSn = IDSp**).
+![Figure: Velocity Saturation](WEEK_4/assets/67.png)
+![Figure: Velocity Sataturation](WEEK_4/assets/68.png)
+![Figure: Velocity Saturation](WEEK_4/assets/69.png)
+
+In the **velocity-saturated** case, the **switching threshold (Vm)** is the point where both **NMOS** and **PMOS** transistors are in saturation, and the drain currents are equal. This occurs when the **VDS** of both devices is less than the saturation voltage, i.e., **VDSAT < (Vm − VT)**. The threshold voltage **Vm** can be derived by equating the drain currents of both transistors, with the device widths and lengths (W/L ratios) playing a key role in determining the point where both transistors conduct equally.
+![Figure: Velocity Saturation](WEEK_4/assets/70.png)
+![Figure: Velocity Saturation](WEEK_4/assets/71.png)
+![Figure: Velocity Saturation](WEEK_4/assets/72.png)
+![Figure: Velocity Saturation](WEEK_4/assets/73.png)
+![Figure: Velocity Saturation](WEEK_4/assets/74.png)
+![Figure: Velocity Saturation](WEEK_4/assets/75.png)
+![Figure: Velocity Saturation](WEEK_4/assets/76.png)
+![Figure: Velocity Saturation](WEEK_4/assets/77.png)
+
+
+## Velocity Saturation and Switching Threshold (Vm) Analysis
+
+- **Case 1: Velocity Saturation Occurs**  
+  - Happens in short-channel devices or high supply voltage.  
+  - Switching threshold **Vm** occurs when currents of PMOS and NMOS transistors are equal.  
+  - The ratio **r** (PMOS to NMOS strength) influences **Vm**.  
+  - For **Vm ≈ VDD/2**, **r ≈ 1**.  
+  - **Vm** can be adjusted by changing the PMOS or NMOS width:  
+    - Increase PMOS width → shift **Vm** upwards.  
+    - Increase NMOS width → shift **Vm** downwards.  
+
+- **Case 2: Velocity Saturation Does Not Occur**  
+  - Applies to long-channel devices or low supply voltage.  
+  - The switching threshold **Vm** is still affected by **r** but with a simpler formula.  
+  - If **r ≈ 1**, **Vm** is near **VDD/2**.
+
+- **PMOS Width Effect on VTC**  
+  - Increasing PMOS width shifts **Vm** upwards.  
+  - Increasing NMOS width shifts **Vm** downwards.  
+  - **Vm** is relatively stable with small variations in transistor ratios.
+
+![Figure: Velocity Saturation](WEEK_4/assets/78.png)
+![Figure: Velocity Saturation](WEEK_4/assets/79.png)
+![Figure: Velocity Saturation](WEEK_4/assets/80.png)
+![Figure: Velocity Saturation](WEEK_4/assets/81.png)
+![Figure: Velocity Saturation](WEEK_4/assets/82.png)
+![Figure: Velocity Saturation](WEEK_4/assets/83.png)
+![Figure: Velocity Saturation](WEEK_4/assets/84.png)
+![Figure: Velocity Saturation](WEEK_4/assets/85.png)
+
+### Labs: VTC SPICE Simulations
+**Sky130 SPICE for CMOS VTC**:
+```
+*Model Description
+.param temp=27
+
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
+
+*Netlist Description
+XM1 out in vdd vdd sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XM2 out in 0 0 sky130_fd_pr__nfet_01v8 w=0.36 l=0.15
+Cload out 0 50fF
+Vdd vdd 0 1.8V
+Vin in 0 1.8V
+
+*simulation commands
+.op
+.dc Vin 0 1.8 0.01
+
+.control
+ run
+ setplot dc1
+ display
+.endc
+.end
 ```
 
-The full execution log can be found in `STA/sta_run.log`.
+#### VTC Plot
+![Figure: VTC Plot](WEEK_4/assets/day_3_1.png)
+![Figure: VTC Plot](WEEK_4/assets/day_3_2.png)
+![Figure: VTC Plot](WEEK_4/assets/day_3_3.png)
 
-## 6\. STA Results
+**Transient Analysis**:
+```
+*Model Description
+.param temp=27
 
-The STA completed successfully, generating timing reports in `reports/`. Key statistics from the reports:
+*Including sky130 library files
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
 
-- Clock: core_clk with period 11.00 ns (from 1_clocks.rpt).
-- Worst slack (max) (or) WNS: +2.26 ns (from 5_worst_slack.rpt).
-- Setup paths: All met with slack +2.26 ns (from 3_setup_report.rpt).
-- Hold paths: All met with slack +0.03 ns (from 4_hold_report.rpt).
-- No unconstrained paths with violations (from 2_unconstrained.rpt).
-- TNS: 0.00 ns (no violations).
+*Netlist Description
+XM1 out in vdd vdd sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XM2 out in 0 0 sky130_fd_pr__nfet_01v8 w=0.36 l=0.15
+Cload out 0 50fF
+Vdd vdd 0 1.8V
+Vin in 0 PULSE(0V 1.8V 0 0.1ns 0.1ns 2ns 4ns)
 
-Detailed reports:
-- `1_clocks.rpt`: Clock properties.
-- `2_unconstrained.rpt`: Unconstrained paths (worst case).
-- `3_setup_report.rpt`: Setup timing checks.
-- `4_hold_report.rpt`: Hold timing checks.
-- `5_worst_slack.rpt`: Worst slack summary.
-- `6_critical_path.rpt` and `6_critical_path_full.rpt`: Critical path details.
-
-Additional files:
-- `run_sta_per_corner.sh` : Script for running STA per corner.
-- `plot_pvt_sta.py` : Python script for plotting pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wns.png, pvt_tns.png.
-- `generate_timing_graph.py`: Python script for generating timing graphs.
-- Graphviz .dot and .png files: Visualizations of critical paths (e.g., critical_path.png, critical_path_improved.png).
-- `pvt/`: Folder for PVT variation analysis outputs.
-
-## 7\. PVT Corner Analysis
-
-PVT (Process, Voltage, Temperature) corner analysis is essential for ensuring timing closure across all possible operating conditions in the fabricated chip. Semiconductor manufacturing introduces variations in process parameters (e.g., transistor threshold voltage and mobility), supply voltage fluctuations, and temperature changes, which significantly impact gate delays, slew rates, and overall circuit performance. Without PVT analysis, a design might pass STA at nominal conditions (e.g., typical-typical "tt" corner) but fail in extreme corners, leading to functional or timing failures in real-world deployment.
-
-### Why PVT Analysis is Necessary
-
-- **Process Variations**: Chips from the same design can vary due to fabrication inconsistencies (fast-fast "ff" for optimistic, slow-slow "ss" for pessimistic).
-- **Voltage Variations**: Supply voltage (Vdd) affects transistor drive strength; lower voltage slows gates, higher speeds them up.
-- **Temperature Effects**: High temperatures increase resistance and reduce mobility (slower gates); low temperatures do the opposite.
-- **Multi-Corner Multi-Mode (MCMM) STA**: Analyzes combinations to find the worst-case slack, ensuring robustness across the operating range (e.g., automotive: -40°C to 125°C, 0.8V to 1.2V).
-
-### Commands Used and Explanation
-
-PVT analysis was automated using scripts in `scripts/`. First, clear previous PVT reports:
-
-```bash
-rm -rf reports/pvt/*
+*simulation commands
+.tran 1n 10n
+.control
+ run
+.endc
+.end
 ```
 
-Then, run STA for each PVT corner using `run_sta_per_corner.sh`. This shell script loops over a list of corners, loads the specific liberty file (e.g., `sky130_fd_sc_hd__ss_n40C_1v28.lib` for slow process at -40°C and 1.28V), executes `sta_per_corner.tcl` (which generates setup/hold summaries, WNS/TNS reports, and critical paths), and stores outputs in `reports/pvt/<corner>/`.
+#### Transient Plot
+![Figure: Transient Waveform](WEEK_4/assets/day_3_4.png)
+![Figure: VTC Plot](WEEK_4/assets/day_3_5.png)
 
-```bash
-cd WEEK_3 && ./scripts/run_sta_per_corner.sh
-```
+#### Fall Delay
+![Figure: VTC Plot](WEEK_4/assets/day_3_fall_delay.png)
+![Figure: VTC Plot](WEEK_4/assets/day_3_fall_delay_calc.png)
 
-Example log output (from `LOGS/LOG_7_PVT_Corner.md`):
-```
-=== Running corner: ff_100C_1v95
-    Lib: .../sky130_fd_sc_hd__ff_100C_1v95.lib
-INFO: Loaded liberty .../ff_100C_1v95.lib
-INFO: Corner ff_100C_1v95 finished. Reports in reports/pvt/ff_100C_1v95
-...
-All corners processed. Reports are under reports/pvt/
-```
+#### Rise Delay
+![Figure: VTC Plot](WEEK_4/assets/day_3_rise_delay.png)
+![Figure: VTC Plot](WEEK_4/assets/day_3_rise_delay_calc.png)
 
-Supported corners include ff/ss/tt at various temperatures (-40°C to 100°C) and voltages (1.28V to 1.95V).
+Propagation delay: Time difference at 50% transition.
 
-Finally, parse results and generate visualizations with `plot_pvt_sta.py`. This Python script reads WNS/TNS from each corner's reports, computes summaries, writes `pvt_summary.csv`, and plots slacks using Matplotlib.
+## Static Behavior Evaluation: CMOS Inverter Robustness and Noise Margin
 
-```bash
-python3 scripts/plot_pvt_sta.py
-```
+### Theory: Noise Margin
+Noise margin is the maximum noise voltage tolerated without errors. Attenuated through gates if below margin.
+![Figure: Velocity Saturation](WEEK_4/assets/86.png)
 
-Example output:
-```
-=== PVT SUMMARY ===
-  PVT_CORNER  Worst Setup Slack  Worst Hold Slack    WNS       TNS
-ff_100C_1v65               4.08              0.21   0.00      0.00
-...
-ss_n40C_1v28             -56.02              1.79 -56.02 -48146.38
-...
-Wrote pvt_summary.csv and plots: pvt_worst_setup.png, pvt_worst_hold.png, pvt_wns.png, pvt_tns.png
-```
+Function: Ensures signals with noise remain logical.
 
-### PVT Results and Observations
+VIL and VIH: Points where VTC slope = -1, gain = -1.
+![Figure: Velocity Saturation](WEEK_4/assets/87.png)
 
-- **Fast Corners (ff)**: Positive slacks (e.g., ff_n40C_1v95: setup +5.36 ns), no violations.
-- **Typical Corners (tt)**: Nominal performance (tt_025C_1v80: setup +2.19 ns).
-- **Slow Corners (ss)**: Violations in extreme conditions (ss_n40C_1v28: WNS -56.02 ns, TNS -48146.38 ns), indicating need for optimizations like cell sizing or VT swapping.
-- All hold slacks positive, suggesting hold fixes (e.g., via buffers) may suffice if focusing on setup.
+Logic: 0 to VIL → Logic 0; VIH to VDD → Logic 1.
 
-Reports stored in `reports/pvt/<corner>/` (e.g., `wns_setup.rpt`, `tns_hold.rpt`). Full summary in `pvt_summary.csv`.
+Conditions: VOL_MAX < VIL_MAX; VOH_MIN > VIH_MIN.
 
-![PVT Worst Setup Slack Across Corners](WEEK_3/pvt_worst_setup.png)
-![PVT Worst Hold Slack Across Corners](WEEK_3/pvt_worst_hold.png)
-![PVT Worst Negative Slack (WNS)](WEEK_3/pvt_wns.png)
-![PVT Total Negative Slack (TNS)](WEEK_3/pvt_tns.png)
-![PVT Summary Overview](WEEK_3/pvt_summary.png)
+Behavior:
+- Vin ≤ VIL: Gain <1, minimal change.
+- Vin ≥ VIH: Gain <1.
+- VIL < Vin < VIH: Gain >1, undefined region.
+- 
+![Figure: Velocity Saturation](WEEK_4/assets/88.png)
 
-## 8\. Timing Analysis and Critical Path Evaluation
+Noise Margins:
+- NML = VIL_MAX - VOL_MAX
+- NMH = VOH_MIN - VIH_MIN
+- NM = Min(NML, NMH)
 
-### Setup Path Analysis
+![Figure: Velocity Saturation](WEEK_4/assets/89.png)
 
-From `reports/3_setup_report.rpt`:
+Robustness to Device Ratio Variations.
 
-```log
-Startpoint: core/_9085_ (rising edge-triggered flip-flop clocked by core_clk)
-Endpoint: core/_8462_ (rising edge-triggered flip-flop clocked by core_clk)
-Path Group: core_clk
-Path Type: max
+![Figure: Velocity Saturation](WEEK_4/assets/90.png)
+![Figure: Velocity Saturation](WEEK_4/assets/91.png)
+![Figure: Velocity Saturation](WEEK_4/assets/92.png)
 
-  Delay    Time   Description
----------------------------------------------------------
-   0.00    0.00   clock core_clk (rise edge)
-   0.00    0.00   clock network delay (ideal)
-   0.00    0.00 ^ core/_9085_/CLK (sky130_fd_sc_hd__dfxtp_1)
-   8.43    8.43 ^ core/_9085_/Q (sky130_fd_sc_hd__dfxtp_1)
-  -0.25    8.19 v core/_6479_/Y (sky130_fd_sc_hd__a21oi_1)
-   0.00    8.19 v core/_8462_/D (sky130_fd_sc_hd__dfxtp_1)
-           8.19   data arrival time
+### Labs: Noise Margin - Sky130 Inverter (Wp/Lp=1u/0.15u, Wn/Ln=0.36u/0.15u)
 
-  11.00   11.00   clock core_clk (rise edge)
-   0.00   11.00   clock network delay (ideal)
-   0.00   11.00   clock reconvergence pessimism
-          11.00 ^ core/_8462_/CLK (sky130_fd_sc_hd__dfxtp_1)
-  -0.55   10.45   library setup time
-          10.45   data required time
----------------------------------------------------------
-          10.45   data required time
-          -8.19   data arrival time
----------------------------------------------------------
-           2.26   slack (MET)
-```
+![Figure: Noise Margin Plot 1](WEEK_4/assets/day_4_1.png)
+![Figure: Noise Margin Plot 1](WEEK_4/assets/day_4_2_static_behaviour_noise_margin.png)
+#### Noise Margin High
+![Figure: Noise Margin Plot 1](WEEK_4/assets/day_4_NM_H.png)
+#### Noise Margin Low
+![Figure: Noise Margin Plot 1](WEEK_4/assets/day_4_NM_L.png)
 
-**Setup Slack Formula:**
+## Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation
 
-Slack_setup = Required Time - Arrival Time = 10.45 - 8.19 = +2.26 ns
+### Theory: Power Supply Variation
+VDD scaling affects Vm, noise margins, robustness.
 
-✅ Setup timing met.
+Smart SPICE: Simulate VTC across VDD values.
 
-### Hold Path Analysis
+Observations:
+- VDD decrease: Vm shifts, noise margins reduce.
+- Lower VDD: Higher gain in transition, narrower region.
+![Figure: Velocity Saturation](WEEK_4/assets/93.png)
 
-From `reports/4_hold_report.rpt`:
+Limitations: Performance degradation, sensitivity to variations, reduced swing.
 
-```log
-Startpoint: reset (input port clocked by core_clk)
-Endpoint: core/_9088_ (rising edge-triggered flip-flop clocked by core_clk)
-Path Group: core_clk
-Path Type: min
+Robustness to Device Variations: Insensitive to parameters, tolerates etching variations.
 
-  Delay    Time   Description
----------------------------------------------------------
-   0.00    0.00   clock core_clk (rise edge)
-   0.00    0.00   clock network delay (ideal)
-   0.00    0.00 ^ input external delay
-   0.00    0.00 ^ reset (in)
-   0.00    0.00 ^ core/_9088_/D (sky130_fd_sc_hd__dfxtp_1)
-           0.00   data arrival time
+### Oxide Thickness Variations.
 
-   0.00    0.00   clock core_clk (rise edge)
-   0.00    0.00   clock network delay (ideal)
-   0.00    0.00   clock reconvergence pessimism
-           0.00 ^ core/_9088_/CLK (sky130_fd_sc_hd__dfxtp_1)
-  -0.03   -0.03   library hold time
-          -0.03   data required time
----------------------------------------------------------
-          -0.03   data required time
-          -0.00   data arrival time
----------------------------------------------------------
-           0.03   slack (MET)
-```
+#### CMOS Inverter Robustness to Extreme Device Width Variation
+Tolerates width variations, affects Vm and noise margins asymmetrically.
+![Figure: Velocity Saturation](WEEK_4/assets/94.png)
+![Figure: Velocity Saturation](WEEK_4/assets/95.png)
+![Figure: Velocity Saturation](WEEK_4/assets/96.png)
+![Figure: Velocity Saturation](WEEK_4/assets/97.png)
+![Figure: Velocity Saturation](WEEK_4/assets/98.png)
+![Figure: Velocity Saturation](WEEK_4/assets/99.png)
+![Figure: Velocity Saturation](WEEK_4/assets/100.png)
 
-**Hold Slack Formula:**
 
-Slack_hold = Arrival Time - Required Time = 0.00 - (-0.03) = +0.03 ns
+### Labs: Power Supply Variation
+#### Smart SPICE for Power Supply Variations
+![Figure: Power Supply Variation Plot](WEEK_4/assets/day_5_supply_voltage_var.png)
+![Figure: Power Supply Variation Plot](WEEK_4/assets/day_5_supply_volt_2.png)
 
-✅ Hold timing met.
+#### Extreme Device Width Variation
+![Figure: Width Variation Plot](WEEK_4/assets/day_5_device_width_var.png)
 
-### Critical Path Evaluation
+#### Gain Plots
+**Gain for 0.8V**
+![Figure: Width Variation Plot](WEEK_4/assets/day_5_gain_0v8.png)
+**Gain for 1.0V**
+![Figure: Width Variation Plot](WEEK_4/assets/day_5_gain_1v0.png)
+**Gain for 1.8V**
+![Figure: Width Variation Plot](WEEK_4/assets/day_5_gain_1v8.png)
 
-The critical path is the longest delay path, limiting clock speed. From `reports/6_critical_path_full.rpt`:
+## SPICE Netlists and Code
+All SPICE netlists used in the simulations are included in the `sky130CircuitDesignWorkshop/design/` directory. Key files:
 
-```log
-Startpoint: core/_9085_ (rising edge-triggered flip-flop clocked by core_clk)
-Endpoint: core/_8462_ (rising edge-triggered flip-flop clocked by core_clk)
-Path Group: core_clk
-Path Type: max
+1. **MOSFET Behavior & Id vs. Vds Characteristics**: `day1_nfet_idvds_L2_W5.spice`
+2. **Threshold Voltage Extraction & Velocity Saturation**: `day2_nfet_idvds_L015_W039.spice`, `day2_nfet_idvgs_L015_W039.spice`
+3. **CMOS Inverter: Voltage Transfer Characteristic (VTC)**: `day3_inv_vtc_Wp084_Wn036.spice`
+4. **Transient Behavior: Rise / Fall Delays**: `day3_inv_tran_Wp084_Wn036.spice`
+5. **Noise Margin / Robustness Analysis**: `day4_inv_noisemargin_wp1_wn036.spice`
+6. **Power-Supply and Device Variation Studies**: `day5_inv_supplyvariation_Wp1_Wn036.spice`, `day5_inv_devicevariation_wp7_wn042.spice`
 
-  Delay    Time   Description
----------------------------------------------------------
-   0.00    0.00   clock core_clk (rise edge)
-   0.00    0.00   clock network delay (ideal)
-   0.00    0.00 ^ core/_9085_/CLK (sky130_fd_sc_hd__dfxtp_1)
-   8.43    8.43 ^ core/_9085_/Q (sky130_fd_sc_hd__dfxtp_1)
-  -0.25    8.19 v core/_6479_/Y (sky130_fd_sc_hd__a21oi_1)
-   0.00    8.19 v core/_8462_/D (sky130_fd_sc_hd__dfxtp_1)
-           8.19   data arrival time
+## Tabulated Results
 
-  11.00   11.00   clock core_clk (rise edge)
-   0.00   11.00   clock network delay (ideal)
-   0.00   11.00   clock reconvergence pessimism
-          11.00 ^ core/_8462_/CLK (sky130_fd_sc_hd__dfxtp_1)
-  -0.55   10.45   library setup time
-          10.45   data required time
----------------------------------------------------------
-          10.45   data required time
-          -8.19   data arrival time
----------------------------------------------------------
-           2.26   slack (MET)
-```
+| Experiment | Parameter | Value | Units |
+|------------|-----------|-------|-------|
+| Threshold Voltage Extraction | Vt (from Id-Vgs) | ~0.45 | V |
+| Switching Threshold (Vm) | Vm | ~0.98 to ~1.2 | V |
+| Propagation Delays | Rise Delay | ~0.333 | ns |
+| | Fall Delay | ~0.285 | ns |
+| Noise Margins | NML | ~0.675678 | V |
+| | NMH | ~0.702931 | V |
 
-- Critical path dominated by combinational logic (8.19 ns delay).
-- Achievable frequency ≈ 90.9 MHz (1 / (11.0 ns - 2.26 ns slack) ≈ 90.9 MHz).
-- Visualizations: reports/critical_path.png, reports/critical_path_improved.png, reports/critical_path_with_lib_delays.png.
-- Graphviz .dot files: critical_path.dot, critical_path_improved.dot, etc.
-- Parsed data in reports/parsed_critical_path_full.txt.
+## Observations / Analysis
+- **Id vs. Vds**: Curves show linear region at low Vds and saturation at higher Vds, confirming transistor operation.
+- **Velocity Saturation**: Short-channel effects lead to linear Id-Vgs at high Vgs, impacting delay models.
+- **VTC**: Steep transition indicates good switching; Vm depends on W/L ratios.
+- **Transient**: Pulse response shows delays due to capacitive loading; rise/fall times differ based on transistor strengths.
+- **Noise Margin**: Robust for nominal conditions; degrades with variations, affecting STA margins.
+- **Variations**: Supply changes shift Vm asymmetrically; device variations tolerate etching but alter symmetry.
 
-![Critical Path Graph](WEEK_3/critical_path_with_lib_delays.png)
-![Critical_Path_2](WEEK_3/critical_path_improved.png)
+## Conclusions
+Transistor-level behavior directly constrains timing in STA: Vt variations affect delay, noise margins ensure robustness. Variations (supply, device) must be modeled for accurate STA. SPICE simulations bridge device physics and digital design, enabling optimization before fabrication.
 
-## 9\. Conclusion
-
-This process successfully verified the `vsdbabysoc` gate-level netlist through GLS and STA. Timing closure was achieved with positive slacks for setup and hold checks. The critical path was identified, confirming the design's performance limits.
+## References / Citations
+- Sky130 PDK Models: `sky130_fd_pr/models/sky130.lib.spice`
+- Workshop Repository: https://github.com/kunalg123/sky130CircuitDesignWorkshop
