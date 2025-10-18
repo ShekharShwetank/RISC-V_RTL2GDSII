@@ -40,6 +40,7 @@
     - [Extreme Device Width Variation](#extreme-device-width-variation)
     - [Gain Plots](#gain-plots)
 - [SPICE Netlists and Code](#spice-netlists-and-code)
+- [Tabulated Results](#tabulated-results)
 - [Observations / Analysis](#observations--analysis)
 - [Conclusions](#conclusions)
 - [References / Citations](#references--citations)
@@ -567,6 +568,17 @@ All SPICE netlists used in the simulations are included in the `sky130CircuitDes
 4. **Transient Behavior: Rise / Fall Delays**: `day3_inv_tran_Wp084_Wn036.spice`
 5. **Noise Margin / Robustness Analysis**: `day4_inv_noisemargin_wp1_wn036.spice`
 6. **Power-Supply and Device Variation Studies**: `day5_inv_supplyvariation_Wp1_Wn036.spice`, `day5_inv_devicevariation_wp7_wn042.spice`
+
+## Tabulated Results
+
+| Experiment | Parameter | Value | Units |
+|------------|-----------|-------|-------|
+| Threshold Voltage Extraction | Vt (from Id-Vgs) | ~0.45 | V |
+| Switching Threshold (Vm) | Vm | ~0.98 to ~1.2 | V |
+| Propagation Delays | Rise Delay | ~0.333 | ns |
+| | Fall Delay | ~0.285 | ns |
+| Noise Margins (Wp=1, Wn=0.36) | NML | ~0.675678 | V |
+| | NMH | ~0.702931 | V |
 
 ## Observations / Analysis
 - **Id vs. Vds**: Curves show linear region at low Vds and saturation at higher Vds, confirming transistor operation.
