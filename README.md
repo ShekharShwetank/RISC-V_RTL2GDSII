@@ -227,7 +227,7 @@ Plot command: `ngspice day1_nfet_idvds_L2_W5.spice; plot -vdd#branch`
 
 #### Outputs
 ![Figure:](WEEK_4/assets/day_1_1.png)
-![Figure: Ids vs Vds Plot](WEEK_4/assetsday_1_Ids_vs_Vds.png)
+![Figure: Ids vs Vds Plot](WEEK_4/assets/day_1_Ids_vs_Vds.png)
 ![Figure:](WEEK_4/assets/day_1_2.png)
 
 ## SPICE Simulation for Lower Nodes and Velocity Saturation Effect
