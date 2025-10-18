@@ -10,7 +10,7 @@ Key themes:
 - Noise margin calculations and robustness.
 - Impact of power supply and device variations on inverter performance.
 
-## Day 8: Introduction to Circuit Design and SPICE Simulations
+## Introduction to Circuit Design and SPICE Simulations
 
 ### Theory: Why SPICE Simulations?
 SPICE (Simulation Program with Integrated Circuit Emphasis) verifies circuit behavior and performance before implementation. In circuit design, logic gates like NAND, NOR, and NOT are built using NMOS and PMOS transistors. For an inverter:
@@ -20,16 +20,18 @@ SPICE (Simulation Program with Integrated Circuit Emphasis) verifies circuit beh
 SPICE ensures circuits meet functionality, timing, and power requirements.
 
 ### SPICE Simulation Overview
-SPICE allows virtual testing of circuits. Input waveforms generate output waveforms, enabling measurement of parameters like delay. Design parameters such as transistor width (W) and length (L) control current flow and delay for optimization.
+SPICE allows virtual testing of circuits. Input waveforms generate output waveforms, enabling measurement of parameters like **delay**. Design parameters such as transistor **width (W)** and **length (L)** control current flow and delay for optimization.
 
 ![Figure: SPICE Simulation Example](assets/Theory/1.png)
 
 For buffers (e.g., CBUF1 vs. CBUF2), differences arise from drive strengths or W/L ratios. Delay tables are derived from SPICE simulations.
 
+![cbuf](assets/Theory/2.png)
+
 ### Introduction to Basic Element: NMOS Transistor
 An NMOS transistor conducts when a positive voltage is applied to the gate, enabling current flow from drain to source.
 
-![Figure: NMOS Transistor Diagram](assets/Theory/)
+![Figure: NMOS Transistor Diagram](assets/Theory/3.png)
 
 **Threshold Voltage (Vt)**: Voltage at which the transistor switches from off to on, key for SPICE simulations.
 
@@ -37,21 +39,48 @@ An NMOS transistor conducts when a positive voltage is applied to the gate, enab
 
 **Threshold Voltage with Substrate Potential**: Vt varies with substrate potential due to the body effect.
 
-![Figure: Threshold Voltage vs. Substrate Potential](assets/Theory/)
+![Figure: Threshold Voltage vs. Substrate Potential](assets/Theory/4.png)
+![Figure:](assets/Theory/5.png)
+![Figure:](assets/Theory/6.png)
+![Figure:](assets/Theory/7.png)
+![Figure:](assets/Theory/8.png)
+
 
 At Vsb = 0, Vt is the baseline. Body effect coefficient and Fermi potential are foundry-provided constants for SPICE models.
 
 ### NMOS Resistive and Saturation Regions
 - **Resistive Region**: Small Vds, current increases linearly with Vds.
 - **Saturation Region**: Vds ≥ Vgs - Vt, Id independent of Vds.
+![Figure:](assets/Theory/9.png)
+![Figure:](assets/Theory/10.png)
+![Figure:](assets/Theory/11.png)
+![Figure:](assets/Theory/12.png)
 
 Drain current models:
 - Linear: Id = μn Cox (W/L) [(Vgs - Vt)Vds - (Vds²/2)]
 - Saturation: Id = (μn Cox / 2) (W/L) (Vgs - Vt)²
 
+![Figure:](assets/Theory/13.png)
+![Figure:](assets/Theory/14.png)
+
 SPICE sweeps Vds for fixed Vgs to generate Id-Vds curves.
 
-![Figure: Id-Vds Curves](assets/Theory/)
+![Figure: Id-Vds Curves](assets/Theory/15.png)
+![Figure:](assets/Theory/17.png)
+![Figure:](assets/Theory/18.png)
+![Figure:](assets/Theory/19.png)
+![Figure:](assets/Theory/20.png)
+![Figure:](assets/Theory/21.png)
+![Figure:](assets/Theory/22.png)
+![Figure:](assets/Theory/23.png)
+![Figure:](assets/Theory/24.png)
+![Figure:](assets/Theory/25.png)
+![Figure:](assets/Theory/26.png)
+![Figure:](assets/Theory/27.png)
+![Figure:](assets/Theory/28.png)
+![Figure:](assets/Theory/29.png)
+![Figure:](assets/Theory/30.png)
+![Figure:](assets/Theory/31.png)
 
 ### SPICE Netlist Example
 ```
@@ -119,33 +148,75 @@ Vin in 0 1.8V
 
 Plot command: `ngspice day1_nfet_idvds_L2_W5.spice; plot -vdd#branch`
 
+#### Outputs:
+![Figure:](assets/day_1_1.png)
 ![Figure: Ids vs Vds Plot](assets/day_1_Ids_vs_Vds.png)
+![Figure:](assets/day_1_2.png)
 
-## Day 9: SPICE Simulation for Lower Nodes and Velocity Saturation Effect
+## SPICE Simulation for Lower Nodes and Velocity Saturation Effect
 
 ### Theory: SPICE for Lower Nodes
 In lower technology nodes, long-channel devices show quadratic Id-Vgs dependence. Short-channel devices are quadratic at low Vgs but linear at higher Vgs due to velocity saturation.
 
-Velocity saturation: At higher electric fields, carrier velocity saturates, becoming constant.
+![Figure: Ids vs Vds Plot](assets/Theory/32.png)
 
-![Figure: Velocity Saturation](assets/Theory/)
+Velocity saturation: At higher electric fields, carrier velocity saturates, becoming constant.
+![Figure: Velocity Saturation](assets/Theory/38.png)
+![Figure: Velocity Saturation](assets/Theory/33.png)
+![Figure: Velocity Saturation](assets/Theory/36.png)
+![Figure: Velocity Saturation](assets/Theory/37.png)
+
 
 Observations:
 - Short-channel: Id constant with Vds increase due to saturation.
 - Id linear with Vgs in saturation.
+
+![Figure: Velocity Saturation](assets/Theory/42.png)
+![Figure: Velocity Saturation](assets/Theory/43.png)
+![Figure: Velocity Saturation](assets/Theory/44.png)
+![Figure: Velocity Saturation](assets/Theory/45.png)
+![Figure: Velocity Saturation](assets/Theory/46.png)
+![Figure: Velocity Saturation](assets/Theory/47.png)
+![Figure: Velocity Saturation](assets/Theory/48.png)
+![Figure: Velocity Saturation](assets/Theory/49.png)
+![Figure: Velocity Saturation](assets/Theory/50.png)
 
 ### CMOS Voltage Transfer Characteristics (VTC)
 Vout high when Vin low, low when Vin high. Transition region shows steep drop where both NMOS and PMOS conduct, defining switching threshold.
 
 MOSFET as Switch: Rp (PMOS) and Rn (NMOS) as non-linear resistors controlled by Vgs and Vds.
 
+![Figure: Velocity Saturation](assets/Theory/51.png)
+![Figure: Velocity Saturation](assets/Theory/52.png)
+![Figure: Velocity Saturation](assets/Theory/53.png)
+![Figure: Velocity Saturation](assets/Theory/54.png)
+![Figure: Velocity Saturation](assets/Theory/55.png)
+
+
 Regions:
 - Linear: Id increases linearly with Vds.
 - Saturation: Id constant.
 
+PMOS/NMOS Drain Current vs. Drain Voltage:
+
+   1. Linear Region (Vds < Vdsat):
+      - Drain current (Ids) increases linearly with Vds.
+      - Device behaves like a resistor controlled by Vgs.
+
+   2. Saturation Region (Vds ≥ Vdsat):
+      - Drain current (Ids) becomes constant and independent of Vds.
+      - For NMOS, Ids depends on Vgs - Vth.
+      - For PMOS, Ids depends on Vth - Vgs.
+
+![Figure: Velocity Saturation](assets/Theory/56.png)
+![Figure: Velocity Saturation](assets/Theory/57.png)
+![Figure: Velocity Saturation](assets/Theory/58.png)
+![Figure: Velocity Saturation](assets/Theory/59.png)
+
 VTC derivation: Merge PMOS and NMOS load curves.
 
-![Figure: VTC Derivation](assets/Theory/)
+![Figure: Velocity Saturation](assets/Theory/60.png)
+![Figure: Velocity Saturation](assets/Theory/62.png)
 
 ### Labs: SPICE for Lower Nodes and Velocity Saturation
 **Sky130 Id-Vgs**
@@ -175,8 +246,9 @@ Vin in 0 1.8V
 .endc
 .end
 ```
-
+#### Outputs:
 ![Figure: Ids vs Vds](assets/day_2_1.png)
+![Figure: Ids vs Vds](assets/day_2_2.png)
 
 **Example 2**:
 ```
@@ -203,28 +275,85 @@ Vin in 0 1.8V
 .endc
 .end
 ```
+#### Output:
+![Figure: Ids vs Vgs](assets/day_2_3.png)
+![Figure: Ids vs Vds](assets/day_2_4.png)
+![Figure: Ids vs Vds](assets/day_2_Threshold_voltage.png)
 
-![Figure: Ids vs Vgs](assets/day_2_2.png)
-
-## Day 10: Voltage Transfer Characteristics: SPICE Simulations
+## Voltage Transfer Characteristics: SPICE Simulations
 
 ### Theory: CMOS Inverter SPICE Netlist
 Includes transistor models, power connections, input source, transistor specs, and commands (e.g., `.tran`).
 
 Components: PMOS, NMOS, Vdd, Vss, Vin/Vout.
 
-![Figure: CMOS Inverter Netlist](assets/Theory/)
+![Figure: Velocity Saturation](assets/Theory/63.png)
 
-VTC plots for different W/L ratios.
+For a **CMOS inverter**, the **SPICE deck** includes:
 
-### Static Behavior: Switching Threshold (Vm)
-Vm is where Vin = Vout, both transistors in saturation. Analytical: Equate Idsn = Idsp.
+- **Component Connectivity:** Define connections between components like **PMOS**, **NMOS**, **Vdd**, **Vss**, and **Vin/Vout**.
+- **Component Values:** Specify values for components such as **threshold voltages (Vth)**, **transistor sizes**, and **supply voltages**.
+- **Identify Nodes:** Identify all electrical nodes like **Vin**, **Vout**, **source**, **drain**, and **bulk** for both transistors.
+- **Name Nodes:** Assign names to each node, ensuring clear identification during simulations (e.g., **Vout** for the output node).
 
-In velocity saturation: Vm where Vdsat < Vm - Vt.
+### SPICE simulation for CMOS inverter
+SPICE Netlist for CMOS Inverter
+A **SPICE netlist** for a CMOS inverter includes transistor models, power supply connections, input voltage source, transistor specifications (PMOS and NMOS), and simulation commands (e.g., `.tran` for transient analysis).
 
-![Figure: Switching Threshold](assets/Theory/)
+![Figure: Velocity Saturation](assets/Theory/64.png)
 
-Velocity Saturation and Vm: r (PMOS/NMOS strength) affects Vm. Adjust by changing widths.
+Same Wn/Ln = Wp/Lp = 1.5. Plot out vs in:
+![Figure: Velocity Saturation](assets/Theory/65.png)
+
+Now, Wn/Ln = 1.5 and Wp/Lp = 3.75. Plot out vs in:
+![Figure: Velocity Saturation](assets/Theory/66.png)
+
+## **Static Behavior Evaluation: CMOS Inverter Robustness and Switching Threshold (Vm)**  
+The **switching threshold (Vm)** is the point where **Vin = Vout**, and both transistors are in saturation (since **Vds = Vgs**). At **Vm**, maximum power is drawn due to large current, and it can be graphically found at the intersection of the **VTC** with the **Vin = Vout** line. The analytical expression for **Vm** is obtained by equating the drain currents of PMOS and NMOS (**IDSn = IDSp**).
+![Figure: Velocity Saturation](assets/Theory/67.png)
+![Figure: Velocity Saturation](assets/Theory/68.png)
+![Figure: Velocity Saturation](assets/Theory/69.png)
+
+In the **velocity-saturated** case, the **switching threshold (Vm)** is the point where both **NMOS** and **PMOS** transistors are in saturation, and the drain currents are equal. This occurs when the **VDS** of both devices is less than the saturation voltage, i.e., **VDSAT < (Vm − VT)**. The threshold voltage **Vm** can be derived by equating the drain currents of both transistors, with the device widths and lengths (W/L ratios) playing a key role in determining the point where both transistors conduct equally.
+![Figure: Velocity Saturation](assets/Theory/70.png)
+![Figure: Velocity Saturation](assets/Theory/71.png)
+![Figure: Velocity Saturation](assets/Theory/72.png)
+![Figure: Velocity Saturation](assets/Theory/73.png)
+![Figure: Velocity Saturation](assets/Theory/74.png)
+![Figure: Velocity Saturation](assets/Theory/75.png)
+![Figure: Velocity Saturation](assets/Theory/76.png)
+![Figure: Velocity Saturation](assets/Theory/77.png)
+
+
+## Velocity Saturation and Switching Threshold (Vm) Analysis
+
+- **Case 1: Velocity Saturation Occurs**  
+  - Happens in short-channel devices or high supply voltage.  
+  - Switching threshold **Vm** occurs when currents of PMOS and NMOS transistors are equal.  
+  - The ratio **r** (PMOS to NMOS strength) influences **Vm**.  
+  - For **Vm ≈ VDD/2**, **r ≈ 1**.  
+  - **Vm** can be adjusted by changing the PMOS or NMOS width:  
+    - Increase PMOS width → shift **Vm** upwards.  
+    - Increase NMOS width → shift **Vm** downwards.  
+
+- **Case 2: Velocity Saturation Does Not Occur**  
+  - Applies to long-channel devices or low supply voltage.  
+  - The switching threshold **Vm** is still affected by **r** but with a simpler formula.  
+  - If **r ≈ 1**, **Vm** is near **VDD/2**.
+
+- **PMOS Width Effect on VTC**  
+  - Increasing PMOS width shifts **Vm** upwards.  
+  - Increasing NMOS width shifts **Vm** downwards.  
+  - **Vm** is relatively stable with small variations in transistor ratios.
+
+![Figure: Velocity Saturation](assets/Theory/78.png)
+![Figure: Velocity Saturation](assets/Theory/79.png)
+![Figure: Velocity Saturation](assets/Theory/80.png)
+![Figure: Velocity Saturation](assets/Theory/81.png)
+![Figure: Velocity Saturation](assets/Theory/82.png)
+![Figure: Velocity Saturation](assets/Theory/83.png)
+![Figure: Velocity Saturation](assets/Theory/84.png)
+![Figure: Velocity Saturation](assets/Theory/85.png)
 
 ### Labs: VTC SPICE Simulations
 **Sky130 SPICE for CMOS VTC**:
@@ -254,7 +383,10 @@ Vin in 0 1.8V
 .end
 ```
 
+**VTC PLOT**
 ![Figure: VTC Plot](assets/day_3_1.png)
+![Figure: VTC Plot](assets/day_3_2.png)
+![Figure: VTC Plot](assets/day_3_3.png)
 
 **Transient Analysis**:
 ```
@@ -279,18 +411,30 @@ Vin in 0 PULSE(0V 1.8V 0 0.1ns 0.1ns 2ns 4ns)
 .end
 ```
 
-![Figure: Transient Waveform](assets/day_3_2.png)
+**TRANSIENT PLOT:**
+![Figure: Transient Waveform](assets/day_3_4.png)
+![Figure: VTC Plot](assets/day_3_5.png)
+
+**Fall Delay:**
+![Figure: VTC Plot](assets/day_3_fall_delay.png)
+![Figure: VTC Plot](assets/day_3_fall_delay_calc.png)
+
+**Rise Delay:**
+![Figure: VTC Plot](assets/day_3_rise_delay.png)
+![Figure: VTC Plot](assets/day_3_rise_delay_calc.png)
 
 Propagation delay: Time difference at 50% transition.
 
-## Day 11: Static Behavior Evaluation: CMOS Inverter Robustness and Noise Margin
+## Static Behavior Evaluation: CMOS Inverter Robustness and Noise Margin
 
 ### Theory: Noise Margin
 Noise margin is the maximum noise voltage tolerated without errors. Attenuated through gates if below margin.
+![Figure: Velocity Saturation](assets/Theory/86.png)
 
 Function: Ensures signals with noise remain logical.
 
 VIL and VIH: Points where VTC slope = -1, gain = -1.
+![Figure: Velocity Saturation](assets/Theory/87.png)
 
 Logic: 0 to VIL → Logic 0; VIH to VDD → Logic 1.
 
@@ -300,23 +444,32 @@ Behavior:
 - Vin ≤ VIL: Gain <1, minimal change.
 - Vin ≥ VIH: Gain <1.
 - VIL < Vin < VIH: Gain >1, undefined region.
+- 
+![Figure: Velocity Saturation](assets/Theory/88.png)
 
 Noise Margins:
 - NML = VIL_MAX - VOL_MAX
 - NMH = VOH_MIN - VIH_MIN
 - NM = Min(NML, NMH)
 
-![Figure: Noise Margin](assets/day_4_2_static_behaviour_noise_margin.png)
+![Figure: Velocity Saturation](assets/Theory/89.png)
 
 Robustness to Device Ratio Variations.
 
-![Figure: Noise Margin Robustness](assets/day_4_NM_H.png)
+![Figure: Velocity Saturation](assets/Theory/90.png)
+![Figure: Velocity Saturation](assets/Theory/91.png)
+![Figure: Velocity Saturation](assets/Theory/92.png)
 
 ### Labs: Noise Margin - Sky130 Inverter (Wp/Lp=1u/0.15u, Wn/Ln=0.36u/0.15u)
 
+![Figure: Noise Margin Plot 1](assets/day_4_1.png)
+![Figure: Noise Margin Plot 1](assets/day_4_2_static_behaviour_noise_margin.png)
+**Noise Margin High**
+![Figure: Noise Margin Plot 1](assets/day_4_NM_H.png)
+**Noise Margin Low**
 ![Figure: Noise Margin Plot 1](assets/day_4_NM_L.png)
 
-## Day 12: Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation
+## Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation
 
 ### Theory: Power Supply Variation
 VDD scaling affects Vm, noise margins, robustness.
@@ -326,24 +479,41 @@ Smart SPICE: Simulate VTC across VDD values.
 Observations:
 - VDD decrease: Vm shifts, noise margins reduce.
 - Lower VDD: Higher gain in transition, narrower region.
+![Figure: Velocity Saturation](assets/Theory/93.png)
 
 Limitations: Performance degradation, sensitivity to variations, reduced swing.
 
 Robustness to Device Variations: Insensitive to parameters, tolerates etching variations.
 
-Oxide Thickness Variations.
+### Oxide Thickness Variations.
 
-### CMOS Inverter Robustness to Extreme Device Width Variation
+#### CMOS Inverter Robustness to Extreme Device Width Variation
 Tolerates width variations, affects Vm and noise margins asymmetrically.
+![Figure: Velocity Saturation](assets/Theory/94.png)
+![Figure: Velocity Saturation](assets/Theory/95.png)
+![Figure: Velocity Saturation](assets/Theory/96.png)
+![Figure: Velocity Saturation](assets/Theory/97.png)
+![Figure: Velocity Saturation](assets/Theory/98.png)
+![Figure: Velocity Saturation](assets/Theory/99.png)
+![Figure: Velocity Saturation](assets/Theory/100.png)
+
 
 ### Labs: Power Supply Variation
 **Smart SPICE for Power Supply Variations**
 
 ![Figure: Power Supply Variation Plot](assets/day_5_supply_voltage_var.png)
+![Figure: Power Supply Variation Plot](assets/day_5_supply_volt_2.png)
 
 **Extreme Device Width Variation**
 
 ![Figure: Width Variation Plot](assets/day_5_device_width_var.png)
+
+**Gain for 0.8V**
+![Figure: Width Variation Plot](assets/day_5_gain_0v8.png)
+**Gain for 1.0V**
+![Figure: Width Variation Plot](assets/day_5_gain_1v0.png)
+**Gain for 1.8V**
+![Figure: Width Variation Plot](assets/day_5_gain_1v8.png)
 
 ## SPICE Netlists and Code
 All SPICE netlists used in the simulations are included in the `sky130CircuitDesignWorkshop/design/` directory. Key files:
