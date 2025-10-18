@@ -1,5 +1,50 @@
 # Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations
 
+## Table of Contents
+- [Overview](#overview)
+- [Introduction to Circuit Design and SPICE Simulations](#introduction-to-circuit-design-and-spice-simulations)
+  - [Theory: Why SPICE Simulations?](#theory-why-spice-simulations)
+  - [SPICE Simulation Overview](#spice-simulation-overview)
+  - [Introduction to Basic Element: NMOS Transistor](#introduction-to-basic-element-nmos-transistor)
+  - [NMOS Resistive and Saturation Regions](#nmos-resistive-and-saturation-regions)
+  - [SPICE Netlist Example](#spice-netlist-example)
+  - [Labs: Introduction to SPICE](#labs-introduction-to-spice)
+    - [Outputs](#outputs)
+- [SPICE Simulation for Lower Nodes and Velocity Saturation Effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
+  - [Theory: SPICE for Lower Nodes](#theory-spice-for-lower-nodes)
+  - [CMOS Voltage Transfer Characteristics (VTC)](#cmos-voltage-transfer-characteristics-vtc)
+  - [Labs: SPICE for Lower Nodes and Velocity Saturation](#labs-spice-for-lower-nodes-and-velocity-saturation)
+    - [Example 1 Outputs](#example-1-outputs)
+    - [Example 2 Output](#example-2-output)
+- [Voltage Transfer Characteristics: SPICE Simulations](#voltage-transfer-characteristics-spice-simulations)
+  - [Theory: CMOS Inverter SPICE Netlist](#theory-cmos-inverter-spice-netlist)
+  - [SPICE simulation for CMOS inverter](#spice-simulation-for-cmos-inverter)
+  - [Static Behavior Evaluation: CMOS Inverter Robustness and Switching Threshold (Vm)](#static-behavior-evaluation-cmos-inverter-robustness-and-switching-threshold-vm)
+  - [Velocity Saturation and Switching Threshold (Vm) Analysis](#velocity-saturation-and-switching-threshold-vm-analysis)
+  - [Labs: VTC SPICE Simulations](#labs-vtc-spice-simulations)
+    - [VTC Plot](#vtc-plot)
+    - [Transient Plot](#transient-plot)
+    - [Fall Delay](#fall-delay)
+    - [Rise Delay](#rise-delay)
+- [Static Behavior Evaluation: CMOS Inverter Robustness and Noise Margin](#static-behavior-evaluation-cmos-inverter-robustness-and-noise-margin)
+  - [Theory: Noise Margin](#theory-noise-margin)
+  - [Labs: Noise Margin - Sky130 Inverter (Wp/Lp=1u/0.15u, Wn/Ln=0.36u/0.15u)](#labs-noise-margin---sky130-inverter-wplp1u015u-wnln036u015u)
+    - [Noise Margin High](#noise-margin-high)
+    - [Noise Margin Low](#noise-margin-low)
+- [Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation](#static-behavior-evaluation-cmos-inverter-robustness---power-supply-variation)
+  - [Theory: Power Supply Variation](#theory-power-supply-variation)
+  - [Oxide Thickness Variations](#oxide-thickness-variations)
+  - [CMOS Inverter Robustness to Extreme Device Width Variation](#cmos-inverter-robustness-to-extreme-device-width-variation)
+  - [Labs: Power Supply Variation](#labs-power-supply-variation)
+    - [Smart SPICE for Power Supply Variations](#smart-spice-for-power-supply-variations)
+    - [Extreme Device Width Variation](#extreme-device-width-variation)
+    - [Gain Plots](#gain-plots)
+- [SPICE Netlists and Code](#spice-netlists-and-code)
+- [Tabulated Results](#tabulated-results)
+- [Observations / Analysis](#observations--analysis)
+- [Conclusions](#conclusions)
+- [References / Citations](#references--citations)
+
 ## Overview
 Week 4 explores the fundamentals of circuit design, SPICE simulations, and the static characteristics of CMOS inverters. Topics include transistor operation, voltage transfer characteristics (VTC), noise margins, switching thresholds, and robustness to process and supply variations. Labs demonstrate practical SPICE simulations using Sky130 models, with outputs visualized through plots and waveforms.
 
@@ -148,7 +193,7 @@ Vin in 0 1.8V
 
 Plot command: `ngspice day1_nfet_idvds_L2_W5.spice; plot -vdd#branch`
 
-#### Outputs:
+#### Outputs
 ![Figure:](assets/day_1_1.png)
 ![Figure: Ids vs Vds Plot](assets/day_1_Ids_vs_Vds.png)
 ![Figure:](assets/day_1_2.png)
@@ -246,7 +291,7 @@ Vin in 0 1.8V
 .endc
 .end
 ```
-#### Outputs:
+#### Example 1 Outputs
 ![Figure: Ids vs Vds](assets/day_2_1.png)
 ![Figure: Ids vs Vds](assets/day_2_2.png)
 
@@ -275,7 +320,7 @@ Vin in 0 1.8V
 .endc
 .end
 ```
-#### Output:
+#### Example 2 Output
 ![Figure: Ids vs Vgs](assets/day_2_3.png)
 ![Figure: Ids vs Vds](assets/day_2_4.png)
 ![Figure: Ids vs Vds](assets/day_2_Threshold_voltage.png)
@@ -383,7 +428,7 @@ Vin in 0 1.8V
 .end
 ```
 
-**VTC PLOT**
+#### VTC Plot
 ![Figure: VTC Plot](assets/day_3_1.png)
 ![Figure: VTC Plot](assets/day_3_2.png)
 ![Figure: VTC Plot](assets/day_3_3.png)
@@ -411,15 +456,15 @@ Vin in 0 PULSE(0V 1.8V 0 0.1ns 0.1ns 2ns 4ns)
 .end
 ```
 
-**TRANSIENT PLOT:**
+#### Transient Plot
 ![Figure: Transient Waveform](assets/day_3_4.png)
 ![Figure: VTC Plot](assets/day_3_5.png)
 
-**Fall Delay:**
+#### Fall Delay
 ![Figure: VTC Plot](assets/day_3_fall_delay.png)
 ![Figure: VTC Plot](assets/day_3_fall_delay_calc.png)
 
-**Rise Delay:**
+#### Rise Delay
 ![Figure: VTC Plot](assets/day_3_rise_delay.png)
 ![Figure: VTC Plot](assets/day_3_rise_delay_calc.png)
 
@@ -464,9 +509,9 @@ Robustness to Device Ratio Variations.
 
 ![Figure: Noise Margin Plot 1](assets/day_4_1.png)
 ![Figure: Noise Margin Plot 1](assets/day_4_2_static_behaviour_noise_margin.png)
-**Noise Margin High**
+#### Noise Margin High
 ![Figure: Noise Margin Plot 1](assets/day_4_NM_H.png)
-**Noise Margin Low**
+#### Noise Margin Low
 ![Figure: Noise Margin Plot 1](assets/day_4_NM_L.png)
 
 ## Static Behavior Evaluation: CMOS Inverter Robustness - Power Supply Variation
@@ -499,15 +544,14 @@ Tolerates width variations, affects Vm and noise margins asymmetrically.
 
 
 ### Labs: Power Supply Variation
-**Smart SPICE for Power Supply Variations**
-
+#### Smart SPICE for Power Supply Variations
 ![Figure: Power Supply Variation Plot](assets/day_5_supply_voltage_var.png)
 ![Figure: Power Supply Variation Plot](assets/day_5_supply_volt_2.png)
 
-**Extreme Device Width Variation**
-
+#### Extreme Device Width Variation
 ![Figure: Width Variation Plot](assets/day_5_device_width_var.png)
 
+#### Gain Plots
 **Gain for 0.8V**
 ![Figure: Width Variation Plot](assets/day_5_gain_0v8.png)
 **Gain for 1.0V**
