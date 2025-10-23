@@ -1,0 +1,38 @@
+Yosys 0.58+35 (git sha1 UNKNOWN, g++ 11.4.0-1ubuntu1~22.04.2 -fPIC -O3)
+Using ABC area script.
+Extracting clock period from SDC file: ./results/nangate45/gcd/base/clock_period.txt
+Setting clock period to 0.46
+1. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+2. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+3. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/flow/designs/src/gcd/gcd.v
+4. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/flow/platforms/nangate45/cells_clkgate.v
+5. Executing HIERARCHY pass (managing design hierarchy).
+6. Executing AST frontend in derive mode using pre-parsed AST for module `\gcd'.
+6.1. Analyzing design hierarchy..
+6.2. Executing AST frontend in derive mode using pre-parsed AST for module `\GcdUnitDpathRTL_0x4d0fc71ead8d3d9e'.
+6.3. Executing AST frontend in derive mode using pre-parsed AST for module `\GcdUnitCtrlRTL_0x4d0fc71ead8d3d9e'.
+6.4. Analyzing design hierarchy..
+6.5. Executing AST frontend in derive mode using pre-parsed AST for module `\RegRst_0x9f365fdf6c8998a'.
+6.6. Executing AST frontend in derive mode using pre-parsed AST for module `\RegEn_0x68db79c4ec1d6e5b'.
+6.7. Executing AST frontend in derive mode using pre-parsed AST for module `\Subtractor_0x422b1f52edd46a85'.
+6.8. Executing AST frontend in derive mode using pre-parsed AST for module `\Mux_0xdd6473406d1a99a'.
+6.9. Executing AST frontend in derive mode using pre-parsed AST for module `\Mux_0x683fa1a418b072c9'.
+6.10. Executing AST frontend in derive mode using pre-parsed AST for module `\ZeroComparator_0x422b1f52edd46a85'.
+6.11. Executing AST frontend in derive mode using pre-parsed AST for module `\LtComparator_0x422b1f52edd46a85'.
+6.12. Analyzing design hierarchy..
+6.13. Analyzing design hierarchy..
+7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module ZeroComparator_0x422b1f52edd46a85 because it contains processes (run 'proc' command first).
+Warning: Ignoring module Mux_0x683fa1a418b072c9 because it contains processes (run 'proc' command first).
+Warning: Ignoring module Mux_0xdd6473406d1a99a because it contains processes (run 'proc' command first).
+Warning: Ignoring module Subtractor_0x422b1f52edd46a85 because it contains processes (run 'proc' command first).
+Warning: Ignoring module RegEn_0x68db79c4ec1d6e5b because it contains processes (run 'proc' command first).
+Warning: Ignoring module RegRst_0x9f365fdf6c8998a because it contains processes (run 'proc' command first).
+Warning: Ignoring module GcdUnitCtrlRTL_0x4d0fc71ead8d3d9e because it contains processes (run 'proc' command first).
+Warning: Ignoring module LtComparator_0x422b1f52edd46a85 because it contains processes (run 'proc' command first).
+8. Executing RTLIL backend.
+Warnings: 8 unique messages, 8 total
+End of script. Logfile hash: b73201ca53, CPU: user 0.07s system 0.02s, MEM: 38.25 MB peak
+Yosys 0.58+35 (git sha1 UNKNOWN, g++ 11.4.0-1ubuntu1~22.04.2 -fPIC -O3)
+Time spent: 78% 4x read_liberty (0 sec), 9% 4x read_verilog (0 sec), ...
+Elapsed time: 0:00.17[h:]min:sec. CPU time: user 0.12 sys 0.02 (87%). Peak memory: 41856KB.

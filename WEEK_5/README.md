@@ -1,36 +1,3 @@
-# RTL2GDSII: A Journey into SoC Design
-
-This repository documents my journey through the world of System-on-Chip (SoC) design, from Register Transfer Level (RTL) to a GDSII layout. This project is a part of my learning process to understand the complete VLSI design flow using open-source EDA tools.
-
-## The RTL to GDSII Flow
-
-The RTL to GDSII flow is the process of converting a high-level hardware description into a physical layout ready for manufacturing. This is a complex process that involves several stages:
-
-1.  **RTL Design:** The process starts with a hardware description written in a Hardware Description Language (HDL) like Verilog or VHDL. This is a high-level description of the chip's functionality.
-
-2.  **Synthesis:** The RTL code is synthesized into a gate-level netlist. This netlist is a description of the circuit in terms of logic gates and the connections between them.
-
-3.  **Floorplanning:** This stage involves planning the layout of the chip. This includes defining the chip size, placing the I/O pads, and arranging the major blocks.
-
-4.  **Placement:** The standard cells from the netlist are placed in the floorplan. The goal is to place the cells in a way that minimizes the wire length and congestion.
-
-5.  **Clock Tree Synthesis (CTS):** A clock tree is built to distribute the clock signal to all the sequential elements in the design. The goal is to minimize the clock skew and delay.
-
-6.  **Routing:** The connections between the cells and blocks are made in this stage. This is done in several steps, including global routing and detailed routing.
-
-7.  **Verification:** After routing, the design is verified to ensure that it meets the design rules and that the layout matches the schematic. This includes Design Rule Checking (DRC) and Layout vs. Schematic (LVS) checks.
-
-8.  **GDSII Generation:** Finally, the physical layout is saved in a GDSII file. This file is sent to the foundry for fabrication.
-
-## Table of Contents
-
-*   [Week 0: Tool Installation and Setup](WEEK_0)
-*   [Week 1: Introduction to Verilog RTL Design and Synthesis](WEEK_1)
-*   [Week 2: SoC Fundamentals and Functional Modelling](WEEK_2)
-*   [Week 3: Static Timing Analysis and PVT Corners](WEEK_3)
-*   [Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations](WEEK_4)
-*   [Week 5: OpenROAD Flow Setup and Floorplan + Placement](WEEK_5)
-
 # Week 5: OpenROAD Flow Setup and Floorplan + Placement
 
 ## Table of Contents
@@ -116,7 +83,7 @@ The installation follows the steps outlined in `Reference/README_week_5_referenc
       ```bash
       docker run --rm -it -u $(id -u ${USER}):$(id -g ${USER}) -v $(pwd)/flow:/OpenROAD-flow-scripts/flow openroad/flow-ubuntu22.04-builder:TAG
       ```
-      ![Docker Tag](WEEK_5/assets/docker_TAG.png)
+      ![Docker Tag](assets/docker_TAG.png)
 
       - Inside Docker:
          ```bash
@@ -166,13 +133,13 @@ The installation follows the steps outlined in `Reference/README_week_5_referenc
 
 ### Verification Screenshots
 
-- ![Installation Summary](WEEK_5/assets/Installation_Summary.png) 
+- ![Installation Summary](assets/Installation_Summary.png) 
 - Overview of setup completion.
-- ![OpenROAD Version](WEEK_5/assets/OpenROAD_version.png) 
+- ![OpenROAD Version](assets/OpenROAD_version.png) 
 - OpenROAD Version check output.
-- ![Yosys Version](WEEK_5/assets/Yosys_version.png) 
+- ![Yosys Version](assets/Yosys_version.png) 
 - Yosys version confirmation.
-- ![Successful OpenROAD Installation](WEEK_5/assets/successful_OpenROAD_installation.png) 
+- ![Successful OpenROAD Installation](assets/successful_OpenROAD_installation.png) 
 - Build success indicator.
 
 ## Execution
@@ -230,15 +197,15 @@ Total time for these stages: ~0s (as per logs), with SHA1 checksums for .odb fil
 
 ### Visual Outputs
 
-- ![Floorplan Main](WEEK_5/assets/Floorplan_main.png) 
+- ![Floorplan Main](assets/Floorplan_main.png) 
 - Die and core area layout.
-- ![Floorplan Zoom](WEEK_5/assets/Floorplan_zoom.png) 
+- ![Floorplan Zoom](assets/Floorplan_zoom.png) 
 - Detailed floorplan view.
-- ![OpenROAD 6 Final GCD](WEEK_5/assets/OpenROAD_6_final-gcd.png) 
+- ![OpenROAD 6 Final GCD](assets/OpenROAD_6_final-gcd.png) 
 - Final layout post-placement.
-- ![OpenROAD Verification Successful Run](WEEK_5/assets/OpenROAD_verification_succesful_run.png) 
+- ![OpenROAD Verification Successful Run](assets/OpenROAD_verification_succesful_run.png) 
 - Run completion.
-- ![Make Final Base Summary](WEEK_5/assets/make_final_base_summary.png) 
+- ![Make Final Base Summary](assets/make_final_base_summary.png) 
 - Summary of flow execution.
 
 ### Key Metrics
@@ -271,10 +238,10 @@ The OpenROAD flow generates intermediate and final files in `flow/results/nangat
    - Floorplan/Placement logs and GUI views.
 
 2. **Images/Outputs**:
-   - Floorplan view (WEEK_5/assets/Floorplan_main.png, Floorplan_zoom.png).
-   - Placement layout (WEEK_5/assets/OpenROAD_6_final-gcd.png).
+   - Floorplan view (assets/Floorplan_main.png, Floorplan_zoom.png).
+   - Placement layout (assets/OpenROAD_6_final-gcd.png).
 
-   ![Floorplan Zoom](WEEK_5/assets/Floorplan_zoom.png) - Detailed view.
+   ![Floorplan Zoom](assets/Floorplan_zoom.png) - Detailed view.
 
 3. **Short Summary**:
    - Steps followed: Cloned ORFS, ran setup/build, verified tools, executed `make` up to placement, visualized with GUI.
