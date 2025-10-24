@@ -2,6 +2,41 @@
 
 This repository documents my journey through the world of System-on-Chip (SoC) design, from Register Transfer Level (RTL) to a GDSII layout. This project is a part of my learning process to understand the complete VLSI design flow using open-source EDA tools.
 
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'dark'
+  } }%%
+timeline
+  title RTL-GDSII Using OpenROAD-flow-scripts
+  Synthesis
+    : Inputs  [RTL, SDC, .lib, .lef]
+    : Logic Synthesis  (Yosys)
+    : Output files  [Netlist, SDC]
+  Floorplan
+    : Floorplan Initialization
+    : IO placement  (random)
+    : Timing-driven mixed-size placement
+    : Macro placement
+    : Tapcell and welltie insertion
+    : PDN generation
+  Placement
+    : Global placement without placed IOs
+    : IO placement  (optimized)
+    : Global placement with placed IOs
+    : Resizing and buffering
+    : Detailed placement
+  CTS : Clock Tree Synthesis
+    : Timing optimization
+    : Filler cell insertion
+  Routing
+    : Global Routing
+    : Detailed Routing
+  Finishing
+    : Metal Fill insertion
+    : Signoff timing report
+    : Generate GDSII  (KLayout)
+    : DRC/LVS check (KLayout)
+```
+
 ## The RTL to GDSII Flow
 
 The RTL to GDSII flow is the process of converting a high-level hardware description into a physical layout ready for manufacturing. This is a complex process that involves several stages:
@@ -57,7 +92,7 @@ The RTL to GDSII flow is the process of converting a high-level hardware descrip
 
 ## Introduction
 
-Week 5 focuses on transitioning from transistor-level SPICE simulations (as covered in WEEK_4) to backend physical design implementation. This week introduces OpenROAD, an open-source Electronic Design Automation (EDA) tool suite for RTL-to-GDSII flows. The primary activities involve setting up the OpenROAD Flow Scripts (ORFS) environment and executing the Floorplan and Placement stages of the physical design flow. These stages are critical for understanding how logical designs are physically realized on silicon, including core area definition, power grid setup, and standard cell placement to optimize for timing, area, and congestion.
+Week 5 focuses on transitioning from transistor-level SPICE simulations (as covered in [WEEK_4](WEEK_4)) to backend physical design implementation. This week introduces OpenROAD, an open-source Electronic Design Automation (EDA) tool suite for RTL-to-GDSII flows. The primary activities involve setting up the OpenROAD Flow Scripts (ORFS) environment and executing the Floorplan and Placement stages of the physical design flow. These stages are critical for understanding how logical designs are physically realized on silicon, including core area definition, power grid setup, and standard cell placement to optimize for timing, area, and congestion.
 
 This README provides a detailed, technical overview of the week's objectives, installation process, execution steps, results, and deliverables.
 
@@ -88,7 +123,7 @@ The following prerequisites are necessary for setting up and running the OpenROA
 
 ## Installation
 
-The installation follows the steps outlined in `Reference/README_week_5_reference_2.md` and verified in `logs/log_2.md`.
+The installation follows the steps outlined here and verified in [LOGS/LOG_10_Floorplan_and_Placement.md](LOGS/LOG_10_Floorplan_and_Placement.md).
 
 ### Prerequisites
 
@@ -253,14 +288,14 @@ Total time for these stages: ~0s (as per logs), with SHA1 checksums for .odb fil
 
 ### Generated Files from Flow
 
-The OpenROAD flow generates intermediate and final files in `flow/results/nangate45/gcd/base/` and `flow/reports/nangate45/gcd/base/`. Key files include:
-
-- **Synthesis**: `1_2_yosys.v` (gate-level netlist), `1_synth.v` (synthesized Verilog).
-- **Floorplan**: `2_1_floorplan.odb` (OpenDB database), `2_floorplan.odb` (final floorplan).
-- **Placement**: `3_5_place_dp.odb` (detailed placement), `3_place.def` (Design Exchange Format).
-- **Reports**: `2_floorplan_final.rpt` (floorplan report), `3_detailed_place.rpt` (placement report).
-- **Logs**: Individual `.log` files for each stage in `flow/logs/nangate45/gcd/base/`.
-- **Visuals**: WebP images like `final_placement.webp`, `final_routing.webp` for layout visualization.
+The OpenROAD flow generates intermediate and final files in [flow/results/nangate45/gcd/base/](WEEK_5/flow/results/nangate45/gcd/base/) and [flow/reports/nangate45/gcd/base/](WEEK_5/flow/reports/nangate45/gcd/base/). 
+- **Key files include:**
+  - **Synthesis**: `1_2_yosys.v` (gate-level netlist), `1_synth.v` (synthesized Verilog).
+  - **Floorplan**: `2_1_floorplan.odb` (OpenDB database), `2_floorplan.odb` (final floorplan).
+  - **Placement**: `3_5_place_dp.odb` (detailed placement), `3_place.def` (Design Exchange Format).
+  - **Reports**: `2_floorplan_final.rpt` (floorplan report), `3_detailed_place.rpt` (placement report).
+  - **Logs**: Individual `.log` files for each stage in `flow/logs/nangate45/gcd/base/`.
+  - **Visuals**: WebP images like `final_placement.webp`, `final_routing.webp` for layout visualization.
 
 ## Deliverables
 
