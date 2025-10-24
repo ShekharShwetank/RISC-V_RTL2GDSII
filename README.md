@@ -2,6 +2,41 @@
 
 This repository documents my journey through the world of System-on-Chip (SoC) design, from Register Transfer Level (RTL) to a GDSII layout. This project is a part of my learning process to understand the complete VLSI design flow using open-source EDA tools.
 
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'dark'
+  } }%%
+timeline
+  title RTL-GDSII Using OpenROAD-flow-scripts
+  Synthesis
+    : Inputs  [RTL, SDC, .lib, .lef]
+    : Logic Synthesis  (Yosys)
+    : Output files  [Netlist, SDC]
+  Floorplan
+    : Floorplan Initialization
+    : IO placement  (random)
+    : Timing-driven mixed-size placement
+    : Macro placement
+    : Tapcell and welltie insertion
+    : PDN generation
+  Placement
+    : Global placement without placed IOs
+    : IO placement  (optimized)
+    : Global placement with placed IOs
+    : Resizing and buffering
+    : Detailed placement
+  CTS : Clock Tree Synthesis
+    : Timing optimization
+    : Filler cell insertion
+  Routing
+    : Global Routing
+    : Detailed Routing
+  Finishing
+    : Metal Fill insertion
+    : Signoff timing report
+    : Generate GDSII  (KLayout)
+    : DRC/LVS check (KLayout)
+```
+
 ## The RTL to GDSII Flow
 
 The RTL to GDSII flow is the process of converting a high-level hardware description into a physical layout ready for manufacturing. This is a complex process that involves several stages:
