@@ -1,15 +1,67 @@
 # Physical Design
 ## Objective
 
-To perform hands-on Physical Design labs using a pre-configured VDI image and 
-understand the complete hierarchy of digital and mixed-signal design implementation — 
+To perform hands-on Physical Design labs using a pre-configured VDI image and
+understand the complete hierarchy of digital and mixed-signal design implementation —
 from standard cell design to DRC and STA validation.
 
 ![alt text](assets/563.png)
 
+## Table of Contents
+
+- [Objective](#objective)
+- [1. Inception of open-source EDA, OpenLANE and Sky130 PDK](#1-inception-of-open-source-eda-openlane-and-sky130-pdk)
+  - [Theory](#theory)
+  - [Implementation](#implementation)
+    - [1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.](#1-run-picorv32a-design-synthesis-using-openlane-flow-and-generate-necessary-outputs)
+    - [2. Calculate the flop ratio.](#2-calculate-the-flop-ratio)
+- [Section 2 - Good floorplan vs bad floorplan and introduction to library cells](#section-2---good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
+  - [Theory](#theory-1)
+  - [Implementation](#implementation-1)
+    - [1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.](#1-run-picorv32a-design-floorplan-using-openlane-flow-and-generate-necessary-outputs)
+    - [2. Calculate the die area in microns from the values in floorplan def.](#2-calculate-the-die-area-in-microns-from-the-values-in-floorplan-def)
+    - [3. Load generated floorplan def in magic tool and explore the floorplan.](#3-load-generated-floorplan-def-in-magic-tool-and-explore-the-floorplan)
+    - [4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.](#4-run-picorv32a-design-congestion-aware-placement-using-openlane-flow-and-generate-necessary-outputs)
+    - [5. Load generated placement def in magic tool and explore the placement.](#5-load-generated-placement-def-in-magic-tool-and-explore-the-placement)
+- [3. Design library cell using Magic Layout and ngspice characterization](#3-design-library-cell-using-magic-layout-and-ngspice-characterization)
+  - [Theory](#theory-2)
+  - [Implementation](#implementation-2)
+    - [1. Clone custom inverter standard cell design from github repository](#1-clone-custom-inverter-standard-cell-design-from-github-repository)
+    - [2. Load the custom inverter layout in magic and explore.](#2-load-the-custom-inverter-layout-in-magic-and-explore)
+    - [3. Spice extraction of inverter in magic.](#3-spice-extraction-of-inverter-in-magic)
+    - [4. Editing the spice model file for analysis through simulation.](#4-editing-the-spice-model-file-for-analysis-through-simulation)
+    - [5. Post-layout ngspice simulations.](#5-post-layout-ngspice-simulations)
+    - [6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.](#6-find-problem-in-the-drc-section-of-the-old-magic-tech-file-for-the-skywater-process-and-fix-them)
+- [4. Pre-layout timing analysis and importance of good clock tree](#4-pre-layout-timing-analysis-and-importance-of-good-clock-tree)
+  - [Theory](#theory-3)
+  - [Implementation](#implementation-3)
+    - [1. Fix up small DRC errors and verify the design is ready to be inserted into our flow.](#1-fix-up-small-drc-errors-and-verify-the-design-is-ready-to-be-inserted-into-our-flow)
+    - [2. Save the finalized layout with custom name and open it.](#2-save-the-finalized-layout-with-custom-name-and-open-it)
+    - [3. Generate lef from the layout.](#3-generate-lef-from-the-layout)
+    - [4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.](#4-copy-the-newly-generated-lef-and-associated-required-lib-files-to-picorv32a-design-src-directory)
+    - [5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.](#5-edit-configtcl-to-change-lib-file-and-add-the-new-extra-lef-into-the-openlane-flow)
+    - [6. Run openlane flow synthesis with newly inserted custom inverter cell.](#6-run-openlane-flow-synthesis-with-newly-inserted-custom-inverter-cell)
+    - [7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.](#7-removereduce-the-newly-introduced-violations-with-the-introduction-of-custom-inverter-cell-by-modifying-design-parameters)
+    - [8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.](#8-once-synthesis-has-accepted-our-custom-inverter-we-can-now-run-floorplan-and-placement-and-verify-the-cell-is-accepted-in-pnr-flow)
+    - [9. Do Post-Synthesis timing analysis with OpenSTA tool.](#9-do-post-synthesis-timing-analysis-with-opensta-tool)
+    - [10. Make timing ECO fixes to remove all violations.](#10-make-timing-eco-fixes-to-remove-all-violations)
+    - [11. Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.](#11-replace-the-old-netlist-with-the-new-netlist-generated-after-timing-eco-fix-and-implement-the-floorplan-placement-and-cts)
+    - [12. Post-CTS OpenROAD timing analysis.](#12-post-cts-openroad-timing-analysis)
+    - [13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.](#13-explore-post-cts-openroad-timing-analysis-by-removing-sky130_fd_sc_hd__clkbuf_1-cell-from-clock-buffer-list-variable-cts_clk_buffer_list)
+- [5. Final steps for RTL2GDS using tritonRoute and openSTA](#5-final-steps-for-rtl2gds-using-tritonroute-and-opensta)
+  - [Theory](#theory-4)
+  - [Implementation](#implementation-4)
+    - [1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.](#1-perform-generation-of-power-distribution-network-pdn-and-explore-the-pdn-layout)
+    - [2. Perfrom detailed routing using TritonRoute.](#2-perfrom-detailed-routing-using-tritonroute)
+    - [3. Post-Route parasitic extraction using SPEF extractor.](#3-post-route-parasitic-extraction-using-spef-extractor)
+    - [4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.](#4-post-route-opensta-timing-analysis-with-the-extracted-parasitics-of-the-route)
+- [Acknowledgements](#acknowledgements)
+
 ## 1. Inception of open-source EDA, OpenLANE and Sky130 PDK
 
 ### Theory
+<details>
+<summary>Click to expand</summary>
 
 #### Package
 
@@ -146,7 +198,32 @@ from standard cell design to DRC and STA validation.
 ![alt text](assets/35.png)
 ![alt text](assets/36.png)
 ![alt text](assets/37.png)
-![alt text](assets/37.png) ![alt text](assets/38.png) ![alt text](assets/39.png) ![alt text](assets/40.png) ![alt text](assets/41.png) ![alt text](assets/42.png) ![alt text](assets/43.png) ![alt text](assets/44.png) ![alt text](assets/45.png) ![alt text](assets/46.png) ![alt text](assets/47.png) ![alt text](assets/48.png) ![alt text](assets/49.png) ![alt text](assets/50.png) ![alt text](assets/51.png) ![alt text](assets/52.png) ![alt text](assets/53.png) ![alt text](assets/54.png) ![alt text](assets/55.png) ![alt text](assets/56.png) ![alt text](assets/57.png) ![alt text](assets/58.png) ![alt text](assets/59.png) ![alt text](assets/60.png) ![alt text](assets/61.png) ![alt text](assets/62.png)
+![alt text](assets/37.png)
+![alt text](assets/38.png)
+![alt text](assets/39.png)
+![alt text](assets/40.png)
+![alt text](assets/41.png)
+![alt text](assets/42.png)
+![alt text](assets/43.png)
+![alt text](assets/44.png)
+![alt text](assets/45.png)
+![alt text](assets/46.png)
+![alt text](assets/47.png)
+![alt text](assets/48.png)
+![alt text](assets/49.png)
+![alt text](assets/50.png)
+![alt text](assets/51.png)
+![alt text](assets/52.png)
+![alt text](assets/53.png)
+![alt text](assets/54.png)
+![alt text](assets/55.png)
+![alt text](assets/56.png)
+![alt text](assets/57.png)
+![alt text](assets/58.png)
+![alt text](assets/59.png)
+![alt text](assets/60.png)
+![alt text](assets/61.png)
+![alt text](assets/62.png)
 </details>
 
 ### Implementation
@@ -225,7 +302,13 @@ Percentage\ of\ DFF's = 0.108429685 * 100 = 10.84296854\ \%
 ## Section 2 - Good floorplan vs bad floorplan and introduction to library cells
 
 ### Theory
+<details>
+<summary>Click to expand</summary>
+
 ![alt text](assets/85.png) ![alt text](assets/86.png) ![alt text](assets/87.png) ![alt text](assets/88.png) ![alt text](assets/89.png) ![alt text](assets/90.png) ![alt text](assets/91.png) ![alt text](assets/92.png) ![alt text](assets/93.png) ![alt text](assets/94.png) ![alt text](assets/95.png) ![alt text](assets/96.png) ![alt text](assets/97.png) ![alt text](assets/98.png) ![alt text](assets/99.png) ![alt text](assets/100.png) ![alt text](assets/101.png) ![alt text](assets/102.png) ![alt text](assets/103.png) ![alt text](assets/104.png) ![alt text](assets/105.png) ![alt text](assets/106.png) ![alt text](assets/107.png) ![alt text](assets/108.png) ![alt text](assets/109.png) ![alt text](assets/110.png) ![alt text](assets/111.png) ![alt text](assets/112.png) ![alt text](assets/113.png) ![alt text](assets/114.png) ![alt text](assets/115.png) ![alt text](assets/116.png) ![alt text](assets/117.png) ![alt text](assets/118.png) ![alt text](assets/119.png) ![alt text](assets/120.png) ![alt text](assets/121.png) ![alt text](assets/122.png) ![alt text](assets/123.png) ![alt text](assets/124.png) ![alt text](assets/125.png) ![alt text](assets/126.png) ![alt text](assets/127.png) ![alt text](assets/128.png) ![alt text](assets/129.png) ![alt text](assets/130.png) ![alt text](assets/131.png)
+
+</details>
+
 ### Implementation
 
 Section 2 tasks:- 
@@ -386,8 +469,16 @@ exit
 ```
 
 ## 3. Design library cell using Magic Layout and ngspice characterization 
+
 ### Theory
+
+<details>
+<summary>Click to expand</summary>
+
 ![alt text](assets/132.png) ![alt text](assets/133.png) ![alt text](assets/134.png) ![alt text](assets/135.png) ![alt text](assets/136.png) ![alt text](assets/137.png) ![alt text](assets/138.png) ![alt text](assets/139.png) ![alt text](assets/140.png) ![alt text](assets/141.png) ![alt text](assets/142.png) ![alt text](assets/143.png) ![alt text](assets/144.png) ![alt text](assets/145.png) ![alt text](assets/146.png) ![alt text](assets/147.png) ![alt text](assets/148.png) ![alt text](assets/149.png) ![alt text](assets/150.png) ![alt text](assets/151.png) ![alt text](assets/152.png) ![alt text](assets/153.png) ![alt text](assets/154.png) ![alt text](assets/155.png) ![alt text](assets/156.png) ![alt text](assets/157.png) ![alt text](assets/158.png) ![alt text](assets/159.png) ![alt text](assets/160.png) ![alt text](assets/161.png) ![alt text](assets/162.png) ![alt text](assets/163.png) ![alt text](assets/164.png) ![alt text](assets/165.png) ![alt text](assets/166.png) ![alt text](assets/167.png) ![alt text](assets/168.png) ![alt text](assets/169.png) ![alt text](assets/170.png) ![alt text](assets/171.png) ![alt text](assets/172.png) ![alt text](assets/173.png) ![alt text](assets/174.png) ![alt text](assets/175.png) ![alt text](assets/176.png) ![alt text](assets/177.png) ![alt text](assets/178.png) ![alt text](assets/179.png) ![alt text](assets/180.png) ![alt text](assets/181.png) ![alt text](assets/182.png) ![alt text](assets/183.png) ![alt text](assets/184.png) ![alt text](assets/185.png) ![alt text](assets/186.png) ![alt text](assets/187.png) ![alt text](assets/188.png) ![alt text](assets/189.png) ![alt text](assets/190.png) ![alt text](assets/191.png) ![alt text](assets/192.png) ![alt text](assets/193.png) ![alt text](assets/194.png) ![alt text](assets/195.png) ![alt text](assets/196.png) ![alt text](assets/197.png) ![alt text](assets/198.png) ![alt text](assets/199.png) ![alt text](assets/200.png) ![alt text](assets/201.png) ![alt text](assets/202.png) ![alt text](assets/203.png) ![alt text](assets/204.png) ![alt text](assets/205.png) ![alt text](assets/206.png) ![alt text](assets/207.png) ![alt text](assets/208.png) ![alt text](assets/209.png) ![alt text](assets/210.png) ![alt text](assets/211.png) ![alt text](assets/212.png) ![alt text](assets/213.png) ![alt text](assets/214.png) ![alt text](assets/215.png) ![alt text](assets/216.png) ![alt text](assets/217.png) ![alt text](assets/218.png) ![alt text](assets/219.png) ![alt text](assets/220.png) ![alt text](assets/221.png) ![alt text](assets/222.png) ![alt text](assets/223.png) ![alt text](assets/224.png) ![alt text](assets/225.png) ![alt text](assets/226.png) ![alt text](assets/227.png) ![alt text](assets/228.png) ![alt text](assets/229.png) ![alt text](assets/230.png) ![alt text](assets/231.png) ![alt text](assets/232.png) ![alt text](assets/233.png) ![alt text](assets/234.png) ![alt text](assets/235.png) ![alt text](assets/236.png) ![alt text](assets/237.png) ![alt text](assets/238.png) ![alt text](assets/239.png) ![alt text](assets/240.png) ![alt text](assets/241.png) ![alt text](assets/242.png) ![alt text](assets/243.png) ![alt text](assets/244.png) ![alt text](assets/245.png) ![alt text](assets/246.png) ![alt text](assets/247.png) ![alt text](assets/248.png) ![alt text](assets/249.png) ![alt text](assets/250.png) ![alt text](assets/251.png) ![alt text](assets/252.png) ![alt text](assets/253.png) ![alt text](assets/254.png) ![alt text](assets/255.png) ![alt text](assets/256.png) ![alt text](assets/257.png) ![alt text](assets/258.png) ![alt text](assets/259.png) ![alt text](assets/260.png) ![alt text](assets/261.png) ![alt text](assets/262.png) ![alt text](assets/263.png) ![alt text](assets/264.png) ![alt text](assets/265.png) ![alt text](assets/266.png) ![alt text](assets/267.png) ![alt text](assets/268.png) ![alt text](assets/269.png) ![alt text](assets/270.png) ![alt text](assets/271.png) ![alt text](assets/272.png) ![alt text](assets/273.png) ![alt text](assets/274.png) ![alt text](assets/275.png) ![alt text](assets/276.png) ![alt text](assets/277.png) ![alt text](assets/278.png) ![alt text](assets/279.png) ![alt text](assets/280.png) ![alt text](assets/281.png) ![alt text](assets/282.png) ![alt text](assets/283.png)
+
+</details>
+
 ### Implementation
 
 * Section 3 tasks:-
@@ -706,7 +797,13 @@ Screenshot of magic window with rule implemented
 ## 4. Pre-layout timing analysis and importance of good clock tree
 
 ### Theory
+
+<details>
+<summary>Click to expand</summary>
+
 ![alt text](assets/284.png) ![alt text](assets/285.png) ![alt text](assets/286.png) ![alt text](assets/287.png) ![alt text](assets/288.png) ![alt text](assets/289.png) ![alt text](assets/290.png) ![alt text](assets/291.png) ![alt text](assets/292.png) ![alt text](assets/293.png) ![alt text](assets/294.png) ![alt text](assets/295.png) ![alt text](assets/296.png) ![alt text](assets/297.png) ![alt text](assets/298.png) ![alt text](assets/299.png) ![alt text](assets/300.png) ![alt text](assets/301.png) ![alt text](assets/302.png) ![alt text](assets/303.png) ![alt text](assets/304.png) ![alt text](assets/305.png) ![alt text](assets/306.png) ![alt text](assets/307.png) ![alt text](assets/308.png) ![alt text](assets/309.png) ![alt text](assets/310.png) ![alt text](assets/311.png) ![alt text](assets/312.png) ![alt text](assets/313.png) ![alt text](assets/314.png) ![alt text](assets/315.png)
+
+</details>
 
 ### Implementation
 
@@ -1473,7 +1570,14 @@ Screenshots of commands run and timing report generated
 ## 5. Final steps for RTL2GDS using tritonRoute and openSTA
 
 ### Theory
+
+<details>
+<summary>Click to expand</summary>
+
 ![alt text](assets/316.png) ![alt text](assets/317.png) ![alt text](assets/318.png) ![alt text](assets/319.png) ![alt text](assets/320.png) ![alt text](assets/321.png) ![alt text](assets/322.png) ![alt text](assets/323.png) ![alt text](assets/324.png) ![alt text](assets/325.png) ![alt text](assets/326.png) ![alt text](assets/327.png) ![alt text](assets/328.png) ![alt text](assets/329.png) ![alt text](assets/330.png) ![alt text](assets/331.png) ![alt text](assets/332.png)
+
+</details>
+
 ### Implementation
 
 * Section 5 tasks:-
