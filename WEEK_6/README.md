@@ -7,7 +7,7 @@ from standard cell design to DRC and STA validation.
 
 ![alt text](assets/563.png)
 
-## 1 Inception of open-source EDA, OpenLANE and Sky130 PDK
+## 1. Inception of open-source EDA, OpenLANE and Sky130 PDK
 
 ### Theory
 
@@ -15,15 +15,17 @@ from standard cell design to DRC and STA validation.
 
 * In any embedded board we have seen, the part of the board we consider as the chip is only the ***PACKAGE*** of the chip which is nothing but a protective layer or packet bound over the actual chip and the actual manufatured chip is usually present at the center of a package wherein, the connections from package is fed to the chip by ***WIRE BOUND*** method which is none other than basic wired connection.
 
-
+![alt text](assets/1.png)
+![alt text](assets/2.png)
+![alt text](assets/3.png)
 
 #### Chip
 
 * Now, taking a look inside the chip, all the signals from the external world to the chip and vice versa is passed through ***PADS***. The area bound by the pads is ***CORE*** where all the digital logic of the chip is placed. Both the core and pads make up the ***DIE*** which is the basic manufacturing unit in regards to semiconductor chips.
-
+![alt text](assets/4.png)
 
 * ***FOUNDRY*** is the place where the semiconductor chips are manufactured and ***FOUNDRY IP's*** are Intellectual Properties based on a specific foundry and these IP's require a specific level of intelligence to be produced whereas, repeatable digital logic blocks are called ***MACROS***.
-
+![alt text](assets/6.png)
 
 #### ISA (Intruction Set Architecture)
 
@@ -32,27 +34,32 @@ from standard cell design to DRC and STA validation.
 * Following this, the assembly language program is then converted to machine language program which is the binary language logic 0 and 1 which is understood by the hardware of the computer.
 * Directly after this, we've to implement this RISC-V specification using some ***RTL (a Hardware Description Language)***. Finally, from the RTL to ***Layout*** it is a standard PnR or RTL to GDSII flow.
 
+![alt text](assets/7.png)
 
 * For an application software to be run on a hardware there are several processes taking place. To begin with, the apps enters into a block called system software and it converts the application program to binary language. There are various layers in system software in which the major layers or components are OS (Operating System), Compiler and Assembler.
 * At first the OS outputs are small function in C, C++, VB or Java language which are taken by the respective compiler and converted into instructions and the syntax of these instructions varies with the hardware architecture on which the system is implemented.
 * Then, the job of the assembler is to take these instructions and convert it into it's binary format which is basically called as a machine language program. Finally, this binary language is fed to the hardware and it understands the specific functions it has to perform based on the binary code it receives.
 
+![alt text](assets/8.png)
 
 * For example, if we take a stopwatch app on RISC-V core, then the output of the OS could be a small C function which enters into the compiler and we get output RISC-V instructions following this, the output of the assembler will be the binary code which enters into your chip layout.
 
+![alt text](assets/9.png)
 
 * For the above stopwatch the following are the input and output of the compiler and assembler.
 
+![alt text](assets/11.png)
 
 * The output of the compiler are instructions and the output of the assembler is the binary pattern. Now, we need some RTL (a Hardware Description Language) which understands and implements the particular instructions. Then, this RTL is synthesised into a netlist in form of gates which is fabricated into the chip through a physical design implementation.
 
-
+![alt text](assets/14.png)
 
 * There are mainly 3 different parts in this course. They are:
 1. RISC-V ISA
 2. RTL and synthesis of RISC-V based CPU core - picorv32
 3. Physical design implementation of picorv32
 
+![alt text](assets/15.png)
 
 #### Open-source Implementation
 
@@ -69,59 +76,77 @@ from standard cell design to DRC and STA validation.
 * Since, the PDK contained variety of informations, and so they were distributed only under NDAs (Non-Disclosure Agreements) which made it in-accessible to the public.
 * Recently, Google worked out an agreement with skywater to open-source the PDK for the 130nm process by skywater Technology, as a result on 30 June 2020 Google released the first ever open-source PDK.
 
+![alt text](assets/18.png)
 
 * ASIC design is a complex step that involves tons of steps, various methodologies and respective EDA tools which are all required for successful ASIC implementation which is achieved though an ASIC flow which is nothing but a piece of software that pulls different tools togather to carry out the design process.
 
-
+![alt text](assets/19.png)
 
 #### OpenLANE Open-source ASIC Design Implementation Flow
 
 * The main objective of the ASIC Design Flow is to take the design from the RTL (Register Transfer Level) all the way to the GDSII, which is the format used for the final fabrication layout.
 
-
+![alt text](assets/20.png)
 
 * Synthesis is the process of convertion or translation of design RTL into circuits made out of Standard Cell Libraries (SCL) the resultant circuit is described in HDL and is usually reffered to as the Gate-Level Netlist.
 * Gate-Level Netlist is functionally equivalent to the RTL.
 
+![alt text](assets/21.png)
 
 * The fundemental building blocks which are the standard cells have regular layouts.
 * Each cell has different views/models which are utilised by different EDA tools like liberty view with electrical models of the cells, HDL behavioral models, SPICE or CDL views of the cells, Layout view which include GDSII view which is the detailed view and LEF view which is the abstract view.
 
+![alt text](assets/22.png)
 
 * Chip Floor Planning
 
+![alt text](assets/23.png)
 
 * Macro Floor Planning
 
+![alt text](assets/24.png)
 
 * Power Planning typically uses upper metal layers for power distribution since thay are thicker than lower metal layers and so have lower resistance and PP is done to avoid electron migration and IR drops.
 
+![alt text](assets/25.png)
 
 * Placement
 
+![alt text](assets/26.png)
 
 * Global placement provide approximate locations for all cells based on connectivity but in this stage the cells may be overlapped on each other and in detailed placement the positions obtained from global placements are minimally altered to make it legal (non-overlapping and in site-rows)
 
+![alt text](assets/28.png)
 
 * Clock Tree Synthesis
 
+![alt text](assets/29.png)
 
 * Clock skew is the time difference in arrival of clock at different components.
 * Routing
 
+![alt text](assets/30.png)
 
 * skywater PDK has 6 routing layers in which the lowest layer is called the local interconnect layer which is a Titanium Nitride layer the following 5 layers are all Aluminium layers.
 
+![alt text](assets/image.png)
 
 * Global and Detailed Routing
 
+![alt text](assets/31.png)
 
 * Once done with the routing the final layout can be generated which undergoes various Sign-Off checks.
 * Design Rules Checking (DRC) which verifies that the final layout honours all design fabrication rules.
 * Layout Vs Schematic (LVS) which verifies that the final layout functionality matches the gate-level netlist that we started with.
 * Static Timing Analysis (STA) to verify that the design runs at the designated clock frequency.
 
-
+![alt text](assets/32.png)
+![alt text](assets/33.png)
+![alt text](assets/34.png)
+![alt text](assets/35.png)
+![alt text](assets/36.png)
+![alt text](assets/37.png)
+![alt text](assets/37.png) ![alt text](assets/38.png) ![alt text](assets/39.png) ![alt text](assets/40.png) ![alt text](assets/41.png) ![alt text](assets/42.png) ![alt text](assets/43.png) ![alt text](assets/44.png) ![alt text](assets/45.png) ![alt text](assets/46.png) ![alt text](assets/47.png) ![alt text](assets/48.png) ![alt text](assets/49.png) ![alt text](assets/50.png) ![alt text](assets/51.png) ![alt text](assets/52.png) ![alt text](assets/53.png) ![alt text](assets/54.png) ![alt text](assets/55.png) ![alt text](assets/56.png) ![alt text](assets/57.png) ![alt text](assets/58.png) ![alt text](assets/59.png) ![alt text](assets/60.png) ![alt text](assets/61.png) ![alt text](assets/62.png)
 </details>
 
 ### Implementation
@@ -174,10 +199,18 @@ exit
 
 Screenshots of running each commands
 
+![alt text](assets/72.png)
+![alt text](assets/73.png)
+![alt text](assets/74.png)
+
+
 #### 2. Calculate the flop ratio.
 
 Screenshots of synthesis statistics report file with required values highlighted
 
+![alt text](assets/76.png)
+![alt text](assets/77.png)
+![alt text](assets/78.png)
 
 Calculation of Flop Ratio and DFF % from synthesis statistics report file
 
@@ -187,11 +220,12 @@ Flop\ Ratio = \frac{1613}{14876} = 0.108429685
 ```math
 Percentage\ of\ DFF's = 0.108429685 * 100 = 10.84296854\ \%
 ```
+![alt text](assets/84.png)
 
 ## Section 2 - Good floorplan vs bad floorplan and introduction to library cells
 
 ### Theory
-
+![alt text](assets/85.png) ![alt text](assets/86.png) ![alt text](assets/87.png) ![alt text](assets/88.png) ![alt text](assets/89.png) ![alt text](assets/90.png) ![alt text](assets/91.png) ![alt text](assets/92.png) ![alt text](assets/93.png) ![alt text](assets/94.png) ![alt text](assets/95.png) ![alt text](assets/96.png) ![alt text](assets/97.png) ![alt text](assets/98.png) ![alt text](assets/99.png) ![alt text](assets/100.png) ![alt text](assets/101.png) ![alt text](assets/102.png) ![alt text](assets/103.png) ![alt text](assets/104.png) ![alt text](assets/105.png) ![alt text](assets/106.png) ![alt text](assets/107.png) ![alt text](assets/108.png) ![alt text](assets/109.png) ![alt text](assets/110.png) ![alt text](assets/111.png) ![alt text](assets/112.png) ![alt text](assets/113.png) ![alt text](assets/114.png) ![alt text](assets/115.png) ![alt text](assets/116.png) ![alt text](assets/117.png) ![alt text](assets/118.png) ![alt text](assets/119.png) ![alt text](assets/120.png) ![alt text](assets/121.png) ![alt text](assets/122.png) ![alt text](assets/123.png) ![alt text](assets/124.png) ![alt text](assets/125.png) ![alt text](assets/126.png) ![alt text](assets/127.png) ![alt text](assets/128.png) ![alt text](assets/129.png) ![alt text](assets/130.png) ![alt text](assets/131.png)
 ### Implementation
 
 Section 2 tasks:- 
@@ -205,7 +239,7 @@ Section 2 tasks:-
 Area\ of\ die\ in\ microns = Die\ width\ in\ microns * Die\ height\ in\ microns
 ```
 
-* All section 2 logs, reports and results can be found in following run folder:
+* All logs, reports and results can be found in following run folder:
 
 #### 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
@@ -238,10 +272,16 @@ run_floorplan
 
 Screenshot of floorplan run
 
+![alt text](assets/334.png)
+![alt text](assets/335.png)
+![alt text](assets/336.png)
+![alt text](assets/337.png)
+
 #### 2. Calculate the die area in microns from the values in floorplan def.
 
 Screenshot of contents of floorplan def
-
+![alt text](assets/338.png)
+![alt text](assets/339.png)
 
 According to floorplan def
 ```math
@@ -279,22 +319,26 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 Screenshots of floorplan def in magic
-
+![alt text](assets/340.png)
 
 Equidistant placement of ports
-
+![alt text](assets/342.png)
 
 Port layer as set through config.tcl
-
+![alt text](assets/343.png)
+![alt text](assets/344.png)
+![alt text](assets/345.png)
 
 Decap Cells and Tap Cells
-
+![alt text](assets/346.png)
+![alt text](assets/347.png)
 
 Diogonally equidistant Tap cells
-
+![alt text](assets/342.png)
 
 Unplaced standard cells at the origin
-
+![alt text](assets/349.png)
+![alt text](assets/350.png)
 
 #### 4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
 
@@ -306,7 +350,8 @@ run_placement
 ```
 
 Screenshots of placement run
-
+![alt text](assets/351.png)
+![alt text](assets/352.png)
 
 #### 5. Load generated placement def in magic tool and explore the placement.
 
@@ -321,10 +366,14 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 Screenshots of floorplan def in magic
-
+![alt text](assets/354.png)
 
 Standard cells legally placed 
-
+![alt text](assets/355.png)
+![alt text](assets/356.png)
+![alt text](assets/357.png)
+![alt text](assets/358.png)
+![alt text](assets/359.png)
 
 Commands to exit from current run
 
@@ -338,7 +387,7 @@ exit
 
 ## 3. Design library cell using Magic Layout and ngspice characterization 
 ### Theory
-
+![alt text](assets/132.png) ![alt text](assets/133.png) ![alt text](assets/134.png) ![alt text](assets/135.png) ![alt text](assets/136.png) ![alt text](assets/137.png) ![alt text](assets/138.png) ![alt text](assets/139.png) ![alt text](assets/140.png) ![alt text](assets/141.png) ![alt text](assets/142.png) ![alt text](assets/143.png) ![alt text](assets/144.png) ![alt text](assets/145.png) ![alt text](assets/146.png) ![alt text](assets/147.png) ![alt text](assets/148.png) ![alt text](assets/149.png) ![alt text](assets/150.png) ![alt text](assets/151.png) ![alt text](assets/152.png) ![alt text](assets/153.png) ![alt text](assets/154.png) ![alt text](assets/155.png) ![alt text](assets/156.png) ![alt text](assets/157.png) ![alt text](assets/158.png) ![alt text](assets/159.png) ![alt text](assets/160.png) ![alt text](assets/161.png) ![alt text](assets/162.png) ![alt text](assets/163.png) ![alt text](assets/164.png) ![alt text](assets/165.png) ![alt text](assets/166.png) ![alt text](assets/167.png) ![alt text](assets/168.png) ![alt text](assets/169.png) ![alt text](assets/170.png) ![alt text](assets/171.png) ![alt text](assets/172.png) ![alt text](assets/173.png) ![alt text](assets/174.png) ![alt text](assets/175.png) ![alt text](assets/176.png) ![alt text](assets/177.png) ![alt text](assets/178.png) ![alt text](assets/179.png) ![alt text](assets/180.png) ![alt text](assets/181.png) ![alt text](assets/182.png) ![alt text](assets/183.png) ![alt text](assets/184.png) ![alt text](assets/185.png) ![alt text](assets/186.png) ![alt text](assets/187.png) ![alt text](assets/188.png) ![alt text](assets/189.png) ![alt text](assets/190.png) ![alt text](assets/191.png) ![alt text](assets/192.png) ![alt text](assets/193.png) ![alt text](assets/194.png) ![alt text](assets/195.png) ![alt text](assets/196.png) ![alt text](assets/197.png) ![alt text](assets/198.png) ![alt text](assets/199.png) ![alt text](assets/200.png) ![alt text](assets/201.png) ![alt text](assets/202.png) ![alt text](assets/203.png) ![alt text](assets/204.png) ![alt text](assets/205.png) ![alt text](assets/206.png) ![alt text](assets/207.png) ![alt text](assets/208.png) ![alt text](assets/209.png) ![alt text](assets/210.png) ![alt text](assets/211.png) ![alt text](assets/212.png) ![alt text](assets/213.png) ![alt text](assets/214.png) ![alt text](assets/215.png) ![alt text](assets/216.png) ![alt text](assets/217.png) ![alt text](assets/218.png) ![alt text](assets/219.png) ![alt text](assets/220.png) ![alt text](assets/221.png) ![alt text](assets/222.png) ![alt text](assets/223.png) ![alt text](assets/224.png) ![alt text](assets/225.png) ![alt text](assets/226.png) ![alt text](assets/227.png) ![alt text](assets/228.png) ![alt text](assets/229.png) ![alt text](assets/230.png) ![alt text](assets/231.png) ![alt text](assets/232.png) ![alt text](assets/233.png) ![alt text](assets/234.png) ![alt text](assets/235.png) ![alt text](assets/236.png) ![alt text](assets/237.png) ![alt text](assets/238.png) ![alt text](assets/239.png) ![alt text](assets/240.png) ![alt text](assets/241.png) ![alt text](assets/242.png) ![alt text](assets/243.png) ![alt text](assets/244.png) ![alt text](assets/245.png) ![alt text](assets/246.png) ![alt text](assets/247.png) ![alt text](assets/248.png) ![alt text](assets/249.png) ![alt text](assets/250.png) ![alt text](assets/251.png) ![alt text](assets/252.png) ![alt text](assets/253.png) ![alt text](assets/254.png) ![alt text](assets/255.png) ![alt text](assets/256.png) ![alt text](assets/257.png) ![alt text](assets/258.png) ![alt text](assets/259.png) ![alt text](assets/260.png) ![alt text](assets/261.png) ![alt text](assets/262.png) ![alt text](assets/263.png) ![alt text](assets/264.png) ![alt text](assets/265.png) ![alt text](assets/266.png) ![alt text](assets/267.png) ![alt text](assets/268.png) ![alt text](assets/269.png) ![alt text](assets/270.png) ![alt text](assets/271.png) ![alt text](assets/272.png) ![alt text](assets/273.png) ![alt text](assets/274.png) ![alt text](assets/275.png) ![alt text](assets/276.png) ![alt text](assets/277.png) ![alt text](assets/278.png) ![alt text](assets/279.png) ![alt text](assets/280.png) ![alt text](assets/281.png) ![alt text](assets/282.png) ![alt text](assets/283.png)
 ### Implementation
 
 * Section 3 tasks:-
@@ -372,27 +421,28 @@ magic -T sky130A.tech sky130_inv.mag &
 ```
 
 Screenshot of commands run
-
+![alt text](assets/360.png)
 
 #### 2. Load the custom inverter layout in magic and explore.
 
 Screenshot of custom inverter layout in magic
-
+![alt text](assets/361.png)
 
 NMOS and PMOS identified
-
+![alt text](assets/364.png)
+![alt text](assets/365.png)
 
 Output Y connectivity to PMOS and NMOS drain verified
-
+![alt text](assets/369.png)
 
 PMOS source connectivity to VDD (here VPWR) verified
-
+![alt text](assets/371.png)
 
 NMOS source connectivity to VSS (here VGND) verified
-
+![alt text](assets/370.png)
 
 Deleting necessary layout part to see DRC error
-
+![alt text](assets/372.png)
 
 #### 3. Spice extraction of inverter in magic.
 
@@ -413,18 +463,18 @@ ext2spice
 ```
 
 Screenshot of tkcon window after running above commands
-
+![alt text](assets/373.png)
 
 Screenshot of created spice file
-
+![alt text](assets/375.png)
 
 #### 4. Editing the spice model file for analysis through simulation.
 
 Measuring unit distance in layout grid
-
+![alt text](assets/374.png)
 
 Final edited spice file ready for ngspice simulation
-
+![alt text](assets/376.png)
 
 #### 5. Post-layout ngspice simulations.
 
@@ -439,10 +489,10 @@ plot y vs time a
 ```
 
 Screenshots of ngspice run
-
+![alt text](assets/377.png)
 
 Screenshot of generated plot
-
+![alt text](assets/378.png)
 
 Rise transition time calculation
 
@@ -457,10 +507,13 @@ Rise\ transition\ time = Time\ taken\ for\ output\ to\ rise\ to\ 80\% - Time\ ta
 ```
 
 20% Screenshots
-
+![alt text](assets/379.png)
+![alt text](assets/380.png)
+![alt text](assets/381.png)
 
 80% Screenshots
-
+![alt text](assets/382.png)
+![alt text](assets/383.png)
 
 ```math
 Rise\ transition\ time = 2.24638 - 2.18242 = 0.06396\ ns = 63.96\ ps
@@ -480,14 +533,15 @@ Fall\ transition\ time = Time\ taken\ for\ output\ to\ fall\ to\ 20\% - Time\ ta
 
 20% Screenshots
 
-
+![alt text](<assets/Screenshot from 2025-11-12 02-42-12.png>)
 
 80% Screenshots
 
-
+![alt text](<assets/Screenshot from 2025-11-12 02-41-48.png>)
+![alt text](<assets/Screenshot from 2025-11-12 02-42-26.png>)
 
 ```math
-Fall\ transition\ time = 4.0955 - 4.0536 = 0.0419\ ns = 41.9\ ps
+Fall\ transition\ time = 4.0957 - 4.0207 = 0.075\ ns = 75\ ps
 ```
 
 Rise Cell Delay Calculation
@@ -500,11 +554,12 @@ Rise\ Cell\ Delay = Time\ taken\ for\ output\ to\ rise\ to\ 50\% - Time\ taken\ 
 ```
 
 50% Screenshots
+![alt text](assets/392.png)
 
 
 
 ```math
-Rise\ Cell\ Delay = 2.21144 - 2.15008 = 0.06136\ ns = 61.36\ ps
+Rise\ Cell\ Delay = 2.21157 - 2.15005 = 0.06152\ ns = 61.52\ ps
 ```
 
 Fall Cell Delay Calculation
@@ -517,7 +572,7 @@ Fall\ Cell\ Delay = Time\ taken\ for\ output\ to\ fall\ to\ 50\% - Time\ taken\ 
 ```
 
 50% Screenshots
-
+![alt text](assets/393.png)
 
 ```math
 Fall\ Cell\ Delay = 4.07 - 4.05 = 0.02\ ns = 20\ ps
@@ -553,26 +608,37 @@ magic -d XR &
 ```
 
 Screenshots of commands run
-
-
+![alt text](assets/396.png)
+![alt text](assets/398.png)
 
 Screenshot of .magicrc file
-
+![alt text](assets/397.png)
 
 
 **Incorrectly implemented poly.9 simple rule correction**
 
 Screenshot of poly rules
-
-
+![alt text](assets/image-1.png)
+![alt text](assets/403.png)
+![alt text](assets/404.png)
+![alt text](assets/405.png)
+![alt text](assets/406.png)
+![alt text](assets/407.png) ![alt text](assets/408.png) ![alt text](assets/409.png) ![alt text](assets/410.png) ![alt text](assets/411.png) ![alt text](assets/412.png) ![alt text](assets/413.png) ![alt text](assets/414.png) ![alt text](assets/415.png) ![alt text](assets/416.png)
 
 Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48u
-
+![alt text](assets/399.png)
+![alt text](assets/400.png)
+![alt text](assets/401.png)
+![alt text](assets/402.png)
+![alt text](assets/430.png)
+![alt text](assets/431.png)
 
 
 New commands inserted in sky130A.tech file to update drc
-
-
+![alt text](assets/425.png)
+![alt text](assets/426.png)
+![alt text](assets/427.png)
+![alt text](assets/428.png)
 
 Commands to run in tkcon window
 
@@ -588,46 +654,33 @@ drc why
 ```
 
 Screenshot of magic window with rule implemented
-
-
-
-**Incorrectly implemented difftap.2 simple rule correction**
-
-Screenshot of difftap rules
-
-
-Incorrectly implemented difftap.2 rule no drc violation even though spacing < 0.42u
-
-
-New commands inserted in sky130A.tech file to update drc
-
-
-Commands to run in tkcon window
-
-```tcl
-# Loading updated tech file
-tech load sky130A.tech
-
-# Must re-run drc check to see updated drc errors
-drc check
-
-# Selecting region displaying the new errors and getting the error messages 
-drc why
-```
-
-Screenshot of magic window with rule implemented
-
+![alt text](assets/429.png)
+![alt text](assets/430.png)
+![alt text](assets/431.png)
+![alt text](assets/432.png)
 
 **Incorrectly implemented nwell.4 complex rule correction**
 
 Screenshot of nwell rules
-
+![alt text](assets/433.png)
+![alt text](assets/434.png)
+![alt text](assets/435.png)
 
 Incorrectly implemented nwell.4 rule no drc violation even though no tap present in nwell
-
+![alt text](assets/436.png)
+![alt text](assets/437.png)
+![alt text](assets/438.png)
 
 New commands inserted in sky130A.tech file to update drc
-
+![alt text](assets/439.png)
+![alt text](assets/440.png)
+![alt text](assets/441.png)
+![alt text](assets/442.png)
+![alt text](assets/443.png)
+![alt text](assets/444.png)
+![alt text](assets/445.png)
+![alt text](assets/446.png)
+![alt text](assets/447.png)
 
 Commands to run in tkcon window
 
@@ -646,11 +699,14 @@ drc why
 ```
 
 Screenshot of magic window with rule implemented
-
+![alt text](assets/445.png)
+![alt text](assets/446.png)
+![alt text](assets/447.png)
 
 ## 4. Pre-layout timing analysis and importance of good clock tree
 
 ### Theory
+![alt text](assets/284.png) ![alt text](assets/285.png) ![alt text](assets/286.png) ![alt text](assets/287.png) ![alt text](assets/288.png) ![alt text](assets/289.png) ![alt text](assets/290.png) ![alt text](assets/291.png) ![alt text](assets/292.png) ![alt text](assets/293.png) ![alt text](assets/294.png) ![alt text](assets/295.png) ![alt text](assets/296.png) ![alt text](assets/297.png) ![alt text](assets/298.png) ![alt text](assets/299.png) ![alt text](assets/300.png) ![alt text](assets/301.png) ![alt text](assets/302.png) ![alt text](assets/303.png) ![alt text](assets/304.png) ![alt text](assets/305.png) ![alt text](assets/306.png) ![alt text](assets/307.png) ![alt text](assets/308.png) ![alt text](assets/309.png) ![alt text](assets/310.png) ![alt text](assets/311.png) ![alt text](assets/312.png) ![alt text](assets/313.png) ![alt text](assets/314.png) ![alt text](assets/315.png)
 
 ### Implementation
 
@@ -702,7 +758,7 @@ magic -T sky130A.tech sky130_inv.mag &
 ```
 
 Screenshot of tracks.info of sky130_fd_sc_hd
-
+![alt text](assets/448.png)
 
 Commands for tkcon window to set grid as tracks of locali layer
 
@@ -715,12 +771,13 @@ grid 0.46um 0.34um 0.23um 0.17um
 ```
 
 Screenshot of commands run
-
+![alt text](assets/449.png)
 
 Condition 1 verified
-
+![alt text](assets/450.png)
 
 Condition 2 verified
+![alt text](assets/451.png)
 
 ```math
 Horizontal\ track\ pitch = 0.46\ um
@@ -736,7 +793,7 @@ Condition 3 verified
 ```math
 Vertical\ track\ pitch = 0.34\ um
 ```
-
+![alt text](assets/452.png)
 
 ```math
 Height\ of\ standard\ cell = 2.72\ um = 0.34 * 8
@@ -759,7 +816,9 @@ magic -T sky130A.tech sky130_vsdinv.mag &
 ```
 
 Screenshot of newly saved layout
-
+![alt text](assets/453.png)
+![alt text](assets/454.png)
+![alt text](assets/455.png)
 
 #### 3. Generate lef from the layout.
 
@@ -771,10 +830,14 @@ lef write
 ```
 
 Screenshot of command run
-
+![alt text](assets/458.png)
+![alt text](assets/459.png)
 
 Screenshot of newly created lef file
-
+![alt text](assets/460.png)
+![alt text](assets/461.png)
+![alt text](assets/462.png)
+![alt text](assets/463.png)
 
 #### 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
 
@@ -795,7 +858,7 @@ ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
 ```
 
 Screenshot of commands run
-
+![alt text](assets/464.png)
 
 #### 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
 
@@ -811,7 +874,7 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 ```
 
 Edited config.tcl to include the added lef and change library to ones we added in src directory
-
+![alt text](assets/465.png)
 
 #### 6. Run openlane flow synthesis with newly inserted custom inverter cell.
 
@@ -844,13 +907,22 @@ run_synthesis
 ```
 
 Screenshots of commands run
+![alt text](assets/466.png)
+![alt text](assets/466.png)
+![alt text](assets/468.png)
+![alt text](assets/469.png)
+![alt text](assets/470.png)
+![alt text](assets/471.png)
 
 
 
 #### 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
 
 Noting down current design values generated before modifying parameters to improve timing
-
+![alt text](assets/472.png)
+![alt text](assets/473.png)
+![alt text](assets/474.png)
+![alt text](assets/475.png)
 
 Commands to view and change parameters to improve timing and run synthesis
 
@@ -886,14 +958,17 @@ run_synthesis
 
 Screenshot of merged.lef in `tmp` directory with our custom inverter as macro
 
-
+![alt text](assets/477.png)
 
 Screenshots of commands run
-
-
+![alt text](assets/482.png)
+![alt text](assets/483.png)
+![alt text](assets/484.png)
+![alt text](assets/485.png)
 
 Comparing to previously noted run values area has increased and worst negative slack has become 0
-
+![alt text](assets/475.png)
+![alt text](assets/476.png)
 
 #### 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
 
@@ -905,7 +980,8 @@ run_floorplan
 ```
 
 Screenshots of command run
-
+![alt text](assets/478.png)
+![alt text](assets/479.png)
 
 Since we are facing unexpected un-explainable error while using `run_floorplan` command, we can instead use the following set of commands available based on information from `Desktop/work/tools/openlane_working_dir/openlane/scripts/tcl_commands/floorplan.tcl` and also based on `Floorplan Commands` section in `Desktop/work/tools/openlane_working_dir/openlane/docs/source/OpenLANE_commands.md`
 
@@ -917,8 +993,10 @@ tap_decap_or
 ```
 
 Screenshots of commands run
-
-
+![alt text](assets/480.png)
+![alt text](assets/481.png)
+![alt text](assets/482.png)
+![alt text](assets/483.png)
 
 Now that floorplan is done we can do placement using following command
 
@@ -928,7 +1006,9 @@ run_placement
 ```
 
 Screenshots of command run
-
+![alt text](assets/484.png)
+![alt text](assets/485.png)
+![alt text](assets/486.png)
 
 Commands to load placement def in magic in another terminal
 
@@ -941,10 +1021,11 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 Screenshot of placement def in magic
-
+![alt text](assets/487.png)
+![alt text](assets/488.png)
 
 Screenshot of custom inverter inserted in placement def with proper abutment
-
+![alt text](assets/489.png)
 
 Command for tkcon window to view internal layers of cells
 
@@ -954,7 +1035,9 @@ expand
 ```
 
 Abutment of power pins with other cell from library clearly visible
-
+![alt text](assets/490.png)
+![alt text](assets/491.png)
+![alt text](assets/492.png)
 
 #### 9. Do Post-Synthesis timing analysis with OpenSTA tool.
 
@@ -992,13 +1075,15 @@ run_synthesis
 ```
 
 Commands run final screenshot
-
+![alt text](assets/493.png)
+![alt text](assets/494.png)
+![alt text](assets/495.png)
 
 Newly created `pre_sta.conf` for STA analysis in `openlane` directory
-
+![alt text](assets/496.png)
 
 Newly created `my_base.sdc` for STA analysis in `openlane/designs/picorv32a/src` directory based on the file `openlane/scripts/base.sdc`
-
+![alt text](assets/497.png)
 
 Commands to run STA in another terminal
 
@@ -1011,7 +1096,8 @@ sta pre_sta.conf
 ```
 
 Screenshots of commands run
-
+![alt text](assets/498.png)
+![alt text](assets/499.png)
 
 Since more fanout is causing more delay we can add parameter to reduce fanout and do synthesis again
 
@@ -1038,9 +1124,6 @@ echo $::env(SYNTH_DRIVING_CELL)
 run_synthesis
 ```
 
-Commands run final screenshot
-
-
 Commands to run STA in another terminal
 
 ```bash
@@ -1052,12 +1135,14 @@ sta pre_sta.conf
 ```
 
 Screenshots of commands run
-
+![alt text](assets/500.png)
+![alt text](assets/501.png)
+![alt text](assets/502.png)
 
 #### 10. Make timing ECO fixes to remove all violations.
 
 OR gate of drive strength 2 is driving 4 fanouts
-
+![alt text](assets/503.png)
 
 Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
 
@@ -1076,10 +1161,13 @@ report_checks -fields {net cap slew input_pins} -digits 4
 ```
 
 Result - slack reduced
+![alt text](assets/504.png)
+![alt text](assets/505.png)
+![alt text](assets/506.png)
 
 
 OR gate of drive strength 2 is driving 4 fanouts
-
+![alt text](assets/507.png)
 
 Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
 
@@ -1095,10 +1183,12 @@ report_checks -fields {net cap slew input_pins} -digits 4
 ```
 
 Result - slack reduced
-
+![alt text](assets/508.png)
+![alt text](assets/509.png)
+![alt text](assets/510.png)
 
 OR gate of drive strength 2 driving OA gate has more delay
-
+![alt text](assets/511.png)
 
 Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
 
@@ -1114,10 +1204,11 @@ report_checks -fields {net cap slew input_pins} -digits 4
 ```
 
 Result - slack reduced
-
+![alt text](assets/512.png)
+![alt text](assets/513.png)
 
 OR gate of drive strength 2 driving OA gate has more delay
-
+![alt text](assets/514.png)
 
 Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
 
@@ -1133,8 +1224,8 @@ report_checks -fields {net cap slew input_pins} -digits 4
 ```
 
 Result - slack reduced
-
-
+![alt text](assets/515.png)
+![alt text](assets/516.png)
 
 Commands to verify instance `_14506_`  is replaced with `sky130_fd_sc_hd__or4_4`
 
@@ -1144,7 +1235,7 @@ report_checks -from _29043_ -to _30440_ -through _14506_
 ```
 
 Screenshot of replaced instance
-
+![alt text](assets/517.png)
 
 *We started ECO fixes at wns -23.9000 and now we stand at wns -22.6173 we reduced around 1.2827 ns of violation*
 
@@ -1169,7 +1260,7 @@ ls
 ```
 
 Screenshot of commands run
-
+![alt text](assets/518.png)
 
 Commands to write verilog
 
@@ -1185,10 +1276,10 @@ exit
 ```
 
 Screenshot of commands run
-
+![alt text](assets/519.png)
 
 Verified that the netlist is overwritten by checking that instance `_14506_`  is replaced with `sky130_fd_sc_hd__or4_4`
-
+![alt text](assets/520.png)
 
 Since we confirmed that netlist is replaced and will be loaded in PnR but since we want to follow up on the earlier 0 violation design we are continuing with the clean design to further stages
 
@@ -1227,7 +1318,16 @@ run_cts
 ```
 
 Screenshots of commands run
-
+![alt text](assets/521.png)
+![alt text](assets/522.png)
+![alt text](assets/523.png)
+![alt text](assets/524.png)
+![alt text](assets/525.png)
+![alt text](assets/526.png)
+![alt text](assets/527.png)
+![alt text](assets/528.png)
+![alt text](assets/529.png)
+![alt text](assets/530.png)
 
 #### 12. Post-CTS OpenROAD timing analysis.
 
@@ -1275,8 +1375,12 @@ exit
 ```
 
 Screenshots of commands run and timing report generated
-
-
+![alt text](assets/531.png)
+![alt text](assets/532.png)
+![alt text](assets/533.png)
+![alt text](assets/534.png)
+![alt text](assets/535.png)
+![alt text](assets/536.png)
 
 #### 13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
 
@@ -1357,13 +1461,19 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 ```
 
 Screenshots of commands run and timing report generated
+![alt text](assets/537.png)
+![alt text](assets/538.png)
+![alt text](assets/539.png)
+![alt text](assets/540.png)
+![alt text](assets/541.png)
+![alt text](assets/542.png)
+![alt text](assets/543.png)
+![alt text](assets/544.png)
 
-
-
-## Section 5 - Final steps for RTL2GDS using tritonRoute and openSTA (25/03/2024 - 26/03/2024)
+## 5. Final steps for RTL2GDS using tritonRoute and openSTA
 
 ### Theory
-
+![alt text](assets/316.png) ![alt text](assets/317.png) ![alt text](assets/318.png) ![alt text](assets/319.png) ![alt text](assets/320.png) ![alt text](assets/321.png) ![alt text](assets/322.png) ![alt text](assets/323.png) ![alt text](assets/324.png) ![alt text](assets/325.png) ![alt text](assets/326.png) ![alt text](assets/327.png) ![alt text](assets/328.png) ![alt text](assets/329.png) ![alt text](assets/330.png) ![alt text](assets/331.png) ![alt text](assets/332.png)
 ### Implementation
 
 * Section 5 tasks:-
@@ -1429,7 +1539,9 @@ gen_pdn
 ```
 
 Screenshots of power distribution network run
-
+![alt text](assets/545.png)
+![alt text](assets/546.png)
+![alt text](assets/547.png)
 
 Commands to load PDN def in magic in another terminal
 
@@ -1442,8 +1554,10 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 Screenshots of PDN def
-
-
+![alt text](assets/548.png)
+![alt text](assets/549.png)
+![alt text](assets/550.png)
+![alt text](assets/551.png)
 
 #### 2. Perfrom detailed routing using TritonRoute and explore the routed layout.
 
@@ -1461,8 +1575,16 @@ run_routing
 ```
 
 Screenshots of routing run
-
-
+![alt text](assets/552.png)
+![alt text](assets/553.png)
+![alt text](assets/554.png)
+![alt text](assets/555.png)
+![alt text](assets/556.png)
+![alt text](assets/557.png)
+![alt text](assets/558.png)
+![alt text](assets/559.png)
+![alt text](assets/560.png)
+![alt text](assets/561.png)
 
 Commands to load routed def in magic in another terminal
 
@@ -1475,25 +1597,18 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 Screenshots of routed def
-
-
+![alt text](assets/562.png)
+![alt text](assets/563.png)
+![alt text](assets/564.png)
+![alt text](assets/565.png)
+![alt text](assets/566.png)
+![alt text](assets/567.png)
+![alt text](assets/568.png)
 
 Screenshot of fast route guide present in `openlane/designs/picorv32a/runs/26-03_08-45/tmp/routing` directory
+![alt text](assets/569.png)
 
-
-#### 3. Post-Route parasitic extraction using SPEF extractor.
-
-Commands for SPEF extraction using external tool
-
-```bash
-# Change directory
-cd Desktop/work/tools/SPEF_EXTRACTOR
-
-# Command extract spef
-python3 main.py /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-03_08-45/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.def
-```
-
-#### 4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+#### 3. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
 
 Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
 
@@ -1539,7 +1654,9 @@ exit
 ```
 
 Screenshots of commands run and timing report generated
-
+![alt text](assets/570.png)
+![alt text](assets/571.png)
+![alt text](assets/572.png)
 
 # Acknowledgements
 
