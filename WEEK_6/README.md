@@ -1,4 +1,5 @@
-# Physical Design
+# Physical Design Labs using OpenLANE and Sky130 PDK
+
 ## Objective
 
 To perform hands-on Physical Design labs using a pre-configured VDI image and
