@@ -5,6 +5,8 @@ To perform hands-on Physical Design labs using a pre-configured VDI image and
 understand the complete hierarchy of digital and mixed-signal design implementation — 
 from standard cell design to DRC and STA validation.
 
+![alt text](assets/563.png)
+
 ## 1 Inception of open-source EDA, OpenLANE and Sky130 PDK
 
 ### Theory
