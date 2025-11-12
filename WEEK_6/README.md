@@ -2,9 +2,7 @@
 
 ## Objective
 
-To perform hands-on Physical Design labs using a pre-configured VDI image and
-understand the complete hierarchy of digital and mixed-signal design implementation —
-from standard cell design to DRC and STA validation.
+To perform hands-on Physical Design labs using a pre-configured VDI image and understand the complete hierarchy of digital and mixed-signal design implementation — from standard cell design to DRC and STA validation.
 
 ![alt text](assets/563.png)
 
@@ -53,20 +51,20 @@ from standard cell design to DRC and STA validation.
   - [Theory](#theory-4)
   - [Implementation](#implementation-4)
     - [1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.](#1-perform-generation-of-power-distribution-network-pdn-and-explore-the-pdn-layout)
-    - [2. Perfrom detailed routing using TritonRoute.](#2-perfrom-detailed-routing-using-tritonroute)
-    - [3. Post-Route parasitic extraction using SPEF extractor.](#3-post-route-parasitic-extraction-using-spef-extractor)
-    - [4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.](#4-post-route-opensta-timing-analysis-with-the-extracted-parasitics-of-the-route)
+    - [2. Perfrom detailed routing using TritonRoute and explore the routed layout.](#2-perfrom-detailed-routing-using-tritonroute-and-explore-the-routed-layout)
+    - [3. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.](#3-post-route-opensta-timing-analysis-with-the-extracted-parasitics-of-the-route)
 - [Acknowledgements](#acknowledgements)
 
 ## 1. Inception of open-source EDA, OpenLANE and Sky130 PDK
 
 ### Theory
+
 <details>
 <summary>Click to expand</summary>
 
 #### Package
 
-* In any embedded board we have seen, the part of the board we consider as the chip is only the ***PACKAGE*** of the chip which is nothing but a protective layer or packet bound over the actual chip and the actual manufatured chip is usually present at the center of a package wherein, the connections from package is fed to the chip by ***WIRE BOUND*** method which is none other than basic wired connection.
+- In any embedded board we have seen, the part of the board we consider as the chip is only the ***PACKAGE*** of the chip which is nothing but a protective layer or packet bound over the actual chip and the actual manufatured chip is usually present at the center of a package wherein, the connections from package is fed to the chip by ***WIRE BOUND*** method which is none other than basic wired connection.
 
 ![alt text](assets/1.png)
 ![alt text](assets/2.png)
@@ -74,40 +72,41 @@ from standard cell design to DRC and STA validation.
 
 #### Chip
 
-* Now, taking a look inside the chip, all the signals from the external world to the chip and vice versa is passed through ***PADS***. The area bound by the pads is ***CORE*** where all the digital logic of the chip is placed. Both the core and pads make up the ***DIE*** which is the basic manufacturing unit in regards to semiconductor chips.
+- Now, taking a look inside the chip, all the signals from the external world to the chip and vice versa is passed through ***PADS***. The area bound by the pads is ***CORE*** where all the digital logic of the chip is placed. Both the core and pads make up the ***DIE*** which is the basic manufacturing unit in regards to semiconductor chips.
 ![alt text](assets/4.png)
 
-* ***FOUNDRY*** is the place where the semiconductor chips are manufactured and ***FOUNDRY IP's*** are Intellectual Properties based on a specific foundry and these IP's require a specific level of intelligence to be produced whereas, repeatable digital logic blocks are called ***MACROS***.
+- ***FOUNDRY*** is the place where the semiconductor chips are manufactured and ***FOUNDRY IP's*** are Intellectual Properties based on a specific foundry and these IP's require a specific level of intelligence to be produced whereas, repeatable digital logic blocks are called ***MACROS***.
 ![alt text](assets/6.png)
 
 #### ISA (Intruction Set Architecture)
 
-* A C program which has to be run on a specific hardware layout which is the interior of a chip in your laptop, there is certain flow to be followed.
-* Initially, this particular C program is compiled in it's assembly language program which is nothing but ***RISC-V ISA (Reduced Instruction Set Compting - V Intruction Set Architecture)***.
-* Following this, the assembly language program is then converted to machine language program which is the binary language logic 0 and 1 which is understood by the hardware of the computer.
-* Directly after this, we've to implement this RISC-V specification using some ***RTL (a Hardware Description Language)***. Finally, from the RTL to ***Layout*** it is a standard PnR or RTL to GDSII flow.
+- A C program which has to be run on a specific hardware layout which is the interior of a chip in your laptop, there is certain flow to be followed.
+- Initially, this particular C program is compiled in it's assembly language program which is nothing but ***RISC-V ISA (Reduced Instruction Set Compting - V Intruction Set Architecture)***.
+- Following this, the assembly language program is then converted to machine language program which is the binary language logic 0 and 1 which is understood by the hardware of the computer.
+- Directly after this, we've to implement this RISC-V specification using some ***RTL (a Hardware Description Language)***. Finally, from the RTL to ***Layout*** it is a standard PnR or RTL to GDSII flow.
 
 ![alt text](assets/7.png)
 
-* For an application software to be run on a hardware there are several processes taking place. To begin with, the apps enters into a block called system software and it converts the application program to binary language. There are various layers in system software in which the major layers or components are OS (Operating System), Compiler and Assembler.
-* At first the OS outputs are small function in C, C++, VB or Java language which are taken by the respective compiler and converted into instructions and the syntax of these instructions varies with the hardware architecture on which the system is implemented.
-* Then, the job of the assembler is to take these instructions and convert it into it's binary format which is basically called as a machine language program. Finally, this binary language is fed to the hardware and it understands the specific functions it has to perform based on the binary code it receives.
+- For an application software to be run on a hardware there are several processes taking place. To begin with, the apps enters into a block called system software and it converts the application program to binary language. There are various layers in system software in which the major layers or components are OS (Operating System), Compiler and Assembler.
+- At first the OS outputs are small function in C, C++, VB or Java language which are taken by the respective compiler and converted into instructions and the syntax of these instructions varies with the hardware architecture on which the system is implemented.
+- Then, the job of the assembler is to take these instructions and convert it into it's binary format which is basically called as a machine language program. Finally, this binary language is fed to the hardware and it understands the specific functions it has to perform based on the binary code it receives.
 
 ![alt text](assets/8.png)
 
-* For example, if we take a stopwatch app on RISC-V core, then the output of the OS could be a small C function which enters into the compiler and we get output RISC-V instructions following this, the output of the assembler will be the binary code which enters into your chip layout.
+- For example, if we take a stopwatch app on RISC-V core, then the output of the OS could be a small C function which enters into the compiler and we get output RISC-V instructions following this, the output of the assembler will be the binary code which enters into your chip layout.
 
 ![alt text](assets/9.png)
 
-* For the above stopwatch the following are the input and output of the compiler and assembler.
+- For the above stopwatch the following are the input and output of the compiler and assembler.
 
 ![alt text](assets/11.png)
 
-* The output of the compiler are instructions and the output of the assembler is the binary pattern. Now, we need some RTL (a Hardware Description Language) which understands and implements the particular instructions. Then, this RTL is synthesised into a netlist in form of gates which is fabricated into the chip through a physical design implementation.
+- The output of the compiler are instructions and the output of the assembler is the binary pattern. Now, we need some RTL (a Hardware Description Language) which understands and implements the particular instructions. Then, this RTL is synthesised into a netlist in form of gates which is fabricated into the chip through a physical design implementation.
 
 ![alt text](assets/14.png)
 
-* There are mainly 3 different parts in this course. They are:
+- There are mainly 3 different parts in this course. They are:
+
 1. RISC-V ISA
 2. RTL and synthesis of RISC-V based CPU core - picorv32
 3. Physical design implementation of picorv32
@@ -116,82 +115,83 @@ from standard cell design to DRC and STA validation.
 
 #### Open-source Implementation
 
-* For open-source ASIC design implemantation, we require the following enablers to be readily available as open-source versions. They are:-
+- For open-source ASIC design implemantation, we require the following enablers to be readily available as open-source versions. They are:-
+
 1. RTL Designs
 2. EDA Tools
 3. PDK Data
 
-* Initially in the early ages, the design and fabrication of IC's were tightly coupled and were only practiced by very few companies like TI, Intel, etc.
-* In 1979, Lynn Conway and Carver Mead came up with an idea to saperate the design from the fabrication and to do this they inroduced structured design methodologies based on the λ-based design rules and published the first VLSI book "Introduction to VLSI System" which started the VLSI education.
-* This methodology resulted in the emergence of the design only companies or ***"Fabless Companies"*** and fabrication only companies that we usually refer to as ***"Pure Play Fabs"***.
-* The inteface between the designers and the fab by now became a set of data files and documents, that are reffered to as the ***"Process Design Kits (PDKs)"***.
-* The PDK include but not limited to Device Models, Technology Information, Design Rules, Digital Standard Cell Libraries, I/O Libraries and many more.
-* Since, the PDK contained variety of informations, and so they were distributed only under NDAs (Non-Disclosure Agreements) which made it in-accessible to the public.
-* Recently, Google worked out an agreement with skywater to open-source the PDK for the 130nm process by skywater Technology, as a result on 30 June 2020 Google released the first ever open-source PDK.
+- Initially in the early ages, the design and fabrication of IC's were tightly coupled and were only practiced by very few companies like TI, Intel, etc.
+- In 1979, Lynn Conway and Carver Mead came up with an idea to saperate the design from the fabrication and to do this they inroduced structured design methodologies based on the λ-based design rules and published the first VLSI book "Introduction to VLSI System" which started the VLSI education.
+- This methodology resulted in the emergence of the design only companies or ***"Fabless Companies"*** and fabrication only companies that we usually refer to as ***"Pure Play Fabs"***.
+- The inteface between the designers and the fab by now became a set of data files and documents, that are reffered to as the ***"Process Design Kits (PDKs)"***.
+- The PDK include but not limited to Device Models, Technology Information, Design Rules, Digital Standard Cell Libraries, I/O Libraries and many more.
+- Since, the PDK contained variety of informations, and so they were distributed only under NDAs (Non-Disclosure Agreements) which made it in-accessible to the public.
+- Recently, Google worked out an agreement with skywater to open-source the PDK for the 130nm process by skywater Technology, as a result on 30 June 2020 Google released the first ever open-source PDK.
 
 ![alt text](assets/18.png)
 
-* ASIC design is a complex step that involves tons of steps, various methodologies and respective EDA tools which are all required for successful ASIC implementation which is achieved though an ASIC flow which is nothing but a piece of software that pulls different tools togather to carry out the design process.
+- ASIC design is a complex step that involves tons of steps, various methodologies and respective EDA tools which are all required for successful ASIC implementation which is achieved though an ASIC flow which is nothing but a piece of software that pulls different tools togather to carry out the design process.
 
 ![alt text](assets/19.png)
 
 #### OpenLANE Open-source ASIC Design Implementation Flow
 
-* The main objective of the ASIC Design Flow is to take the design from the RTL (Register Transfer Level) all the way to the GDSII, which is the format used for the final fabrication layout.
+- The main objective of the ASIC Design Flow is to take the design from the RTL (Register Transfer Level) all the way to the GDSII, which is the format used for the final fabrication layout.
 
 ![alt text](assets/20.png)
 
-* Synthesis is the process of convertion or translation of design RTL into circuits made out of Standard Cell Libraries (SCL) the resultant circuit is described in HDL and is usually reffered to as the Gate-Level Netlist.
-* Gate-Level Netlist is functionally equivalent to the RTL.
+- Synthesis is the process of convertion or translation of design RTL into circuits made out of Standard Cell Libraries (SCL) the resultant circuit is described in HDL and is usually reffered to as the Gate-Level Netlist.
+- Gate-Level Netlist is functionally equivalent to the RTL.
 
 ![alt text](assets/21.png)
 
-* The fundemental building blocks which are the standard cells have regular layouts.
-* Each cell has different views/models which are utilised by different EDA tools like liberty view with electrical models of the cells, HDL behavioral models, SPICE or CDL views of the cells, Layout view which include GDSII view which is the detailed view and LEF view which is the abstract view.
+- The fundemental building blocks which are the standard cells have regular layouts.
+- Each cell has different views/models which are utilised by different EDA tools like liberty view with electrical models of the cells, HDL behavioral models, SPICE or CDL views of the cells, Layout view which include GDSII view which is the detailed view and LEF view which is the abstract view.
 
 ![alt text](assets/22.png)
 
-* Chip Floor Planning
+- Chip Floor Planning
 
 ![alt text](assets/23.png)
 
-* Macro Floor Planning
+- Macro Floor Planning
 
 ![alt text](assets/24.png)
 
-* Power Planning typically uses upper metal layers for power distribution since thay are thicker than lower metal layers and so have lower resistance and PP is done to avoid electron migration and IR drops.
+- Power Planning typically uses upper metal layers for power distribution since thay are thicker than lower metal layers and so have lower resistance and PP is done to avoid electron migration and IR drops.
 
 ![alt text](assets/25.png)
 
-* Placement
+- Placement
 
 ![alt text](assets/26.png)
 
-* Global placement provide approximate locations for all cells based on connectivity but in this stage the cells may be overlapped on each other and in detailed placement the positions obtained from global placements are minimally altered to make it legal (non-overlapping and in site-rows)
+- Global placement provide approximate locations for all cells based on connectivity but in this stage the cells may be overlapped on each other and in detailed placement the positions obtained from global placements are minimally altered to make it legal (non-overlapping and in site-rows)
 
 ![alt text](assets/28.png)
 
-* Clock Tree Synthesis
+- Clock Tree Synthesis
 
 ![alt text](assets/29.png)
 
-* Clock skew is the time difference in arrival of clock at different components.
-* Routing
+- Clock skew is the time difference in arrival of clock at different components.
+- Routing
 
 ![alt text](assets/30.png)
 
-* skywater PDK has 6 routing layers in which the lowest layer is called the local interconnect layer which is a Titanium Nitride layer the following 5 layers are all Aluminium layers.
+- skywater PDK has 6 routing layers in which the lowest layer is called the local interconnect layer which is a Titanium Nitride layer the following 5 layers are all Aluminium layers.
 
 ![alt text](assets/image.png)
 
-* Global and Detailed Routing
+- Global and Detailed Routing
 
 ![alt text](assets/31.png)
 
-* Once done with the routing the final layout can be generated which undergoes various Sign-Off checks.
-* Design Rules Checking (DRC) which verifies that the final layout honours all design fabrication rules.
-* Layout Vs Schematic (LVS) which verifies that the final layout functionality matches the gate-level netlist that we started with.
-* Static Timing Analysis (STA) to verify that the design runs at the designated clock frequency.
+- Once done with the routing the final layout can be generated which undergoes various Sign-Off checks.
+- Design Rules Checking (DRC) which verifies that the final layout honours all design fabrication rules.
+- Layout Vs Schematic (LVS) which verifies that the final layout functionality matches the gate-level netlist that we started with.
+- Static Timing Analysis (STA) to verify that the design runs at the designated clock frequency.
 
 ![alt text](assets/32.png)
 ![alt text](assets/33.png)
@@ -229,21 +229,22 @@ from standard cell design to DRC and STA validation.
 
 ### Implementation
 
-Section 1 tasks:- 
+Section 1 tasks:-
+
 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
 2. Calculate the flop ratio.
 
 ```math
 Flop\ Ratio = \frac{Number\ of\ D\ Flip\ Flops}{Total\ Number\ of\ Cells}
 ```
+
 ```math
 Percentage\ of\ DFF's = Flop\ Ratio * 100
 ```
 
-* All section 1 logs, reports and results can be found in following run folder:
+- All section 1 logs, reports and results can be found in following run folder: [27-10_17-46](WEEK_6/openlane_working_dir/openlane/designs/picorv32a/runs/27-10_17-46)
 
-
-#### 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+#### 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs
 
 Commands to invoke the OpenLANE flow and perform synthesis
 
@@ -255,6 +256,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 # Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
 docker
 ```
+
 ```tcl
 # Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
 ./flow.tcl -interactive
@@ -280,9 +282,9 @@ Screenshots of running each commands
 ![alt text](assets/72.png)
 ![alt text](assets/73.png)
 ![alt text](assets/74.png)
+![alt text](assets/75.png)
 
-
-#### 2. Calculate the flop ratio.
+#### 2. Calculate the flop ratio
 
 Screenshots of synthesis statistics report file with required values highlighted
 
@@ -295,9 +297,11 @@ Calculation of Flop Ratio and DFF % from synthesis statistics report file
 ```math
 Flop\ Ratio = \frac{1613}{14876} = 0.108429685
 ```
+
 ```math
 Percentage\ of\ DFF's = 0.108429685 * 100 = 10.84296854\ \%
 ```
+
 ![alt text](assets/84.png)
 
 ## Section 2 - Good floorplan vs bad floorplan and introduction to library cells
@@ -312,7 +316,8 @@ Percentage\ of\ DFF's = 0.108429685 * 100 = 10.84296854\ \%
 
 ### Implementation
 
-Section 2 tasks:- 
+Section 2 tasks:-
+
 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 2. Calculate the die area in microns from the values in floorplan def.
 3. Load generated floorplan def in magic tool and explore the floorplan.
@@ -323,7 +328,7 @@ Section 2 tasks:-
 Area\ of\ die\ in\ microns = Die\ width\ in\ microns * Die\ height\ in\ microns
 ```
 
-* All logs, reports and results can be found in following run folder:
+- All logs, reports and results can be found in following run folder: [30-10_16-34](WEEK_6/openlane_working_dir/openlane/designs/picorv32a/runs/30-10_16-34)
 
 #### 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
@@ -337,6 +342,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 # Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
 docker
 ```
+
 ```tcl
 # Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
 ./flow.tcl -interactive
@@ -361,36 +367,43 @@ Screenshot of floorplan run
 ![alt text](assets/336.png)
 ![alt text](assets/337.png)
 
-#### 2. Calculate the die area in microns from the values in floorplan def.
+#### 2. Calculate the die area in microns from the values in floorplan def
 
 Screenshot of contents of floorplan def
 ![alt text](assets/338.png)
 ![alt text](assets/339.png)
 
 According to floorplan def
+
 ```math
 1000\ Unit\ Distance = 1\ Micron
 ```
+
 ```math
 Die\ width\ in\ unit\ distance = 660685 - 0 = 660685
 ```
+
 ```math
 Die\ height\ in\ unit\ distance = 671405 - 0 = 671405
 ```
+
 ```math
 Distance\ in\ microns = \frac{Value\ in\ Unit\ Distance}{1000}
 ```
+
 ```math
 Die\ width\ in\ microns = \frac{660685}{1000} = 660.685\ Microns
 ```
+
 ```math
 Die\ height\ in\ microns = \frac{671405}{1000} = 671.405\ Microns
 ```
+
 ```math
 Area\ of\ die\ in\ microns = 660.685 * 671.405 = 443587.212425\ Square\ Microns
 ```
 
-#### 3. Load generated floorplan def in magic tool and explore the floorplan.
+#### 3. Load generated floorplan def in magic tool and explore the floorplan
 
 Commands to load floorplan def in magic in another terminal
 
@@ -424,7 +437,7 @@ Unplaced standard cells at the origin
 ![alt text](assets/349.png)
 ![alt text](assets/350.png)
 
-#### 4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+#### 4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs
 
 Command to run placement
 
@@ -437,7 +450,7 @@ Screenshots of placement run
 ![alt text](assets/351.png)
 ![alt text](assets/352.png)
 
-#### 5. Load generated placement def in magic tool and explore the placement.
+#### 5. Load generated placement def in magic tool and explore the placement
 
 Commands to load placement def in magic in another terminal
 
@@ -452,7 +465,7 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 Screenshots of floorplan def in magic
 ![alt text](assets/354.png)
 
-Standard cells legally placed 
+Standard cells legally placed
 ![alt text](assets/355.png)
 ![alt text](assets/356.png)
 ![alt text](assets/357.png)
@@ -469,7 +482,7 @@ exit
 exit
 ```
 
-## 3. Design library cell using Magic Layout and ngspice characterization 
+## 3. Design library cell using Magic Layout and ngspice characterization
 
 ### Theory
 
@@ -482,7 +495,8 @@ exit
 
 ### Implementation
 
-* Section 3 tasks:-
+- Section 3 tasks:-
+
 1. Clone custom inverter standard cell design from github repository: [Standard cell design and characterization using OpenLANE flow](https://github.com/nickson-jose/vsdstdcelldesign).
 2. Load the custom inverter layout in magic and explore.
 3. Spice extraction of inverter in magic.
@@ -515,7 +529,7 @@ magic -T sky130A.tech sky130_inv.mag &
 Screenshot of commands run
 ![alt text](assets/360.png)
 
-#### 2. Load the custom inverter layout in magic and explore.
+#### 2. Load the custom inverter layout in magic and explore
 
 Screenshot of custom inverter layout in magic
 ![alt text](assets/361.png)
@@ -536,7 +550,7 @@ NMOS source connectivity to VSS (here VGND) verified
 Deleting necessary layout part to see DRC error
 ![alt text](assets/372.png)
 
-#### 3. Spice extraction of inverter in magic.
+#### 3. Spice extraction of inverter in magic
 
 Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
 
@@ -560,7 +574,7 @@ Screenshot of tkcon window after running above commands
 Screenshot of created spice file
 ![alt text](assets/375.png)
 
-#### 4. Editing the spice model file for analysis through simulation.
+#### 4. Editing the spice model file for analysis through simulation
 
 Measuring unit distance in layout grid
 ![alt text](assets/374.png)
@@ -568,7 +582,7 @@ Measuring unit distance in layout grid
 Final edited spice file ready for ngspice simulation
 ![alt text](assets/376.png)
 
-#### 5. Post-layout ngspice simulations.
+#### 5. Post-layout ngspice simulations
 
 Commands for ngspice simulation
 
@@ -591,9 +605,11 @@ Rise transition time calculation
 ```math
 Rise\ transition\ time = Time\ taken\ for\ output\ to\ rise\ to\ 80\% - Time\ taken\ for\ output\ to\ rise\ to\ 20\%
 ```
+
 ```math
 20\%\ of\ output = 660\ mV
 ```
+
 ```math
 80\%\ of\ output = 2.64\ V
 ```
@@ -616,9 +632,11 @@ Fall transition time calculation
 ```math
 Fall\ transition\ time = Time\ taken\ for\ output\ to\ fall\ to\ 20\% - Time\ taken\ for\ output\ to\ fall\ to\ 80\%
 ```
+
 ```math
 20\%\ of\ output = 660\ mV
 ```
+
 ```math
 80\%\ of\ output = 2.64\ V
 ```
@@ -641,14 +659,13 @@ Rise Cell Delay Calculation
 ```math
 Rise\ Cell\ Delay = Time\ taken\ for\ output\ to\ rise\ to\ 50\% - Time\ taken\ for\ input\ to\ fall\ to\ 50\%
 ```
+
 ```math
 50\%\ of\ 3.3\ V = 1.65\ V
 ```
 
 50% Screenshots
 ![alt text](assets/392.png)
-
-
 
 ```math
 Rise\ Cell\ Delay = 2.21157 - 2.15005 = 0.06152\ ns = 61.52\ ps
@@ -659,6 +676,7 @@ Fall Cell Delay Calculation
 ```math
 Fall\ Cell\ Delay = Time\ taken\ for\ output\ to\ fall\ to\ 50\% - Time\ taken\ for\ input\ to\ rise\ to\ 50\%
 ```
+
 ```math
 50\%\ of\ 3.3\ V = 1.65\ V
 ```
@@ -670,7 +688,7 @@ Fall\ Cell\ Delay = Time\ taken\ for\ output\ to\ fall\ to\ 50\% - Time\ taken\ 
 Fall\ Cell\ Delay = 4.07 - 4.05 = 0.02\ ns = 20\ ps
 ```
 
-#### 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+#### 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them
 
 Link to Sky130 Periphery rules: [https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
 
@@ -706,8 +724,7 @@ Screenshots of commands run
 Screenshot of .magicrc file
 ![alt text](assets/397.png)
 
-
-**Incorrectly implemented poly.9 simple rule correction**
+- **Incorrectly implemented poly.9 simple rule correction**
 
 Screenshot of poly rules
 ![alt text](assets/image-1.png)
@@ -724,7 +741,6 @@ Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48u
 ![alt text](assets/402.png)
 ![alt text](assets/430.png)
 ![alt text](assets/431.png)
-
 
 New commands inserted in sky130A.tech file to update drc
 ![alt text](assets/425.png)
@@ -751,7 +767,7 @@ Screenshot of magic window with rule implemented
 ![alt text](assets/431.png)
 ![alt text](assets/432.png)
 
-**Incorrectly implemented nwell.4 complex rule correction**
+- **Incorrectly implemented nwell.4 complex rule correction**
 
 Screenshot of nwell rules
 ![alt text](assets/433.png)
@@ -808,7 +824,8 @@ Screenshot of magic window with rule implemented
 
 ### Implementation
 
-* Section 4 tasks:-
+- Section 4 tasks:-
+
 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow.
 2. Save the finalized layout with custom name and open it.
 3. Generate lef from the layout.
@@ -823,27 +840,33 @@ Screenshot of magic window with rule implemented
 12. Post-CTS OpenROAD timing analysis.
 13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
 
-* Section 4 - Tasks 1 to 4 files, reports and logs can be found in the following folder:
+- Section 4 - reports and logs can be found in the following folder:
 
+[Section 4 - \(vsdstdcelldesign\)](openlane_working_dir/openlane/vsdstdcelldesign)
 
-* Section 4 - Task 4 files, reports and logs can be found in the following folder:
+- Section 4 - reports and logs can be found in the following folder:
 
+[Section 4 - (src\)](openlane_working_dir/openlane/designs/picorv32a/src)
 
-* Section 4 - Task 5 files, reports and logs can be found in the following folder:
+- Section 4 - Task 5 files, reports and logs can be found in the following folder:
 
+[Section 4 - \(picorv32a\)](openlane_working_dir/openlane/designs/picorv32a)
 
-* Section 4 - Tasks 6 to 8 & 11 to 13 logs, reports and results can be found in following run folder:
+- Section 4 - logs, reports and results can be found in following run folder:
 
+[Section 4 - \(11-11_13-20)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_13-20)
 
-* Section 4 - Tasks 9 to 11 logs, reports and results can be found in following run folder:
+- Section 4 - Tasks 9 to 11 logs, reports and results can be found in following run folder:
 
+[Section 4 - \(11-11_14-29)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_14-29)
 
-#### 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+#### 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow
 
 Conditions to be verified before moving forward with custom designed cell layout:
-* Condition 1: The input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
-* Condition 2: Width of the standard cell should be odd multiples of the horizontal track pitch.
-* Condition 3: Height of the standard cell should be even multiples of the vertical track pitch.
+
+- Condition 1: The input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
+- Condition 2: Width of the standard cell should be odd multiples of the horizontal track pitch.
+- Condition 3: Height of the standard cell should be even multiples of the vertical track pitch.
 
 Commands to open the custom inverter layout
 
@@ -881,7 +904,6 @@ Condition 2 verified
 Horizontal\ track\ pitch = 0.46\ um
 ```
 
-
 ```math
 Width\ of\ standard\ cell = 1.38\ um = 0.46 * 3
 ```
@@ -891,13 +913,14 @@ Condition 3 verified
 ```math
 Vertical\ track\ pitch = 0.34\ um
 ```
+
 ![alt text](assets/452.png)
 
 ```math
 Height\ of\ standard\ cell = 2.72\ um = 0.34 * 8
 ```
 
-#### 2. Save the finalized layout with custom name and open it.
+#### 2. Save the finalized layout with custom name and open it
 
 Command for tkcon window to save the layout with custom name
 
@@ -918,7 +941,7 @@ Screenshot of newly saved layout
 ![alt text](assets/454.png)
 ![alt text](assets/455.png)
 
-#### 3. Generate lef from the layout.
+#### 3. Generate lef from the layout
 
 Command for tkcon window to write lef
 
@@ -937,7 +960,7 @@ Screenshot of newly created lef file
 ![alt text](assets/462.png)
 ![alt text](assets/463.png)
 
-#### 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+#### 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory
 
 Commands to copy necessary files to 'picorv32a' design 'src' directory
 
@@ -958,7 +981,7 @@ ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
 Screenshot of commands run
 ![alt text](assets/464.png)
 
-#### 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+#### 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow
 
 Commands to be added to config.tcl to include our custom cell in the openlane flow
 
@@ -974,9 +997,9 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 Edited config.tcl to include the added lef and change library to ones we added in src directory
 ![alt text](assets/465.png)
 
-#### 6. Run openlane flow synthesis with newly inserted custom inverter cell.
+#### 6. Run openlane flow synthesis with newly inserted custom inverter cell
 
-Commands to invoke the OpenLANE flow include new lef and perform synthesis 
+- Commands to invoke the OpenLANE flow include new lef and perform synthesis
 
 ```bash
 # Change directory to openlane flow directory
@@ -986,6 +1009,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 # Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
 docker
 ```
+
 ```tcl
 # Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
 ./flow.tcl -interactive
@@ -1012,9 +1036,7 @@ Screenshots of commands run
 ![alt text](assets/470.png)
 ![alt text](assets/471.png)
 
-
-
-#### 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+#### 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters
 
 Noting down current design values generated before modifying parameters to improve timing
 ![alt text](assets/472.png)
@@ -1068,7 +1090,7 @@ Comparing to previously noted run values area has increased and worst negative s
 ![alt text](assets/475.png)
 ![alt text](assets/476.png)
 
-#### 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+#### 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow
 
 Now that our custom inverter is properly accepted in synthesis we can now run floorplan using following command
 
@@ -1112,7 +1134,7 @@ Commands to load placement def in magic in another terminal
 
 ```bash
 # Change directory to path containing generated placement def
-cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/24-03_10-03/results/placement/
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/11-11_/results/placement/
 
 # Command to load the placement def in magic tool
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
@@ -1137,11 +1159,11 @@ Abutment of power pins with other cell from library clearly visible
 ![alt text](assets/491.png)
 ![alt text](assets/492.png)
 
-#### 9. Do Post-Synthesis timing analysis with OpenSTA tool.
+#### 9. Do Post-Synthesis timing analysis with OpenSTA tool
 
 Since we are having 0 wns after improved timing run we are going to do timing analysis on initial run of synthesis which has lots of violations and no parameters were added to improve timing
 
-Commands to invoke the OpenLANE flow include new lef and perform synthesis 
+Commands to invoke the OpenLANE flow include new lef and perform synthesis:
 
 ```bash
 # Change directory to openlane flow directory
@@ -1151,6 +1173,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 # Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
 docker
 ```
+
 ```tcl
 # Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
 ./flow.tcl -interactive
@@ -1183,7 +1206,7 @@ Newly created `pre_sta.conf` for STA analysis in `openlane` directory
 Newly created `my_base.sdc` for STA analysis in `openlane/designs/picorv32a/src` directory based on the file `openlane/scripts/base.sdc`
 ![alt text](assets/497.png)
 
-Commands to run STA in another terminal
+- Commands to run STA in another terminal
 
 ```bash
 # Change directory to openlane
@@ -1199,7 +1222,7 @@ Screenshots of commands run
 
 Since more fanout is causing more delay we can add parameter to reduce fanout and do synthesis again
 
-Commands to include new lef and perform synthesis 
+- Commands to include new lef and perform synthesis:
 
 ```tcl
 # Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
@@ -1237,7 +1260,7 @@ Screenshots of commands run
 ![alt text](assets/501.png)
 ![alt text](assets/502.png)
 
-#### 10. Make timing ECO fixes to remove all violations.
+#### 10. Make timing ECO fixes to remove all violations
 
 OR gate of drive strength 2 is driving 4 fanouts
 ![alt text](assets/503.png)
@@ -1262,7 +1285,6 @@ Result - slack reduced
 ![alt text](assets/504.png)
 ![alt text](assets/505.png)
 ![alt text](assets/506.png)
-
 
 OR gate of drive strength 2 is driving 4 fanouts
 ![alt text](assets/507.png)
@@ -1335,9 +1357,9 @@ report_checks -from _29043_ -to _30440_ -through _14506_
 Screenshot of replaced instance
 ![alt text](assets/517.png)
 
-*We started ECO fixes at wns -23.9000 and now we stand at wns -22.6173 we reduced around 1.2827 ns of violation*
+- **We started ECO fixes at wns -23.9000 and now we stand at wns -22.6173 we reduced around 1.2827 ns of violation**
 
-#### 11. Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+#### 11. Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts
 
 Now to insert this updated netlist to PnR flow and we can use `write_verilog` and overwrite the synthesis netlist but before that we are going to make a copy of the old old netlist
 
@@ -1345,7 +1367,7 @@ Commands to make copy of netlist
 
 ```bash
 # Change from home directory to synthesis results directory
-cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/25-03_18-52/results/synthesis/
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/11-11_14-29/results/synthesis/
 
 # List contents of the directory
 ls
@@ -1381,7 +1403,7 @@ Verified that the netlist is overwritten by checking that instance `_14506_`  is
 
 Since we confirmed that netlist is replaced and will be loaded in PnR but since we want to follow up on the earlier 0 violation design we are continuing with the clean design to further stages
 
-Commands load the design and run necessary stages
+- Commands load the design and run necessary stages
 
 ```tcl
 # Now once again we have to prep design so as to update variables
@@ -1427,9 +1449,9 @@ Screenshots of commands run
 ![alt text](assets/529.png)
 ![alt text](assets/530.png)
 
-#### 12. Post-CTS OpenROAD timing analysis.
+#### 12. Post-CTS OpenROAD timing analysis
 
-Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
+- Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
 
 ```tcl
 # Command to run OpenROAD tool
@@ -1480,9 +1502,9 @@ Screenshots of commands run and timing report generated
 ![alt text](assets/535.png)
 ![alt text](assets/536.png)
 
-#### 13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
+#### 13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'
 
-Commands to be run in OpenLANE flow to do OpenROAD timing analysis after changing `CTS_CLK_BUFFER_LIST`
+- Commands to be run in OpenLANE flow to do OpenROAD timing analysis after changing `CTS_CLK_BUFFER_LIST`
 
 ```tcl
 # Checking current value of 'CTS_CLK_BUFFER_LIST'
@@ -1581,16 +1603,16 @@ Screenshots of commands run and timing report generated
 
 ### Implementation
 
-* Section 5 tasks:-
+- Section 5 tasks:-
+
 1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
 2. Perfrom detailed routing using TritonRoute.
 3. Post-Route parasitic extraction using SPEF extractor.
 4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
 
-* All section 5 logs, reports and results can be found in following run folder:
+- All section 5 logs, reports and results can be found in following run folder:
 
-
-#### 1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
+#### 1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout
 
 Commands to perform all necessary stages up until now
 
@@ -1602,6 +1624,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 # Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
 docker
 ```
+
 ```tcl
 # Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
 ./flow.tcl -interactive
@@ -1664,7 +1687,7 @@ Screenshots of PDN def
 ![alt text](assets/550.png)
 ![alt text](assets/551.png)
 
-#### 2. Perfrom detailed routing using TritonRoute and explore the routed layout.
+#### 2. Perfrom detailed routing using TritonRoute and explore the routed layout
 
 Command to perform routing
 
@@ -1710,10 +1733,10 @@ Screenshots of routed def
 ![alt text](assets/567.png)
 ![alt text](assets/568.png)
 
-Screenshot of fast route guide present in `openlane/designs/picorv32a/runs/26-03_08-45/tmp/routing` directory
+Screenshot of fast route guide present in `openlane/designs/picorv32a/runs/11-11_15_47/tmp/routing` directory
 ![alt text](assets/569.png)
 
-#### 3. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+#### 3. Post-Route OpenSTA timing analysis with the extracted parasitics of the route
 
 Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
 
@@ -1763,9 +1786,9 @@ Screenshots of commands run and timing report generated
 ![alt text](assets/571.png)
 ![alt text](assets/572.png)
 
-# Acknowledgements
+## Acknowledgements
 
-* [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
-* [Nickson P Jose](https://github.com/nickson-jose), Physical Design Engineer, Intel Corporation.
-* [R. Timothy Edwards](https://github.com/RTimothyEdwards), Senior Vice President of Analog and Design, efabless Corporation.
-* [Fayiz Ferosh](https://github.com/fayizferosh/soc-design-and-planning-nasscom-vsd/blob/main/README.md)
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+- [Nickson P Jose](https://github.com/nickson-jose), Physical Design Engineer, Intel Corporation.
+- [R. Timothy Edwards](https://github.com/RTimothyEdwards), Senior Vice President of Analog and Design, efabless Corporation.
+- [Fayiz Ferosh](https://github.com/fayizferosh/soc-design-and-planning-nasscom-vsd/blob/main/README.md)
