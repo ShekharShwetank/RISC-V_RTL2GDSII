@@ -1,0 +1,30 @@
+Tue Nov 11 13:30:32 UTC 2025 - Executing "python3 /openLANE_flow/scripts/extract_metal_layers.py -t /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef -o /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/met_layers_list.txt"
+
+Tue Nov 11 13:30:32 UTC 2025 - Executing "/openLANE_flow/scripts/mergeLef.py -i /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef {/home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd__fill_12.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd__decap_12.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd__fakediode_2.lef} -o /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef |& tee >&@stdout"
+
+Tue Nov 11 13:30:32 UTC 2025 - Executing "/openLANE_flow/scripts/mergeLef.py -i /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef /openLANE_flow/designs/picorv32a/src/SS_sky130_vsdinv.lef -o /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef |& tee >&@stdout"
+
+Tue Nov 11 13:30:32 UTC 2025 - Executing "/openLANE_flow/scripts/libtrim.pl /openLANE_flow/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/trimmed.lib.exclude.list > /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/trimmed.lib"
+
+Tue Nov 11 13:30:32 UTC 2025 - Executing "echo {openlane v0.21} > /openLANE_flow/designs/picorv32a/runs/11-11_13-20/OPENLANE_VERSION"
+
+Tue Nov 11 13:32:52 UTC 2025 - Executing "/openLANE_flow/scripts/mergeLef.py -i /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged.lef /openLANE_flow/designs/picorv32a/src/SS_sky130_vsdinv.lef -o /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged.lef.new"
+
+Tue Nov 11 13:32:52 UTC 2025 - Executing "/openLANE_flow/scripts/mergeLef.py -i /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef /openLANE_flow/designs/picorv32a/src/SS_sky130_vsdinv.lef -o /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef.new"
+
+Tue Nov 11 13:32:52 UTC 2025 - Executing "mv /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged.lef.new /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged.lef"
+
+Tue Nov 11 13:32:52 UTC 2025 - Executing "mv /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef.new /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/merged_unpadded.lef"
+
+Tue Nov 11 13:33:11 UTC 2025 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /openLANE_flow/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib > /openLANE_flow/designs/picorv32a/runs/11-11_13-20/tmp/sky130_fd_sc_hd__typical.no_pg.lib"
+
+Tue Nov 11 13:33:11 UTC 2025 - Executing "yosys -c /openLANE_flow/scripts/synth.tcl -l /openLANE_flow/designs/picorv32a/runs/11-11_13-20/logs/synthesis/1-yosys.log |& tee >&@stdout"
+
+Tue Nov 11 13:33:40 UTC 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openLANE_flow\/designs\/picorv32a\/runs\/11-11_13-20\/results\/synthesis\/picorv32a.synthesis.v/} /openLANE_flow/designs/picorv32a/runs/11-11_13-20/config.tcl"
+
+Tue Nov 11 13:33:40 UTC 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 0/} /openLANE_flow/designs/picorv32a/runs/11-11_13-20/config.tcl"
+
+Tue Nov 11 13:33:40 UTC 2025 - Executing "sed -i /defparam/d /openLANE_flow/designs/picorv32a/runs/11-11_13-20/results/synthesis/picorv32a.synthesis.v"
+
+Tue Nov 11 13:33:40 UTC 2025 - Executing "sta /openLANE_flow/scripts/sta.tcl |& tee >&@stdout /openLANE_flow/designs/picorv32a/runs/11-11_13-20/logs/synthesis/2-opensta"
+

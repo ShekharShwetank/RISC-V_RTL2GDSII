@@ -1,0 +1,6 @@
+2-prep 0h0m0s352ms
+3-yosys 0h0m36s820ms
+4-opensta 0h0m0s881ms
+5-verilog2def_openroad 0h0m1s204ms
+6-ioPlacer 0h0m0s810ms
+7-replace 0h0m8s727ms

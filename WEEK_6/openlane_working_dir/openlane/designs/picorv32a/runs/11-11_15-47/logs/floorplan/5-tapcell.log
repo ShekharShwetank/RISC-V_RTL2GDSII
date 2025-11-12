@@ -1,0 +1,23 @@
+OpenROAD 0.9.0 1415572a73
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Notice 0: Reading LEF file:  /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/merged_unpadded.lef
+Notice 0:     Created 13 technology layers
+Notice 0:     Created 25 technology vias
+Notice 0:     Created 442 library cells
+Notice 0: Finished LEF file:  /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/merged_unpadded.lef
+Notice 0: 
+Reading DEF file: /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/floorplan/4-ioPlacer.def
+Notice 0: Design: picorv32a
+Notice 0:     Created 409 pins.
+Notice 0:     Created 15705 components and 118344 component-terminals.
+Notice 0:     Created 17241 nets and 55482 connections.
+Notice 0: Finished DEF file: /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/floorplan/4-ioPlacer.def
+Step 1: Cut rows...
+[INFO TAP-0001] Macro blocks found: 0
+[INFO TAP-0002] #Original rows: 260
+[INFO TAP-0003] #Cut rows: 0
+Step 2: Insert endcaps...
+[INFO TAP-0004] #Endcaps inserted: 520
+Step 3: Insert tapcells...
+[INFO TAP-0005] #Tapcells inserted: 7072

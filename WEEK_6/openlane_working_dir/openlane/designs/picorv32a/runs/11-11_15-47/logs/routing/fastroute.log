@@ -1,0 +1,2326 @@
+OpenROAD 0.9.0 1415572a73
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Notice 0: Reading LEF file:  /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/merged_unpadded.lef
+Notice 0:     Created 13 technology layers
+Notice 0:     Created 25 technology vias
+Notice 0:     Created 442 library cells
+Notice 0: Finished LEF file:  /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/merged_unpadded.lef
+Notice 0: 
+Reading DEF file: /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/floorplan/14-pdn.def
+Notice 0: Design: picorv32a
+Notice 0:     Created 411 pins.
+Notice 0:     Created 24117 components and 139488 component-terminals.
+Notice 0:     Created 2 special nets and 0 connections.
+Notice 0:     Created 18061 nets and 57122 connections.
+Notice 0: Finished DEF file: /openLANE_flow/designs/picorv32a/runs/11-11_15-47/tmp/floorplan/14-pdn.def
+Min routing layer: 2
+Max routing layer: 6
+Global adjustment: 0.1
+Unidirectional routing: true
+Grid origin: (0, 0)
+[INFO GRT-0004] #DB Obstructions: 0
+[INFO GRT-0005] #DB Obstacles: 848482
+[INFO GRT-0006] #DB Macros: 0
+[INFO GRT-0017] Found 0 clock nets
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 47
+[INFO GRT-0018] Processing 607339 obstacles on layer 1
+[INFO GRT-0019] Processing 89839 obstacles on layer 2
+[INFO GRT-0022] Processing 10 obstacles on layer 5
+[INFO GRT-0023] Processing 10 obstacles on layer 6
+[INFO GRT-0020] Reducing resources of layer 1 by 99%
+[INFO GRT-0021] Reducing resources of layer 2 by 10%
+[INFO GRT-0022] Reducing resources of layer 3 by 10%
+[INFO GRT-0023] Reducing resources of layer 4 by 10%
+[INFO GRT-0024] Reducing resources of layer 5 by 10%
+[INFO GRT-0025] Reducing resources of layer 6 by 10%
+[INFO] WIRELEN : 136312, WIRELEN1 : 0
+[INFO] NumSeg  : 37620
+[INFO] NumShift: 0
+First L Route
+[INFO] WIRELEN : 136220, WIRELEN1 : 136220
+[INFO] NumSeg  : 37482
+[INFO] NumShift: 1067
+[Overflow Report] Total hCap    : 255239
+[Overflow Report] Total vCap    : 207710
+[Overflow Report] Total Usage   : 136220
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] Num Overflow e: 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+Second L Route
+[Overflow Report] Total hCap    : 255239
+[Overflow Report] Total vCap    : 207710
+[Overflow Report] Total Usage   : 136220
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] Num Overflow e: 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+First Z Route
+[Overflow Report] Total hCap    : 255239
+[Overflow Report] Total vCap    : 207710
+[Overflow Report] Total Usage   : 136220
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] Num Overflow e: 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+[INFO] LV routing round 0, enlarge 10 
+[INFO] 10 threshold, 10 expand
+[Overflow Report] total Usage   : 136220
+[Overflow Report] Max H Overflow: 3
+[Overflow Report] Max V Overflow: 5
+[Overflow Report] Max Overflow  : 5
+[Overflow Report] Num Overflow e: 38
+[Overflow Report] H   Overflow  : 26
+[Overflow Report] V   Overflow  : 57
+[Overflow Report] Final Overflow: 83
+
+[INFO] LV routing round 1, enlarge 15 
+[INFO] 5 threshold, 15 expand
+[Overflow Report] total Usage   : 136240
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 1
+[Overflow Report] Max Overflow  : 1
+[Overflow Report] Num Overflow e: 1
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 1
+[Overflow Report] Final Overflow: 1
+
+[INFO] LV routing round 2, enlarge 20 
+[INFO] 1 threshold, 20 expand
+[Overflow Report] total Usage   : 136238
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 2
+[Overflow Report] Max Overflow  : 2
+[Overflow Report] Num Overflow e: 5
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 7
+[Overflow Report] Final Overflow: 7
+
+Running extra iterations to remove overflow...
+Update congestion history type 1
+[INFO] iteration 1, enlarge 20, costheight 9, threshold 10 via cost 2 
+[INFO] log_coef 2.000000, healingTrigger 0 cost_step 5 L 1 cost_type 1 updatetype 1
+[Overflow Report] total Usage   : 136243
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] Num Overflow e: 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+Usage checked
+Maze routing finished
+[INFO] P3 runtime: 0.000000 sec
+[INFO] Final 2D results: 
+[Overflow Report] total Usage   : 136243
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] Num Overflow e: 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+Layer Assignment Begins
+Layer assignment finished
+[INFO] 2D + Layer Assignment Runtime: 2.260000 sec
+Post Processing Begins 
+Post Processsing finished
+ Starting via filling
+[INFO] Via related to pin nodes 75969
+[INFO] Via related stiner nodes 4443
+Via filling finished
+
+Final usage/overflow report: 
+[INFO] Usage per layer: 
+    Layer 1 usage: 0
+    Layer 2 usage: 60252
+    Layer 3 usage: 59876
+    Layer 4 usage: 11358
+    Layer 5 usage: 5125
+    Layer 6 usage: 0
+
+[INFO] Capacity per layer: 
+    Layer 1 capacity: 0
+    Layer 2 capacity: 146162
+    Layer 3 capacity: 142695
+    Layer 4 capacity: 98262
+    Layer 5 capacity: 65015
+    Layer 6 capacity: 10815
+
+[INFO] Use percentage per layer: 
+    Layer 1 use percentage: 0.0%
+    Layer 2 use percentage: 41.22%
+    Layer 3 use percentage: 41.96%
+    Layer 4 use percentage: 11.56%
+    Layer 5 use percentage: 7.88%
+    Layer 6 use percentage: 0.00%
+
+[INFO] Overflow per layer: 
+    Layer 1 overflow: 0
+    Layer 2 overflow: 0
+    Layer 3 overflow: 0
+    Layer 4 overflow: 0
+    Layer 5 overflow: 0
+    Layer 6 overflow: 0
+
+[Overflow Report] Total Usage   : 136611
+[Overflow Report] Total Capacity: 462949
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+[INFO] Final usage          : 136611
+[INFO] Final number of vias : 88606
+[INFO] Final usage 3D       : 402429
+[INFO GRT-0018] Total wirelength: 1264694 um
+Repairing antennas...
+[WARNING GRT-0025] No OR_DEFAULT vias defined
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 2732  _02320_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 4514  _04102_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 5809  _05397_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 5952  _05540_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 6213  _05801_
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 6220  _05808_
+Notice 0: 
+disconnected net 6235  _05823_
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 6245  _05833_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 6645  _06233_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 6904  _06492_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 7287  _06875_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 7498  _07086_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 7599  _07187_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 8797  _08385_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 9257  _08845_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 9470  _09058_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 9590  _09178_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 9953  _09541_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 10019  _09607_
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 10041  _09629_
+Notice 0: 
+disconnected net 10042  _09630_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 10559  _10147_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 10849  _10437_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 10963  _10551_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 11026  _10614_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 11281  _10869_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 11731  _11319_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 11842  _11430_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 12084  _11672_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 12289  _11877_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 12550  _12138_
+Notice 0: 
+disconnected net 12551  _12139_
+Notice 0: 
+disconnected net 12560  _12148_
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 12583  _12171_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 12852  _12440_
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 3 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 17591  net348
+Notice 0: 
+disconnected net 17605  net362
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: 
+disconnected net 17682  net439
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: 
+disconnected net 17691  net448
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 2 T shapes.
+Notice 0: 
+disconnected net 17730  net487
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+Notice 0: Split top of 1 T shapes.
+[INFO GRT-0012] #Antenna violations: 223
+Design Stats
+--------------------------------
+total instances         24546
+multi row instances         0
+fixed instances          8311
+nets                    18063
+design area          501956.4 u^2
+fixed area            14707.9 u^2
+movable area         211143.8 u^2
+utilization                43 %
+utilization padded         43 %
+rows                      260
+row height                2.7 u
+
+Placement Analysis
+--------------------------------
+total displacement       54.0 u
+average displacement      0.0 u
+max displacement          4.1 u
+original HPWL        872520.1 u
+legalized HPWL       887658.0 u
+delta HPWL                  2 %
+
+[WARNING DPL-0005] Overlap check failed (117).
+[INFO GRT-0015] 429 diodes inserted
+Min routing layer: 2
+Max routing layer: 6
+Global adjustment: 0.1
+Unidirectional routing: true
+Grid origin: (0, 0)
+[INFO GRT-0004] #DB Obstructions: 0
+[INFO GRT-0005] #DB Obstacles: 851056
+[INFO GRT-0006] #DB Macros: 0
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 47
+[INFO GRT-0018] Processing 608626 obstacles on layer 1
+[INFO GRT-0019] Processing 90697 obstacles on layer 2
+[INFO GRT-0022] Processing 10 obstacles on layer 5
+[INFO GRT-0023] Processing 10 obstacles on layer 6
+[INFO GRT-0020] Reducing resources of layer 1 by 99%
+[INFO GRT-0021] Reducing resources of layer 2 by 10%
+[INFO GRT-0022] Reducing resources of layer 3 by 10%
+[INFO GRT-0023] Reducing resources of layer 4 by 10%
+[INFO GRT-0024] Reducing resources of layer 5 by 10%
+[INFO GRT-0025] Reducing resources of layer 6 by 10%
+[INFO GRT-0009] #Nets to reroute: 12076
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 14, 16
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 15, 16
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 13, 15
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 14, 15
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 13, 15
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 16, 17
+[WARNING UKN-0000] Underflow in reduce
+[WARNING UKN-0000] cap, reducedCap: 16, 17
+Running extra iterations to remove overflow...
+Update congestion history type 1
+[INFO] iteration 1, enlarge 20, costheight 9, threshold 10 via cost 2 
+[INFO] log_coef 1.181232, healingTrigger 0 cost_step 5 L 1 cost_type 1 updatetype 1
+
+Final usage/overflow report: 
+
+[Overflow Report] Total Usage   : 134099
+[Overflow Report] Total Capacity: 445740
+[Overflow Report] Max H Overflow: 0
+[Overflow Report] Max V Overflow: 0
+[Overflow Report] Max Overflow  : 0
+[Overflow Report] H   Overflow  : 0
+[Overflow Report] V   Overflow  : 0
+[Overflow Report] Final Overflow: 0
+
+[INFO] Final usage          : 134099
+[INFO] Final number of vias : 74018
+[INFO] Final usage 3D       : 356153
+[WARNING DPL-0005] Overlap check failed (117).
+[INFO GRT-0014] Num routed nets: 17220
+create_clock [get_ports $::env(CLOCK_PORT)]  -name $::env(CLOCK_PORT)  -period $::env(CLOCK_PERIOD)
+set input_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
+set output_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
+puts "\[INFO\]: Setting output delay to: $output_delay_value"
+[INFO]: Setting output delay to: 4.946000000000001
+puts "\[INFO\]: Setting input delay to: $input_delay_value"
+[INFO]: Setting input delay to: 4.946000000000001
+set_max_fanout $::env(SYNTH_MAX_FANOUT) [current_design]
+set clk_indx [lsearch [all_inputs] [get_port $::env(CLOCK_PORT)]]
+#set rst_indx [lsearch [all_inputs] [get_port resetn]]
+set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx]
+#set all_inputs_wo_clk_rst [lreplace $all_inputs_wo_clk $rst_indx $rst_indx]
+set all_inputs_wo_clk_rst $all_inputs_wo_clk
+# correct resetn
+set_input_delay $input_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] $all_inputs_wo_clk_rst
+#set_input_delay 0.0 -clock [get_clocks $::env(CLOCK_PORT)] {resetn}
+set_output_delay $output_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] [all_outputs]
+# TODO set this as parameter
+set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) [all_inputs]
+set cap_load [expr $::env(SYNTH_CAP_LOAD) / 1000.0]
+puts "\[INFO\]: Setting load to: $cap_load"
+[INFO]: Setting load to: 0.01765
+set_load  $cap_load [all_outputs]
+[WARNING GRT-0009] missing route to pin _30785_/S0
+[WARNING GRT-0009] missing route to pin _23559_/B
+[WARNING GRT-0009] missing route to pin _23766_/X
+[WARNING GRT-0009] missing route to pin _24103_/X
+[WARNING GRT-0009] missing route to pin _27587_/X
+[WARNING GRT-0009] missing route to pin _19830_/B
+[WARNING GRT-0009] missing route to pin _29399_/A1
+[WARNING GRT-0009] missing route to pin _29453_/S
+[WARNING GRT-0009] missing route to pin _29436_/S
+[WARNING GRT-0009] missing route to pin _30742_/S0
+No paths found.
+Startpoint: _31220_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _31220_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                  0.00    0.00    0.00 ^ _31220_/CLK (sky130_fd_sc_hd__dfxtp_1)
+                  0.03    0.19    0.19 ^ _31220_/Q (sky130_fd_sc_hd__dfxtp_1)
+     1    0.00                           cpuregs[0][25] (net)
+                  0.03    0.00    0.19 ^ _18466_/A (sky130_fd_sc_hd__clkbuf_1)
+                  0.03    0.05    0.25 ^ _18466_/X (sky130_fd_sc_hd__clkbuf_1)
+     1    0.00                           _02860_ (net)
+                  0.03    0.00    0.25 ^ _31220_/D (sky130_fd_sc_hd__dfxtp_1)
+                                  0.25   data arrival time
+
+                  0.00    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                                  0.00 ^ _31220_/CLK (sky130_fd_sc_hd__dfxtp_1)
+                         -0.02   -0.02   library hold time
+                                 -0.02   data required time
+-----------------------------------------------------------------------------
+                                 -0.02   data required time
+                                 -0.25   data arrival time
+-----------------------------------------------------------------------------
+                                  0.26   slack (MET)
+
+
+Startpoint: _32422_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _32349_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                  0.00    0.00    0.00 ^ _32422_/CLK (sky130_fd_sc_hd__dfxtp_4)
+                  0.77    1.20    1.20 ^ _32422_/Q (sky130_fd_sc_hd__dfxtp_4)
+    33    0.17                           latched_stalu (net)
+                  0.77    0.03    1.23 ^ _30323_/S (sky130_fd_sc_hd__mux2_1)
+                  0.19    0.99    2.22 v _30323_/X (sky130_fd_sc_hd__mux2_1)
+     2    0.01                           _00293_ (net)
+                  0.19    0.01    2.22 v _30322_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.12    0.71    2.93 v _30322_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00294_ (net)
+                  0.12    0.00    2.93 v _19592_/B (sky130_fd_sc_hd__and2_1)
+                  0.06    0.33    3.26 v _19592_/X (sky130_fd_sc_hd__and2_1)
+     1    0.00                           _00295_ (net)
+                  0.06    0.00    3.27 v _29613_/A0 (sky130_fd_sc_hd__mux2_2)
+                  0.15    0.61    3.88 v _29613_/X (sky130_fd_sc_hd__mux2_2)
+     4    0.01                           _02560_ (net)
+                  0.15    0.01    3.88 v _19974_/A (sky130_fd_sc_hd__xnor2_1)
+                  0.17    0.32    4.20 v _19974_/Y (sky130_fd_sc_hd__xnor2_1)
+     2    0.01                           _15017_ (net)
+                  0.18    0.00    4.20 v _19979_/A_N (sky130_fd_sc_hd__nand3b_2)
+                  0.16    0.50    4.70 v _19979_/Y (sky130_fd_sc_hd__nand3b_2)
+     2    0.01                           _15019_ (net)
+                  0.16    0.00    4.71 v _19986_/B2 (sky130_fd_sc_hd__a2bb2oi_1)
+                  0.20    0.26    4.97 ^ _19986_/Y (sky130_fd_sc_hd__a2bb2oi_1)
+     1    0.00                           _15024_ (net)
+                  0.20    0.00    4.97 ^ _19987_/B1 (sky130_fd_sc_hd__a21o_1)
+                  0.15    0.26    5.22 ^ _19987_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15025_ (net)
+                  0.15    0.00    5.23 ^ _19993_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.10    0.15    5.38 v _19993_/Y (sky130_fd_sc_hd__o21ai_1)
+     1    0.00                           _15029_ (net)
+                  0.10    0.00    5.38 v _19994_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.33    0.22    5.61 ^ _19994_/Y (sky130_fd_sc_hd__o21ai_1)
+     2    0.01                           _15030_ (net)
+                  0.33    0.00    5.61 ^ _20001_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.17    0.27    5.88 v _20001_/Y (sky130_fd_sc_hd__o21ai_1)
+     1    0.01                           _15035_ (net)
+                  0.17    0.00    5.88 v _20002_/B1 (sky130_fd_sc_hd__o21ai_2)
+                  0.24    0.16    6.04 ^ _20002_/Y (sky130_fd_sc_hd__o21ai_2)
+     2    0.01                           _15036_ (net)
+                  0.24    0.00    6.04 ^ _20009_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.13    0.32    6.36 ^ _20009_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15041_ (net)
+                  0.13    0.00    6.36 ^ _20016_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.13    0.17    6.54 v _20016_/Y (sky130_fd_sc_hd__o21ai_1)
+     1    0.01                           _15046_ (net)
+                  0.13    0.00    6.54 v _20017_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.34    0.25    6.79 ^ _20017_/Y (sky130_fd_sc_hd__o21ai_1)
+     2    0.01                           _15047_ (net)
+                  0.34    0.00    6.79 ^ _20023_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.16    0.38    7.17 ^ _20023_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15051_ (net)
+                  0.16    0.01    7.17 ^ _20032_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.15    0.31    7.48 ^ _20032_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15058_ (net)
+                  0.15    0.00    7.49 ^ _20038_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.17    0.31    7.80 ^ _20038_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15062_ (net)
+                  0.17    0.00    7.80 ^ _20042_/A (sky130_fd_sc_hd__nand2_1)
+                  0.11    0.17    7.97 v _20042_/Y (sky130_fd_sc_hd__nand2_1)
+     2    0.01                           _15064_ (net)
+                  0.11    0.00    7.97 v _20045_/A1 (sky130_fd_sc_hd__a21boi_1)
+                  0.29    0.32    8.29 ^ _20045_/Y (sky130_fd_sc_hd__a21boi_1)
+     2    0.01                           _15067_ (net)
+                  0.29    0.00    8.29 ^ _20051_/B1 (sky130_fd_sc_hd__a21o_1)
+                  0.13    0.27    8.56 ^ _20051_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15071_ (net)
+                  0.13    0.00    8.57 ^ _20057_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.16    0.30    8.86 ^ _20057_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15075_ (net)
+                  0.16    0.00    8.87 ^ _20062_/A (sky130_fd_sc_hd__nand2_1)
+                  0.08    0.13    9.00 v _20062_/Y (sky130_fd_sc_hd__nand2_1)
+     1    0.00                           _15078_ (net)
+                  0.08    0.00    9.00 v _20063_/B1 (sky130_fd_sc_hd__o21ai_1)
+                  0.28    0.19    9.19 ^ _20063_/Y (sky130_fd_sc_hd__o21ai_1)
+     2    0.01                           _15079_ (net)
+                  0.28    0.00    9.19 ^ _20068_/A (sky130_fd_sc_hd__and2_1)
+                  0.09    0.31    9.50 ^ _20068_/X (sky130_fd_sc_hd__and2_1)
+     1    0.00                           _15082_ (net)
+                  0.09    0.00    9.50 ^ _20069_/B1 (sky130_fd_sc_hd__a21o_1)
+                  0.14    0.20    9.70 ^ _20069_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15083_ (net)
+                  0.14    0.00    9.71 ^ _20075_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.16    0.31   10.01 ^ _20075_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15087_ (net)
+                  0.16    0.00   10.02 ^ _20083_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.16    0.31   10.33 ^ _20083_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15093_ (net)
+                  0.16    0.01   10.33 ^ _20089_/A1 (sky130_fd_sc_hd__a21o_1)
+                  0.16    0.31   10.65 ^ _20089_/X (sky130_fd_sc_hd__a21o_1)
+     2    0.01                           _15097_ (net)
+                  0.16    0.00   10.65 ^ _20095_/A1 (sky130_fd_sc_hd__a21oi_2)
+                  0.11    0.16   10.81 v _20095_/Y (sky130_fd_sc_hd__a21oi_2)
+     2    0.01                           _15101_ (net)
+                  0.11    0.00   10.82 v _20100_/B1 (sky130_fd_sc_hd__a21o_1)
+                  0.08    0.31   11.13 v _20100_/X (sky130_fd_sc_hd__a21o_1)
+     1    0.00                           _15104_ (net)
+                  0.08    0.00   11.13 v _20101_/B1 (sky130_fd_sc_hd__o21ai_2)
+                  0.37    0.16   11.29 ^ _20101_/Y (sky130_fd_sc_hd__o21ai_2)
+     4    0.02                           _15105_ (net)
+                  0.37    0.00   11.30 ^ _20124_/A (sky130_fd_sc_hd__nand3_1)
+                  0.15    0.23   11.53 v _20124_/Y (sky130_fd_sc_hd__nand3_1)
+     1    0.00                           _15120_ (net)
+                  0.15    0.00   11.53 v _20125_/A_N (sky130_fd_sc_hd__nand3b_2)
+                  0.15    0.48   12.01 v _20125_/Y (sky130_fd_sc_hd__nand3b_2)
+     1    0.01                           _15121_ (net)
+                  0.15    0.00   12.01 v _20127_/A (sky130_fd_sc_hd__nand2_2)
+                  0.17    0.21   12.21 ^ _20127_/Y (sky130_fd_sc_hd__nand2_2)
+     3    0.02                           _15123_ (net)
+                  0.17    0.00   12.22 ^ _20139_/A (sky130_fd_sc_hd__nand3_4)
+                  0.15    0.19   12.40 v _20139_/Y (sky130_fd_sc_hd__nand3_4)
+     2    0.01                           _15131_ (net)
+                  0.15    0.00   12.41 v _20153_/A2 (sky130_fd_sc_hd__o21bai_2)
+                  0.29    0.32   12.73 ^ _20153_/Y (sky130_fd_sc_hd__o21bai_2)
+     3    0.01                           _15141_ (net)
+                  0.29    0.00   12.73 ^ _20157_/A (sky130_fd_sc_hd__nand2_1)
+                  0.14    0.22   12.95 v _20157_/Y (sky130_fd_sc_hd__nand2_1)
+     2    0.01                           _15143_ (net)
+                  0.14    0.00   12.95 v _20161_/A1 (sky130_fd_sc_hd__a21oi_1)
+                  0.19    0.24   13.20 ^ _20161_/Y (sky130_fd_sc_hd__a21oi_1)
+     1    0.00                           _15147_ (net)
+                  0.19    0.00   13.20 ^ _20163_/A (sky130_fd_sc_hd__nor2_1)
+                  0.07    0.14   13.33 v _20163_/Y (sky130_fd_sc_hd__nor2_1)
+     1    0.00                           _01676_ (net)
+                  0.07    0.00   13.34 v _30338_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.11    0.64   13.98 v _30338_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _01677_ (net)
+                  0.11    0.00   13.98 v _30792_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.16    1.15   15.13 v _30792_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _01678_ (net)
+                  0.16    0.00   15.13 v _30339_/A0 (sky130_fd_sc_hd__mux2_2)
+                  0.15    0.66   15.79 v _30339_/X (sky130_fd_sc_hd__mux2_2)
+     1    0.01                           _02529_ (net)
+                  0.15    0.00   15.79 v _15894_/A (sky130_fd_sc_hd__or2b_1)
+                  0.11    0.54   16.33 v _15894_/X (sky130_fd_sc_hd__or2b_1)
+     1    0.01                           _13098_ (net)
+                  0.11    0.00   16.33 v _15895_/C1 (sky130_fd_sc_hd__o211a_1)
+                  0.07    0.22   16.55 v _15895_/X (sky130_fd_sc_hd__o211a_1)
+     1    0.00                           _03989_ (net)
+                  0.07    0.00   16.55 v _32349_/D (sky130_fd_sc_hd__dfxtp_1)
+                                 16.55   data arrival time
+
+                  0.00   24.73   24.73   clock clk (rise edge)
+                          0.00   24.73   clock network delay (ideal)
+                          0.00   24.73   clock reconvergence pessimism
+                                 24.73 ^ _32349_/CLK (sky130_fd_sc_hd__dfxtp_1)
+                         -0.28   24.45   library setup time
+                                 24.45   data required time
+-----------------------------------------------------------------------------
+                                 24.45   data required time
+                                -16.55   data arrival time
+-----------------------------------------------------------------------------
+                                  7.90   slack (MET)
+
+
+No paths found.
+wns 0.00
+tns 0.00
