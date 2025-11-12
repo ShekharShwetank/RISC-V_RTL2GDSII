@@ -242,7 +242,7 @@ Flop\ Ratio = \frac{Number\ of\ D\ Flip\ Flops}{Total\ Number\ of\ Cells}
 Percentage\ of\ DFF's = Flop\ Ratio * 100
 ```
 
-- All section 1 logs, reports and results can be found in following run folder: [27-10_17-46](WEEK_6/openlane_working_dir/openlane/designs/picorv32a/runs/27-10_17-46)
+- All section 1 logs, reports and results can be found in following run folder: [27-10_17-46](openlane_working_dir/openlane/designs/picorv32a/runs/27-10_17-46)
 
 #### 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs
 
@@ -328,7 +328,7 @@ Section 2 tasks:-
 Area\ of\ die\ in\ microns = Die\ width\ in\ microns * Die\ height\ in\ microns
 ```
 
-- All logs, reports and results can be found in following run folder: [30-10_16-34](WEEK_6/openlane_working_dir/openlane/designs/picorv32a/runs/30-10_16-34)
+- All logs, reports and results can be found in following run folder: [30-10_16-34](openlane_working_dir/openlane/designs/picorv32a/runs/30-10_16-34)
 
 #### 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
