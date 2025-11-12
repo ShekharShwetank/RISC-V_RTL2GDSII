@@ -842,7 +842,7 @@ Screenshot of magic window with rule implemented
 
 - Section 4 - reports and logs can be found in the following folder:
 
-[Section 4 - \(vsdstdcelldesign\)](openlane_working_dir/openlane/vsdstdcelldesign)
+[Section 4 - (vsdstdcelldesign\)](openlane_working_dir/openlane/vsdstdcelldesign)
 
 - Section 4 - reports and logs can be found in the following folder:
 
@@ -850,15 +850,15 @@ Screenshot of magic window with rule implemented
 
 - Section 4 - Task 5 files, reports and logs can be found in the following folder:
 
-[Section 4 - \(picorv32a\)](openlane_working_dir/openlane/designs/picorv32a)
+[Section 4 - (picorv32a\)](openlane_working_dir/openlane/designs/picorv32a)
 
 - Section 4 - logs, reports and results can be found in following run folder:
 
-[Section 4 - \(11-11_13-20)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_13-20)
+[Section 4 - (11-11_13-20\)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_13-20)
 
 - Section 4 - Tasks 9 to 11 logs, reports and results can be found in following run folder:
 
-[Section 4 - \(11-11_14-29)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_14-29)
+[Section 4 - (11-11_14-29\)](openlane_working_dir/openlane/designs/picorv32a/runs/11-11_14-29)
 
 #### 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow
 
