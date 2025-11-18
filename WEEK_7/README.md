@@ -1,73 +1,3 @@
-# RTL2GDSII: A Journey into SoC Design
-
-This repository documents my journey through the world of System-on-Chip (SoC) design, from Register Transfer Level (RTL) to a GDSII layout. This project is a part of my learning process to understand the complete VLSI design flow using open-source EDA tools.
-
-```mermaid
-%%{init: { 'logLevel': 'debug', 'theme': 'dark'
-  } }%%
-timeline
-  title RTL-GDSII Using OpenROAD-flow-scripts
-  Synthesis
-    : Inputs  [RTL, SDC, .lib, .lef]
-    : Logic Synthesis  (Yosys)
-    : Output files  [Netlist, SDC]
-  Floorplan
-    : Floorplan Initialization
-    : IO placement  (random)
-    : Timing-driven mixed-size placement
-    : Macro placement
-    : Tapcell and welltie insertion
-    : PDN generation
-  Placement
-    : Global placement without placed IOs
-    : IO placement  (optimized)
-    : Global placement with placed IOs
-    : Resizing and buffering
-    : Detailed placement
-  CTS : Clock Tree Synthesis
-    : Timing optimization
-    : Filler cell insertion
-  Routing
-    : Global Routing
-    : Detailed Routing
-  Finishing
-    : Metal Fill insertion
-    : Signoff timing report
-    : Generate GDSII  (KLayout)
-    : DRC/LVS check (KLayout)
-```
-
-## The RTL to GDSII Flow
-
-The RTL to GDSII flow is the process of converting a high-level hardware description into a physical layout ready for manufacturing. This is a complex process that involves several stages:
-
-1.**RTL Design:** The process starts with a hardware description written in a Hardware Description Language (HDL) like Verilog or VHDL. This is a high-level description of the chip's functionality.
-
-2.**Synthesis:** The RTL code is synthesized into a gate-level netlist. This netlist is a description of the circuit in terms of logic gates and the connections between them.
-
-3.**Floorplanning:** This stage involves planning the layout of the chip. This includes defining the chip size, placing the I/O pads, and arranging the major blocks.
-
-4.**Placement:** The standard cells from the netlist are placed in the floorplan. The goal is to place the cells in a way that minimizes the wire length and congestion.
-
-5.**Clock Tree Synthesis (CTS):** A clock tree is built to distribute the clock signal to all the sequential elements in the design. The goal is to minimize the clock skew and delay.
-
-6.**Routing:** The connections between the cells and blocks are made in this stage. This is done in several steps, including global routing and detailed routing.
-
-7.**Verification:** After routing, the design is verified to ensure that it meets the design rules and that the layout matches the schematic. This includes Design Rule Checking (DRC) and Layout vs. Schematic (LVS) checks.
-
-8.**GDSII Generation:** Finally, the physical layout is saved in a GDSII file. This file is sent to the foundry for fabrication.
-
-## Table of Contents
-
-* [Week 0: Tool Installation and Setup](WEEK_0)
-* [Week 1: Introduction to Verilog RTL Design and Synthesis](WEEK_1)
-* [Week 2: SoC Fundamentals and Functional Modelling](WEEK_2)
-* [Week 3: Static Timing Analysis and PVT Corners](WEEK_3)
-* [Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations](WEEK_4)
-* [Week 5: OpenROAD Flow Setup and Floorplan + Placement](WEEK_5)
-* [Week 6: Physical Design Labs using OpenLANE and Sky130 PDK](WEEK_6)
-* [Week 7: BabySoC Design](WEEK_7)
-
 # Physical Design of BabySoC using OpenROAD and Sky130 PDK
 
 ## Objective
@@ -93,7 +23,7 @@ To execute a complete physical design flow for the `vsdbabysoc` design using the
 * [Acknowledgements](#acknowledgements)
 
 - Verification of Outputs generated at various stages of the flow:
-![alt text](WEEK_7/assets/25.png)
+![alt text](assets/25.png)
 
 ## Why This Task Is Important
 
@@ -189,7 +119,7 @@ e. Output directory creation
 
 Thus, `config.mk` is essential to correctly registering your design inside the OpenROAD-flow-scripts directory structure and ensuring that the entire PnR flow runs with the right inputs.
 
-[Complete config.mk file used for VSDBabySoC](WEEK_7/config.mk)
+[Complete config.mk file used for VSDBabySoC:](config.mk)
 
 ## Implementation
 
@@ -232,7 +162,7 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
 This generates the gate-level netlist and reports synthesis statistics, including cell count and area.
 
 Screenshots of synthesis:
-![alt text](WEEK_7/assets/1.png)
+![alt text](assets/1.png)
 
 ### 3. Floorplanning and Power Distribution Network (PDN)
 
@@ -249,11 +179,11 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_floorplan
 ```
 
 Screenshots of floorplan setup:
-![alt text](WEEK_7/assets/2.png)
-![alt text](WEEK_7/assets/3.png)
-![alt text](WEEK_7/assets/4.png)
-![alt text](WEEK_7/assets/5.png)
-![alt text](WEEK_7/assets/6.png)
+![alt text](assets/2.png)
+![alt text](assets/3.png)
+![alt text](assets/4.png)
+![alt text](assets/5.png)
+![alt text](assets/6.png)
 
 ### 4. Placement
 
@@ -270,13 +200,13 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_place
 ```
 
 Screenshots of placement:
-![alt text](WEEK_7/assets/7.png)
-![alt text](WEEK_7/assets/8.png)
-![alt text](WEEK_7/assets/9.png)
-![alt text](WEEK_7/assets/10.png)
-![alt text](WEEK_7/assets/11.png)
-![alt text](WEEK_7/assets/12.png)
-![alt text](WEEK_7/assets/13.png)
+![alt text](assets/7.png)
+![alt text](assets/8.png)
+![alt text](assets/9.png)
+![alt text](assets/10.png)
+![alt text](assets/11.png)
+![alt text](assets/12.png)
+![alt text](assets/13.png)
 
 ### 5. Clock Tree Synthesis (CTS)
 
@@ -288,16 +218,16 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk cts
 
 Post-CTS timing reports are generated, including WNS, TNS, and violations.
 
-[To view CTS results:](WEEK_7/assets/reports/4_cts_final.rpt)
+[To view CTS results:](assets/reports/4_cts_final.rpt)
 
 Screenshots of CTS:
 
-![alt text](WEEK_7/assets/14.png)
-![alt text](WEEK_7/assets/15.png)
-![alt text](WEEK_7/assets/16.png)
-![alt text](WEEK_7/assets/17.png)
-![alt text](WEEK_7/assets/18.png)
-![alt text](WEEK_7/assets/19.png)
+![alt text](assets/14.png)
+![alt text](assets/15.png)
+![alt text](assets/16.png)
+![alt text](assets/17.png)
+![alt text](assets/18.png)
+![alt text](assets/19.png)
 
 ### 6. Routing
 
@@ -323,8 +253,8 @@ The Fix (under work): Modified config.mk to relax these constraints:
 - Removed GRT_LAYER_ADJUSTMENTS to fully utilize met1 and met2.
 
 Screenshots of routing:
-![alt text](WEEK_7/assets/21.png)
-![alt text](WEEK_7/assets/22.png)
+![alt text](assets/21.png)
+![alt text](assets/22.png)
 
 ### 7. Parasitic Extraction (SPEF)
 
@@ -350,9 +280,9 @@ if { $rcx_rules_file != "" } {
 }
 ```
 
-![alt text](WEEK_7/assets/23.png)
-![alt text](WEEK_7/assets/24.png)
-![alt text](WEEK_7/assets/25.png)
+![alt text](assets/23.png)
+![alt text](assets/24.png)
+![alt text](assets/25.png)
 
 ## Task Reference
 
