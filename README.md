@@ -66,6 +66,7 @@ The RTL to GDSII flow is the process of converting a high-level hardware descrip
 * [Week 4: CMOS Inverter Static Behavior Evaluation and SPICE Simulations](WEEK_4)
 * [Week 5: OpenROAD Flow Setup and Floorplan + Placement](WEEK_5)
 * [Week 6: Physical Design Labs using OpenLANE and Sky130 PDK](WEEK_6)
+* [Week 7: BabySoC Design](WEEK_7)
 
 # Physical Design Labs using OpenLANE and Sky130 PDK
 
