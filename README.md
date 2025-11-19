@@ -327,7 +327,7 @@ Screenshots of routing:
 ![alt text](WEEK_7/assets/22.png)
 
 * After making changes into the [config.mk](config.mk) managed to reduce to the following:
-![alt text](assets/26.png)
+![alt text](WEEK_7/assets/26.png)
 
 ### 7. Parasitic Extraction (SPEF)
 
