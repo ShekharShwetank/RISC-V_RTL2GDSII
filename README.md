@@ -326,6 +326,9 @@ Screenshots of routing:
 ![alt text](WEEK_7/assets/21.png)
 ![alt text](WEEK_7/assets/22.png)
 
+* After making changes into the [config.mk](config.mk) managed to reduce to the following:
+![alt text](WEEK_7/assets/26.png)
+
 ### 7. Parasitic Extraction (SPEF)
 
 Extract parasitics for accurate post-route STA.
