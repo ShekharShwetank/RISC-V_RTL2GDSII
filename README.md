@@ -92,29 +92,29 @@ To execute a complete physical design flow for the `vsdbabysoc` design using the
 * [Task Reference](#task-reference)
 * [Acknowledgements](#acknowledgements)
 
-- Verification of Outputs generated at various stages of the flow:
-![alt text](WEEK_7/assets/25.png)
+* Verification of Outputs generated at various stages of the flow:
+![alt text](WEEK_7/assets/results.png)
 
 ## Why This Task Is Important
 
 This week’s task integrates all prior concepts into a complete physical design flow for a real System-on-Chip, the BabySoC.
 
-*   **End-to-End Flow Mastery**: It provides hands-on experience with the entire RTL-to-GDSII process, connecting logical design with physical implementation.
-*   **Impact of Physical Constraints**: You will learn how floorplan decisions, placement density, and routing choices directly affect the chip's timing, power, and area (PPA).
-*   **Parasitic Extraction and STA**: This task highlights the importance of post-route parasitic extraction (SPEF) for accurate static timing analysis (STA), which is crucial for verifying that the chip will function at the desired speed. SPEF captures real parasitic R and C values for signoff-level timing analysis.
-*   **Mixed-Signal Integration**: VSDBabySoC includes analog macros (PLL and DAC), making this a comprehensive example of mixed-signal physical design.
+* **End-to-End Flow Mastery**: It provides hands-on experience with the entire RTL-to-GDSII process, connecting logical design with physical implementation.
+* **Impact of Physical Constraints**: You will learn how floorplan decisions, placement density, and routing choices directly affect the chip's timing, power, and area (PPA).
+* **Parasitic Extraction and STA**: This task highlights the importance of post-route parasitic extraction (SPEF) for accurate static timing analysis (STA), which is crucial for verifying that the chip will function at the desired speed. SPEF captures real parasitic R and C values for signoff-level timing analysis.
+* **Mixed-Signal Integration**: VSDBabySoC includes analog macros (PLL and DAC), making this a comprehensive example of mixed-signal physical design.
 
 ## Prerequisites
 
-- Install OpenROAD, Yosys, and GTKWave. Refer to their respective documentation for installation instructions.
-- Install Sandpiper for Verilog generation from TL-Verilog: rvmyth is in TL-Verilog.
+* Install OpenROAD, Yosys, and GTKWave. Refer to their respective documentation for installation instructions.
+* Install Sandpiper for Verilog generation from TL-Verilog: rvmyth is in TL-Verilog.
 
 ```bash
 pip3 install pyyaml click sandpiper-saas
 sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
 ```
 
-- Clone and set up OpenROAD-flow-scripts (ORFS) for automated physical design flow.
+* Clone and set up OpenROAD-flow-scripts (ORFS) for automated physical design flow.
 
 ## Setup of VSDBabySoC in OpenROAD Flow Scripts Directory
 
@@ -178,9 +178,9 @@ e. Output directory creation
 
 **In simple words:**
 
-- `config.mk` is the file that tells OpenROAD “this is my design, these are my RTL files, these are my macros, and this is how you should run the flow.”
+* `config.mk` is the file that tells OpenROAD “this is my design, these are my RTL files, these are my macros, and this is how you should run the flow.”
 
-- Without this file, OpenROAD will not know:
+* Without this file, OpenROAD will not know:
     Which Verilog files to synthesize
     Which IP blocks (macros) to include
     Where LEF/GDS/LIB files are stored
@@ -189,7 +189,7 @@ e. Output directory creation
 
 Thus, `config.mk` is essential to correctly registering your design inside the OpenROAD-flow-scripts directory structure and ensuring that the entire PnR flow runs with the right inputs.
 
-[Complete config.mk file used for VSDBabySoC](WEEK_7/config.mk)
+[Complete config.mk file used for VSDBabySoC:](config.mk)
 
 ## Implementation
 
@@ -315,19 +315,328 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_route
 
 This is the most critical phase. The design fails with [ERROR GRT-0116] Global routing finished with congestion.
 
-The Problem: The default configuration had high penalties for Metal 1 and Metal 2 layers (met1:0.25, etc.) and a high GRT_ADJUSTMENT (0.40), causing the router to run out of resources near the standard cells.
+* Screenshots of routing attempts:
 
-The Fix (under work): Modified config.mk to relax these constraints:
-
-- Changed GRT_ADJUSTMENT to 0.15.
-- Removed GRT_LAYER_ADJUSTMENTS to fully utilize met1 and met2.
-
-Screenshots of routing:
 ![alt text](WEEK_7/assets/21.png)
 ![alt text](WEEK_7/assets/22.png)
 
 * After making changes into the [config.mk](config.mk) managed to reduce to the following:
+
 ![alt text](WEEK_7/assets/26.png)
+![alt text](WEEK_7/assets/28.png)
+![alt text](WEEK_7/assets/32.png)
+
+* Finally, the routing was completed successfully without congestion errors:
+
+![alt text](WEEK_7/assets/34.png)
+![alt text](WEEK_7/assets/45.png)
+
+* Final routing Screenshots:
+
+![alt text](WEEK_7/assets/36.png)
+![alt text](WEEK_7/assets/37.png)
+![alt text](WEEK_7/assets/38.png)
+![alt text](WEEK_7/assets/39.png)
+![alt text](WEEK_7/assets/40.png)
+![alt text](WEEK_7/assets/41.png)
+![alt text](WEEK_7/assets/42.png)
+![alt text](WEEK_7/assets/43.png)
+
+* The Fix:
+
+<details>
+<summary>Expand to Read Fix Details</summary>
+
+# VSDBabySoC Global Routing Failure: Root Cause Analysis & Resolution
+
+## Executive Summary
+
+A VSDBabySoC design using OpenROAD-flow-scripts with Sky130 PDK was failing at the global routing stage (5_1_grt) with congestion overflow errors. The root cause was identified as **pin accessibility obstructions in the analog macro LEF files**, specifically metal layer obstructions blocking router access to macro pins.
+
+---
+
+## 1. Initial Problem Statement
+
+### Error Message
+
+```bash
+[ERROR GRT-0116] Global routing finished with congestion.
+Check the congestion regions in the DRC Viewer.
+```
+
+### Symptoms
+
+* Global routing completed but reported overflow violations
+* Total overflow count: 18 violations across met3, met4, and met5
+* Design utilization was only 13% (not a density issue)
+* Routing resources appeared adequate (~1-2% usage on most layers)
+
+---
+
+## 2. Investigation Process
+
+### Phase 1: Initial Configuration Analysis
+
+The original `config.mk` had aggressive routing settings:
+
+```makefile
+export PLACE_DENSITY   = 0.30
+export MACRO_PLACE_HALO    = 20 20
+export MACRO_PLACE_CHANNEL = 40 40
+export GRT_LAYER_ADJUSTMENTS = {met1:0.15,met2:0.12,met3:0.10,met4:0.08,met5:0.05}
+```
+
+These settings appeared reasonable for a 13% utilization design.
+
+### Phase 2: Congestion Report Analysis
+
+The congestion report revealed the critical insight:
+
+```rpt
+violation type: Horizontal congestion
+    srcs: net:RV_TO_DAC\[9\]
+    comment: capacity:0 usage:1 overflow:1
+    bbox = (1090.2000, 579.6000) - (1097.1000, 586.5000) on Layer -
+```
+
+**Key observation:** `capacity:0` indicated the router had **zero legal routing tracks** in these regions, not just high congestion.
+
+### Phase 3: LEF File Inspection
+
+Examining `avsddac.lef` revealed the root cause:
+
+#### Problem 1: OUT Pin Access Blocked by met4 OBS
+
+```lef
+PIN OUT
+    PORT
+      LAYER met4 ;
+        RECT 1172.680 1127.710 1173.730 1175.360 ;
+    END
+END OUT
+
+OBS
+    LAYER met4 ;
+        RECT 154.520 1171.010 1172.280 1175.050 ;  ← Ends at x=1172.280
+        RECT 1174.130 1127.310 1188.200 1175.050 ; ← Starts at x=1174.130
+```
+
+The OUT pin (x: 1172.680-1173.730) was squeezed between obstructions with only ~0.4µm clearance on each side—insufficient for routing.
+
+#### Problem 2: D[8] and D[9] Pins Only on li1 Layer
+
+```lef
+PIN D[8]
+    PORT
+      LAYER li1 ;
+        RECT 1117.200 613.050 1117.850 709.180 ;
+    END
+
+PIN D[9]
+    PORT
+      LAYER li1 ;
+        RECT 1150.220 613.050 1151.250 755.620 ;
+    END
+```
+
+The li1 layer has effectively **zero routing capacity** in Sky130:
+
+```lef
+li1        Vertical            0            10          0.00%
+```
+
+#### Problem 3: Massive met1 Obstruction
+
+```lef
+LAYER met1 ;
+    RECT 140.750 613.050 1313.360 1168.430 ;  ← Covers entire macro interior
+```
+
+This blocked any met1 access to the li1-only pins.
+
+---
+
+## 3. Resolution Strategy
+
+### Fix 1: Widen met4 OBS Gap for OUT Pin
+
+**Before:**
+
+```lef
+LAYER met4 ;
+    RECT 154.520 1171.010 1172.280 1175.050 ;
+    RECT 1174.130 1127.310 1188.200 1175.050 ;
+```
+
+**After:**
+
+```lef
+LAYER met4 ;
+    RECT 154.520 1171.010 1168.000 1175.050 ;  ← Moved left edge back
+    RECT 1178.000 1127.310 1188.200 1175.050 ; ← Moved right edge forward
+```
+
+This created a ~10µm routing corridor around the OUT pin instead of ~1.85µm.
+
+### Fix 2: Add met1 Access Points for D[8] and D[9] Pins
+
+**Before:**
+
+```lef
+PIN D[8]
+    PORT
+      LAYER li1 ;
+        RECT 1117.200 613.050 1117.850 709.180 ;
+    END
+END D[8]
+```
+
+**After:**
+
+```lef
+PIN D[8]
+    PORT
+      LAYER li1 ;
+        RECT 1117.200 613.050 1117.850 709.180 ;
+      LAYER met1 ;
+        RECT 1115.000 608.000 1120.000 613.050 ;  ← NEW: Access below OBS
+    END
+END D[8]
+```
+
+The new met1 shapes extend **below** y=613.050, outside the met1 obstruction boundary, giving the router legal access paths.
+
+---
+
+## 4. Technical Explanation
+
+### Why This Happens
+
+Analog macros (DAC, PLL) are often created with:
+
+1. **Pins on lower metal layers (li1)** for analog signal integrity
+2. **Large obstructions** to protect internal routing from interference
+3. **Minimal consideration for digital router requirements**
+
+OpenROAD's TritonRoute requires:
+
+1. Legal access points to every pin
+2. Sufficient routing capacity on accessible layers
+3. Clear paths from pin access points to the routing grid
+
+### The Pin Access Problem Illustrated
+
+```text
+                    ┌─────────────────────────────────┐
+                    │         met1 OBS                │
+                    │   (blocks entire interior)      │
+                    │                                 │
+    Router cannot   │    ┌──────┐                     │
+    reach pin! ─────│───►│D[8]  │ (li1 only)          │
+                    │    │ pin  │                     │
+                    │    └──────┘                     │
+                    │                                 │
+                    └─────────────────────────────────┘
+                    y = 613.050 ─────────────────────────
+
+    SOLUTION: Add met1 shape BELOW y=613.050
+
+                    ┌─────────────────────────────────┐
+                    │         met1 OBS                │
+                    │                                 │
+                    │    ┌──────┐                     │
+                    │    │D[8]  │ (li1)               │
+                    │    │ pin  │                     │
+                    │    └─┬────┘                     │
+                    └──────│──────────────────────────┘
+                    ═══════╪═══════  y = 613.050
+                        ┌──┴───┐
+    Router can now ────►│ met1 │ (new access point)
+    reach pin!          │access│
+                        └──────┘
+```
+
+---
+
+## 5. Results
+
+### Before Fix
+
+```bash
+[ERROR GRT-0116] Global routing finished with congestion.
+Total Overflow: 29 violations
+```
+
+![alt text](WEEK_7/assets/22.png)
+
+### After Fix
+
+```bash
+[INFO GRT-0018] Total wirelength: 407106 um
+[INFO GRT-0014] Routed nets: 6450
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Design area 728556 um^2 13% utilization.
+```
+
+![alt text](WEEK_7/assets/34.png)
+
+---
+
+## 6. Key Lessons Learned
+
+### For Physical Design Engineers
+
+1. **Always verify macro pin accessibility** - Check that pins have routing access on layers the router can use
+
+2. **Understand layer routing capacity** - li1 in Sky130 has near-zero routing capacity; pins must have met1+ access
+
+3. **Inspect OBS sections carefully** - Obstructions can inadvertently block pin access even with sufficient apparent clearance
+
+4. **Use congestion reports effectively** - `capacity:0` indicates physical blockage, not just high utilization
+
+### For Analog Macro Designers
+
+1. **Provide multi-layer pin definitions** - Include met1 or met2 access shapes for all pins
+
+2. **Create routing channels** - Leave gaps in obstructions near pin locations
+
+3. **Document routing requirements** - Specify minimum halo sizes and routing layer requirements
+
+---
+
+## 7. Verification Commands
+
+To verify the fix worked:
+
+```bash
+# View the routed design
+make gui_route DESIGN_CONFIG=designs/sky130hd/VSDBabySoC/config.mk
+
+# Check for DRC violations
+make drc DESIGN_CONFIG=designs/sky130hd/VSDBabySoC/config.mk
+
+# Generate final reports
+make report DESIGN_CONFIG=designs/sky130hd/VSDBabySoC/config.mk
+```
+
+---
+
+## 8. Files Modified
+
+| File | Change |
+|------|--------|
+| `avsddac.lef` | Widened met4 OBS gap around OUT pin; Added met1 access shapes to D[8], D[9] pins |
+| `config.mk` | Increased MACRO_PLACE_HALO and MACRO_PLACE_CHANNEL (optional) |
+| `macro.cfg` | Repositioned macros away from die edges (optional) |
+
+---
+
+## 9. Conclusion
+
+This routing failure exemplifies a common challenge in mixed-signal SoC design: analog macros created without consideration for digital place-and-route requirements. The fix required understanding both the analog macro's physical structure and the digital router's access requirements. By adding appropriate metal layer access points and clearing obstruction blockages, the design achieved zero routing violations with minimal impact to the original macro functionality.
+
+</details>
 
 ### 7. Parasitic Extraction (SPEF)
 
@@ -353,19 +662,18 @@ if { $rcx_rules_file != "" } {
 }
 ```
 
-![alt text](WEEK_7/assets/23.png)
-![alt text](WEEK_7/assets/24.png)
-![alt text](WEEK_7/assets/25.png)
+![alt text](WEEK_7/assets/results.png)
+![alt text](WEEK_7/assets/reports.png)
 
 ## Task Reference
 
-- [VSD BabySoC](https://github.com/manili/VSDBabySoC.git)
-- [BabySoC Simulation](https://github.com/Subhasis-Sahu/BabySoC_Simulation.git)
-- [ASIC Design](https://github.com/Akash-Perla/ASIC-Design.git)
+* [VSD BabySoC](https://github.com/manili/VSDBabySoC.git)
+* [BabySoC Simulation](https://github.com/Subhasis-Sahu/BabySoC_Simulation.git)
+* [ASIC Design](https://github.com/Akash-Perla/ASIC-Design.git)
 
 ## Acknowledgements
 
-- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
-- [Nickson P Jose](https://github.com/nickson-jose), Physical Design Engineer, Intel Corporation.
-- [R. Timothy Edwards](https://github.com/RTimothyEdwards), Senior Vice President of Analog and Design, efabless Corporation.
-- [Fayiz Ferosh](https://github.com/fayizferosh/soc-design-and-planning-nasscom-vsd/blob/main/README.md)
+* [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+* [Nickson P Jose](https://github.com/nickson-jose), Physical Design Engineer, Intel Corporation.
+* [R. Timothy Edwards](https://github.com/RTimothyEdwards), Senior Vice President of Analog and Design, efabless Corporation.
+* [Fayiz Ferosh](https://github.com/fayizferosh/soc-design-and-planning-nasscom-vsd/blob/main/README.md)
