@@ -23,7 +23,7 @@ To execute a complete physical design flow for the `vsdbabysoc` design using the
 * [Acknowledgements](#acknowledgements)
 
 * Verification of Outputs generated at various stages of the flow:
-![alt text](assets/25.png)
+![alt text](assets/results.png)
 
 ## Why This Task Is Important
 
