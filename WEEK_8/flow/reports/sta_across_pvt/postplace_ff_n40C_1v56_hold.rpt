@@ -1,0 +1,29 @@
+Startpoint: core.CPU_reset_a2$_DFF_P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: core.CPU_reset_a3$_DFF_P_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+      Cap      Slew     Delay      Time   Description
+-------------------------------------------------------------------------------
+             0.0000    0.0000    0.0000   clock clk (rise edge)
+                       0.0000    0.0000   clock network delay (ideal)
+             0.0000    0.0000    0.0000 ^ core.CPU_reset_a2$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   0.0016    0.0327    0.2619    0.2619 ^ core.CPU_reset_a2$_DFF_P_/Q (sky130_fd_sc_hd__dfxtp_1)
+             0.0327    0.0000    0.2619 ^ core.CPU_reset_a3$_DFF_P_/D (sky130_fd_sc_hd__dfxtp_4)
+                                 0.2619   data arrival time
+
+             0.0000    0.0000    0.0000   clock clk (rise edge)
+                       0.0000    0.0000   clock network delay (ideal)
+                       0.0000    0.0000   clock reconvergence pessimism
+                                 0.0000 ^ core.CPU_reset_a3$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_4)
+                      -0.0277   -0.0277   library hold time
+                                -0.0277   data required time
+-------------------------------------------------------------------------------
+                                -0.0277   data required time
+                                -0.2619   data arrival time
+-------------------------------------------------------------------------------
+                                 0.2896   slack (MET)
+
+

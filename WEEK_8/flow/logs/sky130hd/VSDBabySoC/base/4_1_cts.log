@@ -1,0 +1,91 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib
+read_db ./results/sky130hd/VSDBabySoC/base/3_place.odb
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets -distance_between_buffers 600
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_16
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0007] Net "CLK" found for clock "clk".
+[INFO CTS-0010]  Clock net "CLK" has 1144 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 2 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net CLK.
+[INFO CTS-0028]  Total number of sinks: 1144.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0021]  Distance between buffers: 22 units (600 um).
+[INFO CTS-0206] Best clustering solution was found from clustering size of 10 and clustering diameter of 50.
+[INFO CTS-0019]  Total number of sinks after clustering: 85.
+[INFO CTS-0024]  Normalized sink region: [(22.8317, 2.1989), (132.489, 24.3869)].
+[INFO CTS-0025]     Width:  109.6570.
+[INFO CTS-0026]     Height: 22.1880.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 43
+    Sub-region size: 54.8285 X 22.1880
+[INFO CTS-0034]     Segment length (rounded): 28.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 22
+    Sub-region size: 54.8285 X 11.0940
+[INFO CTS-0034]     Segment length (rounded): 6.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 11
+    Sub-region size: 27.4143 X 11.0940
+[INFO CTS-0034]     Segment length (rounded): 14.
+[INFO CTS-0032]  Stop criterion found. Max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 85.
+[INFO CTS-0018]     Created 94 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 3.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 3.
+[INFO CTS-0015]     Created 94 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 3:1, 5:1, 6:1, 8:4, 10:6, 11:4, 12:10, 13:18, 14:15, 15:20, 16:8, 17:3, 18:2..
+[INFO CTS-0017]     Max level of the clock tree: 3.
+[INFO CTS-0098] Clock net "CLK"
+[INFO CTS-0099]  Sinks 1224
+[INFO CTS-0100]  Leaf buffers 85
+[INFO CTS-0101]  Average sink wire length 1629.10 um
+[INFO CTS-0102]  Path depth 2 - 3
+[INFO CTS-0207]  Leaf load cells 80
+Placement Analysis
+---------------------------------
+total displacement       1066.3 u
+average displacement        0.0 u
+max displacement           15.4 u
+original HPWL          206450.9 u
+legalized HPWL         209827.7 u
+delta HPWL                    2 %
+
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -skip_gate_cloning -match_cell_footprint -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0033] No hold violations found.
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          209827.7 u
+legalized HPWL         209827.7 u
+delta HPWL                    0 %
+
+Report metrics stage 4, cts final...
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 727948 um^2 13% utilization.
+Elapsed time: 0:07.49[h:]min:sec. CPU time: user 8.41 sys 1.12 (127%). Peak memory: 391664KB.
+Log                        Elapsed/s Peak Memory/MB  sha1sum .odb [0:20)
+4_1_cts                            7            382 e472cbf89ebd934e45ef

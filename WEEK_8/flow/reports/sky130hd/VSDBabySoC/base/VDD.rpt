@@ -1,0 +1,117 @@
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (122.6350, 125.8850) - (122.6350, 125.8850) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (131.2250, 130.7050) - (131.2250, 130.7050) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (133.1300, 128.2600) - (133.1300, 128.2600) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (136.4050, 128.2400) - (136.4050, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (136.5100, 128.9400) - (136.5100, 128.9400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (137.5150, 128.2400) - (137.5150, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (137.7600, 128.7900) - (137.7600, 128.7900) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (140.2450, 128.2400) - (140.2450, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (141.4900, 128.8650) - (141.4900, 128.8650) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (142.9050, 128.2400) - (142.9050, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (144.4350, 128.2400) - (144.4350, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (146.8150, 128.2400) - (146.8150, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (147.9250, 128.2400) - (147.9250, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (149.7650, 128.9600) - (149.7650, 128.9600) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (150.6550, 128.2400) - (150.6550, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (151.8150, 128.9400) - (151.8150, 128.9400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (153.3150, 128.2400) - (153.3150, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (153.7900, 128.9600) - (153.7900, 128.9600) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (153.7900, 129.2900) - (153.7900, 129.2900) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (154.8450, 128.2400) - (154.8450, 128.2400) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (127.3300, 128.3700) - (127.3300, 128.3700) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (128.5300, 128.6100) - (128.5300, 128.6100) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (128.5300, 130.7000) - (128.5300, 130.7000) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (129.2300, 128.6100) - (129.2300, 128.6100) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (132.3750, 128.6100) - (132.3750, 128.6100) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (135.5200, 128.7650) - (135.5200, 128.7650) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (135.9100, 128.7650) - (135.9100, 128.7650) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (138.5700, 124.9700) - (138.5700, 124.9700) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (140.5700, 128.2850) - (140.5700, 128.2850) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (145.2300, 128.8500) - (145.2300, 128.8500) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (146.3200, 128.8500) - (146.3200, 128.8500) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (150.9850, 128.6100) - (150.9850, 128.6100) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (155.6500, 128.4650) - (155.6500, 128.4650) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (156.3400, 128.4650) - (156.3400, 128.4650) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (156.3500, 128.5500) - (156.3500, 128.5500) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (137.0900, 336.6650) - (137.0900, 336.6650) on Layer met4
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (137.1950, 334.3450) - (137.1950, 334.3450) on Layer met5
+violation type: Unconnected instance
+	srcs: inst:dac
+	bbox = (120.4650, 335.4850) - (1314.0350, 897.7950) on Layer -
+violation type: Unconnected instance
+	srcs: inst:pll
+	bbox = (120.4800, 121.7600) - (156.6600, 135.4700) on Layer -

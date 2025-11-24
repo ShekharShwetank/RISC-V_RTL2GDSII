@@ -1,0 +1,53 @@
+Startpoint: core.CPU_is_slli_a3$_DFF_P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: core.CPU_src2_value_a3[24]$_DFF_P_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+      Cap      Slew     Delay      Time   Description
+-------------------------------------------------------------------------------
+             0.0000    0.0000    0.0000   clock clk (rise edge)
+                       0.0000    0.0000   clock network delay (ideal)
+             0.0000    0.0000    0.0000 ^ core.CPU_is_slli_a3$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   0.0026    0.0292    0.1741    0.1741 ^ core.CPU_is_slli_a3$_DFF_P_/Q (sky130_fd_sc_hd__dfxtp_1)
+             0.0292    0.0000    0.1741 ^ place534/A (sky130_fd_sc_hd__buf_4)
+   0.0728    0.1553    0.1598    0.3339 ^ place534/X (sky130_fd_sc_hd__buf_4)
+             0.1553    0.0000    0.3339 ^ _07478_/S (sky130_fd_sc_hd__mux2i_4)
+   0.0026    0.0971    0.1519    0.4858 ^ _07478_/Y (sky130_fd_sc_hd__mux2i_4)
+             0.0971    0.0000    0.4858 ^ place488/A (sky130_fd_sc_hd__buf_4)
+   0.1903    0.3934    0.3393    0.8251 ^ place488/X (sky130_fd_sc_hd__buf_4)
+             0.3934    0.0000    0.8251 ^ _07653_/S0 (sky130_fd_sc_hd__mux4_2)
+   0.0061    0.0672    0.3231    1.1482 v _07653_/X (sky130_fd_sc_hd__mux4_2)
+             0.0672    0.0000    1.1482 v _08211_/A0 (sky130_fd_sc_hd__mux4_2)
+   0.0017    0.0523    0.2474    1.3956 v _08211_/X (sky130_fd_sc_hd__mux4_2)
+             0.0523    0.0000    1.3956 v _08212_/B (sky130_fd_sc_hd__and2_0)
+   0.0023    0.0269    0.1004    1.4960 v _08212_/X (sky130_fd_sc_hd__and2_0)
+             0.0269    0.0000    1.4960 v _08213_/B1 (sky130_fd_sc_hd__a311o_1)
+   0.0042    0.0460    0.1210    1.6169 v _08213_/X (sky130_fd_sc_hd__a311o_1)
+             0.0460    0.0000    1.6169 v _08215_/B (sky130_fd_sc_hd__nor3b_2)
+   0.0043    0.0976    0.1117    1.7287 ^ _08215_/Y (sky130_fd_sc_hd__nor3b_2)
+             0.0976    0.0000    1.7287 ^ _08216_/B (sky130_fd_sc_hd__nand2_1)
+   0.0017    0.0261    0.0289    1.7576 v _08216_/Y (sky130_fd_sc_hd__nand2_1)
+             0.0261    0.0000    1.7576 v _08224_/B1 (sky130_fd_sc_hd__a2bb2o_2)
+   0.0098    0.0452    0.1710    1.9286 v _08224_/X (sky130_fd_sc_hd__a2bb2o_2)
+             0.0452    0.0000    1.9286 v _09898_/B1_N (sky130_fd_sc_hd__a21boi_0)
+   0.0046    0.0565    0.0899    2.0185 v _09898_/Y (sky130_fd_sc_hd__a21boi_0)
+             0.0565    0.0000    2.0185 v _10251_/A1 (sky130_fd_sc_hd__o21a_1)
+   0.0018    0.0225    0.1171    2.1356 v _10251_/X (sky130_fd_sc_hd__o21a_1)
+             0.0225    0.0000    2.1356 v core.CPU_src2_value_a3[24]$_DFF_P_/D (sky130_fd_sc_hd__dfxtp_1)
+                                 2.1356   data arrival time
+
+             0.0000   11.0000   11.0000   clock clk (rise edge)
+                       0.0000   11.0000   clock network delay (ideal)
+                       0.0000   11.0000   clock reconvergence pessimism
+                                11.0000 ^ core.CPU_src2_value_a3[24]$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+                      -0.0697   10.9303   library setup time
+                                10.9303   data required time
+-------------------------------------------------------------------------------
+                                10.9303   data required time
+                                -2.1356   data arrival time
+-------------------------------------------------------------------------------
+                                 8.7947   slack (MET)
+
+

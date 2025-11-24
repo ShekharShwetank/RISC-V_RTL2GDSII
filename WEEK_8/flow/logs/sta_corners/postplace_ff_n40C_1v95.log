@@ -1,0 +1,103 @@
+openroad> 
+openroad> # Clear any previous database
+openroad> catch {remove_db}
+1
+openroad> 
+openroad> # Read liberty files
+openroad> read_liberty "/home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib"
+1
+openroad> if { [file exists "/home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib"] } { read_liberty "/home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib" }
+1
+openroad> if { [file exists "/home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib"] } { read_liberty "/home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib" }
+1
+openroad> 
+openroad> # Read design based on stage
+openroad> if { "postplace" == "postsynth" } {
+...>     # For post-synthesis, we need to load LEF files first
+...>     set platform_dir "/home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd"
+...>     
+...>     # Read technology LEF
+...>     if { [file exists "$platform_dir/lef/sky130_fd_sc_hd.tlef"] } {
+...>         read_lef "$platform_dir/lef/sky130_fd_sc_hd.tlef"
+...>     }
+...>     
+...>     # Read standard cell LEF
+...>     if { [file exists "$platform_dir/lef/sky130_fd_sc_hd_merged.lef"] } {
+...>         read_lef "$platform_dir/lef/sky130_fd_sc_hd_merged.lef"
+...>     } elseif { [file exists "$platform_dir/lef/sky130_fd_sc_hd.lef"] } {
+...>         read_lef "$platform_dir/lef/sky130_fd_sc_hd.lef"
+...>     }
+...>     
+...>     # Read macro LEFs if they exist
+...>     set macro_lef_dir "/home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lef"
+...>     if { [file exists "$macro_lef_dir/avsdpll.lef"] } {
+...>         read_lef "$macro_lef_dir/avsdpll.lef"
+...>     }
+...>     if { [file exists "$macro_lef_dir/avsddac.lef"] } {
+...>         read_lef "$macro_lef_dir/avsddac.lef"
+...>     }
+...>     
+...>     # Now read the Verilog netlist
+...>     read_verilog "/home/shwetank/OpenROAD-flow-scripts/flow/results/sky130hd/VSDBabySoC/base/3_place.odb"
+...>     link_design vsdbabysoc
+...> } else {
+...>     read_db "/home/shwetank/OpenROAD-flow-scripts/flow/results/sky130hd/VSDBabySoC/base/3_place.odb"
+...> }
+openroad> 
+openroad> # Read timing constraints
+openroad> read_sdc "/home/shwetank/OpenROAD-flow-scripts/flow/results/sky130hd/VSDBabySoC/base/3_place.sdc"
+openroad> 
+openroad> # Read SPEF parasitics if available (post-route only)
+openroad> if { "" != "" && [file exists ""] } {
+...>     read_spef ""
+...>     puts "SPEF loaded: "
+...> }
+openroad> 
+openroad> # Generate detailed timing reports for setup analysis
+openroad> report_checks -path_delay max -fields {input_pin slew capacitance}     -format full_clock_expanded -digits 4 -unconstrained     > "/home/shwetank/OpenROAD-flow-scripts/flow/reports/sta_across_pvt/postplace_ff_n40C_1v95_setup.rpt"
+openroad> 
+openroad> # Generate detailed timing reports for hold analysis
+openroad> report_checks -path_delay min -fields {input_pin slew capacitance}     -format full_clock_expanded -digits 4 -unconstrained     > "/home/shwetank/OpenROAD-flow-scripts/flow/reports/sta_across_pvt/postplace_ff_n40C_1v95_hold.rpt"
+openroad> 
+openroad> # Report summary metrics - Setup (max delay)
+openroad> set wns_max [sta::worst_slack_cmd "max"]
+8.794692085700717e-9
+openroad> set tns_max [sta::total_negative_slack_cmd "max"]
+0.0
+openroad> 
+openroad> # Report summary metrics - Hold (min delay)
+openroad> set wns_min [sta::worst_slack_cmd "min"]
+1.8582518857002128e-10
+openroad> set tns_min [sta::total_negative_slack_cmd "min"]
+0.0
+openroad> 
+openroad> # Write summary to files
+openroad> set summary_file [open "/home/shwetank/OpenROAD-flow-scripts/flow/reports/sta_across_pvt/postplace_ff_n40C_1v95_summary.txt" w]
+file5
+openroad> puts $summary_file "Timing Analysis Summary"
+openroad> puts $summary_file "Corner: ff_n40C_1v95"
+openroad> puts $summary_file "Stage: postplace"
+openroad> puts $summary_file "======================================"
+openroad> puts $summary_file "Setup Analysis (Max Delay):"
+openroad> puts $summary_file "  Worst Negative Slack (WNS): $wns_max"
+openroad> puts $summary_file "  Total Negative Slack (TNS): $tns_max"
+openroad> puts $summary_file "Hold Analysis (Min Delay):"
+openroad> puts $summary_file "  Worst Hold Slack (WHS): $wns_min"
+openroad> puts $summary_file "  Total Hold Slack (THS): $tns_min"
+openroad> close $summary_file
+openroad> 
+openroad> # Print to console
+openroad> puts "======================================"
+======================================
+openroad> puts "Timing Summary for ff_n40C_1v95 - postplace"
+Timing Summary for ff_n40C_1v95 - postplace
+openroad> puts "======================================"
+======================================
+openroad> puts "Setup: WNS = $wns_max, TNS = $tns_max"
+Setup: WNS = 8.794692085700717e-9, TNS = 0.0
+openroad> puts "Hold:  WHS = $wns_min, THS = $tns_min"
+Hold:  WHS = 1.8582518857002128e-10, THS = 0.0
+openroad> puts "======================================"
+======================================
+openroad> 
+openroad> exit

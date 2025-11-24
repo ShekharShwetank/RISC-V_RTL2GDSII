@@ -1,0 +1,68 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib
+read_db ./results/sky130hd/VSDBabySoC/base/6_1_fill.odb
+Deleted 0 routing obstructions
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation vsdbabysoc (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 28655 rc segments
+[INFO RCX-0439] Coupling Cap extraction vsdbabysoc ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 27% of 189724 wires extracted
+[INFO RCX-0442] 35% of 189724 wires extracted
+[INFO RCX-0442] 51% of 189724 wires extracted
+[INFO RCX-0442] 66% of 189724 wires extracted
+[INFO RCX-0442] 85% of 189724 wires extracted
+[INFO RCX-0442] 99% of 189724 wires extracted
+[INFO RCX-0045] Extract 6474 nets, 35094 rsegs, 35094 caps, 64437 ccs
+[INFO RCX-0443] 6474 nets finished
+[WARNING PSM-0038] Unconnected node on net VDD at location (122.635um, 125.885um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (131.225um, 130.705um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (133.130um, 128.260um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (136.405um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (136.510um, 128.940um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (137.515um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (137.760um, 128.790um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (140.245um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (141.490um, 128.865um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (142.905um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (144.435um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (146.815um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (147.925um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (149.765um, 128.960um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (150.655um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (151.815um, 128.940um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (153.315um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (153.790um, 128.960um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (153.790um, 129.290um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (154.845um, 128.240um), layer: li1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (127.330um, 128.370um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (128.530um, 128.610um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (128.530um, 130.700um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (129.230um, 128.610um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (132.375um, 128.610um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (135.520um, 128.765um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (135.910um, 128.765um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (138.570um, 124.970um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (140.570um, 128.285um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (145.230um, 128.850um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (146.320um, 128.850um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (150.985um, 128.610um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (155.650um, 128.465um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (156.340um, 128.465um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (156.350um, 128.550um), layer: met1.
+[WARNING PSM-0038] Unconnected node on net VDD at location (137.090um, 336.665um), layer: met4.
+[WARNING PSM-0038] Unconnected node on net VDD at location (137.195um, 334.345um), layer: met5.
+[WARNING PSM-0039] Unconnected instance dac/VPWR at location (137.142um, 335.902um).
+[WARNING PSM-0039] Unconnected instance pll/VDD at location (140.119um, 128.580um).
+[ERROR PSM-0069] Check connectivity failed on VDD.
+Error: final_report.tcl, 60 PSM-0069
+Command exited with non-zero status 1
+Elapsed time: 0:27.63[h:]min:sec. CPU time: user 26.35 sys 1.25 (99%). Peak memory: 990728KB.

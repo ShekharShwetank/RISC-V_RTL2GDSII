@@ -1,0 +1,98 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib
+read_db ./results/sky130hd/VSDBabySoC/base/2_3_floorplan_tapcell.odb
+[WARNING PDN-0189] Supply pin pll/GND is not connected to any net.
+[WARNING PDN-0189] Supply pin pll/GND2 is not connected to any net.
+[WARNING PDN-0189] Supply pin pll/VDD2 is not connected to any net.
+[WARNING PDN-0189] Supply pin pll/VDD3 is not connected to any net.
+[WARNING PDN-0007] VDD on met1 is partially blocked (11.9%) by obstructions on met2, met3 for pll
+[INFO PDN-0001] Inserting grid: grid
+[INFO PDN-0001] Inserting grid: CORE_macro_grid_1 - dac
+[INFO PDN-0001] Inserting grid: CORE_macro_grid_1 - pll
+[WARNING PDN-0110] No via inserted between met4 and met5 at (128.0000, 864.6100) - (129.6000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (155.1400, 864.6100) - (156.7400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (182.2800, 864.6100) - (183.8800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (209.4200, 864.6100) - (211.0200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (236.5600, 864.6100) - (238.1600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (263.7000, 864.6100) - (265.3000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (290.8400, 864.6100) - (292.4400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (317.9800, 864.6100) - (319.5800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (345.1200, 864.6100) - (346.7200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (372.2600, 864.6100) - (373.8600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (399.4000, 864.6100) - (401.0000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (426.5400, 864.6100) - (428.1400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (453.6800, 864.6100) - (455.2800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (480.8200, 864.6100) - (482.4200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (507.9600, 864.6100) - (509.5600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (535.1000, 864.6100) - (536.7000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (562.2400, 864.6100) - (563.8400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (589.3800, 864.6100) - (590.9800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (616.5200, 864.6100) - (618.1200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (643.6600, 864.6100) - (645.2600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (670.8000, 864.6100) - (672.4000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (697.9400, 864.6100) - (699.5400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (725.0800, 864.6100) - (726.6800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (752.2200, 864.6100) - (753.8200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (779.3600, 864.6100) - (780.9600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (806.5000, 864.6100) - (808.1000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (833.6400, 864.6100) - (835.2400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (860.7800, 864.6100) - (862.3800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (887.9200, 864.6100) - (889.5200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (915.0600, 864.6100) - (916.6600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (942.2000, 864.6100) - (943.8000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (969.3400, 864.6100) - (970.9400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (996.4800, 864.6100) - (998.0800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1023.6200, 864.6100) - (1025.2200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1050.7600, 864.6100) - (1052.3600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1077.9000, 864.6100) - (1079.5000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1105.0400, 864.6100) - (1106.6400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1132.1800, 864.6100) - (1133.7800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1159.3200, 864.6100) - (1160.9200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (128.0000, 864.6100) - (129.6000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (155.1400, 864.6100) - (156.7400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (182.2800, 864.6100) - (183.8800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (209.4200, 864.6100) - (211.0200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (236.5600, 864.6100) - (238.1600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (263.7000, 864.6100) - (265.3000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (290.8400, 864.6100) - (292.4400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (317.9800, 864.6100) - (319.5800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (345.1200, 864.6100) - (346.7200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (372.2600, 864.6100) - (373.8600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (399.4000, 864.6100) - (401.0000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (426.5400, 864.6100) - (428.1400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (453.6800, 864.6100) - (455.2800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (480.8200, 864.6100) - (482.4200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (507.9600, 864.6100) - (509.5600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (535.1000, 864.6100) - (536.7000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (562.2400, 864.6100) - (563.8400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (589.3800, 864.6100) - (590.9800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (616.5200, 864.6100) - (618.1200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (643.6600, 864.6100) - (645.2600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (670.8000, 864.6100) - (672.4000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (697.9400, 864.6100) - (699.5400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (725.0800, 864.6100) - (726.6800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (752.2200, 864.6100) - (753.8200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (779.3600, 864.6100) - (780.9600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (806.5000, 864.6100) - (808.1000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (833.6400, 864.6100) - (835.2400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (860.7800, 864.6100) - (862.3800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (887.9200, 864.6100) - (889.5200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (915.0600, 864.6100) - (916.6600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (942.2000, 864.6100) - (943.8000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (969.3400, 864.6100) - (970.9400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (996.4800, 864.6100) - (998.0800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1023.6200, 864.6100) - (1025.2200, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1050.7600, 864.6100) - (1052.3600, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1077.9000, 864.6100) - (1079.5000, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1105.0400, 864.6100) - (1106.6400, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1132.1800, 864.6100) - (1133.7800, 865.7600) on VDD
+[WARNING PDN-0110] No via inserted between met4 and met5 at (1159.3200, 864.6100) - (1160.9200, 865.7600) on VDD
+Elapsed time: 0:04.45[h:]min:sec. CPU time: user 4.14 sys 0.28 (99%). Peak memory: 368900KB.
+Log                        Elapsed/s Peak Memory/MB  sha1sum .odb [0:20)
+2_4_floorplan_pdn                  4            360 1c6519b371b0e499d736
