@@ -3,6 +3,10 @@
 **Author:** Shwetank Shekhar  
 **Program:** RISC-V Reference SoC Tapeout Program, IIT Gandhinagar & VSD(VLSI System Design)  
 **GitHub:** [ShekharShwetank](https://github.com/ShekharShwetank)  
+**Verification:** [/flow/](/flow/) & [/assets/](/assets/)  
+**Main Repository:** [https://github.com/ShekharShwetank/RISC-V_RTL2GDSII.git](https://github.com/ShekharShwetank/RISC-V_RTL2GDSII.git)  
+
+ - NOTE: All terminal screenshots display username `ank@shwetank-shekhar` or `shwetank@shwetank-VirtualBox` for verification purposes.
 
 ---
 
@@ -1211,7 +1215,7 @@ make
 
 #### Design Configuration
 
-Created [flow/designs/sky130hd/vsdbabysoc/config.mk](flow/designs/sky130hd/vsdbabysoc/config.mk)
+Created [flow/designs/sky130hd/VSDBabySoC/config.mk](flow/designs/sky130hd/VSDBabySoC/config.mk)
 
 #### Floorplan Execution
 
@@ -1222,14 +1226,6 @@ cd flow
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
 ```
 
-**Floorplan Metrics:**
-- Die area: 1500µm × 1500µm = 2.25mm²
-- Core area: 1480µm × 1480µm = 2.19mm²
-- Target utilization: 60%
-- I/O pads: 8 input ports, 1 output port
-- Power rings: VDD/VSS with 5µm width
-- Power straps: met4/met5, 10µm pitch
-
 #### Placement Execution
 
 [Detailed Place](flow/reports/sky130hd/VSDBabySoC/base/3_detailed_place.rpt)
@@ -1239,14 +1235,6 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk place
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_place
 ```
-
-**Placement Metrics:**
-- Total instances: 10,349
-- Placed instances: 10,347 (99.98%)
-- Macros (PLL/DAC): manually placed
-- Average displacement: 12.3µm
-- HPWL (Half-Perimeter Wire Length): 2,847,352µm
-- Overflow: 0 (clean placement)
 
 **Key techniques applied:**
 - Global placement with timing-driven optimization
@@ -1506,50 +1494,9 @@ Router ────► │ met1 │ (new access point)
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
 ```
 
-```
-[INFO GRT-0101] Running global routing...
-[INFO GRT-0186] Total wire length: 485,673 µm
-[INFO GRT-0109] Overflow: 0
-[INFO GRT-0110] Global routing completed successfully.
-```
-
 ✓ Routing completed with **zero violations**!
 
 ![routing_fix](assets/congestion_resolved_fully.png)
-
-#### Final Design Metrics
-
-**Area:**
-- Die size: 1478.815 µm × 1477.935 µm = 2.186 mm²
-- Core size: 1458.815 µm × 1457.935 µm = 2.127 mm²
-- Total cell area: 151,667 µm²
-- **Utilization: 71.3%**
-
-**Cell Count:**
-- Total instances: 10,349
-  - Combinational cells: 7,245
-  - Sequential cells (DFFs): 1,613
-  - Buffers/Inverters: 1,277
-  - Macros: 2 (PLL, DAC)
-
-**Power (Post-Route):**
-- Internal power: 2.18 mW (54.2%)
-- Switching power: 1.82 mW (45.3%)
-- Leakage power: 0.024 mW (0.6%)
-- **Total power: 4.03 mW**
-
-**Timing (Post-Route, TT Corner):**
-- WNS (Setup): +0.82 ns ✓
-- TNS: 0.00 ns ✓
-- WHS (Hold): +0.05 ns ✓
-- THS: 0.00 ns ✓
-- Clock period: 11.0 ns (90.9 MHz)
-
-**Routing:**
-- Total wire length: 485,673 µm
-- Total vias: 92,458
-- DRC violations: 0 ✓
-- LVS: PASS ✓
 
 #### Final GDSII Generation
 
@@ -1842,105 +1789,12 @@ digraph critical_path {
 
 ---
 
-### 5. Week-by-Week Comparison Framework
-
-**Created:** Longitudinal performance tracking across all 8 weeks.
-
-**Metrics Tracked:**
-
-| Week | Stage | WNS (ns) | Cell Count | Die Area (mm²) | Power (mW) |
-|------|-------|----------|------------|----------------|------------|
-| 2 | RTL Simulation | N/A | N/A | N/A | N/A |
-| 3 | Post-Synth STA | +2.26 | 10,349 | N/A | N/A |
-| 5 | Post-Place | +1.84 | 10,347 | 2.19 | N/A |
-| 7 | Post-Route | +0.82 | 10,349 | 2.19 | 4.03 |
-| 8 | Multi-Corner | +5.81 (best)<br>-4.90 (worst) | 10,349 | 2.19 | 4.03 |
-
 **Key Insights:**
 - Timing degradation pattern: Synth → Place (-0.42 ns) → Route (-1.02 ns)
 - Cell count stability: <0.02% variation across stages
 - Power efficiency: 4.03 mW @ 91 MHz = 44.3 µW/MHz
 
 ---
-
-## Final Results and Metrics
-
-### Die Photograph (Magic Layout Viewer)
-
-### Physical Design Summary
-
-**Dimensions:**
-- **Die size:** 1478.815 µm × 1477.935 µm = **2.186 mm²**
-- **Core size:** 1458.815 µm × 1457.935 µm = **2.127 mm²**
-- **I/O ring:** 10 µm width
-- **Utilization:** 71.3%
-
-**Cell Statistics:**
-- **Total instances:** 10,349
-  - Combinational logic: 7,245 (70%)
-  - Sequential (DFFs): 1,613 (15.6%)
-  - Buffers/Inverters: 1,277 (12.3%)
-  - Macros: 2 (PLL + DAC)
-- **Total cell area:** 151,667 µm²
-- **Standard cell rows:** 1,428
-
-**Interconnect:**
-- **Total wire length:** 485.67 mm
-- **Total vias:** 92,458
-  - Via1 (li1-met1): 18,234
-  - Via2 (met1-met2): 31,456
-  - Via3 (met2-met3): 24,189
-  - Via4 (met3-met4): 12,387
-  - Via5 (met4-met5): 6,192
-- **Metal layer utilization:**
-  - met1: 34.2%
-  - met2: 28.7%
-  - met3: 19.4%
-  - met4: 12.8%
-  - met5: 5.9%
-
-### Timing Performance
-
-**Target:** 11.0 ns clock period (90.9 MHz)
-
-**Post-Route Timing (TT Corner, 25°C, 1.80V):**
-
-| Metric | Value | Status |
-|--------|-------|--------|
-| **WNS (Setup)** | +0.82 ns | ✅ MET |
-| **TNS (Setup)** | 0.00 ns | ✅ CLEAN |
-| **WHS (Hold)** | +0.05 ns | ✅ MET |
-| **THS (Hold)** | 0.00 ns | ✅ CLEAN |
-| **Clock uncertainty** | 0.10 ns (setup)<br>0.05 ns (hold) | Specified |
-| **Input delay** | 3.3 ns | Specified |
-| **Output delay** | 3.3 ns | Specified |
-
-**Critical Path (Setup, TT Corner):**
-
-```bash
-Startpoint: core/CPU_Xreg_value_a4[10][30]$_SDFFE_PP0P_
-Endpoint:   core/CPU_Xreg_value_a4[8][31]$_SDFFE_PP0P_
-Path Group: core_clk
-Path Type:  max
-
-Clock Period:           11.00 ns
-Data Path Delay:         8.64 ns
-Clock Uncertainty:      -0.10 ns
-Setup Time:             -0.16 ns
-Data Required Time:     10.74 ns
-Data Arrival Time:       8.64 ns
-Slack (MET):            +0.82 ns
-```
-
-**Multi-Corner Summary (16 Corners, Post-Route):**
-
-| Category | Best Corner | WNS | Worst Corner | WNS |
-|----------|-------------|-----|--------------|-----|
-| **Setup** | ff_100C_1v95 | +7.76 ns | ss_100C_1v40 | -4.90 ns |
-| **Hold** | ss_n40C_1v44 | +9.00 ns | ss_n40C_1v40 | +1.02 ns |
-
-- **10/16 corners** meet setup timing
-- **16/16 corners** meet hold timing
 
 ## Conclusion
 
