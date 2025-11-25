@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 
 """
+<<<<<<< HEAD
 Timing Graph Visualization Script for Multi-Corner PVT Analysis
 Generates comprehensive timing graphs comparing metrics across design stages
 Week 8 Task - VSDBabySoC Post-Layout STA Visualization
+=======
+Timing Graph Generator
+Generates line graphs and heatmaps for Setup, Hold, TNS, and THS.
+>>>>>>> 2e9d213 (added assets)
 """
 
 import json
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 import matplotlib.patches as mpatches
 import numpy as np
 from pathlib import Path
@@ -16,11 +22,22 @@ import sys
 class TimingGraphGenerator:
     """Generate visualization graphs for timing analysis results"""
     
+=======
+import numpy as np
+from pathlib import Path
+import sys
+import matplotlib.colors as mcolors
+
+class TimingGraphGenerator:
+>>>>>>> 2e9d213 (added assets)
     def __init__(self, metrics_file):
         self.metrics_file = Path(metrics_file)
         self.metrics = self.load_metrics()
         
+<<<<<<< HEAD
         # Define corner ordering for consistent plotting
+=======
+>>>>>>> 2e9d213 (added assets)
         self.corner_order = [
             "tt_025C_1v80", "tt_100C_1v80",
             "ff_100C_1v65", "ff_100C_1v95", "ff_n40C_1v56", 
@@ -30,6 +47,7 @@ class TimingGraphGenerator:
             "ss_n40C_1v60", "ss_n40C_1v76"
         ]
         
+<<<<<<< HEAD
         # Define stages
         self.stages = ["postsynth", "postplace", "postcts", "postroute"]
         self.stage_labels = ["Post-Synthesis", "Post-CTS", "Post-Placement", "Post-Routing"]
@@ -51,10 +69,24 @@ class TimingGraphGenerator:
     
     def load_metrics(self):
         """Load timing metrics from JSON file"""
+=======
+        self.stages = ["postsynth", "postplace", "postcts", "postroute"]
+        self.stage_labels = ["Post-synth", "Post-place", "Post-cts", "Post-route"]
+        
+        self.styles = {
+            'postsynth': {'color': '#003f5c', 'marker': 'D', 'label': 'Post-Synthesis'},
+            'postplace': {'color': '#ffa600', 'marker': 's', 'label': 'Post-Placement'},
+            'postcts':   {'color': '#58508d', 'marker': '^', 'label': 'Post-CTS'},
+            'postroute': {'color': '#bc5090', 'marker': 'x', 'label': 'Post-Routing'}
+        }
+    
+    def load_metrics(self):
+>>>>>>> 2e9d213 (added assets)
         try:
             with open(self.metrics_file, 'r') as f:
                 return json.load(f)
         except Exception as e:
+<<<<<<< HEAD
             print(f"Error loading metrics file: {e}")
             sys.exit(1)
     
@@ -258,10 +290,122 @@ def main():
     """Main execution function"""
     
     # Get metrics file from command line or use default
+=======
+            print(f"Error: {e}")
+            sys.exit(1)
+    
+    def get_data_series(self, metric_key):
+        series = {}
+        for stage in self.stages:
+            values = []
+            for corner in self.corner_order:
+                val = self.metrics.get(stage, {}).get(corner, {}).get(metric_key)
+                if val is None: val = 0.0
+                values.append(val)
+            series[stage] = values
+        return series
+    
+    def plot_metric(self, metric_key, title, ylabel, filename, output_dir):
+        data = self.get_data_series(metric_key)
+        x = np.arange(len(self.corner_order))
+        
+        fig, ax = plt.subplots(figsize=(18, 9))
+        
+        for stage in self.stages:
+            style = self.styles[stage]
+            ax.plot(x, data[stage], 
+                    marker=style['marker'], 
+                    color=style['color'], 
+                    linewidth=2.5, 
+                    markersize=8,
+                    label=style['label'])
+            
+        ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
+        ax.set_ylabel(ylabel, fontsize=12, fontweight='bold')
+        ax.set_xlabel('PVT Corner', fontsize=12, fontweight='bold')
+        
+        ax.set_xticks(x)
+        ax.set_xticklabels(self.corner_order, rotation=90, fontsize=10, fontweight='bold')
+        
+        ax.axhline(y=0, color='black', linestyle='-', linewidth=1.5, alpha=0.8)
+        ax.grid(True, which='both', linestyle='--', alpha=0.6)
+        ax.legend(fontsize=12, frameon=True, shadow=True)
+        
+        plt.tight_layout()
+        filepath = Path(output_dir) / filename
+        plt.savefig(filepath, dpi=300)
+        plt.close()
+        print(f"Graph generated: {filepath}")
+
+    def plot_heatmap(self, metric_key, title, cbar_label, filename, output_dir, cmap_name='RdYlGn'):
+        data = []
+        for stage in self.stages:
+            row = []
+            for corner in self.corner_order:
+                val = self.metrics.get(stage, {}).get(corner, {}).get(metric_key)
+                if val is None: val = 0.0
+                row.append(val)
+            data.append(row)
+        
+        data = np.array(data)
+        
+        fig, ax = plt.subplots(figsize=(20, 8))
+        
+        im = ax.imshow(data, cmap=cmap_name, aspect='auto')
+        
+        # Show all ticks
+        ax.set_xticks(np.arange(len(self.corner_order)))
+        ax.set_yticks(np.arange(len(self.stages)))
+        
+        # Label ticks
+        ax.set_xticklabels(self.corner_order, rotation=45, ha="right", fontsize=10)
+        ax.set_yticklabels(self.stage_labels, fontsize=12)
+        
+        # Loop over data dimensions and create text annotations.
+        for i in range(len(self.stages)):
+            for j in range(len(self.corner_order)):
+                text = ax.text(j, i, f"{data[i, j]:.2f}",
+                               ha="center", va="center", color="black", fontsize=9, weight='bold')
+        
+        # Create colorbar
+        cbar = ax.figure.colorbar(im, ax=ax)
+        cbar.ax.set_ylabel(cbar_label, rotation=-90, va="bottom", fontsize=12)
+        
+        ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
+        plt.tight_layout()
+        
+        filepath = Path(output_dir) / filename
+        plt.savefig(filepath, dpi=300)
+        plt.close()
+        print(f"Heatmap generated: {filepath}")
+
+    def generate_graphs(self, output_dir):
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        
+        print("\nGenerating Graphs...")
+        print("-" * 60)
+        
+        # Line Graphs
+        self.plot_metric('wns', 'WNS (Violation Only)', 'Slack (ns)', 'wns_comparison.png', out)
+        self.plot_metric('tns', 'TNS (Total Negative Slack)', 'Total Slack (ns)', 'tns_comparison.png', out)
+        self.plot_metric('setup_slack', 'Worst Setup Slack (Raw)', 'Slack (ns)', 'setup_slack_comparison.png', out)
+        self.plot_metric('hold_slack', 'Worst Hold Slack', 'Slack (ns)', 'whs_comparison.png', out)
+        
+        # Heatmaps
+        self.plot_heatmap('setup_slack', 'Setup Slack Heatmap Across Design Stages and PVT Corners', 'Worst Setup Slack (ns)', 'setup_slack_heatmap.png', out, cmap_name='RdYlGn')
+        self.plot_heatmap('hold_slack', 'Hold Slack Heatmap Across Design Stages and PVT Corners', 'Worst Hold Slack (ns)', 'hold_slack_heatmap.png', out, cmap_name='RdYlGn')
+        self.plot_heatmap('tns', 'Total Negative Slack Heatmap', 'Total Negative Slack (ns)', 'tns_heatmap.png', out, cmap_name='RdYlGn') # Reversed colormap for TNS (0 is best/green)
+        
+        print("-" * 60)
+
+def main():
+>>>>>>> 2e9d213 (added assets)
     if len(sys.argv) > 1:
         metrics_file = sys.argv[1]
     else:
         metrics_file = "reports/sta_across_pvt/timing_metrics_all.json"
+<<<<<<< HEAD
     
     # Check if file exists
     if not Path(metrics_file).exists():
@@ -280,6 +424,20 @@ def main():
     
     print("\nVisualization complete!")
 
+=======
+        
+    if len(sys.argv) > 2:
+        output_dir = sys.argv[2]
+    else:
+        output_dir = "reports/sta_across_pvt/graphs"
+        
+    if not Path(metrics_file).exists():
+        print(f"Metrics file missing: {metrics_file}")
+        sys.exit(1)
+        
+    generator = TimingGraphGenerator(metrics_file)
+    generator.generate_graphs(output_dir)
+>>>>>>> 2e9d213 (added assets)
 
 if __name__ == "__main__":
     main()

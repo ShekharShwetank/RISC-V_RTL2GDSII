@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 
 """
+<<<<<<< HEAD
 Automated Timing Metrics Extraction and Analysis Script
 Extracts WNS, TNS, WHS, THS from OpenSTA timing reports across all PVT corners
 Week 8 Task - VSDBabySoC Post-Layout STA Analysis
+=======
+Automated Timing Metrics Extraction Script
+- Converts OpenSTA time units (Seconds) to Nanoseconds (ns).
+- Generates stage-specific CSV tables.
+- Prints a consolidated PVT SUMMARY table to the console.
+Week 8 Task - VSDBabySoC
+>>>>>>> 2e9d213 (added assets)
 """
 
 import os
@@ -15,19 +23,28 @@ from collections import defaultdict
 import sys
 
 class TimingMetricsExtractor:
+<<<<<<< HEAD
     """Extract and organize timing metrics from OpenSTA reports"""
     
+=======
+>>>>>>> 2e9d213 (added assets)
     def __init__(self, reports_dir):
         self.reports_dir = Path(reports_dir)
         self.metrics = defaultdict(lambda: defaultdict(dict))
         
+<<<<<<< HEAD
         # Define all PVT corners
         self.corners = [
             "tt_025C_1v80", "tt_100C_1v80",
+=======
+        # Define PVT corners in specific order
+        self.corners = [
+>>>>>>> 2e9d213 (added assets)
             "ff_100C_1v65", "ff_100C_1v95", "ff_n40C_1v56", 
             "ff_n40C_1v65", "ff_n40C_1v76", "ff_n40C_1v95",
             "ss_100C_1v40", "ss_100C_1v60", "ss_n40C_1v28",
             "ss_n40C_1v35", "ss_n40C_1v40", "ss_n40C_1v44",
+<<<<<<< HEAD
             "ss_n40C_1v60", "ss_n40C_1v76"
         ]
         
@@ -41,12 +58,27 @@ class TimingMetricsExtractor:
             'tns': None,
             'whs': None,
             'ths': None
+=======
+            "ss_n40C_1v60", "ss_n40C_1v76",
+            "tt_025C_1v80", "tt_100C_1v80"
+        ]
+        
+        self.stages = ["postsynth", "postplace", "postcts", "postroute"]
+        
+    def extract_from_summary_file(self, summary_file):
+        metrics = {
+            'setup_slack': None, # Raw Setup Slack (ns)
+            'wns': None,         # Violation (min(0, setup_slack))
+            'tns': None,         # Total Negative Slack (ns)
+            'hold_slack': None   # Raw Hold Slack (ns)
+>>>>>>> 2e9d213 (added assets)
         }
         
         try:
             with open(summary_file, 'r') as f:
                 content = f.read()
                 
+<<<<<<< HEAD
             # Extract WNS (Worst Negative Slack)
             wns_match = re.search(r'Worst Negative Slack \(WNS\):\s*([-\d.]+)', content)
             if wns_match:
@@ -66,6 +98,36 @@ class TimingMetricsExtractor:
             ths_match = re.search(r'Total Hold Slack \(THS\):\s*([-\d.]+)', content)
             if ths_match:
                 metrics['ths'] = float(ths_match.group(1))
+=======
+            # Helper to parse float and convert Seconds -> Nanoseconds
+            def parse_value(pattern, text, scale=1e9):
+                match = re.search(pattern, text)
+                if match:
+                    try:
+                        val = float(match.group(1))
+                        return val * scale
+                    except ValueError:
+                        return None
+                return None
+
+            # Extract Raw Setup Slack (labeled as WNS in OpenSTA summary)
+            raw_setup = parse_value(r'Worst Negative Slack \(WNS\):\s*([-\d.eE]+)', content)
+            if raw_setup is not None:
+                metrics['setup_slack'] = raw_setup
+                # WNS is violation only (capped at 0)
+                metrics['wns'] = min(0.0, raw_setup)
+            
+            # Extract TNS (Total Negative Slack)
+            # TNS is usually already negative or zero. Convert to ns.
+            tns_val = parse_value(r'Total Negative Slack \(TNS\):\s*([-\d.eE]+)', content)
+            if tns_val is not None:
+                metrics['tns'] = tns_val
+            
+            # Extract Raw Hold Slack (labeled as WHS in OpenSTA summary)
+            hold_val = parse_value(r'Worst Hold Slack \(WHS\):\s*([-\d.eE]+)', content)
+            if hold_val is not None:
+                metrics['hold_slack'] = hold_val
+>>>>>>> 2e9d213 (added assets)
                 
         except Exception as e:
             print(f"Error reading {summary_file}: {e}")
@@ -73,9 +135,13 @@ class TimingMetricsExtractor:
         return metrics
     
     def extract_all_metrics(self):
+<<<<<<< HEAD
         """Extract metrics from all summary files"""
         print("Extracting timing metrics from all corners and stages...")
         print("=" * 60)
+=======
+        print("Extracting timing metrics (converting Seconds -> Nanoseconds)...")
+>>>>>>> 2e9d213 (added assets)
         
         for stage in self.stages:
             for corner in self.corners:
@@ -84,6 +150,7 @@ class TimingMetricsExtractor:
                 if summary_file.exists():
                     metrics = self.extract_from_summary_file(summary_file)
                     self.metrics[stage][corner] = metrics
+<<<<<<< HEAD
                     
                     # Format metrics with defensive handling for None values
                     wns_str = f"{metrics['wns']:8.4f}" if metrics['wns'] is not None else "   FAILED"
@@ -126,6 +193,53 @@ class TimingMetricsExtractor:
     def generate_json_report(self, output_file):
         """Generate JSON report with all timing metrics"""
         # Convert defaultdict to regular dict for JSON serialization
+=======
+    
+    def generate_stage_tables(self, output_dir):
+        """Generate separate CSV tables for each stage"""
+        output_dir = Path(output_dir)
+        
+        for stage in self.stages:
+            filename = output_dir / f"timing_table_{stage}.csv"
+            
+            # Print Console Table Header
+            print(f"\n=== {stage.upper()} SUMMARY ===")
+            print(f"{'PVT_CORNER':<15} {'Worst Setup Slack':<18} {'Worst Hold Slack':<18} {'WNS':<10} {'TNS':<10}")
+            
+            with open(filename, 'w', newline='') as f:
+                writer = csv.writer(f)
+                header = ['PVT Corner', 'wns', 'tns', 'worst setup_slack', 'worst hold_slack']
+                writer.writerow(header)
+                
+                for corner in self.corners:
+                    m = self.metrics[stage].get(corner, {})
+                    
+                    wns = m.get('wns')
+                    tns = m.get('tns')
+                    setup = m.get('setup_slack')
+                    hold = m.get('hold_slack')
+                    
+                    # Format for CSV
+                    csv_row = [
+                        corner,
+                        f"{wns:.4f}" if wns is not None else 'N/A',
+                        f"{tns:.4f}" if tns is not None else 'N/A',
+                        f"{setup:.4f}" if setup is not None else 'N/A',
+                        f"{hold:.4f}" if hold is not None else 'N/A'
+                    ]
+                    writer.writerow(csv_row)
+                    
+                    # Print to Console (formatted exactly as requested)
+                    if setup is not None:
+                        print(f"{corner:<15} {setup:>17.2f} {hold:>17.2f} {wns:>10.2f} {tns:>10.2f}")
+                    else:
+                        print(f"{corner:<15} {'N/A':>17} {'N/A':>17} {'N/A':>10} {'N/A':>10}")
+            
+            print(f"Saved: {filename}")
+
+    def generate_json_report(self, output_file):
+        # Convert defaultdict to dict
+>>>>>>> 2e9d213 (added assets)
         json_data = {
             stage: {
                 corner: metrics 
@@ -133,6 +247,7 @@ class TimingMetricsExtractor:
             }
             for stage, corners in self.metrics.items()
         }
+<<<<<<< HEAD
         
         with open(output_file, 'w') as f:
             json.dump(json_data, f, indent=2)
@@ -235,11 +350,19 @@ def main():
     """Main execution function"""
     
     # Get reports directory from command line or use default
+=======
+        with open(output_file, 'w') as f:
+            json.dump(json_data, f, indent=2)
+        print(f"\nJSON Data generated: {output_file}")
+
+def main():
+>>>>>>> 2e9d213 (added assets)
     if len(sys.argv) > 1:
         reports_dir = sys.argv[1]
     else:
         reports_dir = "reports/sta_across_pvt"
     
+<<<<<<< HEAD
     # Check if directory exists
     if not Path(reports_dir).exists():
         print(f"Error: Reports directory not found: {reports_dir}")
@@ -279,3 +402,18 @@ def main():
 if __name__ == "__main__":
     main()
 
+=======
+    if not Path(reports_dir).exists():
+        print(f"Error: Directory not found: {reports_dir}")
+        sys.exit(1)
+    
+    extractor = TimingMetricsExtractor(reports_dir)
+    extractor.extract_all_metrics()
+    
+    output_dir = Path(reports_dir)
+    extractor.generate_stage_tables(output_dir)
+    extractor.generate_json_report(output_dir / "timing_metrics_all.json")
+
+if __name__ == "__main__":
+    main()
+>>>>>>> 2e9d213 (added assets)

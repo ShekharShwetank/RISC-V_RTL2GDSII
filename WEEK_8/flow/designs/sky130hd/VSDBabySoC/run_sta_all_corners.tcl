@@ -1,4 +1,4 @@
-# /mnt/data/run_sta_all_corners.tcl
+# run_sta_all_corners.tcl
 # Run: openroad -no_gui -exit /mnt/data/run_sta_all_corners.tcl
 
 set root "/home/shwetank/OpenROAD-flow-scripts/flow"

@@ -470,5 +470,121 @@ All graphs generated successfully in: reports/sta_across_pvt/graphs
 Visualization complete!
 shwetank@shwetank-VirtualBox:~/OpenROAD-flow-scripts/flow$ 
 
+<<<<<<< HEAD
+=======
+shwetank@shwetank-VirtualBox:~/OpenROAD-flow-scripts/flow$ python3 plot_timing_graphs.py reports/sta_across_pvt/timing_metrics_all.json reports/sta_across_pvt/graphs
+
+Generating 4 Timing Graphs...
+------------------------------------------------------------
+Graph generated: reports/sta_across_pvt/graphs/wns_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/tns_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/setup_slack_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/whs_comparison.png
+------------------------------------------------------------
+shwetank@shwetank-VirtualBox:~/OpenROAD-flow-scripts/flow$ python3 extract_timing_metrics.py reports/sta_across_pvt
+Extracting timing metrics (converting Seconds -> Nanoseconds)...
+
+=== POSTSYNTH SUMMARY ===
+PVT_CORNER      Worst Setup Slack  Worst Hold Slack   WNS        TNS       
+ff_100C_1v65                 8.16              0.25       0.00       0.00
+ff_100C_1v95                 8.79              0.20       0.00       0.00
+ff_n40C_1v56                 7.35              0.29       0.00       0.00
+ff_n40C_1v65                 7.82              0.26       0.00       0.00
+ff_n40C_1v76                 8.25              0.22       0.00       0.00
+ff_n40C_1v95                 8.74              0.19       0.00       0.00
+ss_100C_1v40                 0.62              0.91       0.00       0.00
+ss_100C_1v60                 4.00              0.64       0.00       0.00
+ss_n40C_1v28               -18.22              1.83     -18.22   -5588.14
+ss_n40C_1v35                -8.94              1.35      -8.94   -2093.04
+ss_n40C_1v40                -4.92              1.12      -4.92    -800.73
+ss_n40C_1v44                -2.58              0.99      -2.58    -188.66
+ss_n40C_1v60                 2.65              0.66       0.00       0.00
+ss_n40C_1v76                 5.08              0.50       0.00       0.00
+tt_025C_1v80                 7.43              0.31       0.00       0.00
+tt_100C_1v80                 7.51              0.31       0.00       0.00
+Saved: reports/sta_across_pvt/timing_table_postsynth.csv
+
+=== POSTPLACE SUMMARY ===
+PVT_CORNER      Worst Setup Slack  Worst Hold Slack   WNS        TNS       
+ff_100C_1v65                 8.18              0.25       0.00       0.00
+ff_100C_1v95                 8.82              0.20       0.00       0.00
+ff_n40C_1v56                 7.33              0.29       0.00       0.00
+ff_n40C_1v65                 7.84              0.25       0.00       0.00
+ff_n40C_1v76                 8.29              0.22       0.00       0.00
+ff_n40C_1v95                 8.79              0.19       0.00       0.00
+ss_100C_1v40                -0.16              0.88      -0.16      -1.37
+ss_100C_1v60                 3.49              0.62       0.00       0.00
+ss_n40C_1v28               -20.49              1.77     -20.49   -5869.94
+ss_n40C_1v35               -10.38              1.30     -10.38   -1936.81
+ss_n40C_1v40                -6.13              1.09      -6.13    -685.81
+ss_n40C_1v44                -3.63              0.96      -3.63    -126.45
+ss_n40C_1v60                 1.97              0.64       0.00       0.00
+ss_n40C_1v76                 4.61              0.49       0.00       0.00
+tt_025C_1v80                 7.27              0.31       0.00       0.00
+tt_100C_1v80                 7.38              0.31       0.00       0.00
+Saved: reports/sta_across_pvt/timing_table_postplace.csv
+
+=== POSTCTS SUMMARY ===
+PVT_CORNER      Worst Setup Slack  Worst Hold Slack   WNS        TNS       
+ff_100C_1v65                 8.15              0.24       0.00       0.00
+ff_100C_1v95                 8.79              0.19       0.00       0.00
+ff_n40C_1v56                 7.30              0.28       0.00       0.00
+ff_n40C_1v65                 7.80              0.25       0.00       0.00
+ff_n40C_1v76                 8.26              0.22       0.00       0.00
+ff_n40C_1v95                 8.77              0.18       0.00       0.00
+ss_100C_1v40                -0.24              0.88      -0.24      -2.03
+ss_100C_1v60                 3.44              0.62       0.00       0.00
+ss_n40C_1v28               -20.63              1.74     -20.63   -5931.27
+ss_n40C_1v35               -10.51              1.29     -10.51   -1978.36
+ss_n40C_1v40                -6.24              1.08      -6.24    -719.81
+ss_n40C_1v44                -3.71              0.95      -3.71    -141.63
+ss_n40C_1v60                 1.91              0.64       0.00       0.00
+ss_n40C_1v76                 4.57              0.48       0.00       0.00
+tt_025C_1v80                 7.24              0.30       0.00       0.00
+tt_100C_1v80                 7.35              0.31       0.00       0.00
+Saved: reports/sta_across_pvt/timing_table_postcts.csv
+
+=== POSTROUTE SUMMARY ===
+PVT_CORNER      Worst Setup Slack  Worst Hold Slack   WNS        TNS       
+ff_100C_1v65                 6.76              0.24       0.00       0.00
+ff_100C_1v95                 7.76              0.19       0.00       0.00
+ff_n40C_1v56                 5.27              0.27       0.00       0.00
+ff_n40C_1v65                 6.12              0.24       0.00       0.00
+ff_n40C_1v76                 6.85              0.21       0.00       0.00
+ff_n40C_1v95                 7.66              0.18       0.00       0.00
+ss_100C_1v40                -4.90              0.86      -4.90    -634.19
+ss_100C_1v60                 0.35              0.61       0.00       0.00
+ss_n40C_1v28               -36.46              1.61     -36.46  -15571.38
+ss_n40C_1v35               -21.02              1.21     -21.02   -7570.31
+ss_n40C_1v40               -14.48              1.02     -14.48   -4178.03
+ss_n40C_1v44               -10.72              0.90     -10.72   -2403.87
+ss_n40C_1v60                -2.24              0.61      -2.24     -98.87
+ss_n40C_1v76                 1.64              0.46       0.00       0.00
+tt_025C_1v80                 5.61              0.29       0.00       0.00
+tt_100C_1v80                 5.81              0.30       0.00       0.00
+Saved: reports/sta_across_pvt/timing_table_postroute.csv
+
+JSON Data generated: reports/sta_across_pvt/timing_metrics_all.json
+shwetank@shwetank-VirtualBox:~/OpenROAD-flow-scripts/flow$ python3 plot_timing_graphs.py reports/sta_across_pvt/timing_metrics_all.json reports/sta_across_pvt/graphs
+
+Generating Graphs...
+------------------------------------------------------------
+Graph generated: reports/sta_across_pvt/graphs/wns_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/tns_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/setup_slack_comparison.png
+Graph generated: reports/sta_across_pvt/graphs/whs_comparison.png
+------------------------------------------------------------
+shwetank@shwetank-VirtualBox:~/OpenROAD-flow-scripts/flow$ python3 generate_heatmap_table.py reports/sta_across_pvt/timing_metrics_all.json reports/sta_across_pvt/graphs
+
+Generating Heatmap Tables...
+============================================================
+Table generated: reports/sta_across_pvt/graphs/heatmap_table_postsynth.png
+Table generated: reports/sta_across_pvt/graphs/heatmap_table_postplace.png
+Table generated: reports/sta_across_pvt/graphs/heatmap_table_postcts.png
+Table generated: reports/sta_across_pvt/graphs/heatmap_table_postroute.png
+============================================================
+
+
+>>>>>>> 2e9d213 (added assets)
 
 
