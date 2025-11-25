@@ -1,0 +1,41 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib
+read_db ./results/sky130hd/VSDBabySoC/base/2_1_floorplan.odb
+rtl_macro_placer -max_num_level 2 -halo_width 100 -halo_height 100 -min_ar 0.33 -area_weight 0.1 -wirelength_weight 100.0 -outline_weight 100.0 -boundary_weight 50.0 -notch_weight 10.0 -target_dead_space 0.05 -report_directory ./objects/sky130hd/VSDBabySoC/base/rtlmp -fence_lx 0.0 -fence_ly 0.0 -fence_ux 100000000.0 -fence_uy 100000000.0 -target_util 0.35
+Die Area: (0.00, 0.00) (2500.00, 2500.00),  Floorplan Area: (20.24, 21.76) (2399.82, 2399.04)
+	Number of std cell instances: 6011
+	Area of std cell instances: 50614.96
+	Number of macros: 2
+	Area of macros: 671652.31
+	Halo width: 100.00
+	Halo height: 100.00
+	Area of macros with halos: 1112806.25
+	Area of std cell instances + Area of macros: 722267.25
+	Floorplan area: 5656928.00
+	Design Utilization: 0.13
+	Floorplan Utilization: 0.01
+	Manufacturing Grid: 5
+
+[WARNING MPL-0002] Couldn't align pin dac/D[0] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[1] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[2] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[4] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[5] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[6] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[7] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[8] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin dac/D[9] from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin pll/CLK from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin pll/ENb_CP from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin pll/ENb_VCO from layer li1 to the track-grid.
+[WARNING MPL-0002] Couldn't align pin pll/REF from layer li1 to the track-grid.
+Took 18 seconds: rtl_macro_placer -max_num_level 2 -halo_width 100 -halo_height 100 -min_ar 0.33 -area_weight 0.1 -wirelength_weight 100.0 -outline_weight 100.0 -boundary_weight 50.0 -notch_weight 10.0 -target_dead_space 0.05 -report_directory ./objects/sky130hd/VSDBabySoC/base/rtlmp -fence_lx 0.0 -fence_ly 0.0 -fence_ux 100000000.0 -fence_uy 100000000.0 -target_util 0.35
+Elapsed time: 0:19.03[h:]min:sec. CPU time: user 32.09 sys 21.84 (283%). Peak memory: 162972KB.
+Log                        Elapsed/s Peak Memory/MB  sha1sum .odb [0:20)
+2_2_floorplan_macro               19            159 a324dd60a9c6c61e1ba0

@@ -1,0 +1,10 @@
+Timing Analysis Summary
+Corner: ff_n40C_1v56
+Stage: postplace
+======================================
+Setup Analysis (Max Delay):
+  Worst Negative Slack (WNS): 7.3282886425829474e-9
+  Total Negative Slack (TNS): 0.0
+Hold Analysis (Min Delay):
+  Worst Hold Slack (WHS): 2.895942097236315e-10
+  Total Hold Slack (THS): 0.0

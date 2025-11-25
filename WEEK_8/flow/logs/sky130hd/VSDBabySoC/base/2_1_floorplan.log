@@ -1,0 +1,54 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsddac.lib
+read_liberty /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lib/avsdpll.lib
+[INFO ODB-0227] LEF file: /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd.tlef, created 13 layers, 25 vias
+[INFO ODB-0227] LEF file: /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lef/sky130_fd_sc_hd_merged.lef, created 441 library cells
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lef/avsddac.lef at line 2.
+
+[INFO ODB-0227] LEF file: /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lef/avsddac.lef, created 1 library cells
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lef/avsdpll.lef at line 2.
+
+[WARNING ODB-0186] macro avsdpll references unknown site unithddb1
+[INFO ODB-0227] LEF file: /home/shwetank/OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/lef/avsdpll.lef, created 1 library cells
+link_design vsdbabysoc
+Master sky130_ef_sc_hd__decap_12 is loaded but not used in the design
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+Warning: There are 6 input ports missing set_input_delay.
+Warning: There is 1 output port missing set_output_delay.
+Warning: There are 2 unconstrained endpoints.
+number instances in verilog is 6605
+[WARNING IFP-0028] Core area lower left (20.000, 20.000) snapped to (20.240, 21.760).
+[INFO IFP-0001] Added 874 rows of 5173 site unithd.
+source /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/make_tracks.tcl
+source /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/fastroute.tcl
+Repair tie lo fanout...
+[INFO RSZ-0042] Inserted 4 tie sky130_fd_sc_hd__conb_1 instances.
+Repair tie hi fanout...
+[INFO RSZ-0026] Removed 595 buffers.
+Default units for flow
+ time 1ns
+ capacitance 1pF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1nW
+ distance 1um
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 722267 um^2 13% utilization.
+Elapsed time: 0:02.14[h:]min:sec. CPU time: user 2.34 sys 0.32 (124%). Peak memory: 137832KB.
+Log                        Elapsed/s Peak Memory/MB  sha1sum .odb [0:20)
+2_1_floorplan                      2            134 d6734a29e94f5091b74e

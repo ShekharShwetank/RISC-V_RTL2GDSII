@@ -1,0 +1,9 @@
+Yosys 0.59+0 (git sha1 26b51148a, g++ 11.4.0-1ubuntu1~22.04.2 -fPIC -O3)
+Using ABC speed script.
+Extracting clock period from SDC file: ./results/sky130hd/VSDBabySoC/base/clock_period.txt
+Setting clock period to 11
+1. Executing Liberty frontend: /home/shwetank/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+ERROR: Syntax error in liberty file on line 4.
+  Unexpected token: v
+Command exited with non-zero status 1
+Elapsed time: 0:00.14[h:]min:sec. CPU time: user 0.11 sys 0.02 (94%). Peak memory: 18944KB.

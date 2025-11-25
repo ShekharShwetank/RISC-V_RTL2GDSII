@@ -1,0 +1,10 @@
+Timing Analysis Summary
+Corner: ss_n40C_1v28
+Stage: postsynth
+======================================
+Setup Analysis (Max Delay):
+  Worst Negative Slack (WNS): -1.8217139796661286e-8
+  Total Negative Slack (TNS): -5.588137355516665e-6
+Hold Analysis (Min Delay):
+  Worst Hold Slack (WHS): 1.8296044679289025e-9
+  Total Hold Slack (THS): 0.0

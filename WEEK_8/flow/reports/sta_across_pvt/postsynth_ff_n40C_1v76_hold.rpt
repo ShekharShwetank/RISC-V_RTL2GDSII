@@ -1,0 +1,29 @@
+Startpoint: core.CPU_imm_a2[10]$_DFF_P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: core.CPU_imm_a3[10]$_DFF_P_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+      Cap      Slew     Delay      Time   Description
+-------------------------------------------------------------------------------
+             0.0000    0.0000    0.0000   clock clk (rise edge)
+                       0.0000    0.0000   clock network delay (ideal)
+             0.0000    0.0000    0.0000 ^ core.CPU_imm_a2[10]$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   0.0017    0.0274    0.2026    0.2026 ^ core.CPU_imm_a2[10]$_DFF_P_/Q (sky130_fd_sc_hd__dfxtp_1)
+             0.0274    0.0000    0.2026 ^ core.CPU_imm_a3[10]$_DFF_P_/D (sky130_fd_sc_hd__dfxtp_1)
+                                 0.2026   data arrival time
+
+             0.0000    0.0000    0.0000   clock clk (rise edge)
+                       0.0000    0.0000   clock network delay (ideal)
+                       0.0000    0.0000   clock reconvergence pessimism
+                                 0.0000 ^ core.CPU_imm_a3[10]$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+                      -0.0218   -0.0218   library hold time
+                                -0.0218   data required time
+-------------------------------------------------------------------------------
+                                -0.0218   data required time
+                                -0.2026   data arrival time
+-------------------------------------------------------------------------------
+                                 0.2243   slack (MET)
+
+

@@ -1,0 +1,7 @@
+OpenROAD v2.0-26087-g3bcda7705d 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Error: list_macros.tcl, 1 cannot read file ./platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib.
+[?2004hopenroad> exit./OpenROAD-flow-scripts/flow/designs/sky130hd/VSDBabySoC/list_macros.tcl[C[C[C[C[C[C[C[C[C[Cexit[K[Kexit
+[?2004l
